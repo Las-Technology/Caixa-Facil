@@ -1298,7 +1298,7 @@
             this.label59.AutoSize = true;
             this.label59.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label59.ForeColor = System.Drawing.Color.Black;
-            this.label59.Location = new System.Drawing.Point(242, 176);
+            this.label59.Location = new System.Drawing.Point(167, 176);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(57, 19);
             this.label59.TabIndex = 166;

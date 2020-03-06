@@ -15,7 +15,7 @@ namespace CaixaFacil
 {
     public partial class FrmVenda : Form
     {
-	string AreaAtuacao, opcao = "true", CodigoBarra, Descontar = "Sim", Prazo;
+	string AreaAtuacao, opcao = "true", CodigoBarra, Descontar = "Sim";
         string HoraVenda, NomeFantasia, Cidade, Numero, Endereco, CNPJ, Telefone, Estado, Bairro;
 	int Id_Usuario, X = 0, Y = 0, EstoqueMinimo, Quantidade, Parcela, Nparcelas = 1;
 	decimal ValorPago, ValorCaixa,valorNCaixa, descontoDinheiro, DescontoPorcento, ValorDescontoPorcento, ValorDesconto;
@@ -93,19 +93,10 @@ namespace CaixaFacil
         private void btn_Fechar_Click(object sender, EventArgs e)
         {           
             Sair();           
-        }
-
-        private string SomarDataAtualcomPrazoPagamento()
-        {
-            DateTime dataAtual = DateTime.Now;
-            DateTime Vencimento = dataAtual.AddDays(int.Parse(Settings.Default["TempoPrazo"].ToString()));
-            return Vencimento.ToShortDateString();
-        }
+        }       
 
         private void FrmVenda_Load(object sender, EventArgs e)
         {
-            mask_Data.ReadOnly = true;
-            mask_Data.Text = SomarDataAtualcomPrazoPagamento();
             empresa.Consultar();
             lbl_NomeEmpresa.Text = empresa.nomeFantasia; txt_Codigo_Barra.Focus();
             BuscarAtuacaoEmpresaSalao();
@@ -124,9 +115,7 @@ namespace CaixaFacil
                 this.btn_BuscarProdutos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
                 btn_BuscarProdutos.TextAlign = ContentAlignment.MiddleCenter;
                 this.groupBox4.Size = new System.Drawing.Size(785, 93);
-                this.Text = "P.D.S";
-                label32.Text = "Valor total do Serviço:";
-                label27.Text = "Valor Serviço:";
+                this.Text = "P.D.S";              
                 label10.Text = "Valor Total do serviço:";
                 lblValorTotalVenda.Text = "Valor Total do serviço: ";
             }
@@ -147,11 +136,7 @@ namespace CaixaFacil
             }
             else if (e.KeyCode == Keys.F1)
             {
-                if (panelPrazo.Visible == true)
-                {
-                    btn_SalvarVendaPrazo_Click(sender, e);
-                }
-                else if (btn_Fechar.Enabled == true)
+                if (btn_Fechar.Enabled == true)
                 {
                     btn_ContasClientes_Click(sender, e);
                 }
@@ -162,11 +147,7 @@ namespace CaixaFacil
                 if (btn_Sair.Enabled == true)
                 {
                     btn_BuscarProdutos_Click(sender, e);
-                }
-                else if (panelPrazo.Visible == true)
-                {
-                    btn_GerarRelatorio_Click(sender, e);
-                }
+                }               
             }
             else if (e.KeyCode == Keys.F3)
             {
@@ -221,10 +202,6 @@ namespace CaixaFacil
             {
                 btn_ConfirmarVenda_Click(sender, e);
             }
-            else if ((e.KeyCode == Keys.F10) && (panelVendaMisto.Visible == true))
-            {
-                btn_FinalizarVendaParcial_Click(sender, e);
-            }
             else if (e.KeyCode == Keys.F11 && PanelVendaVista.Visible == true)
             {
                 btn_Recibo_Click(sender, e);
@@ -264,14 +241,6 @@ namespace CaixaFacil
                 else if ((PanelVendaVista.Visible == true) && (btn_Sair.Enabled == false))
                 {
                     btn_CancelarVendaVista_Click(sender, e);
-                }
-                else if (panelPrazo.Visible == true && btn_Sair.Enabled == false)
-                {
-                    btn_CancelarVendaPrazo_Click(sender, e);
-                }
-                else if (panelVendaMisto.Visible == true && btn_Sair.Enabled == false)
-                {
-                    btn_CancelaVendaMisto_Click(sender, e);
                 }               
             }
             else if (Control.ModifierKeys == Keys.Alt && e.KeyCode == Keys.F4)
@@ -971,11 +940,6 @@ namespace CaixaFacil
         {
             if (DGV_ItensVenda.Rows.Count >= 1)
             {
-                //desabilitarFerramentas();
-                //txt_ValorAbatido_Leave(sender, e);
-                //panelVendaMisto.Visible = true;
-                //txt_TotalVenda.Text = "R$ " + ValorTotal;
-                //txt_ValorAbatido.Text = "0,00";
                 FrmVendaParcial vendaParcial = new FrmVendaParcial(ValorTotal);
                 vendaParcial.ShowDialog();
                 if (vendaParcial.vendaConfirmada)
@@ -1069,9 +1033,28 @@ namespace CaixaFacil
         {
             if (DGV_ItensVenda.Rows.Count >= 1)
             {
-                panelPrazo.Visible = true;
-                desabilitarFerramentas();
-                txt_ValorVendaPrazo.Text = "R$ " + ValorTotal;
+                FrmVendaPrazo vendaPrazo = new FrmVendaPrazo(ValorTotal);
+                vendaPrazo.ShowDialog();
+                if (vendaPrazo.vendaConfirmada)
+                {
+                    id_Cliente = vendaPrazo.id_Cliente;
+                    DataVencimento = vendaPrazo.Vencimento;
+                    VendaPrazo();
+                    InserirItensvenda();
+                    if (vendaPrazo.relatorioPedido)
+                    {
+                        this.Cursor = Cursors.WaitCursor;
+                        InformacaoEmpresa();                     
+                        FrmRelatorioPrazo relatorioPrazo = new FrmRelatorioPrazo(txt_CodigoVenda.Text, NomeFantasia, Endereco, Numero, Cidade, Estado, Telefone, CNPJ, Settings.Default["TempoPrazo"].ToString(), Bairro);
+                        relatorioPrazo.ShowDialog();
+                        this.Cursor = Cursors.Default;
+                    }
+                    ValorTotal = 0.00m;
+                    CodigoVenda();
+                    txt_CodigoVenda.Text = codigoVenda;
+                    txt_ValorTotal.Text = "R$ 0,00";
+                    DGV_ItensVenda.Rows.Clear();
+                }
             }
             else
             {
@@ -1095,7 +1078,6 @@ namespace CaixaFacil
             HabilitarFerramentas();
             txt_DescontoDinheiro.Text = "0,00";
             txt_DescontoPorcento.Text = "0,00";
-            lbl_NomeCliente.Text = "";
             
         }
 
@@ -1585,7 +1567,8 @@ namespace CaixaFacil
         /*aqui verificamos a situação da compra a prestação do cliente 
       e pegamos a data de vencimento para comparação em otra parte do código*/
         string DataVencimento;
-        private void VerificarSituacaoClienteParcela()
+
+       private void VerificarSituacaoClienteParcela()
         {
            
             SqlConnection conexao = new SqlConnection(stringConn);
@@ -1637,75 +1620,7 @@ namespace CaixaFacil
 
        Venda venda = new Venda();
 
-        private void lbl_FecharPanelPrazo_Click(object sender, EventArgs e)
-        {
-            btn_CancelarVendaPrazo_Click(sender, e);
-        }
-
-        private void lbl_FecharPanelPrazo_MouseEnter(object sender, EventArgs e)
-        {
-            lbl_FecharPanelPrazo.BackColor = Color.Red;
-        }
-
-        private void lbl_FecharPanelPrazo_MouseLeave(object sender, EventArgs e)
-        {
-            lbl_FecharPanelPrazo.BackColor = Color.MediumSlateBlue;
-        }
-
-        private void btn_CancelarVendaPrazo_Click(object sender, EventArgs e)
-        {
-            panelPrazo.Visible = false;
-            HabilitarFerramentas();
-            lbl_separadorInformacao.Visible = false;
-            lbl_NomeCliente.Text = "";
-            lbl_CodigoCliente.Text = "";
-            mask_Data.Text = SomarDataAtualcomPrazoPagamento();
-            txt_NomeCliente.Text = "";
-        }
-
-        private void btn_PesquisarCliente_Click(object sender, EventArgs e)
-        {
-            FrmPesquisarCliente pesquisarCliente = new FrmPesquisarCliente();
-            pesquisarCliente.ShowDialog();
-            if (pesquisarCliente.Codigo != null && pesquisarCliente.Codigo!= "1")
-            {
-                lbl_separadorInformacao.Visible = true;
-                lbl_NomeCliente.Text = pesquisarCliente.Nome;
-                lbl_CodigoCliente.Text = pesquisarCliente.Codigo;
-                txt_NomeCliente.Text = pesquisarCliente.Nome;
-                VerificarSituacao();
-            }
-        }
-
-        //verifica a situação do cliente antes da conclusão da venda durante o prazo da última compra
-        private void VerificarSituacao()
-        {
-            SqlConnection conexao = new SqlConnection(stringConn);
-            try
-            {
-                conexao.Open();
-                _sql = "SELECT  venda.DataVenda, ParcelaVenda.DataVencimento FROM Produto INNER JOIN ItensVenda ON Produto.Id_Produto = ItensVenda.Id_Produto INNER JOIN Venda ON ItensVenda.Id_Venda = Venda.Id_Venda INNER JOIN Cliente ON Venda.Id_Cliente = Cliente.Id_Cliente INNER JOIN ParcelaVenda ON ParcelaVenda.Id_Venda = Venda.Id_Venda INNER JOIN FormaPagamento ON FormaPagamento.Id_Venda = Venda.Id_Venda WHERE(ParcelaVenda.DataPagamento = '') AND(FormaPagamento.Descricao = 'PRAZO') AND(Venda.Id_Cliente = @id)";
-                SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
-                comando.SelectCommand.Parameters.AddWithValue("@id", lbl_CodigoCliente.Text);
-                comando.SelectCommand.CommandText = _sql;
-                DataTable Tabela = new DataTable();
-                comando.Fill(Tabela);
-                if (Tabela.Rows.Count > 0)
-                {
-                    string dataVenda = Tabela.Rows[0]["DataVenda"].ToString();
-                    string vencimento = Tabela.Rows[0]["DataVencimento"].ToString();
-                    MessageBox.Show("O cliente selecionado tem uma conta pendente realizada no dia: " + dataVenda + " que vence(u) no dia: " + vencimento, "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conexao.Close();
-            }
-        }
+      //verifica a situação do cliente antes da conclusão da venda durante o prazo da última compra
 
         private void VendaPrazo()
         {
@@ -1717,12 +1632,12 @@ namespace CaixaFacil
                 venda.horaVenda = lbl_Hora.Text;
                 venda.valorTotal = ValorTotal;
                 venda.desconto = 0.00m;
-                venda.id_cliente = int.Parse(lbl_CodigoCliente.Text);
+                venda.id_cliente = int.Parse(id_Cliente);
                 venda.id_usuario = Id_Usuario;
                 venda.lucro = LucroTotal;
                 venda.EfetuarVenda();
 
-                ParcelaVenda.vencimento = mask_Data.Text;
+                ParcelaVenda.vencimento = DataVencimento;
                 ParcelaVenda.valorParcelado = ValorTotal;
                 ParcelaVenda.id_Venda = int.Parse(txt_CodigoVenda.Text);
                 ParcelaVenda.dataPagamento = "";
@@ -1765,168 +1680,8 @@ namespace CaixaFacil
             }
         }       
               
-        private void btn_SalvarVendaPrazo_Click(object sender, EventArgs e)
-        {
-            if (txt_NomeCliente.Text == "")
-            {
-                MessageBox.Show("Informe o nome do cliente!", "Messagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else
-            {
-                id_Cliente = lbl_CodigoCliente.Text;
-                //SituacaoCliente();
-                //caso a condição abaixo for verdadeira irá realizar a venda, caso contário, o sistema não permitirá a Confirmação da venda
-                //if (situacaoClienteParcela == 0 && situacaoClientePrazo == 0)
-                {
-                    try
-                    {
-                        {
-                            VendaPrazo();
-                            InserirItensvenda();
-                            InformacaoEmpresa();
-                            MessageBox.Show("Prazo Concedido com sucesso!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Prazo = Settings.Default["TempoPrazo"].ToString();
-                            ValorVenda = 0.00m;
-                            ValorTotal = 0.00m;
-                            txt_ValorTotal.Text = "R$ 0,00";
-                            btn_CancelarVendaPrazo_Click(sender, e);
-                            DGV_ItensVenda.Rows.Clear();
-                            CodigoVenda();
-                            txt_CodigoVenda.Text = codigoVenda;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                //else
-                //{
-                //    MessageBox.Show("Venda não permitida. O cliente tem conta(s) vencida(s) com a empresa!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //}
-            }
-        }
-
-        private void lbl_FecharVendaMisto_Click(object sender, EventArgs e)
-        {
-            btn_CancelaVendaMisto_Click(sender, e);
-        }
-
-        private void lbl_FecharVendaMisto_MouseEnter(object sender, EventArgs e)
-        {
-            lbl_FecharVendaMisto.BackColor = Color.Red;
-        }
-
-        private void txt_ValorVenda_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbl_FecharVendaMisto_MouseLeave(object sender, EventArgs e)
-        {
-            lbl_FecharVendaMisto.BackColor = Color.MediumSlateBlue;
-        }
-
-        private void btn_CancelaVendaMisto_Click(object sender, EventArgs e)
-        {
-            panelVendaMisto.Visible = false;
-            txt_ValorAbatido.Clear();
-            txt_TotalAbatido.Clear();
-            txt_ValorRestante.Clear();
-            lbl_SeparadorDados.Visible = false;
-            lblCodigo_Cliente.Text = "";
-            lblNome_Cliente.Text = "";
-            txt_nome.Clear();
-            btn_FinalizarParcial.Enabled = false;
-            HabilitarFerramentas();
-        }
-
-        private void txt_ValorAbatido_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (!char.IsDigit(e.KeyChar))
-                {
-                    if (((int)e.KeyChar) != ((int)Keys.Back))
-                        if (e.KeyChar != ',')
-                            e.Handled = true;
-                        else if (txt_ValorAbatido.Text.IndexOf(',') > 0)
-                            e.Handled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void txt_ValorAbatido_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txt_ValorAbatido.Text != "")
-                {
-                    txt_ValorAbatido.Text = Convert.ToDecimal(txt_ValorAbatido.Text.Trim()).ToString("0.00");
-                    ValorAbatido = decimal.Parse(txt_ValorAbatido.Text);
-                    if (ValorAbatido <= ValorTotal)
-                    {                        
-                        txt_TotalAbatido.Text = "R$ " + txt_ValorAbatido.Text;
-                        ValorRestante = ValorTotal - ValorAbatido;
-                        txt_ValorRestante.Text = "R$ " + ValorRestante.ToString();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Valor de abatimento maior que o valor de venda! Verifique se houve erro de digitação...", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txt_ValorAbatido.Text = "0,00";
-            }
-        }
-        PagamentoParcial PagamentoParcial = new PagamentoParcial();
-        private void btn_FinalizarVendaParcial_Click(object sender, EventArgs e)
-        {
-            if (txt_nome.Text != "")
-            {
-                txt_ValorAbatido_Leave(sender, e);
-                if (ValorAbatido <= ValorTotal)
-                {
-                    EfetuarAbatimento();
-                    InserirItensvenda();
-                    ValorTotal = 0.00m;
-                    HabilitarFerramentas();
-                    panelVendaMisto.Visible = false;
-                    txt_ValorAbatido.Clear();
-                    txt_TotalAbatido.Clear();
-                    txt_ValorRestante.Clear();
-                    lbl_SeparadorDados.Visible = false;
-                    lblCodigo_Cliente.Text = "";
-                    lblNome_Cliente.Text = "";
-                    txt_nome.Clear();
-                    lbl_Situacao.Text = "";
-                    txt_ValorTotal.Text = "R$ 0,00";
-                    DGV_ItensVenda.Rows.Clear();
-                    CodigoVenda();
-                    txt_CodigoVenda.Text = codigoVenda;
-                    if (AreaAtuacao == "SALÃO DE BELEZA" || AreaAtuacao == "PRESTAÇÃO DE SERVIÇO")
-                    {
-                        MessageBox.Show("Prestaçao de Serviço realizado com sucesso!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Venda e valor associado a conta realizado com sucesso!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Informe o nome do cliente!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-        }
-
+       PagamentoParcial PagamentoParcial = new PagamentoParcial();
+       
         private void EfetuarAbatimento()
         {
             try
@@ -1972,7 +1727,7 @@ namespace CaixaFacil
 
         private void GerenciarCaixa_V_Parcial()
         {
-            decimal ValorRecebidoParcial = decimal.Parse(txt_ValorAbatido.Text);
+            decimal ValorRecebidoParcial = ValorAbatido;
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Update FluxoCaixa set ValorReceber = ValorReceber + @ValorReceber, ValorRecebidoParcial = ValorRecebidoParcial + @ValorRecebidoParcial where HoraSaida = '' and DataSaida = ''";
             SqlCommand comando = new SqlCommand(_sql, conexao);
@@ -1992,63 +1747,7 @@ namespace CaixaFacil
             {
                 conexao.Close();
             }
-        }
-
-        private void txt_ValorAbatido_TextChanged(object sender, EventArgs e)
-        {
-            if (txt_ValorAbatido.Text == "")
-            {
-                btn_FinalizarParcial.Enabled = false;
-            }
-            else
-            {
-                btn_FinalizarParcial.Enabled = true;
-            }
-        }
-
-        private void btn_Buscar_Click(object sender, EventArgs e)
-        {
-            FrmPesquisarCliente pesquisarCliente = new FrmPesquisarCliente();
-            pesquisarCliente.ShowDialog();
-            if (pesquisarCliente.Codigo != null && pesquisarCliente.Codigo != "1")
-            {
-                id_Cliente = pesquisarCliente.Codigo;
-                lblCodigo_Cliente.Text = id_Cliente;
-                txt_nome.Text = pesquisarCliente.Nome;
-                lblNome_Cliente.Text = pesquisarCliente.Nome;
-                lbl_SeparadorDados.Visible = true; if (verificarSituacaoClienteParcial() == true)
-                {
-                    lbl_Situacao.Text = "O Cliente selecionado está em débito com R$ " + Valor;
-                }
-                else
-                {
-                    lbl_Situacao.Text = "";
-                }                
-            }
-        }
-
-        private bool verificarSituacaoClienteParcial()
-        {
-            SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "select * from  Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda where PagamentoParcial.ValorRestante > 0 and Venda.Id_Cliente = @Id_Cliente";
-            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
-            comando.SelectCommand.Parameters.AddWithValue("@Id_Cliente", lblCodigo_Cliente.Text);
-            comando.SelectCommand.CommandText = _sql;
-
-            conexao.Open();
-            DataTable Tabela = new DataTable();
-            comando.Fill(Tabela);
-            if (Tabela.Rows.Count > 0)
-            {
-                Valor = decimal.Parse(Tabela.Rows[0]["ValorRestante"].ToString());
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            
-        }
+        }       
               
         private void FrmVenda_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -2056,38 +1755,6 @@ namespace CaixaFacil
             {
                 e.Cancel = true;
             }            
-        }
-
-        private void btn_GerarRelatorio_Click(object sender, EventArgs e)
-        {
-            if (txt_NomeCliente.Text == "")
-            {
-                MessageBox.Show("Informe o nome do cliente!", "Messagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else
-            {
-                try
-                {
-                    this.Cursor = Cursors.WaitCursor;
-                    VendaPrazo();
-                    InserirItensvenda();
-                    InformacaoEmpresa();
-                    Prazo = Settings.Default["TempoPrazo"].ToString();
-                    ValorVenda = 0.00m;
-                    txt_ValorTotal.Text = "R$ 0,00";
-                    btn_CancelarVendaPrazo_Click(sender, e);
-                    DGV_ItensVenda.Rows.Clear();
-                    FrmRelatorioPrazo relatorioPrazo = new FrmRelatorioPrazo(txt_CodigoVenda.Text, NomeFantasia, Endereco, Numero, Cidade, Estado, Telefone, CNPJ, Prazo, Bairro);
-                    relatorioPrazo.ShowDialog();
-                    this.Cursor = Cursors.Default;
-                    CodigoVenda();
-                    txt_CodigoVenda.Text = codigoVenda;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
         }
 
         private void btn_GerarRepasse_Click(object sender, EventArgs e)

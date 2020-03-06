@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbl_atendente = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -56,51 +56,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.panelVendaMisto = new System.Windows.Forms.Panel();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.lbl_Situacao = new System.Windows.Forms.Label();
-            this.btn_Buscar = new System.Windows.Forms.Button();
-            this.lbl_SeparadorDados = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.lblCodigo_Cliente = new System.Windows.Forms.Label();
-            this.lblNome_Cliente = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.txt_nome = new System.Windows.Forms.TextBox();
-            this.btn_FinalizarParcial = new System.Windows.Forms.Button();
-            this.btn_CancelaVendaMisto = new System.Windows.Forms.Button();
-            this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.txt_ValorRestante = new System.Windows.Forms.TextBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.txt_TotalAbatido = new System.Windows.Forms.TextBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.txt_TotalVenda = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.txt_ValorAbatido = new System.Windows.Forms.TextBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.lbl_FecharVendaMisto = new System.Windows.Forms.Label();
-            this.panelPrazo = new System.Windows.Forms.Panel();
-            this.btn_GerarRelatorio = new System.Windows.Forms.Button();
-            this.btn_CancelarVendaPrazo = new System.Windows.Forms.Button();
-            this.btn_SalvarVendaPrazo = new System.Windows.Forms.Button();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.txt_ValorVendaPrazo = new System.Windows.Forms.TextBox();
-            this.mask_Data = new System.Windows.Forms.MaskedTextBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.lbl_separadorInformacao = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.lbl_CodigoCliente = new System.Windows.Forms.Label();
-            this.lbl_NomeCliente = new System.Windows.Forms.Label();
-            this.btn_PesquisarCliente = new System.Windows.Forms.Button();
-            this.label28 = new System.Windows.Forms.Label();
-            this.txt_NomeCliente = new System.Windows.Forms.TextBox();
-            this.lbl_FecharPanelPrazo = new System.Windows.Forms.Label();
             this.txt_CodigoVenda = new System.Windows.Forms.TextBox();
             this.PanelVendaVista = new System.Windows.Forms.Panel();
             this.btn_ImprimiCupom = new System.Windows.Forms.Button();
@@ -158,13 +113,6 @@
             this.btn_GerarRecibo.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.panelVendaMisto.SuspendLayout();
-            this.groupBox13.SuspendLayout();
-            this.groupBox12.SuspendLayout();
-            this.groupBox11.SuspendLayout();
-            this.panelPrazo.SuspendLayout();
-            this.groupBox10.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             this.PanelVendaVista.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -405,8 +353,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.panelVendaMisto);
-            this.groupBox1.Controls.Add(this.panelPrazo);
             this.groupBox1.Controls.Add(this.txt_CodigoVenda);
             this.groupBox1.Controls.Add(this.PanelVendaVista);
             this.groupBox1.Controls.Add(this.cbOpcao);
@@ -425,529 +371,6 @@
             this.groupBox1.Size = new System.Drawing.Size(1040, 641);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            // 
-            // panelVendaMisto
-            // 
-            this.panelVendaMisto.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.panelVendaMisto.Controls.Add(this.groupBox13);
-            this.panelVendaMisto.Controls.Add(this.btn_FinalizarParcial);
-            this.panelVendaMisto.Controls.Add(this.btn_CancelaVendaMisto);
-            this.panelVendaMisto.Controls.Add(this.groupBox12);
-            this.panelVendaMisto.Controls.Add(this.groupBox11);
-            this.panelVendaMisto.Controls.Add(this.lbl_FecharVendaMisto);
-            this.panelVendaMisto.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelVendaMisto.Location = new System.Drawing.Point(189, 144);
-            this.panelVendaMisto.Name = "panelVendaMisto";
-            this.panelVendaMisto.Size = new System.Drawing.Size(815, 342);
-            this.panelVendaMisto.TabIndex = 26;
-            this.panelVendaMisto.Visible = false;
-            // 
-            // groupBox13
-            // 
-            this.groupBox13.Controls.Add(this.lbl_Situacao);
-            this.groupBox13.Controls.Add(this.btn_Buscar);
-            this.groupBox13.Controls.Add(this.lbl_SeparadorDados);
-            this.groupBox13.Controls.Add(this.label36);
-            this.groupBox13.Controls.Add(this.label37);
-            this.groupBox13.Controls.Add(this.label38);
-            this.groupBox13.Controls.Add(this.lblCodigo_Cliente);
-            this.groupBox13.Controls.Add(this.lblNome_Cliente);
-            this.groupBox13.Controls.Add(this.label29);
-            this.groupBox13.Controls.Add(this.txt_nome);
-            this.groupBox13.ForeColor = System.Drawing.Color.White;
-            this.groupBox13.Location = new System.Drawing.Point(17, 118);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(496, 153);
-            this.groupBox13.TabIndex = 6;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "Pagamento";
-            // 
-            // lbl_Situacao
-            // 
-            this.lbl_Situacao.AutoSize = true;
-            this.lbl_Situacao.Location = new System.Drawing.Point(10, 126);
-            this.lbl_Situacao.Name = "lbl_Situacao";
-            this.lbl_Situacao.Size = new System.Drawing.Size(0, 19);
-            this.lbl_Situacao.TabIndex = 21;
-            // 
-            // btn_Buscar
-            // 
-            this.btn_Buscar.Image = global::CaixaFacil.Properties.Resources.magnifying_glass_icon;
-            this.btn_Buscar.Location = new System.Drawing.Point(407, 47);
-            this.btn_Buscar.Name = "btn_Buscar";
-            this.btn_Buscar.Size = new System.Drawing.Size(83, 38);
-            this.btn_Buscar.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.btn_Buscar, "Pesquisar");
-            this.btn_Buscar.UseVisualStyleBackColor = true;
-            this.btn_Buscar.Click += new System.EventHandler(this.btn_Buscar_Click);
-            // 
-            // lbl_SeparadorDados
-            // 
-            this.lbl_SeparadorDados.AutoSize = true;
-            this.lbl_SeparadorDados.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_SeparadorDados.ForeColor = System.Drawing.Color.White;
-            this.lbl_SeparadorDados.Location = new System.Drawing.Point(65, 104);
-            this.lbl_SeparadorDados.Name = "lbl_SeparadorDados";
-            this.lbl_SeparadorDados.Size = new System.Drawing.Size(12, 19);
-            this.lbl_SeparadorDados.TabIndex = 19;
-            this.lbl_SeparadorDados.Text = "|";
-            this.lbl_SeparadorDados.Visible = false;
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.ForeColor = System.Drawing.Color.White;
-            this.label36.Location = new System.Drawing.Point(65, 81);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(12, 19);
-            this.label36.TabIndex = 18;
-            this.label36.Text = "|";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.Color.White;
-            this.label37.Location = new System.Drawing.Point(12, 81);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(56, 19);
-            this.label37.TabIndex = 17;
-            this.label37.Text = "Código";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.ForeColor = System.Drawing.Color.White;
-            this.label38.Location = new System.Drawing.Point(77, 81);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(49, 19);
-            this.label38.TabIndex = 16;
-            this.label38.Text = "Nome";
-            // 
-            // lblCodigo_Cliente
-            // 
-            this.lblCodigo_Cliente.AutoSize = true;
-            this.lblCodigo_Cliente.ForeColor = System.Drawing.Color.White;
-            this.lblCodigo_Cliente.Location = new System.Drawing.Point(12, 104);
-            this.lblCodigo_Cliente.Name = "lblCodigo_Cliente";
-            this.lblCodigo_Cliente.Size = new System.Drawing.Size(0, 19);
-            this.lblCodigo_Cliente.TabIndex = 15;
-            // 
-            // lblNome_Cliente
-            // 
-            this.lblNome_Cliente.AutoSize = true;
-            this.lblNome_Cliente.ForeColor = System.Drawing.Color.White;
-            this.lblNome_Cliente.Location = new System.Drawing.Point(80, 104);
-            this.lblNome_Cliente.Name = "lblNome_Cliente";
-            this.lblNome_Cliente.Size = new System.Drawing.Size(0, 19);
-            this.lblNome_Cliente.TabIndex = 14;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.ForeColor = System.Drawing.Color.White;
-            this.label29.Location = new System.Drawing.Point(12, 23);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(117, 19);
-            this.label29.TabIndex = 7;
-            this.label29.Text = "Nome do cliente";
-            // 
-            // txt_nome
-            // 
-            this.txt_nome.Location = new System.Drawing.Point(15, 51);
-            this.txt_nome.Name = "txt_nome";
-            this.txt_nome.ReadOnly = true;
-            this.txt_nome.Size = new System.Drawing.Size(386, 26);
-            this.txt_nome.TabIndex = 6;
-            // 
-            // btn_FinalizarParcial
-            // 
-            this.btn_FinalizarParcial.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_FinalizarParcial.ForeColor = System.Drawing.Color.Black;
-            this.btn_FinalizarParcial.Image = global::CaixaFacil.Properties.Resources.Ok_icon;
-            this.btn_FinalizarParcial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_FinalizarParcial.Location = new System.Drawing.Point(648, 282);
-            this.btn_FinalizarParcial.Name = "btn_FinalizarParcial";
-            this.btn_FinalizarParcial.Size = new System.Drawing.Size(164, 60);
-            this.btn_FinalizarParcial.TabIndex = 15;
-            this.btn_FinalizarParcial.Text = "Finalizar - [F10]";
-            this.btn_FinalizarParcial.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_FinalizarParcial.UseVisualStyleBackColor = true;
-            this.btn_FinalizarParcial.Click += new System.EventHandler(this.btn_FinalizarVendaParcial_Click);
-            // 
-            // btn_CancelaVendaMisto
-            // 
-            this.btn_CancelaVendaMisto.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_CancelaVendaMisto.ForeColor = System.Drawing.Color.Black;
-            this.btn_CancelaVendaMisto.Image = global::CaixaFacil.Properties.Resources.Button_Cancel_icon__1_;
-            this.btn_CancelaVendaMisto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_CancelaVendaMisto.Location = new System.Drawing.Point(486, 282);
-            this.btn_CancelaVendaMisto.Name = "btn_CancelaVendaMisto";
-            this.btn_CancelaVendaMisto.Size = new System.Drawing.Size(162, 60);
-            this.btn_CancelaVendaMisto.TabIndex = 16;
-            this.btn_CancelaVendaMisto.Text = "Cancelar - [ESC]";
-            this.btn_CancelaVendaMisto.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_CancelaVendaMisto.UseVisualStyleBackColor = true;
-            this.btn_CancelaVendaMisto.Click += new System.EventHandler(this.btn_CancelaVendaMisto_Click);
-            // 
-            // groupBox12
-            // 
-            this.groupBox12.Controls.Add(this.txt_ValorRestante);
-            this.groupBox12.Controls.Add(this.label34);
-            this.groupBox12.Controls.Add(this.txt_TotalAbatido);
-            this.groupBox12.Controls.Add(this.label33);
-            this.groupBox12.Controls.Add(this.txt_TotalVenda);
-            this.groupBox12.Controls.Add(this.label32);
-            this.groupBox12.Location = new System.Drawing.Point(517, 9);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(257, 224);
-            this.groupBox12.TabIndex = 2;
-            this.groupBox12.TabStop = false;
-            // 
-            // txt_ValorRestante
-            // 
-            this.txt_ValorRestante.Location = new System.Drawing.Point(26, 179);
-            this.txt_ValorRestante.Name = "txt_ValorRestante";
-            this.txt_ValorRestante.ReadOnly = true;
-            this.txt_ValorRestante.Size = new System.Drawing.Size(129, 26);
-            this.txt_ValorRestante.TabIndex = 11;
-            this.txt_ValorRestante.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.ForeColor = System.Drawing.Color.White;
-            this.label34.Location = new System.Drawing.Point(22, 157);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(109, 19);
-            this.label34.TabIndex = 10;
-            this.label34.Text = "Valor restante:";
-            // 
-            // txt_TotalAbatido
-            // 
-            this.txt_TotalAbatido.Location = new System.Drawing.Point(26, 115);
-            this.txt_TotalAbatido.Name = "txt_TotalAbatido";
-            this.txt_TotalAbatido.ReadOnly = true;
-            this.txt_TotalAbatido.Size = new System.Drawing.Size(129, 26);
-            this.txt_TotalAbatido.TabIndex = 9;
-            this.txt_TotalAbatido.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.ForeColor = System.Drawing.Color.White;
-            this.label33.Location = new System.Drawing.Point(22, 93);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(101, 19);
-            this.label33.TabIndex = 8;
-            this.label33.Text = "Total abatido:";
-            // 
-            // txt_TotalVenda
-            // 
-            this.txt_TotalVenda.Location = new System.Drawing.Point(26, 50);
-            this.txt_TotalVenda.Name = "txt_TotalVenda";
-            this.txt_TotalVenda.ReadOnly = true;
-            this.txt_TotalVenda.Size = new System.Drawing.Size(129, 26);
-            this.txt_TotalVenda.TabIndex = 7;
-            this.txt_TotalVenda.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.ForeColor = System.Drawing.Color.White;
-            this.label32.Location = new System.Drawing.Point(6, 24);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(232, 19);
-            this.label32.TabIndex = 6;
-            this.label32.Text = "Valor total da venda e/ou serviço:";
-            // 
-            // groupBox11
-            // 
-            this.groupBox11.Controls.Add(this.txt_ValorAbatido);
-            this.groupBox11.Controls.Add(this.label31);
-            this.groupBox11.ForeColor = System.Drawing.Color.White;
-            this.groupBox11.Location = new System.Drawing.Point(17, 9);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(494, 103);
-            this.groupBox11.TabIndex = 1;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Pagamento";
-            // 
-            // txt_ValorAbatido
-            // 
-            this.txt_ValorAbatido.Location = new System.Drawing.Point(11, 45);
-            this.txt_ValorAbatido.Name = "txt_ValorAbatido";
-            this.txt_ValorAbatido.Size = new System.Drawing.Size(116, 26);
-            this.txt_ValorAbatido.TabIndex = 5;
-            this.txt_ValorAbatido.Text = "0,00";
-            this.txt_ValorAbatido.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txt_ValorAbatido.TextChanged += new System.EventHandler(this.txt_ValorAbatido_TextChanged);
-            this.txt_ValorAbatido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_ValorAbatido_KeyPress);
-            this.txt_ValorAbatido.Leave += new System.EventHandler(this.txt_ValorAbatido_Leave);
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(7, 23);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(163, 19);
-            this.label31.TabIndex = 4;
-            this.label31.Text = "Valor Para abatimento:";
-            // 
-            // lbl_FecharVendaMisto
-            // 
-            this.lbl_FecharVendaMisto.AutoSize = true;
-            this.lbl_FecharVendaMisto.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_FecharVendaMisto.ForeColor = System.Drawing.Color.White;
-            this.lbl_FecharVendaMisto.Location = new System.Drawing.Point(780, 0);
-            this.lbl_FecharVendaMisto.Name = "lbl_FecharVendaMisto";
-            this.lbl_FecharVendaMisto.Size = new System.Drawing.Size(33, 31);
-            this.lbl_FecharVendaMisto.TabIndex = 0;
-            this.lbl_FecharVendaMisto.Text = "X";
-            this.lbl_FecharVendaMisto.Click += new System.EventHandler(this.lbl_FecharVendaMisto_Click);
-            this.lbl_FecharVendaMisto.MouseEnter += new System.EventHandler(this.lbl_FecharVendaMisto_MouseEnter);
-            this.lbl_FecharVendaMisto.MouseLeave += new System.EventHandler(this.lbl_FecharVendaMisto_MouseLeave);
-            // 
-            // panelPrazo
-            // 
-            this.panelPrazo.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.panelPrazo.Controls.Add(this.btn_GerarRelatorio);
-            this.panelPrazo.Controls.Add(this.btn_CancelarVendaPrazo);
-            this.panelPrazo.Controls.Add(this.btn_SalvarVendaPrazo);
-            this.panelPrazo.Controls.Add(this.groupBox10);
-            this.panelPrazo.Controls.Add(this.groupBox8);
-            this.panelPrazo.Controls.Add(this.btn_PesquisarCliente);
-            this.panelPrazo.Controls.Add(this.label28);
-            this.panelPrazo.Controls.Add(this.txt_NomeCliente);
-            this.panelPrazo.Controls.Add(this.lbl_FecharPanelPrazo);
-            this.panelPrazo.Location = new System.Drawing.Point(147, 144);
-            this.panelPrazo.Name = "panelPrazo";
-            this.panelPrazo.Size = new System.Drawing.Size(746, 366);
-            this.panelPrazo.TabIndex = 27;
-            this.panelPrazo.Visible = false;
-            // 
-            // btn_GerarRelatorio
-            // 
-            this.btn_GerarRelatorio.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_GerarRelatorio.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_GerarRelatorio.Location = new System.Drawing.Point(542, 205);
-            this.btn_GerarRelatorio.Name = "btn_GerarRelatorio";
-            this.btn_GerarRelatorio.Size = new System.Drawing.Size(185, 65);
-            this.btn_GerarRelatorio.TabIndex = 17;
-            this.btn_GerarRelatorio.Text = "Gerar Relatório - [F2]";
-            this.toolTip1.SetToolTip(this.btn_GerarRelatorio, "Buscar");
-            this.btn_GerarRelatorio.UseVisualStyleBackColor = true;
-            this.btn_GerarRelatorio.Click += new System.EventHandler(this.btn_GerarRelatorio_Click);
-            // 
-            // btn_CancelarVendaPrazo
-            // 
-            this.btn_CancelarVendaPrazo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_CancelarVendaPrazo.Image = global::CaixaFacil.Properties.Resources.Button_Cancel_icon__1_;
-            this.btn_CancelarVendaPrazo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_CancelarVendaPrazo.Location = new System.Drawing.Point(542, 276);
-            this.btn_CancelarVendaPrazo.Name = "btn_CancelarVendaPrazo";
-            this.btn_CancelarVendaPrazo.Size = new System.Drawing.Size(185, 66);
-            this.btn_CancelarVendaPrazo.TabIndex = 16;
-            this.btn_CancelarVendaPrazo.Text = "Cancelar - ESC";
-            this.toolTip1.SetToolTip(this.btn_CancelarVendaPrazo, "Buscar");
-            this.btn_CancelarVendaPrazo.UseVisualStyleBackColor = true;
-            this.btn_CancelarVendaPrazo.Click += new System.EventHandler(this.btn_CancelarVendaPrazo_Click);
-            // 
-            // btn_SalvarVendaPrazo
-            // 
-            this.btn_SalvarVendaPrazo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_SalvarVendaPrazo.Image = global::CaixaFacil.Properties.Resources.Save_icon__1_1;
-            this.btn_SalvarVendaPrazo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_SalvarVendaPrazo.Location = new System.Drawing.Point(542, 129);
-            this.btn_SalvarVendaPrazo.Name = "btn_SalvarVendaPrazo";
-            this.btn_SalvarVendaPrazo.Size = new System.Drawing.Size(185, 65);
-            this.btn_SalvarVendaPrazo.TabIndex = 15;
-            this.btn_SalvarVendaPrazo.Text = "Salvar - [F1]";
-            this.toolTip1.SetToolTip(this.btn_SalvarVendaPrazo, "Buscar");
-            this.btn_SalvarVendaPrazo.UseVisualStyleBackColor = true;
-            this.btn_SalvarVendaPrazo.Click += new System.EventHandler(this.btn_SalvarVendaPrazo_Click);
-            // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.label27);
-            this.groupBox10.Controls.Add(this.txt_ValorVendaPrazo);
-            this.groupBox10.Controls.Add(this.mask_Data);
-            this.groupBox10.Controls.Add(this.label26);
-            this.groupBox10.ForeColor = System.Drawing.Color.White;
-            this.groupBox10.Location = new System.Drawing.Point(47, 159);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(486, 183);
-            this.groupBox10.TabIndex = 14;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Prazo";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.ForeColor = System.Drawing.Color.White;
-            this.label27.Location = new System.Drawing.Point(27, 104);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(96, 19);
-            this.label27.TabIndex = 16;
-            this.label27.Text = "Valor Venda:";
-            // 
-            // txt_ValorVendaPrazo
-            // 
-            this.txt_ValorVendaPrazo.Location = new System.Drawing.Point(30, 132);
-            this.txt_ValorVendaPrazo.Name = "txt_ValorVendaPrazo";
-            this.txt_ValorVendaPrazo.ReadOnly = true;
-            this.txt_ValorVendaPrazo.Size = new System.Drawing.Size(114, 26);
-            this.txt_ValorVendaPrazo.TabIndex = 15;
-            // 
-            // mask_Data
-            // 
-            this.mask_Data.Location = new System.Drawing.Point(31, 60);
-            this.mask_Data.Name = "mask_Data";
-            this.mask_Data.ReadOnly = true;
-            this.mask_Data.Size = new System.Drawing.Size(89, 26);
-            this.mask_Data.TabIndex = 14;
-            this.mask_Data.ValidatingType = typeof(System.DateTime);
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.ForeColor = System.Drawing.Color.White;
-            this.label26.Location = new System.Drawing.Point(22, 35);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(147, 19);
-            this.label26.TabIndex = 13;
-            this.label26.Text = "Data de vencimento:";
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.lbl_separadorInformacao);
-            this.groupBox8.Controls.Add(this.label23);
-            this.groupBox8.Controls.Add(this.label24);
-            this.groupBox8.Controls.Add(this.label25);
-            this.groupBox8.Controls.Add(this.lbl_CodigoCliente);
-            this.groupBox8.Controls.Add(this.lbl_NomeCliente);
-            this.groupBox8.Location = new System.Drawing.Point(47, 85);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(486, 68);
-            this.groupBox8.TabIndex = 11;
-            this.groupBox8.TabStop = false;
-            // 
-            // lbl_separadorInformacao
-            // 
-            this.lbl_separadorInformacao.AutoSize = true;
-            this.lbl_separadorInformacao.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_separadorInformacao.ForeColor = System.Drawing.Color.White;
-            this.lbl_separadorInformacao.Location = new System.Drawing.Point(59, 37);
-            this.lbl_separadorInformacao.Name = "lbl_separadorInformacao";
-            this.lbl_separadorInformacao.Size = new System.Drawing.Size(12, 19);
-            this.lbl_separadorInformacao.TabIndex = 13;
-            this.lbl_separadorInformacao.Text = "|";
-            this.lbl_separadorInformacao.Visible = false;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(59, 14);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(12, 19);
-            this.label23.TabIndex = 12;
-            this.label23.Text = "|";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.ForeColor = System.Drawing.Color.White;
-            this.label24.Location = new System.Drawing.Point(6, 14);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(56, 19);
-            this.label24.TabIndex = 11;
-            this.label24.Text = "Código";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.Color.White;
-            this.label25.Location = new System.Drawing.Point(71, 14);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(49, 19);
-            this.label25.TabIndex = 10;
-            this.label25.Text = "Nome";
-            // 
-            // lbl_CodigoCliente
-            // 
-            this.lbl_CodigoCliente.AutoSize = true;
-            this.lbl_CodigoCliente.ForeColor = System.Drawing.Color.White;
-            this.lbl_CodigoCliente.Location = new System.Drawing.Point(6, 37);
-            this.lbl_CodigoCliente.Name = "lbl_CodigoCliente";
-            this.lbl_CodigoCliente.Size = new System.Drawing.Size(0, 19);
-            this.lbl_CodigoCliente.TabIndex = 9;
-            // 
-            // lbl_NomeCliente
-            // 
-            this.lbl_NomeCliente.AutoSize = true;
-            this.lbl_NomeCliente.ForeColor = System.Drawing.Color.White;
-            this.lbl_NomeCliente.Location = new System.Drawing.Point(74, 37);
-            this.lbl_NomeCliente.Name = "lbl_NomeCliente";
-            this.lbl_NomeCliente.Size = new System.Drawing.Size(0, 19);
-            this.lbl_NomeCliente.TabIndex = 8;
-            // 
-            // btn_PesquisarCliente
-            // 
-            this.btn_PesquisarCliente.Image = global::CaixaFacil.Properties.Resources.magnifying_glass_icon;
-            this.btn_PesquisarCliente.Location = new System.Drawing.Point(439, 41);
-            this.btn_PesquisarCliente.Name = "btn_PesquisarCliente";
-            this.btn_PesquisarCliente.Size = new System.Drawing.Size(105, 43);
-            this.btn_PesquisarCliente.TabIndex = 10;
-            this.toolTip1.SetToolTip(this.btn_PesquisarCliente, "Buscar");
-            this.btn_PesquisarCliente.UseVisualStyleBackColor = true;
-            this.btn_PesquisarCliente.Click += new System.EventHandler(this.btn_PesquisarCliente_Click);
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.ForeColor = System.Drawing.Color.White;
-            this.label28.Location = new System.Drawing.Point(44, 22);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(187, 19);
-            this.label28.TabIndex = 9;
-            this.label28.Text = "Informe o nome do cliente:";
-            // 
-            // txt_NomeCliente
-            // 
-            this.txt_NomeCliente.Location = new System.Drawing.Point(47, 50);
-            this.txt_NomeCliente.Name = "txt_NomeCliente";
-            this.txt_NomeCliente.ReadOnly = true;
-            this.txt_NomeCliente.Size = new System.Drawing.Size(386, 26);
-            this.txt_NomeCliente.TabIndex = 8;
-            // 
-            // lbl_FecharPanelPrazo
-            // 
-            this.lbl_FecharPanelPrazo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_FecharPanelPrazo.AutoSize = true;
-            this.lbl_FecharPanelPrazo.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_FecharPanelPrazo.ForeColor = System.Drawing.Color.White;
-            this.lbl_FecharPanelPrazo.Location = new System.Drawing.Point(710, 4);
-            this.lbl_FecharPanelPrazo.Name = "lbl_FecharPanelPrazo";
-            this.lbl_FecharPanelPrazo.Size = new System.Drawing.Size(33, 31);
-            this.lbl_FecharPanelPrazo.TabIndex = 4;
-            this.lbl_FecharPanelPrazo.Text = "X";
-            this.lbl_FecharPanelPrazo.Click += new System.EventHandler(this.lbl_FecharPanelPrazo_Click);
-            this.lbl_FecharPanelPrazo.MouseEnter += new System.EventHandler(this.lbl_FecharPanelPrazo_MouseEnter);
-            this.lbl_FecharPanelPrazo.MouseLeave += new System.EventHandler(this.lbl_FecharPanelPrazo_MouseLeave);
             // 
             // txt_CodigoVenda
             // 
@@ -1425,14 +848,14 @@
             this.DGV_ItensVenda.AllowUserToAddRows = false;
             this.DGV_ItensVenda.AllowUserToDeleteRows = false;
             this.DGV_ItensVenda.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_ItensVenda.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_ItensVenda.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DGV_ItensVenda.ColumnHeadersHeight = 30;
             this.DGV_ItensVenda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DGV_ItensVenda.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1454,8 +877,8 @@
             // ColumnCodigo
             // 
             this.ColumnCodigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.ColumnCodigo.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.ColumnCodigo.DefaultCellStyle = dataGridViewCellStyle2;
             this.ColumnCodigo.HeaderText = "Código";
             this.ColumnCodigo.Name = "ColumnCodigo";
             this.ColumnCodigo.ReadOnly = true;
@@ -1464,8 +887,8 @@
             // ColumnDescricaoProduto
             // 
             this.ColumnDescricaoProduto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.ColumnDescricaoProduto.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.ColumnDescricaoProduto.DefaultCellStyle = dataGridViewCellStyle3;
             this.ColumnDescricaoProduto.HeaderText = "Descrição";
             this.ColumnDescricaoProduto.Name = "ColumnDescricaoProduto";
             this.ColumnDescricaoProduto.ReadOnly = true;
@@ -1473,8 +896,8 @@
             // ColumnQuantidade
             // 
             this.ColumnQuantidade.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.ColumnQuantidade.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.ColumnQuantidade.DefaultCellStyle = dataGridViewCellStyle4;
             this.ColumnQuantidade.HeaderText = "Quantidade";
             this.ColumnQuantidade.Name = "ColumnQuantidade";
             this.ColumnQuantidade.ReadOnly = true;
@@ -1482,8 +905,8 @@
             // 
             // ColumnUnidade
             // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.ColumnUnidade.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.ColumnUnidade.DefaultCellStyle = dataGridViewCellStyle5;
             this.ColumnUnidade.HeaderText = "Unidade";
             this.ColumnUnidade.Name = "ColumnUnidade";
             this.ColumnUnidade.ReadOnly = true;
@@ -1491,10 +914,10 @@
             // ColumnValorUnitario
             // 
             this.ColumnValorUnitario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle13.Format = "C2";
-            dataGridViewCellStyle13.NullValue = null;
-            this.ColumnValorUnitario.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.ColumnValorUnitario.DefaultCellStyle = dataGridViewCellStyle6;
             this.ColumnValorUnitario.HeaderText = "Valor Unitário";
             this.ColumnValorUnitario.Name = "ColumnValorUnitario";
             this.ColumnValorUnitario.ReadOnly = true;
@@ -1503,10 +926,10 @@
             // ColumnSubTotal
             // 
             this.ColumnSubTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle14.Format = "C2";
-            dataGridViewCellStyle14.NullValue = null;
-            this.ColumnSubTotal.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle7.Format = "C2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.ColumnSubTotal.DefaultCellStyle = dataGridViewCellStyle7;
             this.ColumnSubTotal.HeaderText = "Valor SubTotal";
             this.ColumnSubTotal.Name = "ColumnSubTotal";
             this.ColumnSubTotal.ReadOnly = true;
@@ -1650,20 +1073,6 @@
             this.groupBox5.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panelVendaMisto.ResumeLayout(false);
-            this.panelVendaMisto.PerformLayout();
-            this.groupBox13.ResumeLayout(false);
-            this.groupBox13.PerformLayout();
-            this.groupBox12.ResumeLayout(false);
-            this.groupBox12.PerformLayout();
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox11.PerformLayout();
-            this.panelPrazo.ResumeLayout(false);
-            this.panelPrazo.PerformLayout();
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
             this.PanelVendaVista.ResumeLayout(false);
             this.PanelVendaVista.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1748,51 +1157,6 @@
         private System.Windows.Forms.Button btn_BuscarServiço;
         private System.Windows.Forms.TextBox txt_DescontoPorcento;
         private System.Windows.Forms.Label lbl_DescontoPorcento;
-        private System.Windows.Forms.Panel panelVendaMisto;
-        private System.Windows.Forms.GroupBox groupBox13;
-        private System.Windows.Forms.Label lbl_Situacao;
-        private System.Windows.Forms.Button btn_Buscar;
-        private System.Windows.Forms.Label lbl_SeparadorDados;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Label lblCodigo_Cliente;
-        private System.Windows.Forms.Label lblNome_Cliente;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.TextBox txt_nome;
-        private System.Windows.Forms.Button btn_FinalizarParcial;
-        private System.Windows.Forms.Button btn_CancelaVendaMisto;
-        private System.Windows.Forms.GroupBox groupBox12;
-        private System.Windows.Forms.TextBox txt_ValorRestante;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox txt_TotalAbatido;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.TextBox txt_TotalVenda;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.TextBox txt_ValorAbatido;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Label lbl_FecharVendaMisto;
-        private System.Windows.Forms.Panel panelPrazo;
-        private System.Windows.Forms.Button btn_GerarRelatorio;
-        private System.Windows.Forms.Button btn_CancelarVendaPrazo;
-        private System.Windows.Forms.Button btn_SalvarVendaPrazo;
-        private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox txt_ValorVendaPrazo;
-        private System.Windows.Forms.MaskedTextBox mask_Data;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.Label lbl_separadorInformacao;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label lbl_CodigoCliente;
-        private System.Windows.Forms.Label lbl_NomeCliente;
-        private System.Windows.Forms.Button btn_PesquisarCliente;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.TextBox txt_NomeCliente;
-        private System.Windows.Forms.Label lbl_FecharPanelPrazo;
         private System.Windows.Forms.Button btnPagamentoCartao;
         private System.Windows.Forms.Button btn_ImprimiCupom;
     }
