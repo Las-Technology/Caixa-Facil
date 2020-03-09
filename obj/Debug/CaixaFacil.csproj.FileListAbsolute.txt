@@ -273,3 +273,4 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\RdlCompile.compiled
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.csproj.CopyComplete
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.exe
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.pdb
+C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmVendaVista.resources

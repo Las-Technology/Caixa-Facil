@@ -512,6 +512,12 @@
     <Compile Include="FrmVendaParcelas.designer.cs">
       <DependentUpon>FrmVendaParcelas.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmVendaVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmVendaVista.designer.cs">
+      <DependentUpon>FrmVendaVista.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmVendaPrazo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -724,6 +730,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmVendaParcelas.resx">
       <DependentUpon>FrmVendaParcelas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmVendaVista.resx">
+      <DependentUpon>FrmVendaVista.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmVendaPrazo.resx">
       <DependentUpon>FrmVendaPrazo.cs</DependentUpon>
