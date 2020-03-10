@@ -11,12 +11,17 @@ namespace CaixaFacil
     {
         public string id_Cliente, stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
         public bool vendaConfirmada = false;
+        public bool CupomPedido = false;
+        public bool promissoriaPedido = false;
         public bool relatorioPedido = false;
         public string Vencimento { get; set; }
+        public string nomeCliente { get; set; }
         public decimal ValorTotal { get; set; }
+        public decimal ValorPago { get; set; }
         public decimal ValorDesconto { get; set; }
+        public decimal troco { get; set; }
         public decimal descontoDinheiro { get; set; }
-        decimal ValorPago, ValorDescontoPorcento, DescontoPorcento;
+        decimal ValorDescontoPorcento, DescontoPorcento;
         const int Porcento = 100;
         bool Descontar = true;
 
@@ -49,8 +54,8 @@ namespace CaixaFacil
                 if (txt_ValorPago.Text != "")
                 {
                     ValorPago = decimal.Parse(txt_ValorPago.Text.Trim());
-                    decimal Troco = ValorPago - ValorTotal;
-                    txt_Troco.Text = Troco.ToString();
+                    troco = ValorPago - ValorTotal;
+                    txt_Troco.Text = troco.ToString();
                     txt_ValorPago.Text = ValorPago.ToString();
                     txt_ValorPago.Text = Convert.ToDouble(txt_ValorPago.Text.Trim()).ToString("0.00");
                     if (txt_ValorDesconto.Text != "0,00")
@@ -145,9 +150,19 @@ namespace CaixaFacil
         }
 
         private void btn_Finalizar_Click(object sender, EventArgs e)
-        {
-            vendaConfirmada = true;
+        {        
+            Finalizar();          
+        }
 
+        private void Finalizar()
+        {
+            if (string.IsNullOrWhiteSpace(txt_ValorPago.Text))
+            {
+                MessageBox.Show("Informe o valor pago!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            troco = decimal.Parse(txt_Troco.Text);
             if (ValorDesconto == 0.00M)
                 ValorDesconto = ValorTotal;
 
@@ -156,6 +171,8 @@ namespace CaixaFacil
                 MessageBox.Show("Valor em dinheiro menor do que o valor total da venda!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+
+            vendaConfirmada = true;
 
             this.Close();
         }
@@ -232,6 +249,20 @@ namespace CaixaFacil
             {
                 MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btn_ImprimiCupom_Click(object sender, EventArgs e)
+        {
+            CupomPedido = true;
+
+            Finalizar();
+        }
+
+        private void btn_Recibo_Click(object sender, EventArgs e)
+        {
+            promissoriaPedido = true;
+            nomeCliente = lbl_Cliente.Text;
+            Finalizar();
         }
 
         private void btn_Desconto_Click(object sender, EventArgs e)

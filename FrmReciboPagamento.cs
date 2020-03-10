@@ -20,9 +20,9 @@ namespace CaixaFacil
         public FrmReciboPagamento(string Hora, decimal Valor, string NomeFantasia, string Cidade, string Endereco, string Numero, string CNPJ, string Cliente, string Data, string Atendente, string Id_Venda)
         {
             InitializeComponent();
-            if (Cliente == "")
+            if (string.IsNullOrEmpty(Cliente))
             {
-                Cliente = "Cliente avulso";
+                Cliente = "Cliente Avulso";
             }
             CodigoVenda = int.Parse(Id_Venda);
             ReportParameterCollection reportParameters = new ReportParameterCollection();

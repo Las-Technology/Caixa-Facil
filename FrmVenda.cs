@@ -116,8 +116,7 @@ namespace CaixaFacil
                 btn_BuscarProdutos.TextAlign = ContentAlignment.MiddleCenter;
                 this.groupBox4.Size = new System.Drawing.Size(785, 93);
                 this.Text = "P.D.S";              
-                label10.Text = "Valor Total do serviço:";
-                lblValorTotalVenda.Text = "Valor Total do serviço: ";
+               lblValorTotalVenda.Text = "Valor Total do serviço: ";
             }
         }
 
@@ -125,89 +124,49 @@ namespace CaixaFacil
         {
             if (e.KeyCode == Keys.F)
             {
-                if (btn_Sair.Enabled == true)
-                {
-                    btn_NovoCadastro_Click(sender, e);
-                }
-                else if (PanelVendaVista.Visible == true)
-                {
-                    txt_ValorPago.Focus();
-                }
+                btn_NovoCadastro_Click(sender, e);
             }
             else if (e.KeyCode == Keys.F1)
             {
-                if (btn_Fechar.Enabled == true)
-                {
-                    btn_ContasClientes_Click(sender, e);
-                }
+                btn_ContasClientes_Click(sender, e);
             }
-
             else if (e.KeyCode == Keys.F2)
             {
-                if (btn_Sair.Enabled == true)
-                {
-                    btn_BuscarProdutos_Click(sender, e);
-                }               
+                btn_BuscarProdutos_Click(sender, e);
             }
             else if (e.KeyCode == Keys.F3)
             {
-                if (btn_Sair.Enabled == true)
-                {
-                    btn_BuscarPreços_Click(sender, e);
-                }
+                btn_BuscarPreços_Click(sender, e);
             }
             else if (e.KeyCode == Keys.F4)
             {
-                if (PanelVendaVista.Visible == true)
-                {
-                    btn_Desconto_Click(sender, e);
-                }
-                else if (btn_Sair.Enabled == true)
-                {
-                    btn_VendaVista_Click(sender, e);
-                }
+                btn_VendaVista_Click(sender, e);
             }
             else if (e.KeyCode == Keys.F5)
             {
-                if (PanelVendaVista.Visible == true)
-                {
-                    btn_VincularCliente_Click(sender, e);
-                }
-                else if (btn_Fechar.Enabled == true)
-                {
-                    btn_PagamentoParcial_Click(sender, e);
-                }
+                btn_PagamentoParcial_Click(sender, e);
             }
-            else if (e.KeyCode == Keys.F6 && btn_Fechar.Enabled == true)
+            else if (e.KeyCode == Keys.F6)
             {
                 btn_VenderPrazo_Click(sender, e);
             }
-            else if (Keys.F7 == e.KeyCode && btn_Fechar.Enabled == true)
+            else if (Keys.F7 == e.KeyCode)
             {
                 btn_VenderParcelado_Click(sender, e);
             }
-            else if (Keys.F8 == e.KeyCode && btn_Fechar.Enabled == true)
+            else if (Keys.F8 == e.KeyCode)
             {
                 btnPagamentoCartao_Click(sender, e);
             }
-            else if (e.KeyCode == Keys.F9 && btn_Fechar.Enabled == true)
+            else if (e.KeyCode == Keys.F9)
             {
                 btn_CancelarVenda_Click(sender, e);
             }
-            else if (e.KeyCode == Keys.F9 && btn_BuscarServiço.Enabled == true)
+            else if (e.KeyCode == Keys.F10)
             {
                 btn_BuscarServiço_Click(sender, e);
             }
-            else if ((e.KeyCode == Keys.F10) && (PanelVendaVista.Visible == true))
-            {
-                btn_ConfirmarVenda_Click(sender, e);
-            }
-            else if (e.KeyCode == Keys.F11 && PanelVendaVista.Visible == true)
-            {
-                btn_Recibo_Click(sender, e);
-                txt_ValorPago_Leave(sender, e);
-            }
-            else if (e.KeyCode == Keys.F12 && btn_Sair.Enabled == true)
+            else if (e.KeyCode == Keys.F12)
             {
                 if (txt_Codigo_Barra.Text == "" || txt_Codigo_Barra.Text != "")
                 {
@@ -225,28 +184,14 @@ namespace CaixaFacil
                     }
                 }
             }
-            else if (e.KeyCode == Keys.F12 && btn_Sair.Enabled == false)
-            {
-                if (txt_Codigo_Barra.Text == "" || txt_Codigo_Barra.Text != "")
-                {
-                    btn_ImprimiCupom_Click(sender, e);
-                }
-            }
             else if (e.KeyCode == Keys.Escape)
             {
-                if (btn_Sair.Enabled == true)
-                {
-                    btn_Sair_Click(sender, e);
-                }
-                else if ((PanelVendaVista.Visible == true) && (btn_Sair.Enabled == false))
-                {
-                    btn_CancelarVendaVista_Click(sender, e);
-                }               
+                btn_Sair_Click(sender, e);
             }
-            else if (Control.ModifierKeys == Keys.Alt && e.KeyCode == Keys.F4)
-            {
-                MessageBox.Show("Oi");
-            }
+            //else if (Control.ModifierKeys == Keys.Alt && e.KeyCode == Keys.F4)
+            //{
+                
+            //}
         }
 
         private void btn_BuscarProdutos_Click(object sender, EventArgs e)
@@ -747,52 +692,7 @@ namespace CaixaFacil
         private void btn_Remover_Click(object sender, EventArgs e)
         {
             RemoverItens(); 
-        }
-
-
-        private void desabilitarFerramentas()
-        {
-            btn_Adcionar.Enabled = false;
-            btn_ContasClientes.Enabled = false;
-            btn_BuscarPreços.Enabled = false;
-            btn_BuscarProdutos.Enabled = false;
-            btn_CancelarVenda.Enabled = false;
-            btn_Fechar.Enabled = false;
-            btn_VendaVista.Enabled = false;
-            btn_Minimizar.Enabled = false;
-            btn_NovoCadastro.Enabled = false;
-            btn_PagamentoParcial.Enabled = false;
-            btn_Remover.Enabled = false;
-            btn_Sair.Enabled = false;
-            btn_VenderParcelado.Enabled = false;
-            btn_VenderPrazo.Enabled = false;
-            txt_Codigo_Barra.Enabled = false;
-            txt_Quantidade.Enabled = false;
-            txt_ValorTotal.Enabled = false;
-            btn_BuscarServiço.Enabled = false;
-            Descontar = "Sim";
-            txt_ValorPago.Clear();
-            txt_Troco.Clear();
-            btn_VincularCliente.Text = "Vincular Cliente - F5";
-            btn_VincularCliente.TextAlign = ContentAlignment.MiddleCenter;
-            lbl_ApresentacaoCliente.Visible = false;
-            lbl_Cliente.Visible = false;
-            lbl_Cliente.Text = string.Empty;
-            lbl_DescontoDinheiro.Visible = false;
-            lbl_DescontoPorcento.Visible = false;
-            txt_DescontoDinheiro.Visible = false;
-            txt_DescontoPorcento.Visible = false;
-            txt_Codigo_Barra.Focus();
-            lbl_ValorDesconto.Visible = false;
-            txt_ValorDesconto.Clear();
-            txt_ValorDesconto.Visible = false;
-            btnPagamentoCartao.Enabled = false;
-            cbOpcao.Enabled = false;
-            lbl_Informacao.Enabled = false;
-            lbl_Quantidade.Enabled = false;
-            DGV_ItensVenda.Enabled = false;
-            txt_CodigoVenda.Enabled = false;
-        }
+        }       
 
         private void HabilitarFerramentas()
         {
@@ -1002,7 +902,7 @@ namespace CaixaFacil
                 if (vendaParcelas.vendaConfirmada)
                 {
                     id_Cliente = vendaParcelas.idCliente.ToString();
-                    InformacaoEmpresa();
+                    BuscarInformacaoEmpresa();
                     GerarParcelas();
                     if (vendaParcelas.repasseGerada)
                     {
@@ -1044,7 +944,7 @@ namespace CaixaFacil
                     if (vendaPrazo.relatorioPedido)
                     {
                         this.Cursor = Cursors.WaitCursor;
-                        InformacaoEmpresa();                     
+                        BuscarInformacaoEmpresa();                     
                         FrmRelatorioPrazo relatorioPrazo = new FrmRelatorioPrazo(txt_CodigoVenda.Text, NomeFantasia, Endereco, Numero, Cidade, Estado, Telefone, CNPJ, Settings.Default["TempoPrazo"].ToString(), Bairro);
                         relatorioPrazo.ShowDialog();
                         this.Cursor = Cursors.Default;
@@ -1072,349 +972,18 @@ namespace CaixaFacil
             }
         }
 
-        private void btn_CancelarVendaVista_Click(object sender, EventArgs e)
-        {
-            PanelVendaVista.Visible = false;
-            HabilitarFerramentas();
-            txt_DescontoDinheiro.Text = "0,00";
-            txt_DescontoPorcento.Text = "0,00";
-            
-        }
-
-        private void lbl_FecharVendaVista_MouseEnter(object sender, EventArgs e)
-        {
-            lbl_FecharVendaVista.BackColor = Color.Red;
-        }
-
-        private void lbl_FecharVendaVista_MouseLeave(object sender, EventArgs e)
-        {
-            lbl_FecharVendaVista.BackColor = Color.MediumSlateBlue;
-        }
-
-        private void lbl_FecharVendaVista_Click(object sender, EventArgs e)
-        {
-            btn_CancelarVendaVista_Click(sender, e);
-        }
-
-        private void btn_Desconto_Click(object sender, EventArgs e)
-        {           
-            switch (Descontar)
-            {
-                case "Não":
-                   
-                    lbl_DescontoDinheiro.Visible = false;
-                    txt_DescontoDinheiro.Visible = false;                   
-                    lbl_ValorDesconto.Visible = false;
-                    txt_ValorDesconto.Visible = false;
-                    lbl_DescontoPorcento.Visible = false;
-                    txt_DescontoPorcento.Visible = false;
-                    txt_DescontoDinheiro.Text = "0,00";
-                    txt_DescontoPorcento.Text = "0,00";
-                    txt_ValorDesconto.Text = ValorTotal.ToString();
-                    ValorDesconto = decimal.Parse(txt_ValorDesconto.Text); 
-                    txt_Troco.Text = (ValorPago - ValorTotal).ToString();
-                    Descontar = "Sim";
-                    break;
-                case "Sim":
-         
-                    lbl_DescontoDinheiro.Visible = true;
-                    txt_DescontoDinheiro.Visible = true;
-                    lbl_ValorDesconto.Visible = true;
-                    lbl_DescontoPorcento.Visible = true;
-                    txt_DescontoPorcento.Visible = true;
-                    txt_ValorDesconto.Visible = true;
-                    txt_ValorDesconto.Text = ValorTotal.ToString();
-                    ValorDesconto = decimal.Parse(txt_ValorDesconto.Text);
-                    Descontar = "Não";
-                    break;
-            }
-        }
-
-        private void txt_ValorPago_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txt_ValorPago.Text != "")
-                {
-                    ValorPago = decimal.Parse(txt_ValorPago.Text.Trim());
-                   decimal Troco = ValorPago - ValorTotal;
-                    txt_Troco.Text = Troco.ToString();
-                    txt_ValorPago.Text = ValorPago.ToString();
-                    txt_ValorPago.Text = Convert.ToDouble(txt_ValorPago.Text.Trim()).ToString("0.00");                    
-                    if (txt_ValorDesconto.Text != "")
-                    {
-                        txt_Troco.Text = (decimal.Parse(txt_ValorPago.Text) - decimal.Parse(txt_ValorDesconto.Text)).ToString();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txt_ValorPago.Clear();
-            }
-        }
-
-        private void btn_VincularCliente_Click(object sender, EventArgs e)
-        {
-            string VincularCliente = btn_VincularCliente.Text;
-            switch (VincularCliente)
-            {
-                case "Vincular Cliente - F5":
-                    FrmPesquisarCliente pesquisarCliente = new FrmPesquisarCliente();
-                    pesquisarCliente.ShowDialog();
-                    if (pesquisarCliente.Codigo != null && pesquisarCliente.Codigo != "1")
-                    {
-                        lbl_ApresentacaoCliente.Visible = true;
-                        lbl_Cliente.Visible = true;
-                        id_Cliente = pesquisarCliente.Codigo;
-                        lbl_Cliente.Text = pesquisarCliente.Nome;
-                        VincularCliente = "Não";
-                        btn_VincularCliente.Text = "Desvincular Cliente - F5";
-                        btn_VincularCliente.TextAlign = ContentAlignment.MiddleRight;
-                    }
-                    break;
-                case "Desvincular Cliente - F5":
-                    lbl_ApresentacaoCliente.Visible = false;
-                    lbl_Cliente.Visible = false;
-                    lbl_Cliente.Text = string.Empty;
-                    id_Cliente = string.Empty;
-                    VincularCliente = "Sim";
-                    btn_VincularCliente.Text = "Vincular Cliente - F5";
-                    btn_VincularCliente.TextAlign = ContentAlignment.MiddleCenter;
-                    break;
-            }
-        }
-
-       
-        private void txt_ValorPago_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (!char.IsDigit(e.KeyChar))
-                {
-                    if (((int)e.KeyChar) != ((int)Keys.Back))
-                        if (e.KeyChar != ',')
-                            e.Handled = true;
-                        else if (txt_ValorPago.Text.IndexOf(',') > 0)
-                            e.Handled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void txt_Troco_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (!char.IsDigit(e.KeyChar))
-                {
-                    if (((int)e.KeyChar) != ((int)Keys.Back))
-                        if (e.KeyChar != ',')
-                            e.Handled = true;
-                        else if (txt_Troco.Text.IndexOf(',') > 0)
-                            e.Handled = true;
-                }
-                if (char.IsNumber(e.KeyChar) || e.KeyChar == ',')
-                {
-                    if (System.Text.RegularExpressions.Regex.IsMatch(txt_Troco.Text, @"\,\d\d"))
-                        e.Handled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void txt_ValorDesconto_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (!char.IsDigit(e.KeyChar))
-                {
-                    if (((int)e.KeyChar) != ((int)Keys.Back))
-                        if (e.KeyChar != ',')
-                            e.Handled = true;
-                        else if (txt_ValorDesconto.Text.IndexOf(',') > 0)
-                            e.Handled = true;
-                }
-                if (char.IsNumber(e.KeyChar) || e.KeyChar == ',')
-                {
-                    if (System.Text.RegularExpressions.Regex.IsMatch(txt_ValorDesconto.Text, @"\,\d\d"))
-                        e.Handled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void txt_DescontoDinheiro_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (!char.IsDigit(e.KeyChar))
-                {
-                    if (((int)e.KeyChar) != ((int)Keys.Back))
-                        if (e.KeyChar != ',')
-                            e.Handled = true;
-                        else if (txt_DescontoDinheiro.Text.IndexOf(',') > 0)
-                            e.Handled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void txt_DescontoDinheiro_Leave(object sender, EventArgs e)
-        {
-            if (txt_DescontoDinheiro.Text != "")
-            {
-                try
-                {
-                    descontoDinheiro= decimal.Parse(txt_DescontoDinheiro.Text);
-                    if (descontoDinheiro <= ValorTotal)
-                    {
-                        valorNCaixa = ValorTotal - descontoDinheiro;
-                        txt_ValorDesconto.Text = valorNCaixa.ToString();
-                        txt_Troco.Text = (ValorPago - decimal.Parse(txt_ValorDesconto.Text)).ToString();
-                        txt_DescontoDinheiro.Text = Convert.ToDouble(txt_DescontoDinheiro.Text.Trim()).ToString("0.00");
-                        ValorDesconto = decimal.Parse(txt_ValorDesconto.Text);
-                        DescontoPorcento = (Porcento * descontoDinheiro) / ValorTotal;
-                        DescontoPorcento = Math.Round(DescontoPorcento, 2);
-                        txt_DescontoPorcento.Text = Math.Round(DescontoPorcento, 2).ToString();
-                        txt_DescontoPorcento.Text = decimal.Parse(txt_DescontoPorcento.Text.Trim()).ToString("0.00");
-                    }
-                    else
-                    {
-                        txt_DescontoPorcento.Text = "0,00";
-                        txt_DescontoDinheiro.Text = "0,00";
-                        DescontoPorcento = 0.00M;
-                        descontoDinheiro = 0.00M;
-                        txt_ValorDesconto.Text = ValorTotal.ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txt_DescontoDinheiro.Text = "0,00";
-                }
-            }
-        }
-                 
-        private void txt_DescontoPorcento_Leave(object sender, EventArgs e)
-        {
-            if (txt_DescontoPorcento.Text != "")
-            {
-                try
-                {
-                    ValorDescontoPorcento = decimal.Parse(txt_DescontoPorcento.Text);
-                    if (ValorDescontoPorcento <= 100)
-                    {
-                        DescontoPorcento = (ValorTotal * ValorDescontoPorcento) / Porcento;
-                        DescontoPorcento = Math.Round(DescontoPorcento, 2);
-                        txt_DescontoDinheiro.Text = DescontoPorcento.ToString();
-                        decimal ValorVenda = ValorTotal - DescontoPorcento;
-                        txt_ValorDesconto.Text = ValorVenda.ToString();
-                        txt_DescontoDinheiro_Leave(sender, e);
-                        txt_DescontoPorcento.Text = Convert.ToDecimal(txt_DescontoPorcento.Text.Trim()).ToString("0.00");
-                    }
-                    else
-                    {
-                        txt_DescontoPorcento.Text = "0,00";
-                        txt_DescontoDinheiro.Text = "0,00";
-                        DescontoPorcento = 0.00M;
-                        descontoDinheiro = 0.00M;
-                        txt_ValorDesconto.Text = ValorTotal.ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txt_DescontoPorcento.Text = "0";
-                }
-            }
-        }
-
-        private void btn_ConfirmarVenda_Click(object sender, EventArgs e)
-        {
-            txt_DescontoDinheiro_Leave(sender, e);
-            if (txt_ValorPago.Text != string.Empty)
-            {
-                if (decimal.Parse(txt_ValorPago.Text) >= ValorDesconto)
-                {
-                  
-                   
-                }
-                else
-                    MessageBox.Show("Valor em dinheiro menor do que o valor total da venda!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else
-            {
-                MessageBox.Show("Informe o valor Pago!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-        }
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql, codigoVenda, id_Cliente = "1";
 
         int EstoqueAtual, EstoqueAtualizado,QuantidadeItens;
         private void ConfirmarVenda()
         {
             EfetuarVendaVista();
-            InserirItensvenda();
-            //if (AreaAtuacao == "SALÃO DE BELEZA" || AreaAtuacao == "PRESTAÇÃO DE SERVIÇO")
-            //{
-            //    MessageBox.Show("Prestaçao de Serviço realizado com sucesso!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Venda realizado com sucesso!", "Realização Venda", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-        }
-        
-        private void btn_Recibo_Click(object sender, EventArgs e)
-        {
-            txt_DescontoPorcento_Leave(sender, e);
-            txt_DescontoDinheiro_Leave(sender, e);
-            txt_ValorPago_Leave(sender, e);
-            if (txt_ValorPago.Text != string.Empty)
-            {
-                if (decimal.Parse(txt_ValorPago.Text) >= ValorDesconto)
-                {
-                    this.Cursor = Cursors.WaitCursor;
-                    InformacaoEmpresa();
-                    EfetuarVendaVista();
-                    InserirItensvenda();
-                    CodigoVenda();
-                    DGV_ItensVenda.Rows.Clear();
-                    txt_ValorTotal.Text = "R$ 0,00";
-                    txt_DescontoDinheiro.Text = "0,00";
-                    HabilitarFerramentas();
-                    PanelVendaVista.Visible = false;
-                    decimal valorDesconto = decimal.Parse(txt_ValorDesconto.Text);
-                    FrmReciboPagamento reciboPagamento = new FrmReciboPagamento(lbl_Hora.Text, valorDesconto, NomeFantasia, Cidade, Endereco, Numero, CNPJ, lbl_Cliente.Text, lbl_Data.Text, lbl_atendente.Text, txt_CodigoVenda.Text);
-                    reciboPagamento.ShowDialog();
-                    this.Cursor = Cursors.Default;
-                    txt_CodigoVenda.Text = codigoVenda;
-                    ValorTotal = 0;
-                    txt_Codigo_Barra.Focus();
-                }
-                else
-                    MessageBox.Show("Valor em dinheiro menor do que o valor total da venda!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else
-            {
-                MessageBox.Show("Informe o valor Pago!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+            InserirItensvenda();            
         }
 
         Empresa empresa = new Empresa();
-        private void InformacaoEmpresa()
+        
+        private void BuscarInformacaoEmpresa()
         {
             empresa.Consultar();
             NomeFantasia = empresa.nomeFantasia;
@@ -1429,27 +998,48 @@ namespace CaixaFacil
             HoraVenda = venda.horaVenda;            
         }
 
+        string cliente;
+
         private void btn_VendaVista_Click(object sender, EventArgs e)
         {           
             if (DGV_ItensVenda.Rows.Count > 0)
             {
-                //txt_ValorPago.Text = "0,00";
-                //txt_ValorDesconto.Text = ValorTotal.ToString();
-                //ValorDesconto = decimal.Parse(txt_ValorDesconto.Text);
-                //Parcela = 1;
-                //PanelVendaVista.Visible = true;
-                //desabilitarFerramentas();
-                //lbl_ValorTotal.Text = "R$ " + ValorTotal;
-
                 FrmVendaVista vendaVista = new FrmVendaVista(ValorTotal);
                 vendaVista.ShowDialog();
                 if (vendaVista.vendaConfirmada)
                 {
                     ValorDesconto = vendaVista.ValorDesconto;
                     descontoDinheiro = vendaVista.descontoDinheiro;
+                   
                     if (!string.IsNullOrEmpty(vendaVista.id_Cliente))
-                        id_Cliente = vendaVista.id_Cliente; ;
+                        id_Cliente = vendaVista.id_Cliente; 
+                    
                     ConfirmarVenda();
+                  
+                    if (vendaVista.CupomPedido || vendaVista.promissoriaPedido)
+                    {
+                        BuscarInformacaoEmpresa();
+                        Cursor = Cursors.WaitCursor;
+                        
+                       
+                        if(vendaVista.promissoriaPedido)
+                        {
+                            if (!string.IsNullOrEmpty(vendaVista.nomeCliente))
+                            {
+                                cliente = vendaVista.nomeCliente;
+                            }
+
+                            FrmReciboPagamento reciboPagamento = new FrmReciboPagamento(lbl_Hora.Text, ValorDesconto, NomeFantasia, Cidade, Endereco, Numero, CNPJ, cliente, lbl_Data.Text, lbl_atendente.Text, txt_CodigoVenda.Text);
+                            reciboPagamento.ShowDialog();
+                        }
+                        else
+                        {
+                            FrmCupom cupom = new FrmCupom(int.Parse(txt_CodigoVenda.Text), lbl_Hora.Text, NomeFantasia, Cidade, Estado, Endereco, Numero, CNPJ, cliente, lbl_Data.Text, lbl_atendente.Text, txt_CodigoVenda.Text, vendaVista.ValorPago, vendaVista.troco, Bairro);
+                            cupom.ShowDialog();
+                        }
+
+                        Cursor = Cursors.Default;
+                    }
                     DGV_ItensVenda.Rows.Clear();
                     CodigoVenda();
                     txt_CodigoVenda.Text = codigoVenda;
@@ -1765,7 +1355,7 @@ namespace CaixaFacil
         {
           
                 this.Cursor = Cursors.WaitCursor;
-                InformacaoEmpresa();
+                BuscarInformacaoEmpresa();
                 GerarParcelas();
                 InserirItensvenda();
                 FrmRelatorioParcelas relatorioParcelas = new FrmRelatorioParcelas(txt_CodigoVenda.Text, NomeFantasia, Endereco, Numero, Cidade, Estado, Telefone, CNPJ);
@@ -1784,25 +1374,6 @@ namespace CaixaFacil
 
        ClassParcelaVenda ParcelaVenda = new ClassParcelaVenda();
         ClassFluxoCaixa FluxoCaixa = new ClassFluxoCaixa();
-
-        private void txt_DescontoPorcento_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (!char.IsDigit(e.KeyChar))
-                {
-                    if (((int)e.KeyChar) != ((int)Keys.Back))
-                        if (e.KeyChar != ',')
-                            e.Handled = true;
-                        else if (txt_DescontoPorcento.Text.IndexOf(',') > 0)
-                            e.Handled = true;
-                }
-            }
-             catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         private void DGV_ItensVenda_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -1825,8 +1396,7 @@ namespace CaixaFacil
         private void btnPagamentoCartao_Click(object sender, EventArgs e)
         {
             if (DGV_ItensVenda.Rows.Count >= 1)
-            {
-                desabilitarFerramentas();
+            {              
                 FrmFormaPagamento pagamentoCartao = new FrmFormaPagamento(txt_CodigoVenda.Text, ValorTotal, LucroTotal, Id_Usuario);
                 pagamentoCartao.ShowDialog();
                 if (pagamentoCartao.Confirmacao == "Venda realizada com sucesso!")
@@ -1835,9 +1405,9 @@ namespace CaixaFacil
                     if (pagamentoCartao.Nota == 1)
                     {
                         this.Cursor = Cursors.WaitCursor;
-                        InformacaoEmpresa();
+                        BuscarInformacaoEmpresa();
                         decimal valorDesconto = pagamentoCartao.Desconto;
-                        FrmReciboPagamento reciboPagamento = new FrmReciboPagamento(lbl_Hora.Text, valorDesconto, NomeFantasia, Cidade, Endereco, Numero, CNPJ, lbl_Cliente.Text, lbl_Data.Text, lbl_atendente.Text, txt_CodigoVenda.Text);
+                        FrmReciboPagamento reciboPagamento = new FrmReciboPagamento(lbl_Hora.Text, valorDesconto, NomeFantasia, Cidade, Endereco, Numero, CNPJ, cliente, lbl_Data.Text, lbl_atendente.Text, txt_CodigoVenda.Text);
                         reciboPagamento.ShowDialog();
                         this.Cursor = Cursors.Default;
                         ValorTotal = 0.00m;
@@ -1853,46 +1423,6 @@ namespace CaixaFacil
             }
             else
                 MessageBox.Show("Não há itens para venda! Verifique...", "Mensagem do sistema 'Gerenciamento Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-
-        private void btn_ImprimiCupom_Click(object sender, EventArgs e)
-        {
-            txt_DescontoPorcento_Leave(sender, e);
-            txt_DescontoDinheiro_Leave(sender, e);
-            txt_ValorPago_Leave(sender, e);
-            if (txt_ValorPago.Text != string.Empty)
-            {
-                if (decimal.Parse(txt_ValorPago.Text) >= ValorDesconto)
-                {
-                    decimal troco = decimal.Parse(txt_Troco.Text);
-                    decimal valorPago = decimal.Parse(txt_ValorPago.Text);
-                    int CodVenda = int.Parse(txt_CodigoVenda.Text);
-                    this.Cursor = Cursors.WaitCursor;
-                    InformacaoEmpresa();
-                    EfetuarVendaVista();
-                    InserirItensvenda();
-                    CodigoVenda();
-                    DGV_ItensVenda.Rows.Clear();
-                    txt_ValorTotal.Text = "R$ 0,00";
-                    txt_DescontoDinheiro.Text = "0,00";
-                    txt_DescontoPorcento.Text = "0,00";
-                    HabilitarFerramentas();
-                    PanelVendaVista.Visible = false;
-                    decimal valorDesconto = decimal.Parse(txt_ValorDesconto.Text);
-                    FrmCupom cupom= new FrmCupom(CodVenda, lbl_Hora.Text, NomeFantasia, Cidade, Estado, Endereco, Numero, CNPJ, lbl_Cliente.Text, lbl_Data.Text, lbl_atendente.Text, txt_CodigoVenda.Text, valorPago, troco, Bairro);
-                    cupom.ShowDialog();
-                    this.Cursor = Cursors.Default;
-                    txt_CodigoVenda.Text = codigoVenda;
-                    ValorTotal = 0;
-                    txt_Codigo_Barra.Focus();
-                }
-                else
-                    MessageBox.Show("Valor em dinheiro menor do que o valor total da venda!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            else
-            {
-                MessageBox.Show("Informe o valor Pago!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
         }
 
         private void txt_Codigo_Barra_KeyPress(object sender, KeyPressEventArgs e)
@@ -1978,7 +1508,7 @@ namespace CaixaFacil
                 valorNCaixa = ValorDesconto;
                 CaixaDia();
                 GerenciarCaixa();
-                ValorDescontoCaixa();
+                AtualizarValorDescontoCaixa();
                 InformarValorRecebidoVista();
             }
             catch (Exception ex)
@@ -1986,7 +1516,7 @@ namespace CaixaFacil
                 MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void ValorDescontoCaixa()
+        private void AtualizarValorDescontoCaixa()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Update FluxoCaixa set Desconto = Desconto + @Desconto where HoraSaida = '' and DataSaida = ''";
@@ -2045,7 +1575,7 @@ namespace CaixaFacil
 
         private void InformarValorRecebidoVista()
         {
-            decimal ValorVista = decimal.Parse(txt_ValorDesconto.Text);
+            decimal ValorVista = ValorDesconto;
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Update FluxoCaixa set ValorRecebidoVista = ValorRecebidoVista + @ValorRecebidoVista where HoraSaida = '' and DataSaida = ''";
             SqlCommand comando = new SqlCommand(_sql, conexao);

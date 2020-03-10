@@ -93,6 +93,7 @@ namespace CaixaFacil
             this.btn_ImprimiCupom.Text = "Imprimir Cupom N.F- [F12]";
             this.btn_ImprimiCupom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_ImprimiCupom.UseVisualStyleBackColor = true;
+            this.btn_ImprimiCupom.Click += new System.EventHandler(this.btn_ImprimiCupom_Click);
             // 
             // txt_DescontoPorcento
             // 
@@ -132,6 +133,7 @@ namespace CaixaFacil
             this.btn_Recibo.Text = "Imprimir N. Promissória- [F11]";
             this.btn_Recibo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_Recibo.UseVisualStyleBackColor = true;
+            this.btn_Recibo.Click += new System.EventHandler(this.btn_Recibo_Click);
             // 
             // txt_DescontoDinheiro
             // 

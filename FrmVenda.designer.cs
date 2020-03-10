@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbl_atendente = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -57,28 +57,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txt_CodigoVenda = new System.Windows.Forms.TextBox();
-            this.PanelVendaVista = new System.Windows.Forms.Panel();
-            this.btn_ImprimiCupom = new System.Windows.Forms.Button();
-            this.txt_DescontoPorcento = new System.Windows.Forms.TextBox();
-            this.lbl_DescontoPorcento = new System.Windows.Forms.Label();
-            this.btn_Recibo = new System.Windows.Forms.Button();
-            this.txt_DescontoDinheiro = new System.Windows.Forms.TextBox();
-            this.txt_ValorDesconto = new System.Windows.Forms.TextBox();
-            this.lbl_ValorDesconto = new System.Windows.Forms.Label();
-            this.lbl_Cliente = new System.Windows.Forms.Label();
-            this.lbl_ApresentacaoCliente = new System.Windows.Forms.Label();
-            this.btn_VincularCliente = new System.Windows.Forms.Button();
-            this.txt_Troco = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lbl_DescontoDinheiro = new System.Windows.Forms.Label();
-            this.btn_Desconto = new System.Windows.Forms.Button();
-            this.lbl_ValorTotal = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txt_ValorPago = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.lbl_FecharVendaVista = new System.Windows.Forms.Label();
-            this.btn_ConfirmarVenda = new System.Windows.Forms.Button();
-            this.btn_CancelarVendaVista = new System.Windows.Forms.Button();
             this.cbOpcao = new System.Windows.Forms.CheckBox();
             this.txt_ValorTotal = new System.Windows.Forms.TextBox();
             this.btn_Remover = new System.Windows.Forms.Button();
@@ -113,7 +91,6 @@
             this.btn_GerarRecibo.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.PanelVendaVista.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_ItensVenda)).BeginInit();
@@ -354,7 +331,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txt_CodigoVenda);
-            this.groupBox1.Controls.Add(this.PanelVendaVista);
             this.groupBox1.Controls.Add(this.cbOpcao);
             this.groupBox1.Controls.Add(this.txt_ValorTotal);
             this.groupBox1.Controls.Add(this.btn_Remover);
@@ -383,298 +359,6 @@
             this.txt_CodigoVenda.Size = new System.Drawing.Size(127, 62);
             this.txt_CodigoVenda.TabIndex = 21;
             this.txt_CodigoVenda.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // PanelVendaVista
-            // 
-            this.PanelVendaVista.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.PanelVendaVista.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.PanelVendaVista.Controls.Add(this.btn_ImprimiCupom);
-            this.PanelVendaVista.Controls.Add(this.txt_DescontoPorcento);
-            this.PanelVendaVista.Controls.Add(this.lbl_DescontoPorcento);
-            this.PanelVendaVista.Controls.Add(this.btn_Recibo);
-            this.PanelVendaVista.Controls.Add(this.txt_DescontoDinheiro);
-            this.PanelVendaVista.Controls.Add(this.txt_ValorDesconto);
-            this.PanelVendaVista.Controls.Add(this.lbl_ValorDesconto);
-            this.PanelVendaVista.Controls.Add(this.lbl_Cliente);
-            this.PanelVendaVista.Controls.Add(this.lbl_ApresentacaoCliente);
-            this.PanelVendaVista.Controls.Add(this.btn_VincularCliente);
-            this.PanelVendaVista.Controls.Add(this.txt_Troco);
-            this.PanelVendaVista.Controls.Add(this.label12);
-            this.PanelVendaVista.Controls.Add(this.lbl_DescontoDinheiro);
-            this.PanelVendaVista.Controls.Add(this.btn_Desconto);
-            this.PanelVendaVista.Controls.Add(this.lbl_ValorTotal);
-            this.PanelVendaVista.Controls.Add(this.label10);
-            this.PanelVendaVista.Controls.Add(this.txt_ValorPago);
-            this.PanelVendaVista.Controls.Add(this.label8);
-            this.PanelVendaVista.Controls.Add(this.lbl_FecharVendaVista);
-            this.PanelVendaVista.Controls.Add(this.btn_ConfirmarVenda);
-            this.PanelVendaVista.Controls.Add(this.btn_CancelarVendaVista);
-            this.PanelVendaVista.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PanelVendaVista.Location = new System.Drawing.Point(130, 146);
-            this.PanelVendaVista.Name = "PanelVendaVista";
-            this.PanelVendaVista.Size = new System.Drawing.Size(857, 338);
-            this.PanelVendaVista.TabIndex = 1;
-            this.PanelVendaVista.Visible = false;
-            // 
-            // btn_ImprimiCupom
-            // 
-            this.btn_ImprimiCupom.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btn_ImprimiCupom.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_ImprimiCupom.Image = global::CaixaFacil.Properties.Resources.printer_icon;
-            this.btn_ImprimiCupom.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_ImprimiCupom.Location = new System.Drawing.Point(450, 273);
-            this.btn_ImprimiCupom.Name = "btn_ImprimiCupom";
-            this.btn_ImprimiCupom.Size = new System.Drawing.Size(235, 60);
-            this.btn_ImprimiCupom.TabIndex = 288;
-            this.btn_ImprimiCupom.Text = "Imprimir Cupom N.F- [F12]";
-            this.btn_ImprimiCupom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_ImprimiCupom.UseVisualStyleBackColor = true;
-            this.btn_ImprimiCupom.Click += new System.EventHandler(this.btn_ImprimiCupom_Click);
-            // 
-            // txt_DescontoPorcento
-            // 
-            this.txt_DescontoPorcento.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_DescontoPorcento.Location = new System.Drawing.Point(191, 129);
-            this.txt_DescontoPorcento.Name = "txt_DescontoPorcento";
-            this.txt_DescontoPorcento.Size = new System.Drawing.Size(147, 26);
-            this.txt_DescontoPorcento.TabIndex = 26;
-            this.txt_DescontoPorcento.Text = "0,00";
-            this.txt_DescontoPorcento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txt_DescontoPorcento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_DescontoPorcento_KeyPress);
-            this.txt_DescontoPorcento.Leave += new System.EventHandler(this.txt_DescontoPorcento_Leave);
-            // 
-            // lbl_DescontoPorcento
-            // 
-            this.lbl_DescontoPorcento.AutoSize = true;
-            this.lbl_DescontoPorcento.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_DescontoPorcento.ForeColor = System.Drawing.Color.White;
-            this.lbl_DescontoPorcento.Location = new System.Drawing.Point(192, 104);
-            this.lbl_DescontoPorcento.Name = "lbl_DescontoPorcento";
-            this.lbl_DescontoPorcento.Size = new System.Drawing.Size(97, 19);
-            this.lbl_DescontoPorcento.TabIndex = 30;
-            this.lbl_DescontoPorcento.Text = "Desconto -%";
-            this.lbl_DescontoPorcento.Visible = false;
-            // 
-            // btn_Recibo
-            // 
-            this.btn_Recibo.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btn_Recibo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Recibo.Image = global::CaixaFacil.Properties.Resources.printer_icon;
-            this.btn_Recibo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Recibo.Location = new System.Drawing.Point(181, 274);
-            this.btn_Recibo.Name = "btn_Recibo";
-            this.btn_Recibo.Size = new System.Drawing.Size(269, 60);
-            this.btn_Recibo.TabIndex = 28;
-            this.btn_Recibo.Text = "Imprimir N. Promissória- [F11]";
-            this.btn_Recibo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_Recibo.UseVisualStyleBackColor = true;
-            this.btn_Recibo.Click += new System.EventHandler(this.btn_Recibo_Click);
-            // 
-            // txt_DescontoDinheiro
-            // 
-            this.txt_DescontoDinheiro.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_DescontoDinheiro.Location = new System.Drawing.Point(347, 129);
-            this.txt_DescontoDinheiro.Name = "txt_DescontoDinheiro";
-            this.txt_DescontoDinheiro.Size = new System.Drawing.Size(147, 26);
-            this.txt_DescontoDinheiro.TabIndex = 27;
-            this.txt_DescontoDinheiro.Text = "0,00";
-            this.txt_DescontoDinheiro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txt_DescontoDinheiro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_DescontoDinheiro_KeyPress);
-            this.txt_DescontoDinheiro.Leave += new System.EventHandler(this.txt_DescontoDinheiro_Leave);
-            // 
-            // txt_ValorDesconto
-            // 
-            this.txt_ValorDesconto.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_ValorDesconto.Location = new System.Drawing.Point(512, 129);
-            this.txt_ValorDesconto.Name = "txt_ValorDesconto";
-            this.txt_ValorDesconto.ReadOnly = true;
-            this.txt_ValorDesconto.Size = new System.Drawing.Size(144, 26);
-            this.txt_ValorDesconto.TabIndex = 286;
-            this.txt_ValorDesconto.Text = "0,00";
-            this.txt_ValorDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txt_ValorDesconto.Visible = false;
-            this.txt_ValorDesconto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_ValorDesconto_KeyPress);
-            // 
-            // lbl_ValorDesconto
-            // 
-            this.lbl_ValorDesconto.AutoSize = true;
-            this.lbl_ValorDesconto.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ValorDesconto.ForeColor = System.Drawing.Color.White;
-            this.lbl_ValorDesconto.Location = new System.Drawing.Point(496, 107);
-            this.lbl_ValorDesconto.Name = "lbl_ValorDesconto";
-            this.lbl_ValorDesconto.Size = new System.Drawing.Size(172, 19);
-            this.lbl_ValorDesconto.TabIndex = 25;
-            this.lbl_ValorDesconto.Text = "Valor com desconto - R$";
-            this.lbl_ValorDesconto.Visible = false;
-            // 
-            // lbl_Cliente
-            // 
-            this.lbl_Cliente.AutoSize = true;
-            this.lbl_Cliente.ForeColor = System.Drawing.Color.White;
-            this.lbl_Cliente.Location = new System.Drawing.Point(211, 257);
-            this.lbl_Cliente.Name = "lbl_Cliente";
-            this.lbl_Cliente.Size = new System.Drawing.Size(0, 19);
-            this.lbl_Cliente.TabIndex = 23;
-            this.lbl_Cliente.Visible = false;
-            // 
-            // lbl_ApresentacaoCliente
-            // 
-            this.lbl_ApresentacaoCliente.AutoSize = true;
-            this.lbl_ApresentacaoCliente.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ApresentacaoCliente.ForeColor = System.Drawing.Color.White;
-            this.lbl_ApresentacaoCliente.Location = new System.Drawing.Point(211, 225);
-            this.lbl_ApresentacaoCliente.Name = "lbl_ApresentacaoCliente";
-            this.lbl_ApresentacaoCliente.Size = new System.Drawing.Size(62, 19);
-            this.lbl_ApresentacaoCliente.TabIndex = 22;
-            this.lbl_ApresentacaoCliente.Text = "Cliente:";
-            this.lbl_ApresentacaoCliente.Visible = false;
-            // 
-            // btn_VincularCliente
-            // 
-            this.btn_VincularCliente.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_VincularCliente.Image = global::CaixaFacil.Properties.Resources.User_Group_icon__1_1;
-            this.btn_VincularCliente.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_VincularCliente.Location = new System.Drawing.Point(6, 217);
-            this.btn_VincularCliente.Name = "btn_VincularCliente";
-            this.btn_VincularCliente.Size = new System.Drawing.Size(199, 48);
-            this.btn_VincularCliente.TabIndex = 19;
-            this.btn_VincularCliente.Text = "Vincular Cliente - F5";
-            this.btn_VincularCliente.UseVisualStyleBackColor = true;
-            this.btn_VincularCliente.Click += new System.EventHandler(this.btn_VincularCliente_Click);
-            // 
-            // txt_Troco
-            // 
-            this.txt_Troco.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Troco.Location = new System.Drawing.Point(30, 185);
-            this.txt_Troco.Name = "txt_Troco";
-            this.txt_Troco.ReadOnly = true;
-            this.txt_Troco.Size = new System.Drawing.Size(144, 26);
-            this.txt_Troco.TabIndex = 18;
-            this.txt_Troco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txt_Troco.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_Troco_KeyPress);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(26, 160);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(124, 19);
-            this.label12.TabIndex = 17;
-            this.label12.Text = "Troco ao Cliente:";
-            // 
-            // lbl_DescontoDinheiro
-            // 
-            this.lbl_DescontoDinheiro.AutoSize = true;
-            this.lbl_DescontoDinheiro.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_DescontoDinheiro.ForeColor = System.Drawing.Color.White;
-            this.lbl_DescontoDinheiro.Location = new System.Drawing.Point(348, 104);
-            this.lbl_DescontoDinheiro.Name = "lbl_DescontoDinheiro";
-            this.lbl_DescontoDinheiro.Size = new System.Drawing.Size(105, 19);
-            this.lbl_DescontoDinheiro.TabIndex = 15;
-            this.lbl_DescontoDinheiro.Text = "Desconto - R$";
-            this.lbl_DescontoDinheiro.Visible = false;
-            // 
-            // btn_Desconto
-            // 
-            this.btn_Desconto.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Desconto.Image = global::CaixaFacil.Properties.Resources.Ecommerce_Discount_icon1;
-            this.btn_Desconto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Desconto.Location = new System.Drawing.Point(30, 110);
-            this.btn_Desconto.Name = "btn_Desconto";
-            this.btn_Desconto.Size = new System.Drawing.Size(144, 48);
-            this.btn_Desconto.TabIndex = 12;
-            this.btn_Desconto.Text = "      Desconto - [F4]";
-            this.btn_Desconto.UseVisualStyleBackColor = true;
-            this.btn_Desconto.Click += new System.EventHandler(this.btn_Desconto_Click);
-            // 
-            // lbl_ValorTotal
-            // 
-            this.lbl_ValorTotal.AutoSize = true;
-            this.lbl_ValorTotal.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ValorTotal.ForeColor = System.Drawing.Color.White;
-            this.lbl_ValorTotal.Location = new System.Drawing.Point(236, 73);
-            this.lbl_ValorTotal.Name = "lbl_ValorTotal";
-            this.lbl_ValorTotal.Size = new System.Drawing.Size(0, 31);
-            this.lbl_ValorTotal.TabIndex = 11;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(227, 46);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(154, 19);
-            this.label10.TabIndex = 10;
-            this.label10.Text = "Valor Total da Venda:";
-            // 
-            // txt_ValorPago
-            // 
-            this.txt_ValorPago.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_ValorPago.Location = new System.Drawing.Point(30, 78);
-            this.txt_ValorPago.Name = "txt_ValorPago";
-            this.txt_ValorPago.Size = new System.Drawing.Size(144, 26);
-            this.txt_ValorPago.TabIndex = 9;
-            this.txt_ValorPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txt_ValorPago.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_ValorPago_KeyPress);
-            this.txt_ValorPago.Leave += new System.EventHandler(this.txt_ValorPago_Leave);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(26, 52);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(137, 19);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "Valor pago - R$ [F]";
-            // 
-            // lbl_FecharVendaVista
-            // 
-            this.lbl_FecharVendaVista.AutoSize = true;
-            this.lbl_FecharVendaVista.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_FecharVendaVista.ForeColor = System.Drawing.Color.White;
-            this.lbl_FecharVendaVista.Location = new System.Drawing.Point(824, 0);
-            this.lbl_FecharVendaVista.Name = "lbl_FecharVendaVista";
-            this.lbl_FecharVendaVista.Size = new System.Drawing.Size(33, 31);
-            this.lbl_FecharVendaVista.TabIndex = 2;
-            this.lbl_FecharVendaVista.Text = "X";
-            this.lbl_FecharVendaVista.Click += new System.EventHandler(this.lbl_FecharVendaVista_Click);
-            this.lbl_FecharVendaVista.MouseEnter += new System.EventHandler(this.lbl_FecharVendaVista_MouseEnter);
-            this.lbl_FecharVendaVista.MouseLeave += new System.EventHandler(this.lbl_FecharVendaVista_MouseLeave);
-            // 
-            // btn_ConfirmarVenda
-            // 
-            this.btn_ConfirmarVenda.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btn_ConfirmarVenda.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_ConfirmarVenda.Image = global::CaixaFacil.Properties.Resources.Ok_icon;
-            this.btn_ConfirmarVenda.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_ConfirmarVenda.Location = new System.Drawing.Point(685, 273);
-            this.btn_ConfirmarVenda.Name = "btn_ConfirmarVenda";
-            this.btn_ConfirmarVenda.Size = new System.Drawing.Size(164, 60);
-            this.btn_ConfirmarVenda.TabIndex = 1;
-            this.btn_ConfirmarVenda.Text = "Confirmar - [F10]";
-            this.btn_ConfirmarVenda.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_ConfirmarVenda.UseVisualStyleBackColor = true;
-            this.btn_ConfirmarVenda.Click += new System.EventHandler(this.btn_ConfirmarVenda_Click);
-            // 
-            // btn_CancelarVendaVista
-            // 
-            this.btn_CancelarVendaVista.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btn_CancelarVendaVista.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_CancelarVendaVista.Image = global::CaixaFacil.Properties.Resources.Button_Cancel_icon__1_;
-            this.btn_CancelarVendaVista.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_CancelarVendaVista.Location = new System.Drawing.Point(17, 273);
-            this.btn_CancelarVendaVista.Name = "btn_CancelarVendaVista";
-            this.btn_CancelarVendaVista.Size = new System.Drawing.Size(162, 60);
-            this.btn_CancelarVendaVista.TabIndex = 0;
-            this.btn_CancelarVendaVista.Text = "Cancelar - [ESC]";
-            this.btn_CancelarVendaVista.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_CancelarVendaVista.UseVisualStyleBackColor = true;
-            this.btn_CancelarVendaVista.Click += new System.EventHandler(this.btn_CancelarVendaVista_Click);
             // 
             // cbOpcao
             // 
@@ -771,7 +455,7 @@
             this.btn_BuscarServiço.Name = "btn_BuscarServiço";
             this.btn_BuscarServiço.Size = new System.Drawing.Size(406, 60);
             this.btn_BuscarServiço.TabIndex = 14;
-            this.btn_BuscarServiço.Text = "Serviços - [F9]";
+            this.btn_BuscarServiço.Text = "Serviços - [F10]";
             this.btn_BuscarServiço.UseVisualStyleBackColor = true;
             this.btn_BuscarServiço.Click += new System.EventHandler(this.btn_BuscarServiço_Click);
             // 
@@ -847,14 +531,14 @@
             this.DGV_ItensVenda.AllowUserToAddRows = false;
             this.DGV_ItensVenda.AllowUserToDeleteRows = false;
             this.DGV_ItensVenda.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_ItensVenda.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_ItensVenda.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.DGV_ItensVenda.ColumnHeadersHeight = 30;
             this.DGV_ItensVenda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DGV_ItensVenda.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -876,8 +560,8 @@
             // ColumnCodigo
             // 
             this.ColumnCodigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.ColumnCodigo.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.ColumnCodigo.DefaultCellStyle = dataGridViewCellStyle23;
             this.ColumnCodigo.HeaderText = "Código";
             this.ColumnCodigo.Name = "ColumnCodigo";
             this.ColumnCodigo.ReadOnly = true;
@@ -886,8 +570,8 @@
             // ColumnDescricaoProduto
             // 
             this.ColumnDescricaoProduto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.ColumnDescricaoProduto.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.ColumnDescricaoProduto.DefaultCellStyle = dataGridViewCellStyle24;
             this.ColumnDescricaoProduto.HeaderText = "Descrição";
             this.ColumnDescricaoProduto.Name = "ColumnDescricaoProduto";
             this.ColumnDescricaoProduto.ReadOnly = true;
@@ -895,8 +579,8 @@
             // ColumnQuantidade
             // 
             this.ColumnQuantidade.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.ColumnQuantidade.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.ColumnQuantidade.DefaultCellStyle = dataGridViewCellStyle25;
             this.ColumnQuantidade.HeaderText = "Quantidade";
             this.ColumnQuantidade.Name = "ColumnQuantidade";
             this.ColumnQuantidade.ReadOnly = true;
@@ -904,8 +588,8 @@
             // 
             // ColumnUnidade
             // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.ColumnUnidade.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.ColumnUnidade.DefaultCellStyle = dataGridViewCellStyle26;
             this.ColumnUnidade.HeaderText = "Unidade";
             this.ColumnUnidade.Name = "ColumnUnidade";
             this.ColumnUnidade.ReadOnly = true;
@@ -913,10 +597,10 @@
             // ColumnValorUnitario
             // 
             this.ColumnValorUnitario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle20.Format = "C2";
-            dataGridViewCellStyle20.NullValue = null;
-            this.ColumnValorUnitario.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle27.Format = "C2";
+            dataGridViewCellStyle27.NullValue = null;
+            this.ColumnValorUnitario.DefaultCellStyle = dataGridViewCellStyle27;
             this.ColumnValorUnitario.HeaderText = "Valor Unitário";
             this.ColumnValorUnitario.Name = "ColumnValorUnitario";
             this.ColumnValorUnitario.ReadOnly = true;
@@ -925,10 +609,10 @@
             // ColumnSubTotal
             // 
             this.ColumnSubTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle21.Format = "C2";
-            dataGridViewCellStyle21.NullValue = null;
-            this.ColumnSubTotal.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle28.Format = "C2";
+            dataGridViewCellStyle28.NullValue = null;
+            this.ColumnSubTotal.DefaultCellStyle = dataGridViewCellStyle28;
             this.ColumnSubTotal.HeaderText = "Valor SubTotal";
             this.ColumnSubTotal.Name = "ColumnSubTotal";
             this.ColumnSubTotal.ReadOnly = true;
@@ -1072,8 +756,6 @@
             this.groupBox5.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.PanelVendaVista.ResumeLayout(false);
-            this.PanelVendaVista.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_ItensVenda)).EndInit();
@@ -1123,29 +805,10 @@
         private System.Windows.Forms.Button btn_PagamentoParcial;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel PanelVendaVista;
-        private System.Windows.Forms.Button btn_ConfirmarVenda;
-        private System.Windows.Forms.Button btn_CancelarVendaVista;
-        private System.Windows.Forms.Label lbl_FecharVendaVista;
-        private System.Windows.Forms.Button btn_Desconto;
-        private System.Windows.Forms.Label lbl_ValorTotal;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txt_ValorPago;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label lbl_DescontoDinheiro;
-        private System.Windows.Forms.Button btn_VincularCliente;
-        private System.Windows.Forms.TextBox txt_Troco;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label lbl_Cliente;
-        private System.Windows.Forms.Label lbl_ApresentacaoCliente;
-        private System.Windows.Forms.TextBox txt_ValorDesconto;
-        private System.Windows.Forms.Label lbl_ValorDesconto;
-        private System.Windows.Forms.TextBox txt_DescontoDinheiro;
         private System.Windows.Forms.Label lbl_atendente;
         private System.Windows.Forms.TextBox txt_CodigoVenda;
         private System.Windows.Forms.DataGridView DGV_ItensVenda;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button btn_Recibo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCodigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescricaoProduto;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQuantidade;
@@ -1154,9 +817,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSubTotal;
         private System.Windows.Forms.Label lbl_Usuario;
         private System.Windows.Forms.Button btn_BuscarServiço;
-        private System.Windows.Forms.TextBox txt_DescontoPorcento;
-        private System.Windows.Forms.Label lbl_DescontoPorcento;
         private System.Windows.Forms.Button btnPagamentoCartao;
-        private System.Windows.Forms.Button btn_ImprimiCupom;
     }
 }
