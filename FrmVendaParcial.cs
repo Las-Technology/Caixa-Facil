@@ -150,6 +150,14 @@ namespace CaixaFacil
             this.lbl_FecharVendaMisto.BackColor = Color.Red;
         }
 
+        private void FrmVendaParcial_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                btn_CancelaVendaMisto_Click(sender, e);
+            else if (e.KeyCode == Keys.F10)
+                btn_FinalizarParcial_Click(sender, e);
+        }
+
         private void txt_ValorAbatido_TextChanged(object sender, EventArgs e)
         {
             if (txt_ValorAbatido.Text == "")

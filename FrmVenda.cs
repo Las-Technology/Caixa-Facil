@@ -850,11 +850,8 @@ namespace CaixaFacil
 
                     EfetuarAbatimento();
                     InserirItensvenda();
-                    ValorTotal = 0.00m;
-                    CodigoVenda();
-                    txt_CodigoVenda.Text = codigoVenda;
-                    txt_ValorTotal.Text = "R$ 0,00";
-                    DGV_ItensVenda.Rows.Clear();
+                    
+                    loadTelaInicial();
                 }
                 
             }
@@ -912,14 +909,10 @@ namespace CaixaFacil
                         this.Cursor = Cursors.Default;
 
                     }
-                    InserirItensvenda();                   
-                 
-                    ValorTotal = 0.00m;
-                    DGV_ItensVenda.Rows.Clear();
-                    HabilitarFerramentas();
-                    CodigoVenda();
-                    txt_CodigoVenda.Text = codigoVenda;
-                    txt_ValorTotal.Text = "R$ 0,00";                   
+                   
+                    InserirItensvenda();
+
+                    loadTelaInicial();
                 }
             }
             else
@@ -949,11 +942,8 @@ namespace CaixaFacil
                         relatorioPrazo.ShowDialog();
                         this.Cursor = Cursors.Default;
                     }
-                    ValorTotal = 0.00m;
-                    CodigoVenda();
-                    txt_CodigoVenda.Text = codigoVenda;
-                    txt_ValorTotal.Text = "R$ 0,00";
-                    DGV_ItensVenda.Rows.Clear();
+
+                    loadTelaInicial();
                 }
             }
             else
@@ -1040,13 +1030,8 @@ namespace CaixaFacil
 
                         Cursor = Cursors.Default;
                     }
-                    DGV_ItensVenda.Rows.Clear();
-                    CodigoVenda();
-                    txt_CodigoVenda.Text = codigoVenda;
-                    txt_ValorTotal.Text = "R$ 0,00";
-                    ValorTotal = 0.00m;
-                    DGV_ItensVenda.Rows.Clear();
-                    txt_Codigo_Barra.Focus();
+
+                    loadTelaInicial();
                 }
             }
             else
@@ -1402,7 +1387,7 @@ namespace CaixaFacil
                 if (pagamentoCartao.Confirmacao == "Venda realizada com sucesso!")
                 {
                     InserirItensvenda();
-                    if (pagamentoCartao.Nota == 1)
+                    if (pagamentoCartao.pedidoNotaPromissoria)
                     {
                         this.Cursor = Cursors.WaitCursor;
                         BuscarInformacaoEmpresa();
@@ -1413,16 +1398,22 @@ namespace CaixaFacil
                         ValorTotal = 0.00m;
                         txt_Codigo_Barra.Focus();
                     }
-                    DGV_ItensVenda.Rows.Clear();
-                    CodigoVenda();
-                    txt_CodigoVenda.Text = codigoVenda;
-                    ValorTotal = 0.00M;
-                    txt_ValorTotal.Text = "R$ " + ValorTotal;
+
+                    loadTelaInicial();
                 }
-                HabilitarFerramentas();
             }
             else
                 MessageBox.Show("Não há itens para venda! Verifique...", "Mensagem do sistema 'Gerenciamento Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void loadTelaInicial()
+        {
+            DGV_ItensVenda.Rows.Clear();
+            CodigoVenda();
+            txt_CodigoVenda.Text = codigoVenda;
+            ValorTotal = 0.00M;
+            txt_ValorTotal.Text = "R$ " + ValorTotal;
+            txt_Codigo_Barra.Focus();
         }
 
         private void txt_Codigo_Barra_KeyPress(object sender, KeyPressEventArgs e)

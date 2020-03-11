@@ -45,7 +45,7 @@ namespace CaixaFacil
             this.txt_Troco = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.lbl_DescontoDinheiro = new System.Windows.Forms.Label();
-            this.btn_Desconto = new System.Windows.Forms.Button();
+            this.btn_Descontar = new System.Windows.Forms.Button();
             this.lbl_ValorTotal = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.txt_ValorPago = new System.Windows.Forms.TextBox();
@@ -242,18 +242,18 @@ namespace CaixaFacil
             this.lbl_DescontoDinheiro.Text = "Desconto - R$";
             this.lbl_DescontoDinheiro.Visible = false;
             // 
-            // btn_Desconto
+            // btn_Descontar
             // 
-            this.btn_Desconto.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Desconto.Image = global::CaixaFacil.Properties.Resources.Ecommerce_Discount_icon1;
-            this.btn_Desconto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Desconto.Location = new System.Drawing.Point(25, 99);
-            this.btn_Desconto.Name = "btn_Desconto";
-            this.btn_Desconto.Size = new System.Drawing.Size(144, 48);
-            this.btn_Desconto.TabIndex = 295;
-            this.btn_Desconto.Text = "      Desconto - [F4]";
-            this.btn_Desconto.UseVisualStyleBackColor = true;
-            this.btn_Desconto.Click += new System.EventHandler(this.btn_Desconto_Click);
+            this.btn_Descontar.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Descontar.Image = global::CaixaFacil.Properties.Resources.Ecommerce_Discount_icon1;
+            this.btn_Descontar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Descontar.Location = new System.Drawing.Point(25, 99);
+            this.btn_Descontar.Name = "btn_Descontar";
+            this.btn_Descontar.Size = new System.Drawing.Size(144, 48);
+            this.btn_Descontar.TabIndex = 295;
+            this.btn_Descontar.Text = "      Desconto - [F4]";
+            this.btn_Descontar.UseVisualStyleBackColor = true;
+            this.btn_Descontar.Click += new System.EventHandler(this.btn_Descontar_Click);
             // 
             // lbl_ValorTotal
             // 
@@ -347,7 +347,7 @@ namespace CaixaFacil
             this.Controls.Add(this.txt_Troco);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.lbl_DescontoDinheiro);
-            this.Controls.Add(this.btn_Desconto);
+            this.Controls.Add(this.btn_Descontar);
             this.Controls.Add(this.lbl_ValorTotal);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txt_ValorPago);
@@ -363,6 +363,7 @@ namespace CaixaFacil
             this.Name = "FrmVendaVista";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmVendaParcelas";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmVendaVista_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -384,7 +385,7 @@ namespace CaixaFacil
         private System.Windows.Forms.TextBox txt_Troco;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lbl_DescontoDinheiro;
-        private System.Windows.Forms.Button btn_Desconto;
+        private System.Windows.Forms.Button btn_Descontar;
         private System.Windows.Forms.Label lbl_ValorTotal;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txt_ValorPago;

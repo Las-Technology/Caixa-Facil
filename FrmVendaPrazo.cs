@@ -122,6 +122,16 @@ namespace CaixaFacil
             Finalizar();
         }
 
+        private void FrmVendaPrazo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                btn_Cancelar_Click(sender, e);
+            else if (e.KeyCode == Keys.F2)
+                btn_GerarRelatorio_Click(sender, e);
+            else if (e.KeyCode == Keys.F10)
+                btn_Finalizar_Click(sender, e);
+        }
+
         private void lbl_Fechar_MouseEnter(object sender, EventArgs e)
         {
             this.lbl_Fechar.BackColor = Color.Red;

@@ -151,7 +151,9 @@ namespace CaixaFacil
 
         private void btn_Finalizar_Click(object sender, EventArgs e)
         {        
-            Finalizar();          
+            Finalizar();
+            if (vendaConfirmada)
+                this.Close();
         }
 
         private void Finalizar()
@@ -163,7 +165,7 @@ namespace CaixaFacil
             }
 
             troco = decimal.Parse(txt_Troco.Text);
-            if (ValorDesconto == 0.00M)
+            if (ValorDesconto == 0.00M && descontoDinheiro < ValorTotal)
                 ValorDesconto = ValorTotal;
 
             if (decimal.Parse(txt_ValorPago.Text) < ValorDesconto)
@@ -172,9 +174,7 @@ namespace CaixaFacil
                 return;
             }
 
-            vendaConfirmada = true;
-
-            this.Close();
+            vendaConfirmada = true;           
         }
 
         private void txt_Troco_KeyPress(object sender, KeyPressEventArgs e)
@@ -253,19 +253,28 @@ namespace CaixaFacil
 
         private void btn_ImprimiCupom_Click(object sender, EventArgs e)
         {
-            CupomPedido = true;
-
             Finalizar();
+
+            if (!vendaConfirmada)
+                return;
+
+            CupomPedido = true;
+            this.Close();
         }
 
         private void btn_Recibo_Click(object sender, EventArgs e)
         {
-            promissoriaPedido = true;
-            nomeCliente = lbl_Cliente.Text;
             Finalizar();
+         
+            if (!vendaConfirmada)
+                return;
+
+            nomeCliente = lbl_Cliente.Text;
+            promissoriaPedido = true;
+            this.Close();
         }
 
-        private void btn_Desconto_Click(object sender, EventArgs e)
+        private void btn_Descontar_Click(object sender, EventArgs e)
         {
             switch (Descontar)
             {
@@ -299,6 +308,22 @@ namespace CaixaFacil
             }
         }
 
+        private void FrmVendaVista_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                btn_Cancelar_Click(sender, e);
+            else if (e.KeyCode == Keys.F4)
+                btn_Descontar_Click(sender, e);
+            else if (e.KeyCode == Keys.F5)
+                btn_VincularCliente_Click(sender, e);
+            else if (e.KeyCode == Keys.F11)
+                btn_Recibo_Click(sender, e);
+            else if (e.KeyCode == Keys.F12)
+                btn_ImprimiCupom_Click(sender, e);
+            else if (e.KeyCode == Keys.F10)
+                btn_Finalizar_Click(sender, e);
+        }
+
         private void txt_DescontoPorcento_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
@@ -330,8 +355,8 @@ namespace CaixaFacil
                         DescontoPorcento = (ValorTotal * ValorDescontoPorcento) / Porcento;
                         DescontoPorcento = Math.Round(DescontoPorcento, 2);
                         txt_DescontoDinheiro.Text = DescontoPorcento.ToString();
-                        decimal ValorVenda = ValorTotal - DescontoPorcento;
-                        txt_ValorDesconto.Text = ValorVenda.ToString();
+                        ValorDesconto = ValorTotal - DescontoPorcento;
+                        txt_ValorDesconto.Text = ValorDesconto.ToString();
                         txt_DescontoDinheiro_Leave(sender, e);
                         txt_DescontoPorcento.Text = Convert.ToDecimal(txt_DescontoPorcento.Text.Trim()).ToString("0.00");
                     }

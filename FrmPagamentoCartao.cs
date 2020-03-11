@@ -14,7 +14,7 @@ namespace CaixaFacil
     public partial class FrmPagamentoCartao : Form
     {
         public string confirmacao { get; set; }
-        public int Nota { get; set; }
+        public bool pedidoNotaPromissoria = false;
         public decimal Desconto { get; set; }
 
         int CodigoVenda, IdUsuario;
@@ -233,7 +233,7 @@ namespace CaixaFacil
             EfetuarVenda();
             EfetuarParcelas();
             confirmacao = "Venda realizada com sucesso!";
-            Nota = 1;
+            pedidoNotaPromissoria = true;
             Desconto = decimal.Parse(txt_ValorDesconto.Text);
             Close();
         }
@@ -243,15 +243,7 @@ namespace CaixaFacil
             txt_DescontoDinheiro_Leave(sender, e);
             txt_DescontoPorcento_Leave(sender, e);
             EfetuarVenda();
-            EfetuarParcelas();
-            if(FormaPagamento == "Cartão de Crédito")
-            {
-                MessageBox.Show("Parcelas no cartão gravadas no banco de dados com sucesso!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Pagamento realizado com sucesso!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            EfetuarParcelas();           
             confirmacao = "Venda realizada com sucesso!";
             Close();
         }
@@ -260,8 +252,8 @@ namespace CaixaFacil
 
         private void txt_DescontoPorcento_TextChanged(object sender, EventArgs e)
         {
-            if(FormaPagamento == "Cartão de Crédito")
-            btn_Finalizar.Enabled = false;
+            if (FormaPagamento == "Cartão de Crédito")
+                btn_Finalizar.Enabled = false;
         }
 
         private void txt_DescontoDinheiro_TextChanged(object sender, EventArgs e)

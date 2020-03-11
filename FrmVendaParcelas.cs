@@ -332,8 +332,8 @@ namespace CaixaFacil
 
         private void btn_GerarRepasse_Click(object sender, EventArgs e)
         {
-            finalizarParcelamento();
             repasseGerada = true;
+            finalizarParcelamento();
         }
 
         string DataVencimento;

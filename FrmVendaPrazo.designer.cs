@@ -289,6 +289,7 @@
             this.Name = "FrmVendaPrazo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmVendaParcelas";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmVendaPrazo_KeyDown);
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.groupBox8.ResumeLayout(false);

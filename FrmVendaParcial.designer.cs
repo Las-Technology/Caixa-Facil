@@ -361,6 +361,7 @@
             this.Name = "FrmVendaParcial";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmVendaParcelas";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmVendaParcial_KeyDown);
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
             this.groupBox12.ResumeLayout(false);

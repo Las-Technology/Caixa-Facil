@@ -13,7 +13,7 @@ namespace CaixaFacil
     public partial class FrmFormaPagamento : Form
     {
         public string Confirmacao { get; set; }
-        public int Nota { get; set; }
+        public bool pedidoNotaPromissoria = false;
         public decimal Desconto { get; set; }
 
         public FrmFormaPagamento(string CodigoVenda, decimal ValorTotal, decimal Lucro, int IdUsuario)
@@ -34,7 +34,7 @@ namespace CaixaFacil
                 FrmPagamentoCartao PagamentoCartao = new FrmPagamentoCartao(cb_FormasPagamento.Text, CodigoVenda, ValorTotal, Lucro, IdUsuario);
                 PagamentoCartao.ShowDialog();
                 Confirmacao = PagamentoCartao.confirmacao;
-                Nota = PagamentoCartao.Nota;
+                pedidoNotaPromissoria = PagamentoCartao.pedidoNotaPromissoria;
                 Desconto = PagamentoCartao.Desconto;
                 this.Close();
                
