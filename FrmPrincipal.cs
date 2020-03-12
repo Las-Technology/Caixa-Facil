@@ -669,14 +669,21 @@ namespace CaixaFacil
 
         private void Menu_RelatorioVendasDias_Click(object sender, EventArgs e)
         {
-            if (ListaTodasVendasDia() == true)
+            try
             {
-                FrmListaVenda listaVenda = new FrmListaVenda("", "", "DIA");
-                listaVenda.ShowDialog();
+                if (ListaTodasVendasDia() == true)
+                {
+                    FrmListaVenda listaVenda = new FrmListaVenda("", "", "DIA");
+                    listaVenda.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Não há lista de vendas de hoje no momento!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Não há lista de vendas de hoje no momento!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(ex.Message);
             }
         }
 

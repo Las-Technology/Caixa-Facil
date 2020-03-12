@@ -293,7 +293,7 @@
     <Compile Include="FrmListaVenda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmListaVenda.designer.cs">
+    <Compile Include="FrmListaVenda.Designer.cs">
       <DependentUpon>FrmListaVenda.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmListaVendaData.cs">
@@ -622,6 +622,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmInformarDicaSenha.resx">
       <DependentUpon>FrmInformarDicaSenha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmListaVenda.resx">
+      <DependentUpon>FrmListaVenda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmListaVendaData.resx">
       <DependentUpon>FrmListaVendaData.cs</DependentUpon>
