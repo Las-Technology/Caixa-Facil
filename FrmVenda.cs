@@ -1414,6 +1414,7 @@ namespace CaixaFacil
             ValorTotal = 0.00M;
             txt_ValorTotal.Text = "R$ " + ValorTotal;
             txt_Codigo_Barra.Focus();
+            LucroTotal = 0.00m;
         }
 
         private void txt_Codigo_Barra_KeyPress(object sender, KeyPressEventArgs e)

@@ -171,7 +171,13 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
+              
+                if(string.IsNullOrWhiteSpace(txtCliente.Text))
                 _sql = "select Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Venda.DataVenda = @DataVenda";
+               else
+                _sql = "select Cliente.Nome, Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.DataVenda = @DataVenda and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%' group by Cliente.Nome";
+
+
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.Parameters.AddWithValue("@DataVenda", DateTime.Now.ToShortDateString());
                 comando.SelectCommand.CommandText = _sql;
@@ -188,6 +194,13 @@ namespace CaixaFacil
                     TotalVendaDesconto = TotalVenda - TotalDesconto;
                     lbl_TotalVendaDesconto.Text = "R$ " + TotalVendaDesconto;
 
+                }
+                else
+                {
+                    lbl_TotalLucros.Text = "R$ 0,00";
+                    lbl_TotalVendas.Text = "R$ 0,00";
+                    lbl_TotalDesconto.Text = "R$ 0,00";
+                    lbl_TotalVendaDesconto.Text = "R$ 0,00";
                 }
             }
             catch (Exception ex)
@@ -223,7 +236,12 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda";
+
+               if(string.IsNullOrWhiteSpace(txtCliente.Text))
+                    _sql = "select Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda";
+                else
+                    _sql = "select Cliente.Nome, Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Cliente.Nome like '%" + txtCliente.Text.Trim() + "%' group by Cliente.Nome";
+
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
@@ -238,6 +256,13 @@ namespace CaixaFacil
                     lbl_TotalDesconto.Text = "R$ " + TotalDesconto;
                     TotalVendaDesconto = TotalVenda - TotalDesconto;
                     lbl_TotalVendaDesconto.Text = "R$ " + TotalVendaDesconto;
+                }
+                else
+                {
+                    lbl_TotalLucros.Text = "R$ 0,00";
+                    lbl_TotalVendas.Text = "R$ 0,00";
+                    lbl_TotalDesconto.Text = "R$ 0,00";
+                    lbl_TotalVendaDesconto.Text = "R$ 0,00";
                 }
             }
             catch (Exception ex)
@@ -275,7 +300,12 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and FormaPagamento.Descricao = @Descricao";
+
+                if (string.IsNullOrWhiteSpace(txtCliente.Text))
+                    _sql = "select Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and FormaPagamento.Descricao = @Descricao";
+                else
+                    _sql = "select Cliente.Nome, Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and FormaPagamento.Descricao = @Descricao and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%' group by Cliente.Nome";
+
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.Parameters.AddWithValue("@DataInicial", DataInicial);
                 comando.SelectCommand.Parameters.AddWithValue("@DataFinal", DataFinal);
@@ -292,6 +322,13 @@ namespace CaixaFacil
                     lbl_TotalDesconto.Text = "R$ " + TotalDesconto;
                     TotalVendaDesconto = TotalVenda - TotalDesconto;
                     lbl_TotalVendaDesconto.Text = "R$ " + TotalVendaDesconto;
+                }
+                else
+                {
+                    lbl_TotalLucros.Text = "R$ 0,00";
+                    lbl_TotalVendas.Text = "R$ 0,00";
+                    lbl_TotalDesconto.Text = "R$ 0,00";
+                    lbl_TotalVendaDesconto.Text = "R$ 0,00";
                 }
             }
             catch (Exception ex)
@@ -327,7 +364,11 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103)";
+                if (string.IsNullOrWhiteSpace(txtCliente.Text))
+                    _sql = "select Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103)";
+                else
+                    _sql = "select Cliente.Nome, Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%' group by Cliente.Nome";
+
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.Parameters.AddWithValue("@DataInicial", DataInicial);
                 comando.SelectCommand.Parameters.AddWithValue("@DataFinal", DataFinal); comando.SelectCommand.CommandText = _sql;
@@ -343,6 +384,13 @@ namespace CaixaFacil
                     lbl_TotalDesconto.Text = "R$ " + TotalDesconto;
                     TotalVendaDesconto = TotalVenda - TotalDesconto;
                     lbl_TotalVendaDesconto.Text = "R$ " + TotalVendaDesconto;
+                }
+                else
+                {
+                    lbl_TotalLucros.Text = "R$ 0,00";
+                    lbl_TotalVendas.Text = "R$ 0,00";
+                    lbl_TotalDesconto.Text = "R$ 0,00";
+                    lbl_TotalVendaDesconto.Text = "R$ 0,00";
                 }
             }
             catch (Exception ex)
