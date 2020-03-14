@@ -222,7 +222,7 @@ namespace CaixaFacil
             }
             else if (txt_senha.TextLength < 5)
             {
-                MessageBox.Show("A senha deve ter de 5 a 15 caracteres!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("A senha deve ter de 5 a 15 caracteres!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.Clear();
                 errorProvider.SetError(txt_senha, "Campo obrigatório!");
                 txt_senha.Focus();
@@ -279,13 +279,13 @@ namespace CaixaFacil
                     {
                         Usuario.Cadastrar();
 
-                        MessageBox.Show("Usuario cadastrado com sucesso!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Usuario cadastrado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         btn_Limpar_Click(sender, e);
                         CodigoUsuario();
                     }
                     else
                     {
-                        MessageBox.Show("O Usuário já existe!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("O Usuário já existe!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         errorProvider.Clear();
                         errorProvider.SetError(txt_Usuario, "");
                         txt_Usuario.Focus();
@@ -414,7 +414,7 @@ namespace CaixaFacil
             }
             else if (txt_SenhaEdicao.TextLength < 5)
             {
-                MessageBox.Show("A senha deve ter de 5 a 15 caracteres!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("A senha deve ter de 5 a 15 caracteres!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.Clear();
                 errorProvider.SetError(txt_SenhaEdicao, "Campo obrigatório!");
                 txt_SenhaEdicao.Focus();
@@ -469,7 +469,7 @@ namespace CaixaFacil
                     Usuario.respostaSeguranca = txt_RespostaSegurancaEdicao.Text;
                     if (Usuario.Atualizar() == false)
                     {
-                        MessageBox.Show("Dados do Usuario atualizado com sucesso!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Dados do Usuario atualizado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         btn_LimparEdicao_Click(sender, e);
                     }
                     else
@@ -532,7 +532,7 @@ namespace CaixaFacil
                     Usuario.id = int.Parse(txt_CodigoExclusao.Text);
                     Usuario.usuario = txt_UsuarioExclusao.Text;
                     Usuario.Deletar();
-                    MessageBox.Show("Dados do Usuário deletado com sucesso!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Dados do Usuário deletado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btn_LimparExclusao_Click(sender, e);
                     CodigoUsuario();
                 }

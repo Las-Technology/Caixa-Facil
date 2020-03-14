@@ -976,7 +976,7 @@ namespace CaixaFacil
             }
             catch 
             {
-                MessageBox.Show("Não é permitido a exclusão! Existe Produto(s) relacionadas com o fornecedor selecionado", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Não é permitido a exclusão! Existe Produto(s) relacionadas com o fornecedor selecionado", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

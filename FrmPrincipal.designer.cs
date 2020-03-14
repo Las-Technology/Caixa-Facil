@@ -234,10 +234,10 @@
             this.Lbl_Titulo.ForeColor = System.Drawing.Color.White;
             this.Lbl_Titulo.Location = new System.Drawing.Point(101, 34);
             this.Lbl_Titulo.Name = "Lbl_Titulo";
-            this.Lbl_Titulo.Size = new System.Drawing.Size(730, 19);
+            this.Lbl_Titulo.Size = new System.Drawing.Size(667, 19);
             this.Lbl_Titulo.TabIndex = 60;
-            this.Lbl_Titulo.Text = "Sistema Gerenciamento Fácil (LAS Technology - Email: lastechnology2018@gmail.com)" +
-    "  - Sistema não fiscal";
+            this.Lbl_Titulo.Text = "Sistema Caixa Fácil (LAS Technology - Email: lastechnology2018@gmail.com)  - Sist" +
+    "ema não fiscal";
             // 
             // Lbl_Icone
             // 
@@ -599,7 +599,7 @@
             this.menuVendasNãoContablizadas.Name = "menuVendasNãoContablizadas";
             this.menuVendasNãoContablizadas.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
             this.menuVendasNãoContablizadas.Size = new System.Drawing.Size(354, 22);
-            this.menuVendasNãoContablizadas.Text = "Vendas não contablizadas";
+            this.menuVendasNãoContablizadas.Text = "Vendas não contabilizadas";
             this.menuVendasNãoContablizadas.Click += new System.EventHandler(this.menuVendasNãoContablizadas_Click);
             // 
             // diversosToolStripMenuItem

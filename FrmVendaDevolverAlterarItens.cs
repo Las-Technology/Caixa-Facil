@@ -729,7 +729,7 @@ namespace CaixaFacil
                         messagem = " O valor já foi pago pelo cliente está no valor de " + ValorPago;
                     }
 
-                    MessageBox.Show("Itens devolvidos!" + messagem, "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Itens devolvidos!" + messagem, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -782,7 +782,7 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    MessageBox.Show("Selecione o item para excluir!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Selecione o item para excluir!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             else
@@ -1098,7 +1098,7 @@ namespace CaixaFacil
             {
                 conexao.Open();
                 comando.ExecuteNonQuery();
-                MessageBox.Show("Item(ns) devolvido!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Item(ns) devolvido!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {

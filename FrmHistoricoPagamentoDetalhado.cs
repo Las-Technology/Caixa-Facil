@@ -72,7 +72,7 @@ namespace CaixaFacil
         {
             if (txtValorPago.Text == "R$ 0,00")
             {
-                MessageBox.Show("Não constamos pagamentos realizados por estes clientes!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Não constamos pagamentos realizados por estes clientes!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {

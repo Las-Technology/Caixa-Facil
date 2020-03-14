@@ -175,7 +175,7 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    MessageBox.Show("Dados não encontrado! Escolha outra opção...", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Dados não encontrado! Escolha outra opção...", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     Resertar();
                 }
             }
@@ -271,7 +271,7 @@ namespace CaixaFacil
                     }
                     else
                     {
-                        MessageBox.Show("Dados não encontrado! Tente novamente.", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Dados não encontrado! Tente novamente.", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txt_Descricao.Clear();
                         Resertar();
                     }

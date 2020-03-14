@@ -88,7 +88,7 @@ namespace CaixaFacil
                         contasNaoContabilizada.dataConta = dt_DataVenda.Text;
                         if (decimal.Parse(txt_Valor.Text) != ValorConta)
                         {
-                            if (MessageBox.Show("Valor é diferente da conta atual, Deseja alterar o valor? " + txt_Valor.Text, "Mensagem do sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            if (MessageBox.Show("Valor é diferente da conta atual, Deseja alterar o valor? " + txt_Valor.Text, "Caixa Fácil", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                                 contasNaoContabilizada.valorConta = decimal.Parse(txt_Valor.Text.Trim());
                             else
                                 contasNaoContabilizada.valorConta = ValorConta;
@@ -100,7 +100,7 @@ namespace CaixaFacil
                         if (contasNaoContabilizada.valorConta > 0)
                         {
                             contasNaoContabilizada.EditarVendaNaoContabilizada();
-                            MessageBox.Show("Conta alterada com sucesso!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Conta alterada com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             LimparCampos();
                             txt_Nome.Focus();
                             Validado = false;
@@ -114,7 +114,7 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    MessageBox.Show("Busque a conta que deseja alterar!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Busque a conta que deseja alterar!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             catch (Exception ex)
@@ -127,7 +127,7 @@ namespace CaixaFacil
         {
             if (codigo == 0)
             {
-                MessageBox.Show("Busque a conta para excluir!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Busque a conta para excluir!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
@@ -136,7 +136,7 @@ namespace CaixaFacil
                 {
                     contasNaoContabilizada.codigo = codigo;
                     contasNaoContabilizada.ExcluirVendaNaoContabilizada();
-                    MessageBox.Show("Conta excluido com sucesso!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Conta excluido com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimparCampos();
                     txt_Nome.Focus();
                 }
@@ -164,7 +164,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Não existe contas não contabilizadas registrada no sistema!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Não existe contas não contabilizadas registrada no sistema!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -229,7 +229,7 @@ namespace CaixaFacil
                     if (contasNaoContabilizada.valorConta > 0)
                     {
                         contasNaoContabilizada.ConfimarVendaNaoContabilizada();
-                        MessageBox.Show("Conta salvo com sucesso!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Conta salvo com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txt_Nome.Focus();
                         LimparCampos();
                         txt_Nome.Focus();
@@ -436,7 +436,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Busque a conta que irá abater!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Busque a conta que irá abater!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

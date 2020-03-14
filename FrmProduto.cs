@@ -370,7 +370,7 @@ namespace CaixaFacil
                 }
                 catch 
                 {
-                    MessageBox.Show("Não é permitido a exclusão! Existe registros de venda(s) do produto selecionado", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Não é permitido a exclusão! Existe registros de venda(s) do produto selecionado", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             else

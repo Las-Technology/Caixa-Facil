@@ -142,7 +142,7 @@ namespace CaixaFacil
         int fecharPrograma;
         private void FecharPrograma()
         {
-            DialogResult dr = MessageBox.Show("Deseja gerar o backup de segurança agora?", "Mensagem do sistema 'Gerenciamento de Caixa Fácil'", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult dr = MessageBox.Show("Deseja gerar o backup de segurança agora?", "Caixa Fácil", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
                 fecharPrograma = 2;
@@ -284,7 +284,6 @@ namespace CaixaFacil
             {
                 this.btn_MaximizarRestaurar.Image = global::CaixaFacil.Properties.Resources.Botão_Maximizar2;
                 this.toolTip1.SetToolTip(this.btn_MaximizarRestaurar, "Máximizar");
-
             }
             else
             {
@@ -631,7 +630,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Não há venda realizadas.", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Não há venda realizadas.", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -775,7 +774,7 @@ namespace CaixaFacil
             }
             else if (ListaTodasVendas() == "false")
             {
-                MessageBox.Show("Não há vendas realizadas.", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Não há vendas realizadas.", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

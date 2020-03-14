@@ -932,7 +932,7 @@ namespace CaixaFacil
                 {
                     id_Cliente = vendaPrazo.id_Cliente;
                     DataVencimento = vendaPrazo.Vencimento;
-                    VendaPrazo();
+                    EfetuarVendaPrazo();
                     InserirItensvenda();
                     if (vendaPrazo.relatorioPedido)
                     {
@@ -1201,7 +1201,7 @@ namespace CaixaFacil
 
       //verifica a situação do cliente antes da conclusão da venda durante o prazo da última compra
 
-        private void VendaPrazo()
+        private void EfetuarVendaPrazo()
         {
             try
             {
@@ -1415,6 +1415,7 @@ namespace CaixaFacil
             txt_ValorTotal.Text = "R$ " + ValorTotal;
             txt_Codigo_Barra.Focus();
             LucroTotal = 0.00m;
+            ValorCaixa = 0.00m;
         }
 
         private void txt_Codigo_Barra_KeyPress(object sender, KeyPressEventArgs e)

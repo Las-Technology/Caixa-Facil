@@ -243,7 +243,7 @@ namespace CaixaFacil
 
                             cliente.Cadastrar();
 
-                            MessageBox.Show("Cliente cadastrado com sucesso!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Cliente cadastrado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             btn_Limpar_Click(sender, e);
                             codigoCliente();
                         }
@@ -274,7 +274,7 @@ namespace CaixaFacil
 
                         cliente.Cadastrar();
 
-                        MessageBox.Show("Cliente cadastrado com sucesso!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Cliente cadastrado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         btn_Limpar_Click(sender, e);
                         codigoCliente();
                     }                
@@ -626,7 +626,7 @@ namespace CaixaFacil
 
                             cliente.Atualizar();
 
-                            MessageBox.Show("Dados do cliente atualizado com sucesso!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Dados do cliente atualizado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             btn_LimparEdicao_Click(sender, e);
                         }
                         else
@@ -657,7 +657,7 @@ namespace CaixaFacil
 
                         cliente.Atualizar();
 
-                        MessageBox.Show("Dados do cliente atualizado com sucesso!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Dados do cliente atualizado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         btn_LimparEdicao_Click(sender, e);
                     }
                 }
@@ -1013,7 +1013,7 @@ namespace CaixaFacil
                     }
                     catch
                     {
-                        MessageBox.Show("Não é permitido a exclusão! Existe registros de venda(s) do cliente", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Não é permitido a exclusão! Existe registros de venda(s) do cliente", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
             }

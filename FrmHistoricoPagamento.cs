@@ -176,7 +176,6 @@ namespace CaixaFacil
         }
 
         int X = 0, Y = 0;
-        string FormaPagamento;
 
         private void cbFormaPagamento_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -232,10 +231,10 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Não há histórico de pagamentos realizados nesta forma de pagamento", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Não há histórico de pagamentos realizados nesta forma de pagamento", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtCliente.Clear();
-                MostrarHistoricoPagamento();
-                cbFormaPagamento.Text = "Parcial";
+                Tabela.Rows.Clear();
+                dgvHistoricoPagamento.DataSource = Tabela;
             }
         }
 
@@ -265,29 +264,34 @@ namespace CaixaFacil
 
         private void btnVerHistoricoPagamento_Click(object sender, EventArgs e)
         {
-            if(dgvHistoricoPagamento.CurrentRow.Selected == true)
+            if (dgvHistoricoPagamento.Rows.Count > 0)
             {
-                if (cbFormaPagamento.Text == "Parcial")
+                if (dgvHistoricoPagamento.CurrentRow.Selected == true)
                 {
-                    informarValorVendaParcial();
-                }
-                else if (cbFormaPagamento.Text == "Prazo")
-                {
-                    informarValorVendaPrazo();
+                    if (cbFormaPagamento.Text == "Parcial")
+                    {
+                        informarValorVendaParcial();
+                    }
+                    else if (cbFormaPagamento.Text == "Prazo")
+                    {
+                        informarValorVendaPrazo();
+                    }
+                    else
+                    {
+                        InformarValorPagamentoParcela();
+                    }
+
+                    FrmHistoricoPagamentoDetalhado historicoPagamentoDetalhado = new FrmHistoricoPagamentoDetalhado(NVenda, Cliente, dateTime, ValorVenda, cbFormaPagamento.Text, ValorAbatido, ValorRestante, idPagamentoParcial);
+                    historicoPagamentoDetalhado.ShowDialog();
                 }
                 else
                 {
-                    InformarValorPagamentoParcela();
+                    MessageBox.Show("É necessário selecionar a venda para Visualizar o histórico!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-
-                FrmHistoricoPagamentoDetalhado historicoPagamentoDetalhado = new FrmHistoricoPagamentoDetalhado(NVenda, Cliente, dateTime, ValorVenda, cbFormaPagamento.Text, ValorAbatido, ValorRestante, idPagamentoParcial);
-                historicoPagamentoDetalhado.ShowDialog();
             }
             else
-            {
-                MessageBox.Show("É necessário selecionar a venda para Visualizar o histórico!", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            
+                MessageBox.Show("Não há lista de vendas!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
         }
 
         private void dgvHistoricoPagamento_CellClick(object sender, DataGridViewCellEventArgs e)

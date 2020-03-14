@@ -133,7 +133,7 @@ namespace CaixaFacil
                     rTB_Motivo.Clear();
                 }
                 else
-                    MessageBox.Show("O valor é menor que o valor do caixa! Verifique novamente o valor a retirar.", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("O valor é menor que o valor do caixa! Verifique novamente o valor a retirar.", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {

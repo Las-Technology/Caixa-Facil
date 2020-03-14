@@ -109,7 +109,7 @@ namespace CaixaFacil
                     }
                     else
                     {
-                        MessageBox.Show("Para prosseguir é necessário ativar o sistema! Entre contato com a LAS Technology", "Mensagem do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Para prosseguir é necessário ativar o sistema! Entre contato com a LAS Technology", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         Application.Exit();
                     }
                 }
