@@ -15,7 +15,7 @@ namespace CaixaFacil
     {
         decimal TotalLucro, TotalVenda, TotalDesconto, TotalVendaDesconto;
         string DataInicial, DataFinal, Opcao;
-        string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
+        string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql, colunaTabela;
 
         string NomeFantasia, Cidade, Numero, Endereco, CNPJ, Telefone, Estado, Bairro;
         Empresa empresa = new Empresa();
@@ -24,6 +24,8 @@ namespace CaixaFacil
         public FrmListaVenda(string DataInicial, string DataFinal, string Opcao)
         {
             InitializeComponent();
+
+            cbFilter.SelectedIndex = 0;
 
             dgv_ListaVenda.ClearSelection();
 
@@ -36,7 +38,7 @@ namespace CaixaFacil
 
         private void loadVendas()
         {
-            if (DataInicial == "" && DataFinal == "" && Opcao == "")
+            if (string.IsNullOrEmpty(DataInicial) && string.IsNullOrEmpty(DataFinal) && string.IsNullOrEmpty(Opcao))
             {
                 Lbl_Titulo.Text = "Lista de todas as vendas e serviços";
                 ListaTodasVendas();
@@ -84,6 +86,22 @@ namespace CaixaFacil
             Y = this.Top - MousePosition.Y;
         }
 
+        private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbFilter.SelectedIndex == 0)
+            {
+                lbl_CliProd.Text = "Cliente";
+                colunaTabela = "Cliente.Nome";
+            }
+            else
+            {
+                lbl_CliProd.Text = "Produto";
+                colunaTabela = "Produto.Descricao";
+            }
+
+            loadVendas();
+        }
+
         private void PanelCabecalho_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
@@ -98,7 +116,7 @@ namespace CaixaFacil
             dgv.ClearSelection();
         }
 
-        private void txtCliente_TextChanged(object sender, EventArgs e)
+        private void txtCliProd_TextChanged(object sender, EventArgs e)
         {
             loadVendas();
         }
@@ -148,10 +166,10 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                if (string.IsNullOrWhiteSpace(txtCliente.Text))
+                if (string.IsNullOrWhiteSpace(txtCliProd.Text))
                     _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where Venda.Datavenda = @DataVenda";
                 else
-                    _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where Venda.Datavenda = @DataVenda and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
+                    _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where Venda.Datavenda = @DataVenda and " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%'";
 
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.Parameters.AddWithValue("@DataVenda", DateTime.Now.ToShortDateString());
@@ -171,12 +189,16 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-              
-                if(string.IsNullOrWhiteSpace(txtCliente.Text))
-                _sql = "select Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Venda.DataVenda = @DataVenda";
-               else
-                _sql = "select Cliente.Nome, Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.DataVenda = @DataVenda and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%' group by Cliente.Nome";
 
+                if (string.IsNullOrWhiteSpace(txtCliProd.Text))
+                    _sql = "select Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Venda.DataVenda = @DataVenda";
+                else
+                {
+                    if (colunaTabela == "Cliente.Nome")
+                        _sql = "select " + colunaTabela + ", Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.DataVenda = @DataVenda and " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%' group by " + colunaTabela;
+                    else
+                        _sql = "select " + colunaTabela + ", Sum(ItensVenda.LucroItens) as Lucro, sum(ItensVenda.Valor) as Valor, Sum(Venda.Desconto) as Desconto from ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto where Venda.DataVenda = @DataVenda and " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%' group by " + colunaTabela;
+                }
 
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.Parameters.AddWithValue("@DataVenda", DateTime.Now.ToShortDateString());
@@ -214,10 +236,10 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                if(string.IsNullOrWhiteSpace(txtCliente.Text))
+                if(string.IsNullOrWhiteSpace(txtCliProd.Text))
                     _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario";
                 else
-                    _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
+                    _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%'";
 
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
@@ -237,10 +259,15 @@ namespace CaixaFacil
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
 
-               if(string.IsNullOrWhiteSpace(txtCliente.Text))
+                if (string.IsNullOrWhiteSpace(txtCliProd.Text))
                     _sql = "select Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda";
                 else
-                    _sql = "select Cliente.Nome, Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Cliente.Nome like '%" + txtCliente.Text.Trim() + "%' group by Cliente.Nome";
+                {
+                    if (txtCliProd.Text == "Cliente.Nome")
+                        _sql = "select " + colunaTabela + ", Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%' group by " + colunaTabela;
+                    else
+                        _sql = "select " + colunaTabela + ", Sum(ItensVenda.LucroItens) as Lucro, sum(ItensVenda.Valor) as Valor, Sum(Venda.Desconto) as Desconto from ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto where " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%' group by " + colunaTabela;
+                }
 
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
@@ -276,10 +303,10 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                if (string.IsNullOrWhiteSpace(txtCliente.Text))
+                if (string.IsNullOrWhiteSpace(txtCliProd.Text))
                     _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Convert(Date, Venda.DataVenda, 103) as DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and FormaPagamento.Descricao = @Descricao";
                 else
-                    _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Convert(Date, Venda.DataVenda, 103) as DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and FormaPagamento.Descricao = @Descricao and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
+                    _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Convert(Date, Venda.DataVenda, 103) as DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and FormaPagamento.Descricao = @Descricao and " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%'";
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.Parameters.AddWithValue("@DataInicial", DataInicial);
                 comando.SelectCommand.Parameters.AddWithValue("@DataFinal", DataFinal);
@@ -301,10 +328,17 @@ namespace CaixaFacil
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
 
-                if (string.IsNullOrWhiteSpace(txtCliente.Text))
+                if (string.IsNullOrWhiteSpace(txtCliProd.Text))
                     _sql = "select Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and FormaPagamento.Descricao = @Descricao";
                 else
-                    _sql = "select Cliente.Nome, Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and FormaPagamento.Descricao = @Descricao and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%' group by Cliente.Nome";
+                {
+                    if (colunaTabela == "Cliente.Nome")
+                        _sql = "select " + colunaTabela + ", Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and FormaPagamento.Descricao = @Descricao and " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%' group by " + colunaTabela;
+                    else
+                    {
+                        _sql = "select " + colunaTabela + ", Sum(ItensVenda.LucroItens) as Lucro, sum(ItensVenda.Valor) as Valor, Sum(Venda.Desconto) as Desconto from ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and FormaPagamento.Descricao = @Descricao and " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%' group by " + colunaTabela;
+                    }
+                }
 
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.Parameters.AddWithValue("@DataInicial", DataInicial);
@@ -342,10 +376,10 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                if (string.IsNullOrWhiteSpace(txtCliente.Text))
+                if (string.IsNullOrWhiteSpace(txtCliProd.Text))
                     _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Convert(Date, Venda.DataVenda, 103) as DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103)";
                 else
-                    _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Convert(Date, Venda.DataVenda, 103) as DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
+                    _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Convert(Date, Venda.DataVenda, 103) as DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%'";
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.Parameters.AddWithValue("@DataInicial", DataInicial);
                 comando.SelectCommand.Parameters.AddWithValue("@DataFinal", DataFinal);
@@ -364,10 +398,15 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                if (string.IsNullOrWhiteSpace(txtCliente.Text))
+                if (string.IsNullOrWhiteSpace(txtCliProd.Text))
                     _sql = "select Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103)";
                 else
-                    _sql = "select Cliente.Nome, Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%' group by Cliente.Nome";
+                {
+                    if (colunaTabela == "Cliente.Nome")
+                        _sql = "select Cliente.Nome, Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%' group by " + colunaTabela;
+                    else
+                        _sql = "select " + colunaTabela + ", Sum(ItensVenda.LucroItens) as Lucro, sum(ItensVenda.Valor) as Valor, Sum(Venda.Desconto) as Desconto from ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%' group by " + colunaTabela;
+                }
 
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.Parameters.AddWithValue("@DataInicial", DataInicial);
