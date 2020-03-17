@@ -263,7 +263,7 @@ namespace CaixaFacil
                     _sql = "select Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda";
                 else
                 {
-                    if (txtCliProd.Text == "Cliente.Nome")
+                    if (colunaTabela == "Cliente.Nome")
                         _sql = "select " + colunaTabela + ", Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%' group by " + colunaTabela;
                     else
                         _sql = "select " + colunaTabela + ", Sum(ItensVenda.LucroItens) as Lucro, sum(ItensVenda.Valor) as Valor, Sum(Venda.Desconto) as Desconto from ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto where " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%' group by " + colunaTabela;
@@ -403,7 +403,7 @@ namespace CaixaFacil
                 else
                 {
                     if (colunaTabela == "Cliente.Nome")
-                        _sql = "select Cliente.Nome, Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%' group by " + colunaTabela;
+                        _sql = "select " + colunaTabela + ", Sum(Venda.Lucro) as Lucro, sum(Venda.ValorTotal + Venda.Desconto) as Valor, Sum(Venda.Desconto) as Desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%' group by " + colunaTabela;
                     else
                         _sql = "select " + colunaTabela + ", Sum(ItensVenda.LucroItens) as Lucro, sum(ItensVenda.Valor) as Valor, Sum(Venda.Desconto) as Desconto from ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%' group by " + colunaTabela;
                 }
