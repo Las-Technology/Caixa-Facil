@@ -9,17 +9,24 @@ namespace CaixaFacil
     public partial class FrmVendaParcial : Form
     {
         public string id_Cliente, stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
-        decimal Valor;
         public bool vendaConfirmada = false;
-        public decimal ValorAbatido { get; set; }
-        public decimal ValorTotal { get; set; }
-        public decimal ValorRestante { get; set; }
+        public decimal valorAbatido { get; set; }
+        public decimal valorTotal { get; set; }
+        public decimal valorRestante { get; set; }
+        public decimal valorDesconto { get;  set; }
+        bool goDescontar = false;
+        decimal descontoDinheiro, descontoPorcento, valorDescontoPorcento, valorCliente, valorTotalComDesconto;
 
-        public FrmVendaParcial(decimal ValorTotal)
+
+        public FrmVendaParcial(decimal valorTotal)
         {
             InitializeComponent();
-            txt_TotalVenda.Text = "R$ " + ValorTotal;
-            this.ValorTotal = ValorTotal;
+            this.valorTotal = valorTotal;
+            valorTotalComDesconto = valorTotal;
+            txt_ValorVenda.Text = "R$ " + valorTotal;
+            txtValorTotal.Text = "R$ " + valorTotalComDesconto;
+            groupBox13.Location = new Point(7, 122);
+            groupBox11.Size = new Size(494, 102);
         }
 
         private void btn_Buscar_Click(object sender, EventArgs e)
@@ -35,7 +42,7 @@ namespace CaixaFacil
                 lbl_SeparadorDados.Visible = true;
                 if (verificarSituacaoClienteParcial() == true)
                 {
-                    lbl_Situacao.Text = "O Cliente selecionado está em débito com R$ " + Valor;
+                    lbl_Situacao.Text = "O Cliente selecionado está em débito com R$ " + valorCliente;
                 }
                 else
                 {
@@ -57,7 +64,7 @@ namespace CaixaFacil
             comando.Fill(Tabela);
             if (Tabela.Rows.Count > 0)
             {
-                Valor = decimal.Parse(Tabela.Rows[0]["ValorRestante"].ToString());
+                valorCliente = decimal.Parse(Tabela.Rows[0]["ValorRestante"].ToString());
                 return true;
             }
             else
@@ -74,8 +81,8 @@ namespace CaixaFacil
                 if (!string.IsNullOrEmpty(lblCodigo_Cliente.Text))
                 {
                     vendaConfirmada = true;
-                    if (ValorAbatido == 0.00m)
-                        ValorRestante = ValorTotal;
+                    if (valorAbatido == 0.00m)
+                        valorRestante = valorTotal;
 
                     id_Cliente = lblCodigo_Cliente.Text;
                     this.Close();
@@ -96,12 +103,12 @@ namespace CaixaFacil
                 if (txt_ValorAbatido.Text != "")
                 {
                     txt_ValorAbatido.Text = Convert.ToDecimal(txt_ValorAbatido.Text.Trim()).ToString("0.00");
-                    ValorAbatido = decimal.Parse(txt_ValorAbatido.Text);
-                    if (ValorAbatido <= ValorTotal)
+                    valorAbatido = decimal.Parse(txt_ValorAbatido.Text);
+                    if (valorAbatido <= valorTotal)
                     {
                         txt_TotalAbatido.Text = "R$ " + txt_ValorAbatido.Text;
-                        ValorRestante = ValorTotal - ValorAbatido;
-                        txt_ValorRestante.Text = "R$ " + ValorRestante.ToString();
+                        valorRestante = valorTotal - valorAbatido;
+                        txt_ValorRestante.Text = "R$ " + valorRestante.ToString();
                     }
                     else
                     {
@@ -154,8 +161,152 @@ namespace CaixaFacil
         {
             if (e.KeyCode == Keys.Escape)
                 btn_CancelaVendaMisto_Click(sender, e);
+            else if (e.KeyCode == Keys.F4)
+                btn_Descontar_Click(sender, e);
             else if (e.KeyCode == Keys.F10)
                 btn_FinalizarParcial_Click(sender, e);
+        }
+
+        
+        private void btn_Descontar_Click(object sender, EventArgs e)
+        {
+            goDescontar = !goDescontar;
+            switch (goDescontar)
+            {
+                case true:
+                    lbl_DescontoDinheiro.Visible = true;
+                    txt_DescontoDinheiro.Visible = true;
+                    lbl_ValorDesconto.Visible = true;
+                    lbl_DescontoPorcento.Visible = true;
+                    txt_DescontoPorcento.Visible = true;
+                    txt_ValorDesconto.Visible = true;
+                    txt_ValorDesconto.Text = valorTotal.ToString();
+                    groupBox13.Location = new Point(6, 176);
+                    groupBox11.Size = new Size(494, 156);
+                    valorDesconto = decimal.Parse(txt_ValorDesconto.Text);
+                    break; 
+                case false:
+                    lbl_DescontoDinheiro.Visible = false;
+                    txt_DescontoDinheiro.Visible = false;
+                    lbl_ValorDesconto.Visible = false;
+                    txt_ValorDesconto.Visible = false;
+                    lbl_DescontoPorcento.Visible = false;
+                    txt_DescontoPorcento.Visible = false;
+                    txt_DescontoDinheiro.Text = "0,00";
+                    txt_DescontoPorcento.Text = "0,00";
+                    txt_ValorDesconto.Text = "0,00";
+                    groupBox13.Location = new Point(7, 122);
+                    groupBox11.Size = new Size(494, 102);
+                    valorDesconto = decimal.Parse(txt_ValorDesconto.Text);
+                    break;
+
+            }
+        }
+
+        private void txt_DescontoPorcento_Leave(object sender, EventArgs e)
+        {
+            if (txt_DescontoPorcento.Text != "")
+            {
+                try
+                {
+                    valorDescontoPorcento = decimal.Parse(txt_DescontoPorcento.Text);
+                    if (valorDescontoPorcento <= 100)
+                    {
+                        descontoPorcento = (valorTotal * valorDescontoPorcento) / 100;
+                        descontoPorcento = Math.Round(descontoPorcento, 2);
+                        txt_DescontoDinheiro.Text = descontoPorcento.ToString();
+                        valorDesconto = valorTotal - descontoPorcento;
+                        txt_ValorDesconto.Text = valorDesconto.ToString();
+                        txt_DescontoDinheiro_Leave(sender, e);
+                        txt_DescontoPorcento.Text = Convert.ToDecimal(txt_DescontoPorcento.Text.Trim()).ToString("0.00");
+                    }
+                    else
+                    {
+                        txt_DescontoPorcento.Text = "0,00";
+                        txt_DescontoDinheiro.Text = "0,00";
+                        descontoPorcento = 0.00M;
+                        descontoDinheiro = 0.00M;
+                        txt_ValorDesconto.Text = valorTotal.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txt_DescontoPorcento.Text = "0";
+                }
+            }
+        }
+
+        private void txt_DescontoPorcento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (!char.IsDigit(e.KeyChar))
+                {
+                    if (((int)e.KeyChar) != ((int)Keys.Back))
+                        if (e.KeyChar != ',')
+                            e.Handled = true;
+                        else if (txt_DescontoPorcento.Text.IndexOf(',') > 0)
+                            e.Handled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txt_DescontoDinheiro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (!char.IsDigit(e.KeyChar))
+                {
+                    if (((int)e.KeyChar) != ((int)Keys.Back))
+                        if (e.KeyChar != ',')
+                            e.Handled = true;
+                        else if (txt_DescontoDinheiro.Text.IndexOf(',') > 0)
+                            e.Handled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txt_DescontoDinheiro_Leave(object sender, EventArgs e)
+        {
+            if (txt_DescontoDinheiro.Text != "")
+            {
+                try
+                {
+                    descontoDinheiro = decimal.Parse(txt_DescontoDinheiro.Text);
+                    if (descontoDinheiro <= valorTotal)
+                    {
+                        txt_ValorDesconto.Text = (valorTotal - descontoDinheiro).ToString();
+                        txt_DescontoDinheiro.Text = Convert.ToDouble(txt_DescontoDinheiro.Text.Trim()).ToString("0.00");
+                        valorDesconto = decimal.Parse(txt_ValorDesconto.Text);
+                        descontoPorcento = (100 * descontoDinheiro) / valorTotal;
+                        descontoPorcento = Math.Round(descontoPorcento, 2);
+                        txt_DescontoPorcento.Text = Math.Round(descontoPorcento, 2).ToString();
+                        txt_DescontoPorcento.Text = decimal.Parse(txt_DescontoPorcento.Text.Trim()).ToString("0.00");
+                    }
+                    else
+                    {
+                        txt_DescontoPorcento.Text = "0,00";
+                        txt_DescontoDinheiro.Text = "0,00";
+                        descontoPorcento = 0.00M;
+                        descontoDinheiro = 0.00M;
+                        txt_ValorDesconto.Text = valorTotal.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txt_DescontoDinheiro.Text = "0,00";
+                }
+            }
         }
 
         private void txt_ValorAbatido_TextChanged(object sender, EventArgs e)

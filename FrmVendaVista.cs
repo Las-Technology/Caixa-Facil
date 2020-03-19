@@ -23,7 +23,7 @@ namespace CaixaFacil
         public decimal descontoDinheiro { get; set; }
         decimal ValorDescontoPorcento, DescontoPorcento;
         const int Porcento = 100;
-        bool Descontar = true;
+        bool goDescontar = false;
 
         public FrmVendaVista(decimal ValorTotal)
         {
@@ -276,7 +276,9 @@ namespace CaixaFacil
 
         private void btn_Descontar_Click(object sender, EventArgs e)
         {
-            switch (Descontar)
+            goDescontar = !goDescontar;
+
+            switch (goDescontar)
             {
                 case false:
 
@@ -291,7 +293,6 @@ namespace CaixaFacil
                     txt_ValorDesconto.Text = "0,00";
                     ValorDesconto = decimal.Parse(txt_ValorDesconto.Text);
                     txt_Troco.Text = (ValorPago - ValorTotal).ToString();
-                    Descontar = true;
                     break;
                 case true:
 
@@ -303,7 +304,6 @@ namespace CaixaFacil
                     txt_ValorDesconto.Visible = true;
                     txt_ValorDesconto.Text = ValorTotal.ToString();
                     ValorDesconto = decimal.Parse(txt_ValorDesconto.Text);
-                    Descontar = false;
                     break;
             }
         }

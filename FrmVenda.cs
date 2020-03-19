@@ -845,8 +845,8 @@ namespace CaixaFacil
                 if (vendaParcial.vendaConfirmada)
                 {
                     id_Cliente = vendaParcial.id_Cliente;
-                    ValorRestante = vendaParcial.ValorRestante;
-                    ValorAbatido = vendaParcial.ValorAbatido;
+                    ValorRestante = vendaParcial.valorRestante;
+                    ValorAbatido = vendaParcial.valorAbatido;
 
                     EfetuarAbatimento();
                     InserirItensvenda();
