@@ -101,6 +101,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.btn_Cancelar);
             this.panel1.Controls.Add(this.groupBox1);
@@ -120,7 +121,7 @@
             this.btn_Cancelar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Cancelar.Image = global::CaixaFacil.Properties.Resources.Button_Cancel_icon__1_;
             this.btn_Cancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Cancelar.Location = new System.Drawing.Point(86, 263);
+            this.btn_Cancelar.Location = new System.Drawing.Point(54, 266);
             this.btn_Cancelar.Name = "btn_Cancelar";
             this.btn_Cancelar.Size = new System.Drawing.Size(161, 45);
             this.btn_Cancelar.TabIndex = 9;
@@ -174,7 +175,7 @@
             // 
             this.btn_Retirar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Retirar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Retirar.Location = new System.Drawing.Point(253, 266);
+            this.btn_Retirar.Location = new System.Drawing.Point(221, 266);
             this.btn_Retirar.Name = "btn_Retirar";
             this.btn_Retirar.Size = new System.Drawing.Size(143, 45);
             this.btn_Retirar.TabIndex = 3;

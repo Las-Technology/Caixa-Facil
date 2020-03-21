@@ -293,6 +293,7 @@ namespace CaixaFacil
                     txt_ValorDesconto.Text = "0,00";
                     ValorDesconto = decimal.Parse(txt_ValorDesconto.Text);
                     txt_Troco.Text = (ValorPago - ValorTotal).ToString();
+                    descontoDinheiro = 0.00m;
                     break;
                 case true:
 

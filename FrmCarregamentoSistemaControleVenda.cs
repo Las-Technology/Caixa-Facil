@@ -355,7 +355,7 @@ namespace CaixaFacil
                 "[DataPagamento] VARCHAR(10)    NOT NULL," +
                 "[HoraPagamento]        VARCHAR(10)    NOT NULL," +
                 "PRIMARY KEY CLUSTERED([Id_ValorAbatido] ASC)," +
-                "FOREIGN KEY([Id_PagamentoParcial]) REFERENCES[dbo].[PagamentoParcial] ([Id_PagamentoParcial]));" +
+                "FOREIGN KEY([Id_PagamentoParcial]) REFERENCES[dbo].[PagamentoParcial] ([Id_PagamentoParcial]) ON DELETE CASCADE);" +
 
                 "CREATE TABLE [dbo].[ContasNaoContabilizadas] (" +
                 "[Id]               INT IDENTITY(1, 1) NOT NULL," +

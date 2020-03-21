@@ -11,11 +11,13 @@ namespace CaixaFacil
         public string id_Cliente, stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
         public bool vendaConfirmada = false;
         public decimal valorAbatido { get; set; }
-        public decimal valorTotal { get; set; }
+        public decimal valorTotal { get; private set; }
         public decimal valorRestante { get; set; }
         public decimal valorDesconto { get;  set; }
+        public decimal valorTotalComDesconto { get;  set; }
+        public decimal descontoDinheiro;
         bool goDescontar = false;
-        decimal descontoDinheiro, descontoPorcento, valorDescontoPorcento, valorCliente, valorTotalComDesconto;
+        decimal descontoPorcento, valorDescontoPorcento, valorCliente;
 
 
         public FrmVendaParcial(decimal valorTotal)
@@ -24,9 +26,10 @@ namespace CaixaFacil
             this.valorTotal = valorTotal;
             valorTotalComDesconto = valorTotal;
             txt_ValorVenda.Text = "R$ " + valorTotal;
-            txtValorTotal.Text = "R$ " + valorTotalComDesconto;
             groupBox13.Location = new Point(7, 122);
             groupBox11.Size = new Size(494, 102);
+            txtValorTotalComDesconto.Text = "R$ " + valorTotalComDesconto.ToString();
+            txt_ValorRestante.Text = valorTotal.ToString();
         }
 
         private void btn_Buscar_Click(object sender, EventArgs e)
@@ -107,7 +110,7 @@ namespace CaixaFacil
                     if (valorAbatido <= valorTotal)
                     {
                         txt_TotalAbatido.Text = "R$ " + txt_ValorAbatido.Text;
-                        valorRestante = valorTotal - valorAbatido;
+                        getValorRestante();
                         txt_ValorRestante.Text = "R$ " + valorRestante.ToString();
                     }
                     else
@@ -121,6 +124,11 @@ namespace CaixaFacil
                 MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txt_ValorAbatido.Text = "0,00";
             }
+        }
+
+        private void getValorRestante()
+        {
+            valorRestante = valorTotalComDesconto - valorAbatido;
         }
 
         private void txt_ValorAbatido_KeyPress(object sender, KeyPressEventArgs e)
@@ -179,28 +187,34 @@ namespace CaixaFacil
                     lbl_ValorDesconto.Visible = true;
                     lbl_DescontoPorcento.Visible = true;
                     txt_DescontoPorcento.Visible = true;
-                    txt_ValorDesconto.Visible = true;
-                    txt_ValorDesconto.Text = valorTotal.ToString();
+                    txt_ValorTotalDesconto.Visible = true;
                     groupBox13.Location = new Point(6, 176);
-                    groupBox11.Size = new Size(494, 156);
-                    valorDesconto = decimal.Parse(txt_ValorDesconto.Text);
+                    groupBox11.Size = new Size(494, 156);                   
                     break; 
                 case false:
                     lbl_DescontoDinheiro.Visible = false;
                     txt_DescontoDinheiro.Visible = false;
                     lbl_ValorDesconto.Visible = false;
-                    txt_ValorDesconto.Visible = false;
+                    txt_ValorTotalDesconto.Visible = false;
                     lbl_DescontoPorcento.Visible = false;
-                    txt_DescontoPorcento.Visible = false;
-                    txt_DescontoDinheiro.Text = "0,00";
-                    txt_DescontoPorcento.Text = "0,00";
-                    txt_ValorDesconto.Text = "0,00";
+                    txt_DescontoPorcento.Visible = false;     
                     groupBox13.Location = new Point(7, 122);
-                    groupBox11.Size = new Size(494, 102);
-                    valorDesconto = decimal.Parse(txt_ValorDesconto.Text);
+                    groupBox11.Size = new Size(494, 102);                                  
                     break;
 
             }
+
+            txtValorDesconto.Text = " R$ 0,00";
+            txt_DescontoDinheiro.Text = "0,00";
+            txt_DescontoPorcento.Text = "0,00";
+            descontoDinheiro = 0.00m;
+            descontoPorcento = 0.00m;
+            valorDesconto = valorTotal;
+            valorTotalComDesconto = valorTotal;
+            txtValorTotalComDesconto.Text = "R$ " + valorTotal.ToString();
+            txt_ValorTotalDesconto.Text = txtValorTotalComDesconto.Text;
+            getValorRestante();
+            txt_ValorRestante.Text = "R$ " + valorRestante;
         }
 
         private void txt_DescontoPorcento_Leave(object sender, EventArgs e)
@@ -216,17 +230,13 @@ namespace CaixaFacil
                         descontoPorcento = Math.Round(descontoPorcento, 2);
                         txt_DescontoDinheiro.Text = descontoPorcento.ToString();
                         valorDesconto = valorTotal - descontoPorcento;
-                        txt_ValorDesconto.Text = valorDesconto.ToString();
+                        txt_ValorTotalDesconto.Text = valorDesconto.ToString();
                         txt_DescontoDinheiro_Leave(sender, e);
                         txt_DescontoPorcento.Text = Convert.ToDecimal(txt_DescontoPorcento.Text.Trim()).ToString("0.00");
                     }
                     else
                     {
-                        txt_DescontoPorcento.Text = "0,00";
-                        txt_DescontoDinheiro.Text = "0,00";
-                        descontoPorcento = 0.00M;
-                        descontoDinheiro = 0.00M;
-                        txt_ValorDesconto.Text = valorTotal.ToString();
+                        zerarAtibutos();
                     }
                 }
                 catch (Exception ex)
@@ -284,21 +294,22 @@ namespace CaixaFacil
                     descontoDinheiro = decimal.Parse(txt_DescontoDinheiro.Text);
                     if (descontoDinheiro <= valorTotal)
                     {
-                        txt_ValorDesconto.Text = (valorTotal - descontoDinheiro).ToString();
+                        txt_ValorTotalDesconto.Text = (valorTotal - descontoDinheiro).ToString();
                         txt_DescontoDinheiro.Text = Convert.ToDouble(txt_DescontoDinheiro.Text.Trim()).ToString("0.00");
-                        valorDesconto = decimal.Parse(txt_ValorDesconto.Text);
+                        valorDesconto = decimal.Parse(txt_ValorTotalDesconto.Text);
                         descontoPorcento = (100 * descontoDinheiro) / valorTotal;
                         descontoPorcento = Math.Round(descontoPorcento, 2);
                         txt_DescontoPorcento.Text = Math.Round(descontoPorcento, 2).ToString();
                         txt_DescontoPorcento.Text = decimal.Parse(txt_DescontoPorcento.Text.Trim()).ToString("0.00");
+                        txtValorTotalComDesconto.Text = "R$ " + valorDesconto.ToString();
+                        valorTotalComDesconto = valorDesconto;
+                        getValorRestante();
+                        txt_ValorRestante.Text = "R$ " + valorRestante;
+                        txtValorDesconto.Text = "R$ " + txt_DescontoDinheiro.Text;
                     }
                     else
                     {
-                        txt_DescontoPorcento.Text = "0,00";
-                        txt_DescontoDinheiro.Text = "0,00";
-                        descontoPorcento = 0.00M;
-                        descontoDinheiro = 0.00M;
-                        txt_ValorDesconto.Text = valorTotal.ToString();
+                        zerarAtibutos();
                     }
                 }
                 catch (Exception ex)
@@ -307,6 +318,16 @@ namespace CaixaFacil
                     txt_DescontoDinheiro.Text = "0,00";
                 }
             }
+        }
+
+        private void zerarAtibutos()
+        {
+            txt_DescontoPorcento.Text = "0,00";
+            txt_DescontoDinheiro.Text = "0,00";
+            descontoPorcento = 0.00M;
+            descontoDinheiro = 0.00M;
+            txt_ValorTotalDesconto.Text = valorTotal.ToString();
+            valorTotalComDesconto = valorTotal;
         }
 
         private void txt_ValorAbatido_TextChanged(object sender, EventArgs e)

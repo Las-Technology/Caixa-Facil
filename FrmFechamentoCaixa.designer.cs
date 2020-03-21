@@ -117,7 +117,7 @@
             this.btn_Cancelar.ForeColor = System.Drawing.Color.Black;
             this.btn_Cancelar.Image = global::CaixaFacil.Properties.Resources.Button_Cancel_icon__1_;
             this.btn_Cancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Cancelar.Location = new System.Drawing.Point(320, 628);
+            this.btn_Cancelar.Location = new System.Drawing.Point(338, 634);
             this.btn_Cancelar.Name = "btn_Cancelar";
             this.btn_Cancelar.Size = new System.Drawing.Size(162, 50);
             this.btn_Cancelar.TabIndex = 17;
@@ -130,7 +130,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(172, 620);
+            this.label9.Location = new System.Drawing.Point(190, 624);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(88, 19);
             this.label9.TabIndex = 15;
@@ -142,7 +142,7 @@
             this.txt_SaldoCaixa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_SaldoCaixa.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_SaldoCaixa.ForeColor = System.Drawing.Color.Black;
-            this.txt_SaldoCaixa.Location = new System.Drawing.Point(171, 642);
+            this.txt_SaldoCaixa.Location = new System.Drawing.Point(189, 646);
             this.txt_SaldoCaixa.Name = "txt_SaldoCaixa";
             this.txt_SaldoCaixa.ReadOnly = true;
             this.txt_SaldoCaixa.Size = new System.Drawing.Size(143, 29);
@@ -153,7 +153,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(12, 620);
+            this.label8.Location = new System.Drawing.Point(30, 624);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(147, 19);
             this.label8.TabIndex = 13;
@@ -164,7 +164,7 @@
             this.txt_ValorTotalCaixa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_ValorTotalCaixa.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_ValorTotalCaixa.ForeColor = System.Drawing.Color.Black;
-            this.txt_ValorTotalCaixa.Location = new System.Drawing.Point(11, 642);
+            this.txt_ValorTotalCaixa.Location = new System.Drawing.Point(29, 646);
             this.txt_ValorTotalCaixa.Name = "txt_ValorTotalCaixa";
             this.txt_ValorTotalCaixa.Size = new System.Drawing.Size(143, 29);
             this.txt_ValorTotalCaixa.TabIndex = 0;
@@ -179,7 +179,7 @@
             this.btn_FecharCaixa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_FecharCaixa.Image = global::CaixaFacil.Properties.Resources.Actions_application_exit_icon;
             this.btn_FecharCaixa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_FecharCaixa.Location = new System.Drawing.Point(489, 626);
+            this.btn_FecharCaixa.Location = new System.Drawing.Point(509, 634);
             this.btn_FecharCaixa.Name = "btn_FecharCaixa";
             this.btn_FecharCaixa.Size = new System.Drawing.Size(228, 50);
             this.btn_FecharCaixa.TabIndex = 10;
@@ -192,9 +192,9 @@
             // 
             this.groupBox2.Controls.Add(this.dgv_HistoricoVendas);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(29, 330);
+            this.groupBox2.Location = new System.Drawing.Point(19, 330);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(777, 266);
+            this.groupBox2.Size = new System.Drawing.Size(809, 266);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Histórico de venda:";
@@ -220,7 +220,7 @@
             this.dgv_HistoricoVendas.Name = "dgv_HistoricoVendas";
             this.dgv_HistoricoVendas.ReadOnly = true;
             this.dgv_HistoricoVendas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_HistoricoVendas.Size = new System.Drawing.Size(771, 241);
+            this.dgv_HistoricoVendas.Size = new System.Drawing.Size(803, 241);
             this.dgv_HistoricoVendas.TabIndex = 0;
             this.dgv_HistoricoVendas.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_HistoricoVendas_DataBindingComplete);
             // 

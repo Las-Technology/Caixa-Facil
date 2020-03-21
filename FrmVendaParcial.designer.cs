@@ -43,7 +43,7 @@
             this.btn_FinalizarParcial = new System.Windows.Forms.Button();
             this.btn_CancelaVendaMisto = new System.Windows.Forms.Button();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.txtValorTotal = new System.Windows.Forms.TextBox();
+            this.txtValorTotalComDesconto = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_ValorRestante = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
@@ -55,13 +55,15 @@
             this.txt_DescontoPorcento = new System.Windows.Forms.TextBox();
             this.lbl_DescontoPorcento = new System.Windows.Forms.Label();
             this.txt_DescontoDinheiro = new System.Windows.Forms.TextBox();
-            this.txt_ValorDesconto = new System.Windows.Forms.TextBox();
+            this.txt_ValorTotalDesconto = new System.Windows.Forms.TextBox();
             this.lbl_ValorDesconto = new System.Windows.Forms.Label();
             this.lbl_DescontoDinheiro = new System.Windows.Forms.Label();
             this.btn_Descontar = new System.Windows.Forms.Button();
             this.txt_ValorAbatido = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.lbl_FecharVendaMisto = new System.Windows.Forms.Label();
+            this.txtValorDesconto = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
@@ -192,6 +194,7 @@
             // 
             // txt_nome
             // 
+            this.txt_nome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_nome.Location = new System.Drawing.Point(15, 51);
             this.txt_nome.Name = "txt_nome";
             this.txt_nome.ReadOnly = true;
@@ -230,7 +233,9 @@
             // 
             // groupBox12
             // 
-            this.groupBox12.Controls.Add(this.txtValorTotal);
+            this.groupBox12.Controls.Add(this.txtValorDesconto);
+            this.groupBox12.Controls.Add(this.label2);
+            this.groupBox12.Controls.Add(this.txtValorTotalComDesconto);
             this.groupBox12.Controls.Add(this.label1);
             this.groupBox12.Controls.Add(this.txt_ValorRestante);
             this.groupBox12.Controls.Add(this.label34);
@@ -240,25 +245,27 @@
             this.groupBox12.Controls.Add(this.label32);
             this.groupBox12.Location = new System.Drawing.Point(509, 14);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(257, 261);
+            this.groupBox12.Size = new System.Drawing.Size(309, 261);
             this.groupBox12.TabIndex = 19;
             this.groupBox12.TabStop = false;
             // 
-            // txtValorTotal
+            // txtValorTotalComDesconto
             // 
-            this.txtValorTotal.Location = new System.Drawing.Point(39, 104);
-            this.txtValorTotal.Name = "txtValorTotal";
-            this.txtValorTotal.ReadOnly = true;
-            this.txtValorTotal.Size = new System.Drawing.Size(129, 26);
-            this.txtValorTotal.TabIndex = 13;
-            this.txtValorTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtValorTotalComDesconto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.txtValorTotalComDesconto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtValorTotalComDesconto.Location = new System.Drawing.Point(39, 168);
+            this.txtValorTotalComDesconto.Name = "txtValorTotalComDesconto";
+            this.txtValorTotalComDesconto.ReadOnly = true;
+            this.txtValorTotalComDesconto.Size = new System.Drawing.Size(129, 26);
+            this.txtValorTotalComDesconto.TabIndex = 13;
+            this.txtValorTotalComDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(35, 81);
+            this.label1.ForeColor = System.Drawing.Color.Aqua;
+            this.label1.Location = new System.Drawing.Point(35, 145);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(178, 19);
             this.label1.TabIndex = 12;
@@ -266,7 +273,8 @@
             // 
             // txt_ValorRestante
             // 
-            this.txt_ValorRestante.Location = new System.Drawing.Point(39, 206);
+            this.txt_ValorRestante.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_ValorRestante.Location = new System.Drawing.Point(174, 219);
             this.txt_ValorRestante.Name = "txt_ValorRestante";
             this.txt_ValorRestante.ReadOnly = true;
             this.txt_ValorRestante.Size = new System.Drawing.Size(129, 26);
@@ -278,7 +286,7 @@
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.ForeColor = System.Drawing.Color.White;
-            this.label34.Location = new System.Drawing.Point(35, 184);
+            this.label34.Location = new System.Drawing.Point(170, 197);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(109, 19);
             this.label34.TabIndex = 10;
@@ -286,11 +294,13 @@
             // 
             // txt_TotalAbatido
             // 
-            this.txt_TotalAbatido.Location = new System.Drawing.Point(39, 155);
+            this.txt_TotalAbatido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_TotalAbatido.Location = new System.Drawing.Point(39, 219);
             this.txt_TotalAbatido.Name = "txt_TotalAbatido";
             this.txt_TotalAbatido.ReadOnly = true;
             this.txt_TotalAbatido.Size = new System.Drawing.Size(129, 26);
             this.txt_TotalAbatido.TabIndex = 9;
+            this.txt_TotalAbatido.Text = "R$ 0,00";
             this.txt_TotalAbatido.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label33
@@ -298,7 +308,7 @@
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label33.ForeColor = System.Drawing.Color.White;
-            this.label33.Location = new System.Drawing.Point(35, 133);
+            this.label33.Location = new System.Drawing.Point(35, 197);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(101, 19);
             this.label33.TabIndex = 8;
@@ -306,6 +316,9 @@
             // 
             // txt_ValorVenda
             // 
+            this.txt_ValorVenda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.txt_ValorVenda.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_ValorVenda.ForeColor = System.Drawing.SystemColors.WindowText;
             this.txt_ValorVenda.Location = new System.Drawing.Point(39, 52);
             this.txt_ValorVenda.Name = "txt_ValorVenda";
             this.txt_ValorVenda.ReadOnly = true;
@@ -317,7 +330,7 @@
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.ForeColor = System.Drawing.Color.White;
+            this.label32.ForeColor = System.Drawing.Color.Aqua;
             this.label32.Location = new System.Drawing.Point(35, 26);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(178, 19);
@@ -329,7 +342,7 @@
             this.groupBox11.Controls.Add(this.txt_DescontoPorcento);
             this.groupBox11.Controls.Add(this.lbl_DescontoPorcento);
             this.groupBox11.Controls.Add(this.txt_DescontoDinheiro);
-            this.groupBox11.Controls.Add(this.txt_ValorDesconto);
+            this.groupBox11.Controls.Add(this.txt_ValorTotalDesconto);
             this.groupBox11.Controls.Add(this.lbl_ValorDesconto);
             this.groupBox11.Controls.Add(this.lbl_DescontoDinheiro);
             this.groupBox11.Controls.Add(this.btn_Descontar);
@@ -345,6 +358,7 @@
             // 
             // txt_DescontoPorcento
             // 
+            this.txt_DescontoPorcento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_DescontoPorcento.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_DescontoPorcento.Location = new System.Drawing.Point(11, 108);
             this.txt_DescontoPorcento.Name = "txt_DescontoPorcento";
@@ -370,6 +384,7 @@
             // 
             // txt_DescontoDinheiro
             // 
+            this.txt_DescontoDinheiro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_DescontoDinheiro.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_DescontoDinheiro.Location = new System.Drawing.Point(167, 108);
             this.txt_DescontoDinheiro.Name = "txt_DescontoDinheiro";
@@ -381,17 +396,18 @@
             this.txt_DescontoDinheiro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_DescontoDinheiro_KeyPress);
             this.txt_DescontoDinheiro.Leave += new System.EventHandler(this.txt_DescontoDinheiro_Leave);
             // 
-            // txt_ValorDesconto
+            // txt_ValorTotalDesconto
             // 
-            this.txt_ValorDesconto.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_ValorDesconto.Location = new System.Drawing.Point(320, 108);
-            this.txt_ValorDesconto.Name = "txt_ValorDesconto";
-            this.txt_ValorDesconto.ReadOnly = true;
-            this.txt_ValorDesconto.Size = new System.Drawing.Size(144, 26);
-            this.txt_ValorDesconto.TabIndex = 313;
-            this.txt_ValorDesconto.Text = "0,00";
-            this.txt_ValorDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txt_ValorDesconto.Visible = false;
+            this.txt_ValorTotalDesconto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_ValorTotalDesconto.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_ValorTotalDesconto.Location = new System.Drawing.Point(320, 108);
+            this.txt_ValorTotalDesconto.Name = "txt_ValorTotalDesconto";
+            this.txt_ValorTotalDesconto.ReadOnly = true;
+            this.txt_ValorTotalDesconto.Size = new System.Drawing.Size(144, 26);
+            this.txt_ValorTotalDesconto.TabIndex = 313;
+            this.txt_ValorTotalDesconto.Text = "0,00";
+            this.txt_ValorTotalDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txt_ValorTotalDesconto.Visible = false;
             // 
             // lbl_ValorDesconto
             // 
@@ -433,6 +449,7 @@
             // 
             // txt_ValorAbatido
             // 
+            this.txt_ValorAbatido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_ValorAbatido.Location = new System.Drawing.Point(11, 45);
             this.txt_ValorAbatido.Name = "txt_ValorAbatido";
             this.txt_ValorAbatido.Size = new System.Drawing.Size(150, 26);
@@ -458,7 +475,7 @@
             this.lbl_FecharVendaMisto.AutoSize = true;
             this.lbl_FecharVendaMisto.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_FecharVendaMisto.ForeColor = System.Drawing.Color.White;
-            this.lbl_FecharVendaMisto.Location = new System.Drawing.Point(814, -2);
+            this.lbl_FecharVendaMisto.Location = new System.Drawing.Point(824, -5);
             this.lbl_FecharVendaMisto.Name = "lbl_FecharVendaMisto";
             this.lbl_FecharVendaMisto.Size = new System.Drawing.Size(33, 31);
             this.lbl_FecharVendaMisto.TabIndex = 17;
@@ -467,12 +484,34 @@
             this.lbl_FecharVendaMisto.MouseEnter += new System.EventHandler(this.lbl_FecharVendaMisto_MouseEnter);
             this.lbl_FecharVendaMisto.MouseLeave += new System.EventHandler(this.lbl_FecharVendaMisto_MouseLeave);
             // 
+            // txtValorDesconto
+            // 
+            this.txtValorDesconto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtValorDesconto.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtValorDesconto.Location = new System.Drawing.Point(39, 108);
+            this.txtValorDesconto.Name = "txtValorDesconto";
+            this.txtValorDesconto.Size = new System.Drawing.Size(129, 26);
+            this.txtValorDesconto.TabIndex = 315;
+            this.txtValorDesconto.Text = "R$ 0,00";
+            this.txtValorDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(35, 83);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(128, 19);
+            this.label2.TabIndex = 314;
+            this.label2.Text = "Valor do desconto";
+            // 
             // FrmVendaParcial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.ClientSize = new System.Drawing.Size(846, 342);
+            this.ClientSize = new System.Drawing.Size(855, 342);
             this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.btn_FinalizarParcial);
             this.Controls.Add(this.btn_CancelaVendaMisto);
@@ -526,13 +565,15 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label lbl_FecharVendaMisto;
         private System.Windows.Forms.Button btn_Descontar;
-        private System.Windows.Forms.TextBox txtValorTotal;
+        private System.Windows.Forms.TextBox txtValorTotalComDesconto;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_DescontoPorcento;
         private System.Windows.Forms.Label lbl_DescontoPorcento;
         private System.Windows.Forms.TextBox txt_DescontoDinheiro;
-        private System.Windows.Forms.TextBox txt_ValorDesconto;
+        private System.Windows.Forms.TextBox txt_ValorTotalDesconto;
         private System.Windows.Forms.Label lbl_ValorDesconto;
         private System.Windows.Forms.Label lbl_DescontoDinheiro;
+        private System.Windows.Forms.TextBox txtValorDesconto;
+        private System.Windows.Forms.Label label2;
     }
 }
