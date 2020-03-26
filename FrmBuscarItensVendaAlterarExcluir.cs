@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -30,7 +25,7 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda";
+                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.Desconto, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda";
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
@@ -58,7 +53,7 @@ namespace CaixaFacil
             this.Close();
         }
 
-        string NomeFantasia, Cidade, Numero, Endereco, CNPJ, Telefone, Estado, Bairro, FormaPagamento;
+        string FormaPagamento;
 
         private void dgv_ListaVenda_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
@@ -75,7 +70,7 @@ namespace CaixaFacil
             }
             else
             {
-                FrmVendaDevolverAlterarItens vendaAlterarExcluir = new FrmVendaDevolverAlterarItens(CodVenda, Cliente, FormaPagamento, ValorVenda, codCliente, dataVenda);
+                FrmVendaDevolverAlterarItens vendaAlterarExcluir = new FrmVendaDevolverAlterarItens(CodVenda, Cliente, FormaPagamento, ValorVenda, codCliente, dataVenda, desconto);
                 vendaAlterarExcluir.ShowDialog();
                 CodVenda = "";
                 if (txtNomeCliente.Text != "")
@@ -94,7 +89,7 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Cliente.Nome like '%" + txtNomeCliente.Text + "%'";
+                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.Desconto, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Cliente.Nome like '%" + txtNomeCliente.Text + "%'";
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
@@ -106,8 +101,6 @@ namespace CaixaFacil
                 MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        Empresa empresa = new Empresa();
 
         private void dgv_ListaVenda_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -122,11 +115,12 @@ namespace CaixaFacil
                 FormaPagamento = linhas.Cells["ColFormaPagamento"].Value.ToString();
                 dataVenda = linhas.Cells["ColDataVenda"].Value.ToString();
                 horaVenda = linhas.Cells["ColHoraVenda"].Value.ToString();
-                atendente = linhas.Cells["ColOperador"].Value.ToString();                
+                atendente = linhas.Cells["ColOperador"].Value.ToString();
+                desconto = linhas.Cells["ColDesconto"].Value.ToString();
             }
         }
 
-       string CodVenda = "", Cliente, horaVenda, dataVenda, atendente, ValorVenda, codCliente;
+       string CodVenda = "", Cliente, horaVenda, dataVenda, atendente, ValorVenda, codCliente, desconto;
 
         private void Menu_Sair_Click(object sender, EventArgs e)
         {

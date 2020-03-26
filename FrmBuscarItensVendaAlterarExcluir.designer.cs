@@ -50,6 +50,7 @@
             this.ColCodCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColValorVenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColFormaPagamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDataVenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColHoraVenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -137,6 +138,7 @@
             this.ColCodCliente,
             this.ColCliente,
             this.ColValorVenda,
+            this.ColDesconto,
             this.ColFormaPagamento,
             this.ColDataVenda,
             this.ColHoraVenda,
@@ -291,6 +293,15 @@
             this.ColValorVenda.ReadOnly = true;
             this.ColValorVenda.Width = 101;
             // 
+            // ColDesconto
+            // 
+            this.ColDesconto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColDesconto.DataPropertyName = "Desconto";
+            this.ColDesconto.HeaderText = "Desconto";
+            this.ColDesconto.Name = "ColDesconto";
+            this.ColDesconto.ReadOnly = true;
+            this.ColDesconto.Width = 86;
+            // 
             // ColFormaPagamento
             // 
             this.ColFormaPagamento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -369,6 +380,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCodCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColValorVenda;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColDesconto;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColFormaPagamento;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColDataVenda;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColHoraVenda;

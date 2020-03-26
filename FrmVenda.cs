@@ -1339,6 +1339,7 @@ namespace CaixaFacil
             ValorCaixa = 0.00m;
             ValorDesconto = 0.00m;
             descontoDinheiro = 0.00m;
+            id_Cliente = "1";
         }
 
         private void txt_Codigo_Barra_KeyPress(object sender, KeyPressEventArgs e)
