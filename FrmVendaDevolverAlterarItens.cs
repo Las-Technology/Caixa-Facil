@@ -12,7 +12,7 @@ namespace CaixaFacil
 
         int MaxCodVenda, IdPagamentoParcial, qtdItens, qtdItensDevolvido = 1;
 
-        decimal lucroItens, ValorPago, ValorRestante, valorAbatido, ValorTotalPagamentoParcial, ValorVenda, valorEntrada, sumValorParcelado, valorSubTotal, ValorCaixaInicial, valorReceber, ValorRecebidoDebito, desconto;
+        decimal lucroItens, ValorPago, valorRestante, valorAbatido, ValorTotalPagamentoParcial, valorVenda, valorEntrada, sumValorParcelado, valorSubTotal, ValorCaixaInicial, valorReceber, ValorRecebidoDebito, desconto;
 
         bool devolucaoItensTudo = false;
 
@@ -21,7 +21,7 @@ namespace CaixaFacil
             InitializeComponent();
             this.dataVenda = dataVenda;
             this.desconto = decimal.Parse(desconto);
-            this.ValorVenda = decimal.Parse(ValorVenda) + this.desconto;
+            this.valorVenda = decimal.Parse(ValorVenda) + this.desconto;
             lblCodigoVenda.Text = CodVenda;
             lblCliente.Text = Cliente;
             lblValorTotalComDesconto.Text = "R$ " + ValorVenda;
@@ -37,20 +37,25 @@ namespace CaixaFacil
             }
             else if (FormaPagamento == "PAGAMENTO PARCIAL")
             {
-                receberValor_e_IdPagamentoParcial();
-                ValorTotalPagamentoParcial = ValorRestante + ReceberValorAbatido();
+                getValorReceber();
             }
             else if (FormaPagamento == "PARCELADO")
             {
                 InformarValoresPagos();
                 VerificarParcelas_E_ValorEntrada();
-                valorEntrada = this.ValorVenda - sumValorParcelado;
+                valorEntrada = this.valorVenda - sumValorParcelado;
                 ValorPago += valorEntrada;
             }
             else if((FormaPagamento == "PRAZO"))
             {
                 InformarValoresPagos();
             }
+        }
+
+        private void getValorReceber()
+        {
+            receberValor_e_IdPagamentoParcial();
+            ValorTotalPagamentoParcial = valorRestante + ReceberValorAbatido();
         }
 
         private void BuscarValorReceberFluxCaixa()
@@ -151,8 +156,10 @@ namespace CaixaFacil
                 if (dr.Read())
                 {
                     IdPagamentoParcial = int.Parse(dr["Id_PagamentoParcial"].ToString());
-                    ValorRestante = decimal.Parse(dr["ValorRestante"].ToString());
+                    valorRestante = decimal.Parse(dr["ValorRestante"].ToString());
                 }
+                else
+                    valorRestante = 0.00m;
             }
             catch (Exception ex)
             {
@@ -326,44 +333,36 @@ namespace CaixaFacil
 
             if (dr == DialogResult.Yes)
             {
+                bool retirarValorCaixa = true;
+
                 if (ValorCaixa > 0)
                 {
-                    if (ValorCaixa >= ValorPago)
-                    {
-                        AlterarValoresPagamentoParcial_Parcelado();
-                        verificarDataPagamento_E_AtualizarValoresFluxoCaixa();
-                        ExcluirTodosItensVenda();
-                        GerenciarFluxoCaixa();
-                    }
-                    else
+                    if (ValorCaixa < ValorPago)
                     {
                         dr = MessageBox.Show("O Valor a devolver para o cliente é maior que o valor que está em caixa no momento. Você deseja que retire o valor do caixa?", "Aviso do sistema", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3);
-                        if (dr == DialogResult.Yes)
+                        if (dr == DialogResult.No)
                         {
-                            AlterarValoresPagamentoParcial_Parcelado();
-                            verificarDataPagamento_E_AtualizarValoresFluxoCaixa();
-                            ExcluirTodosItensVenda();
-                            GerenciarFluxoCaixa();
-                        }
-                        else if (dr == DialogResult.No)
-                        {
-                            AlterarValoresPagamentoParcial_Parcelado();
-                            verificarDataPagamento_E_AtualizarValoresFluxoCaixa();
-                            ExcluirTodosItensVenda(); ;
+                            retirarValorCaixa = false;
                         }
                     }
                 }
                 else
                 {
+                    retirarValorCaixa = false;
                     dr = MessageBox.Show("Informamos que não existe valores no caixa no momento. Os valores da venda não irá afetar o fluxo do caixa. Deseja continuar?", "Aviso do sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
-                    if (dr == DialogResult.Yes)
+                    if (dr == DialogResult.No)
                     {
-                        AlterarValoresPagamentoParcial_Parcelado();
-                        verificarDataPagamento_E_AtualizarValoresFluxoCaixa();
-                        ExcluirTodosItensVenda();
+                        return;
                     }
                 }
+
+                AlterarValoresPagamentoParcial_Parcelado();
+                verificarDataPagamento_E_AtualizarValoresFluxoCaixa();
+                ExcluirTodosItensVenda();
+
+                if (retirarValorCaixa)
+                    GerenciarFluxoCaixa();
 
                 AtualizarTodoEstoque();
                 this.Close();
@@ -402,7 +401,7 @@ namespace CaixaFacil
         {
             if (FormaPagamento == "PAGAMENTO PARCIAL")
             {
-                if (ValorTotalPagamentoParcial > ValorVenda)
+                if (ValorTotalPagamentoParcial > valorVenda)
                 {
                     // primeiro Verifica se o idVenda informado é igual ao idVenda da tabela Pagamento Parcial
 
@@ -413,7 +412,7 @@ namespace CaixaFacil
                         InformarIdVendaMaximo();
                     }
 
-                    subValorVendaValorAbatido = ValorTotalPagamentoParcial - ValorVenda - ReceberValorAbatido();
+                    subValorVendaValorAbatido = ValorTotalPagamentoParcial - valorVenda - ReceberValorAbatido();
                     AlterarValorRestantePagamentoParcial();
 
                 }
@@ -429,22 +428,22 @@ namespace CaixaFacil
             if (FormaPagamento == "PAGAMENTO PARCIAL")
             {
                 VerificarDataAbatimentoDataVenda();
-                subValorReceber = valorReceber - (ValorVenda - valorAbatido);
+                subValorReceber = valorReceber - (valorVenda - valorAbatido);
                 if (valorReceber >= subValorReceber)
                     AtualizarValorReceberPagamentoParcial();
             }
             else if (FormaPagamento == "PRAZO")
             {
-                subValorReceber = ValorVenda;
+                subValorReceber = valorVenda;
             }
             else if (FormaPagamento == "Cartão de Débito")
             {
-                ValorRecebidoDebito = ValorVenda;
+                ValorRecebidoDebito = valorVenda;
                 AtualizarValorRecebidoDebito();
             }
             else
             {
-                subValorReceber = ValorVenda - ValorPago;
+                subValorReceber = valorVenda - ValorPago;
             }
             if (valorReceber >= subValorReceber)
                 AtualizarValorReceberPagamentoPrazoParcela();
@@ -688,7 +687,7 @@ namespace CaixaFacil
             {
                 conexao.Open();
                 comando.ExecuteNonQuery();
-                if (FormaPagamento != "PAGAMENTO PARCIAL" || ValorTotalPagamentoParcial == ValorVenda)
+                if (FormaPagamento != "PAGAMENTO PARCIAL" || ValorTotalPagamentoParcial == valorVenda)
                 {
 
                     string messagem = "";
@@ -764,6 +763,8 @@ namespace CaixaFacil
             }
 
             DevolverItens();
+            dgv_ListaVenda.Rows.Remove(dgv_ListaVenda.CurrentRow);
+            ListaTodasVendas();
         }
 
         private void DevolverItens()
@@ -782,7 +783,7 @@ namespace CaixaFacil
                 AtualizarValorRecebidoDebito();
             }
             else if (FormaPagamento == "PAGAMENTO PARCIAL")
-            {
+            {             
                 subValorReceber = (valorReceber + valorAbatido) - ((valorSubTotal / qtdItens) * qtdItensDevolvido) - valorAbatido;
                 VerificarDataAbatimentoDataVenda();
                 if (valorReceber >= subValorReceber)
@@ -795,15 +796,15 @@ namespace CaixaFacil
 
             AtualizarEstoque();
             ListaTodasVendas();
-            lblValorTotalComDesconto.Text = "R$ " + ValorVenda;
+            lblValorTotalComDesconto.Text = "R$ " + valorVenda;
             if (dgv_ListaVenda.Rows.Count == 0)
             {
                 this.Close();
             }
 
-            lblValorTotalComDesconto.Text = "R$ " + (ValorVenda - desconto);
-            ValorVenda -= desconto;
-            lblValorTotalSemDesconto.Text = "R$ " + (ValorVenda + desconto);
+            lblValorTotalComDesconto.Text = "R$ " + (valorVenda - desconto);
+            valorVenda -= desconto;
+            lblValorTotalSemDesconto.Text = "R$ " + (valorVenda + desconto);
         }
 
         private void AtualizarEstoque()
@@ -844,26 +845,26 @@ namespace CaixaFacil
 
             if (qtdItensDevolvido == 0 || qtdItens == qtdItensDevolvido || qtdItens == 1)
             {
-                ValorVenda -= valorSubTotal;
+                valorVenda -= valorSubTotal;
                 subValoresTotalUnitario = valorSubTotal;
             }
             else
             {
                 subValoresTotalUnitario = valorSubTotal - ((valorSubTotal / qtdItens) * qtdItensDevolvido);
-                ValorVenda =(ValorVenda - ((valorSubTotal / qtdItens) * qtdItensDevolvido));
+                valorVenda =(valorVenda - ((valorSubTotal / qtdItens) * qtdItensDevolvido));
             }
 
             if (FormaPagamento == "PARCELADO")
             {
-                if ((ValorPago) < ValorVenda)
+                if ((ValorPago) < valorVenda)
                 {
                     verificarNumeroParcelas();
-                    valorParcela = (ValorVenda - (ValorPago)) / qtdParcela;
+                    valorParcela = (valorVenda - (ValorPago)) / qtdParcela;
                     AlterarValoresParcelas();
                 }
                 else
                 {
-                    decimal subValorPagoValorVenda = ValorPago - ValorVenda;
+                    decimal subValorPagoValorVenda = ValorPago - valorVenda;
                     MessageBox.Show("Informamos que o cliente pagou R$ " + Math.Ceiling(ValorPago).ToString("0.00") + " reais, e com devolução do{s} produto(s) pela contabilização dos valores da venda com tudo que já foi pago, fica constatado que o cliente tem o direito de receber R$" + Math.Ceiling(subValorPagoValorVenda).ToString("0.00") + ". A partir deste momento a conta do cliente zera.", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ExcluirParcelas();
                 }
@@ -878,31 +879,66 @@ namespace CaixaFacil
             }
             else if (FormaPagamento == "PAGAMENTO PARCIAL")
             {
-                subValorVendaValorAbatido = ((ValorRestante + valorAbatido) - (valorSubTotal / qtdItens * qtdItensDevolvido) - valorAbatido);
+                getValorReceber();
+                subValorVendaValorAbatido = ((valorRestante + valorAbatido) - (valorSubTotal / qtdItens * qtdItensDevolvido) - valorAbatido);
 
                 if (subValorVendaValorAbatido < 0)
-                {                    
-                    decimal y = valorAbatido - ValorVenda;
+                {
+                    if (valorVenda < valorAbatido)
+                    {
+                        decimal valorDevolver = valorAbatido - valorVenda;
+                        if (valorRestante > 0)
+                        {
+                            MessageBox.Show("Deverá ser devolvido o valor de R$ " + valorDevolver + "! Pois, o cliente tinha o valor restante em sua conta de R$ " + valorRestante + " e abateu R$" + valorAbatido + ", e com o item devolvido no valor de R$ " + valorSubTotal + " a conta do cliente zera e terá o direito de receber R$ " + valorDevolver + " que é o valor que ultrapassou durante toda a transação da venda e devolução.", "Aviso do sistema Gerenciamento Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
 
-                    MessageBox.Show("Deverá ser devolvido o valor de R$ " + y + "! Pois, o cliente tinha o valor restante em sua conta de R$ " + ValorRestante + " e abateu R$" + valorAbatido + ", e com o item devolvido no valor de R$ " + valorSubTotal + " a conta do cliente zera e terá o direito de receber R$ " + y + " que é o valor que ultrapassou durante toda a transação da venda e devolução.", "Aviso do sistema Gerenciamento Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    
-                    //MessageBox.Show("Deverá ser devolvido o valor de R$ " + (valorSubTotal - ValorRestante) + "! Pois, o cliente tinha o valor restante em sua conta de R$ " + ValorRestante + " e abateu R$" + valorAbatido + ", e com o item devolvido no valor de R$ " + valorSubTotal + " a conta do cliente zera e terá o direito de receber R$ " + (valorSubTotal - ValorRestante) + " que é o valor que ultrapassou durante toda a transação da venda e devolução.", "Aviso do sistema Gerenciamento Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    subValorVendaValorAbatido = 0;
+                        AlterarValorAbatidoPagamentoParcial();
+                        subValorVendaValorAbatido = 0;
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Com a devolução do(a) " + dgv_ListaVenda.CurrentRow.Cells["ColDescricao"].Value.ToString() + " o cliente passa a dever R$ " + subValorVendaValorAbatido, "Aviso do sistema Gerenciamento Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                AlterarValorRestantePagamentoParcial();
+              
+                if(subValorVendaValorAbatido >= 0)
+                    AlterarValorRestantePagamentoParcial();
             }
+
             AlterarLucroItens();
             AlterarValorDesconto();
             AlterarValor_E_LucroVenda();
         }
 
+        private void AlterarValorAbatidoPagamentoParcial()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "update ValorAbatido set ValorTotalAbatimento = @Valor where Id_PagamentoParcial = @idPagamentoParcial";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@idPagamentoParcial", IdPagamentoParcial);
+            comando.Parameters.AddWithValue("@Valor", valorVenda);
+            comando.CommandText = _sql;
+
+            try
+            {
+                conexao.Open();
+                comando.ExecuteNonQuery();
+                desconto = 0.00m;
+                lblDesconto.Text = "R$ 0,00";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
         private void AlterarValorDesconto()
         {
-            if (ValorVenda < desconto)
+            if (valorVenda < desconto)
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
                 _sql = "update Venda set Desconto = 0.00 where id_Venda = @idVenda";
@@ -983,7 +1019,7 @@ namespace CaixaFacil
             _sql = "update Venda set ValorTotal = @ValorTotal, Lucro = Lucro - @Lucro where id_Venda = @idVenda";
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@idVenda", CodVenda);
-            comando.Parameters.AddWithValue("@ValorTotal", (ValorVenda - desconto));
+            comando.Parameters.AddWithValue("@ValorTotal", (valorVenda - desconto));
             comando.Parameters.AddWithValue("@Lucro", ((lucroItens / qtdItens) * qtdItensDevolvido));
             comando.CommandText = _sql;
 

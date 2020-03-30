@@ -274,7 +274,7 @@ namespace CaixaFacil
                     produto.estoqueMinimo = int.Parse(txt_EstoqueMinimo.Text.Trim());
                     produto.unidade = txt_Unidade.Text.Trim();
                     produto.id_categoria = int.Parse(Id_Categoria);
-                    produto.id_fornecedor = Codigo;
+                    produto.id_fornecedor = idFornecedor;
                     produto.Cadastrar();
                     MessageBox.Show("Produto cadastrado com sucesso!", "Informação do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     CodigoProduto();
@@ -444,14 +444,14 @@ namespace CaixaFacil
                 btn_Salvar_Click(sender, e);
             }
         }
-        int Codigo;
+        int idFornecedor;
         private void btn_Buscar_Click(object sender, EventArgs e)
         {
             FrmPesquisarFornecedor pesquisarFornecedor = new FrmPesquisarFornecedor();
             pesquisarFornecedor.ShowDialog();
             if (pesquisarFornecedor.Codigo != null)
             {
-                Codigo = int.Parse(pesquisarFornecedor.Codigo);
+                idFornecedor = int.Parse(pesquisarFornecedor.Codigo);
                 txt_NomeFornecedor.Text = pesquisarFornecedor.Fornecedor;
             }
         }
@@ -570,7 +570,7 @@ namespace CaixaFacil
                 DataTable Tabela = new DataTable();
                 comando.Fill(Tabela);
                 Id_Categoria = Tabela.Rows[0]["Id_Categoria"].ToString();
-                Codigo = int.Parse(Tabela.Rows[0]["Id_Fornecedor"].ToString());
+                idFornecedor = int.Parse(Tabela.Rows[0]["Id_Fornecedor"].ToString());
             }
             catch (Exception ex)
             {
@@ -587,6 +587,7 @@ namespace CaixaFacil
             pesquisarFornecedor.ShowDialog();
             if (pesquisarFornecedor.Codigo != null)
             {
+                idFornecedor = int.Parse(pesquisarFornecedor.Codigo);
                 txt_fornecedorEdicao.Text = pesquisarFornecedor.Fornecedor;
             }
         }
@@ -752,7 +753,8 @@ namespace CaixaFacil
                     produto.lucro = decimal.Parse(txt_LucroEdicao.Text);
                     produto.estoqueAtual = int.Parse(txt_EstoqueAtualEdicao.Text.Trim());
                     produto.estoqueMinimo = int.Parse(txt_EstoqueMinimoEdicao.Text.Trim());
-                    produto.unidade = txt_UnidadeEdicao.Text.Trim();                    
+                    produto.unidade = txt_UnidadeEdicao.Text.Trim();
+                    produto.id_fornecedor = idFornecedor;
                     produto.Atualizar();
                     MessageBox.Show("Produto atualizado com sucesso!", "Informação do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btn_LimparAtualizar_Click(sender, e);
@@ -995,7 +997,6 @@ namespace CaixaFacil
             }
         }
 
-        ClassPrestacaoServico prestacaoServico = new ClassPrestacaoServico();
         ClassFornecedor Fornecedor = new ClassFornecedor();
         private void btn_Adicionar_Click(object sender, EventArgs e)
         {
@@ -1006,7 +1007,7 @@ namespace CaixaFacil
                 Fornecedor.id = int.Parse(fornecedor.IdFornecedor);
                 Fornecedor.Consultar();
                 txt_NomeFornecedor.Text = Fornecedor.nome;
-                Codigo = int.Parse(fornecedor.IdFornecedor);
+                idFornecedor = int.Parse(fornecedor.IdFornecedor);
 
             }
             
@@ -1074,6 +1075,11 @@ namespace CaixaFacil
             {
                 btn_Salvar_Click(sender, e);
             }
+        }
+
+        private void tabCadastro_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void txt_PrecoVenda_Leave(object sender, EventArgs e)

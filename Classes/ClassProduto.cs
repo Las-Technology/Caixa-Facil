@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 
 namespace CaixaFacil
@@ -129,7 +124,7 @@ namespace CaixaFacil
         public void Atualizar()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "update produto set CodigoBarra = @CodigoBarra, descricao = @descricao, Marca = @Marca, DataValidade = @DataValidade, ValorCusto= @ValorCusto,ValorVenda = @ValorVenda, Lucro = @Lucro, EstoqueAtual = @EstoqueAtual, Unidade = @Unidade where id_Produto = @id";
+            _sql = "update produto set CodigoBarra = @CodigoBarra, descricao = @descricao, Marca = @Marca, DataValidade = @DataValidade, ValorCusto= @ValorCusto,ValorVenda = @ValorVenda, Lucro = @Lucro, EstoqueAtual = @EstoqueAtual, Unidade = @Unidade, Id_Fornecedor = @idFornecedor where id_Produto = @id";
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@id", id);
             comando.Parameters.AddWithValue("@CodigoBarra", codigoBarra);
@@ -142,6 +137,7 @@ namespace CaixaFacil
             comando.Parameters.AddWithValue("@EstoqueAtual", estoqueAtual);
             comando.Parameters.AddWithValue("@EstoqueMinimo", estoqueMinimo);
             comando.Parameters.AddWithValue("@Unidade", unidade);
+            comando.Parameters.AddWithValue("@idFornecedor", id_fornecedor);
             comando.CommandText = _sql;
             try
             {

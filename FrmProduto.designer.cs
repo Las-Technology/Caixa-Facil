@@ -196,6 +196,7 @@
             this.tabCadastro.Size = new System.Drawing.Size(856, 335);
             this.tabCadastro.TabIndex = 0;
             this.tabCadastro.Text = "Cadastro de Produtos";
+            this.tabCadastro.Click += new System.EventHandler(this.tabCadastro_Click);
             // 
             // btn_Adicionar
             // 
