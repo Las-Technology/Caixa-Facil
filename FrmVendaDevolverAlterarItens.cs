@@ -276,7 +276,7 @@ namespace CaixaFacil
             IdentificarFluxoCaixa();
             VerificarValorCaixa();
             VerificarSaidaCaixa();
-            ValorCaixa = (ValorCaixa + ValorCaixaInicial) - ValorSaida;
+            valorCaixa = (valorCaixa + ValorCaixaInicial) - ValorSaida;
             dgv_ListaVenda.ClearSelection();
             ListaTodasVendas();
             BuscarValorReceberFluxCaixa();
@@ -335,9 +335,9 @@ namespace CaixaFacil
             {
                 bool retirarValorCaixa = true;
 
-                if (ValorCaixa > 0)
+                if (valorCaixa > 0)
                 {
-                    if (ValorCaixa < ValorPago)
+                    if (valorCaixa < ValorPago)
                     {
                         dr = MessageBox.Show("O Valor a devolver para o cliente é maior que o valor que está em caixa no momento. Você deseja que retire o valor do caixa?", "Aviso do sistema", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3);
                         if (dr == DialogResult.No)
@@ -596,7 +596,7 @@ namespace CaixaFacil
             _sql = "insert into SaidaCaixa values (@Valor, 'Devolução de Itens vendidos', @IdFluxo)";
 
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            if (ValorCaixa >= ValorPago)
+            if (valorCaixa >= ValorPago)
             {
                 if(devolucaoItensTudo)
                 comando.Parameters.AddWithValue("@Valor", ValorPago);
@@ -605,7 +605,7 @@ namespace CaixaFacil
             }
             else
             {
-                comando.Parameters.AddWithValue("@Valor", ValorCaixa);
+                comando.Parameters.AddWithValue("@Valor", valorCaixa);
             }
             comando.Parameters.AddWithValue("@IdFluxo", idFluxoCaixa);
             comando.CommandText = _sql;
@@ -624,7 +624,7 @@ namespace CaixaFacil
             }
         }
 
-        decimal ValorCaixa, ValorSaida;
+        decimal valorCaixa, ValorSaida;
         private void VerificarValorCaixa()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
@@ -637,7 +637,7 @@ namespace CaixaFacil
                 SqlDataReader dr = comando.ExecuteReader();
                 if (dr.Read())
                 {
-                    ValorCaixa = decimal.Parse(dr["ValorCaixa"].ToString());
+                    valorCaixa = decimal.Parse(dr["ValorCaixa"].ToString());
                     ValorCaixaInicial = decimal.Parse(dr["ValorEntrada"].ToString());
                 }
             }
@@ -762,9 +762,7 @@ namespace CaixaFacil
                 }
             }
 
-            DevolverItens();
-            dgv_ListaVenda.Rows.Remove(dgv_ListaVenda.CurrentRow);
-            ListaTodasVendas();
+            DevolverItens();  
         }
 
         private void DevolverItens()
@@ -783,7 +781,7 @@ namespace CaixaFacil
                 AtualizarValorRecebidoDebito();
             }
             else if (FormaPagamento == "PAGAMENTO PARCIAL")
-            {             
+            {
                 subValorReceber = (valorReceber + valorAbatido) - ((valorSubTotal / qtdItens) * qtdItensDevolvido) - valorAbatido;
                 VerificarDataAbatimentoDataVenda();
                 if (valorReceber >= subValorReceber)
@@ -795,16 +793,16 @@ namespace CaixaFacil
             }
 
             AtualizarEstoque();
+            dgv_ListaVenda.Rows.Remove(dgv_ListaVenda.CurrentRow);
             ListaTodasVendas();
-            lblValorTotalComDesconto.Text = "R$ " + valorVenda;
+
+            lblValorTotalComDesconto.Text = "R$ " + (valorVenda - desconto);
+            lblValorTotalSemDesconto.Text = "R$ " + valorVenda;
+
             if (dgv_ListaVenda.Rows.Count == 0)
             {
                 this.Close();
             }
-
-            lblValorTotalComDesconto.Text = "R$ " + (valorVenda - desconto);
-            valorVenda -= desconto;
-            lblValorTotalSemDesconto.Text = "R$ " + (valorVenda + desconto);
         }
 
         private void AtualizarEstoque()
@@ -884,15 +882,25 @@ namespace CaixaFacil
 
                 if (subValorVendaValorAbatido < 0)
                 {
-                    if (valorVenda < valorAbatido)
+                    if ((valorVenda - desconto) < valorAbatido && valorRestante > 0)
                     {
-                        decimal valorDevolver = valorAbatido - valorVenda;
-                        if (valorRestante > 0)
+                        subValorVendaValorAbatido = valorVenda - valorAbatido;
+                        if(subValorVendaValorAbatido < 0)
                         {
-                            MessageBox.Show("Deverá ser devolvido o valor de R$ " + valorDevolver + "! Pois, o cliente tinha o valor restante em sua conta de R$ " + valorRestante + " e abateu R$" + valorAbatido + ", e com o item devolvido no valor de R$ " + valorSubTotal + " a conta do cliente zera e terá o direito de receber R$ " + valorDevolver + " que é o valor que ultrapassou durante toda a transação da venda e devolução.", "Aviso do sistema Gerenciamento Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        }
+                            decimal valorDevolver = valorAbatido - valorVenda;
+                           
+                            MessageBox.Show("Deverá ser devolvido o valor de R$ " + valorDevolver + "! Por conta que o cliente tinha em sua conta uma pendência de R$ " + valorRestante + " e abateu R$ " + valorAbatido + ", com a devolução do item selecionado que está no valor de R$ " + valorSubTotal + " o cliente passa a não ter dívidas e terá o direito de receber o valor de R$ " + valorDevolver, "Aviso do sistema Gerenciamento Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                        AlterarValorAbatidoPagamentoParcial();
+
+                            AlterarValorAbatidoPagamentoParcial();
+                            subValorVendaValorAbatido = 0;
+                        }
+                        else
+                            MessageBox.Show("Com a devolução do(a) " + dgv_ListaVenda.CurrentRow.Cells["ColDescricao"].Value.ToString() + " o cliente passa a dever R$ " + subValorVendaValorAbatido, "Aviso do sistema Gerenciamento Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (valorVenda == valorAbatido)
+                    {
+                        MessageBox.Show("Com o valor da venda se igualando com o valor que já foi abatido pelo cliente, o cliente passa a não ter dívidas com o estabelicimento.", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         subValorVendaValorAbatido = 0;
                     }
                 }
@@ -923,7 +931,6 @@ namespace CaixaFacil
             {
                 conexao.Open();
                 comando.ExecuteNonQuery();
-                desconto = 0.00m;
                 lblDesconto.Text = "R$ 0,00";
             }
             catch (Exception ex)

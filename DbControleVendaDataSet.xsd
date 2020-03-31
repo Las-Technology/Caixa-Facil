@@ -291,8 +291,8 @@ WHERE        (Categoria.Descricao &lt;&gt; 'Serviço')</CommandText>
               <DbSource ConnectionRef="DbControleVendaConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        Produto.Id_Produto, Produto.CodigoBarra, Produto.Descricao AS DescricaoNome, Produto.Marca, Produto.DataValidade, Produto.ValorCusto, Produto.ValorVenda, 
-                         Produto.Lucro, Produto.EstoqueAtual, Produto.EstoqueMinimo, Produto.Unidade, Categoria.Descricao, Fornecedor.Nome
+                    <CommandText>SELECT        Produto.Id_Produto, Produto.CodigoBarra, Produto.Descricao AS DescricaoNome, Produto.Marca, Produto.DataValidade, Produto.ValorCusto, Produto.ValorVenda, Produto.Lucro, Produto.EstoqueAtual, 
+                         Produto.EstoqueMinimo, Produto.Unidade, Categoria.Descricao, Fornecedor.Nome
 FROM            Categoria INNER JOIN
                          Produto ON Categoria.Id_Categoria = Produto.Id_Categoria INNER JOIN
                          Fornecedor ON Produto.Id_Fornecedor = Fornecedor.Id_Fornecedor</CommandText>

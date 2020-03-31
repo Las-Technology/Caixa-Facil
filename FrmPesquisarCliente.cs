@@ -24,7 +24,7 @@ namespace CaixaFacil
         {
 
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Select * from Cliente";
+            _sql = "Select * from Cliente where id_Cliente <> 1";
             SqlDataAdapter adapter = new SqlDataAdapter(_sql,conexao);
             adapter.SelectCommand.CommandText = _sql;
             try
@@ -106,7 +106,7 @@ namespace CaixaFacil
             if (txt_Nome.Text != string.Empty)
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                string _sql = "Select * FROM Cliente WHERE  Nome like   '%" + txt_Nome.Text.Trim() + "%'";
+                string _sql = "Select * FROM Cliente WHERE  Nome like   '%" + txt_Nome.Text.Trim() + "%' and id_Cliente <> 1";
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();

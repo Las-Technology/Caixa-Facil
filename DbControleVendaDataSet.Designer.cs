@@ -7336,8 +7336,8 @@ WHERE        (Categoria.Descricao <> 'Serviço')";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        Produto.Id_Produto, Produto.CodigoBarra, Produto.Descricao AS DescricaoNome, Produto.Marca, Produto.DataValidade, Produto.ValorCusto, Produto.ValorVenda, 
-                         Produto.Lucro, Produto.EstoqueAtual, Produto.EstoqueMinimo, Produto.Unidade, Categoria.Descricao, Fornecedor.Nome
+            this._commandCollection[0].CommandText = @"SELECT        Produto.Id_Produto, Produto.CodigoBarra, Produto.Descricao AS DescricaoNome, Produto.Marca, Produto.DataValidade, Produto.ValorCusto, Produto.ValorVenda, Produto.Lucro, Produto.EstoqueAtual, 
+                         Produto.EstoqueMinimo, Produto.Unidade, Categoria.Descricao, Fornecedor.Nome
 FROM            Categoria INNER JOIN
                          Produto ON Categoria.Id_Categoria = Produto.Id_Categoria INNER JOIN
                          Fornecedor ON Produto.Id_Fornecedor = Fornecedor.Id_Fornecedor";
