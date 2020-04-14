@@ -48,7 +48,7 @@ namespace CaixaFacil
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -107,7 +107,7 @@ namespace CaixaFacil
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -282,7 +282,7 @@ namespace CaixaFacil
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -664,7 +664,7 @@ namespace CaixaFacil
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -712,7 +712,7 @@ namespace CaixaFacil
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -937,7 +937,7 @@ namespace CaixaFacil
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -971,7 +971,7 @@ namespace CaixaFacil
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

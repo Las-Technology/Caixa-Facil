@@ -108,7 +108,7 @@ namespace CaixaFacil
                         }
                         else
                         {
-                            MessageBox.Show("Informe valor maior que zero!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show("Informe valor maior que zero!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         }
                     }
                 }
@@ -119,7 +119,7 @@ namespace CaixaFacil
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -131,7 +131,7 @@ namespace CaixaFacil
             }
             else
             {
-                DialogResult dr = MessageBox.Show("Deseja mesmo excluir esta conta? Excluindo a conta, não haverá com recuperá-la.", "Aviso do sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dr = MessageBox.Show("Deseja mesmo excluir esta conta? Excluindo a conta, não haverá com recuperá-la.", "Caixa Fácil", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
                     contasNaoContabilizada.codigo = codigo;
@@ -237,13 +237,13 @@ namespace CaixaFacil
                     }
                     else
                     {
-                        MessageBox.Show("Informe valor maior que zero!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Informe valor maior que zero!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

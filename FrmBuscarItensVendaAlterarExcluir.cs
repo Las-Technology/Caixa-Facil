@@ -34,7 +34,7 @@ namespace CaixaFacil
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -66,7 +66,7 @@ namespace CaixaFacil
         {
             if (string.IsNullOrEmpty(CodVenda))
             {
-                MessageBox.Show(@"Selecione a Venda que será devolvida\alterada!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(@"Selecione a Venda que será devolvida\alterada!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
@@ -98,7 +98,7 @@ namespace CaixaFacil
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

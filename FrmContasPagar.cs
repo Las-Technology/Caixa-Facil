@@ -174,13 +174,13 @@ namespace CaixaFacil
                     ContasPagar.desconto = double.Parse(txt_Desconto.Text.Trim());
                     ContasPagar.status = status;
                     ContasPagar.Cadastrar();
-                    MessageBox.Show("Valores gravados no banco de dados com sucesso!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Valores gravados no banco de dados com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btn_Limpar_Click(sender, e);
                     CarregarGrid();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -371,7 +371,7 @@ namespace CaixaFacil
                     }
                 }
                 else
-                    MessageBox.Show("Não encontramos dados do boleto deste fornecedor!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Não encontramos dados do boleto deste fornecedor!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -445,7 +445,7 @@ namespace CaixaFacil
                     ContasPagar.dataPagamento = DataPagamento;
                     ContasPagar.status = Status;
                     ContasPagar.QuitarPagamento();
-                    MessageBox.Show("Boleto quitado com sucesso", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Boleto quitado com sucesso", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     btn_LimparQuitar_Click(sender, e);
                     CarregarGrid();
@@ -453,7 +453,7 @@ namespace CaixaFacil
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -531,7 +531,7 @@ namespace CaixaFacil
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txt_ValorDocumento.Clear();
             }
         }
@@ -547,7 +547,7 @@ namespace CaixaFacil
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txt_Desconto.Clear();
             }
 }
@@ -563,7 +563,7 @@ namespace CaixaFacil
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txt_Desconto.Clear();
             }
         }
@@ -579,7 +579,7 @@ namespace CaixaFacil
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txt_ValorPago.Clear();
                 txt_ValorPago.Clear();
             }

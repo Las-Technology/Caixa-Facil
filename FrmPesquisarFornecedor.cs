@@ -100,7 +100,7 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    MessageBox.Show("Dados não encontrado no banco de dados!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Dados não encontrado no banco de dados!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else

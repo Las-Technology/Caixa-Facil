@@ -72,7 +72,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Preencha todos os campos!", "Aviso do sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Preencha todos os campos!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
         }
