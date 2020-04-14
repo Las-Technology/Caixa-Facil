@@ -687,13 +687,28 @@ namespace CaixaFacil
             {
                 conexao.Open();
                 comando.ExecuteNonQuery();
-                if (FormaPagamento != "PAGAMENTO PARCIAL" || ValorTotalPagamentoParcial == valorVenda)
+                string messagem = "";
+                if (FormaPagamento == "VISTA")
                 {
+                    if ((valorVenda - desconto) > 0)
+                    {
+                        messagem = " O valor já foi pago pelo cliente está no valor de R$ " + (valorVenda - desconto);
+                    }
 
-                    string messagem = "";
+                    MessageBox.Show("Itens devolvidos!" + messagem, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else if(FormaPagamento == "PAGAMENTO PARCIAL")
+                {
+                    if(valorAbatido > 0)
+                    {
+                        MessageBox.Show("Itens devolvidos! O valor já foi pago pelo cliente está no valor de R$ " + valorAbatido, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else if (FormaPagamento == "PARCELADO")
+                {
                     if (ValorPago > 0)
                     {
-                        messagem = " O valor já foi pago pelo cliente está no valor de " + ValorPago;
+                        messagem = " O valor já foi pago pelo cliente está no valor de R$ " + ValorPago;
                     }
 
                     MessageBox.Show("Itens devolvidos!" + messagem, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
