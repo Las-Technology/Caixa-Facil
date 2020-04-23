@@ -115,7 +115,7 @@ namespace CaixaFacil
                     }
                     else
                     {
-                        MessageBox.Show("Valor de abatimento maior que o valor de venda! Verifique se houve erro de digitação...", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Valor de abatimento maior que o valor de venda! Verifique se houve erro de digitação...", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
             }

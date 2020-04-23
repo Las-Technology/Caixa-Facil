@@ -132,7 +132,7 @@ namespace CaixaFacil
                 }
                 else if (dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0)
                 {
-                    MessageBox.Show("Não existe conta associada ao cliente: " + pesquisarCliente.Codigo + " - " + pesquisarCliente.Nome, "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Não existe conta associada ao cliente: " + pesquisarCliente.Codigo + " - " + pesquisarCliente.Nome, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 dgv_PagamentoParcelas.ClearSelection();
             }
@@ -321,7 +321,7 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    MessageBox.Show("Selecione a parcela para pagamento!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Selecione a parcela para pagamento!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             else if (tabPagamento.SelectedTab == tab_PagamentoParcial)

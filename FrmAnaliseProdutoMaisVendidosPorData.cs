@@ -71,7 +71,7 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    MessageBox.Show("Dados não encontrado! Verifique outra opção...", "Mensagem do sistema 'Gerenciamento Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Dados não encontrado! Verifique outra opção...", "Mensagem do sistema 'Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             else
@@ -83,7 +83,7 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    MessageBox.Show("Dados não encontrado! Verifique outra opção...", "Mensagem do sistema 'Gerenciamento Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Dados não encontrado! Verifique outra opção...", "Mensagem do sistema 'Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
         }

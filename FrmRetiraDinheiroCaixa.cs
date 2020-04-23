@@ -128,7 +128,7 @@ namespace CaixaFacil
                     FluxoCaixa.motivoRetirada = " Motivo: " + rTB_Motivo.Text.ToUpper();
                     FluxoCaixa.RetirarDinheiroCaixa();
 
-                    MessageBox.Show("Valor retirado com sucesso!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Valor retirado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txt_Valor.Clear();
                     rTB_Motivo.Clear();
                 }
@@ -137,7 +137,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Preencha o valor da retiragem e o motivo", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Preencha o valor da retiragem e o motivo", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

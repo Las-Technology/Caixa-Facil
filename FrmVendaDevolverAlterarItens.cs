@@ -733,7 +733,7 @@ namespace CaixaFacil
 
             if (qtdItens >= 2)
             {
-                MessageBox.Show("Informe a quantidade de itens que vai ser devolvida.", "Aviso do sistema Gerenciamento Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Informe a quantidade de itens que vai ser devolvida.", "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 FrmDevolverQuantidadeItens devolverQuantidadeItens = new FrmDevolverQuantidadeItens(qtdItens);
                 devolverQuantidadeItens.ShowDialog();
@@ -743,7 +743,7 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    MessageBox.Show("É necessário informar a quantidade de itens que vai ser devolvida.", "Aviso do sistema Gerenciamento Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("É necessário informar a quantidade de itens que vai ser devolvida.", "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
             }
@@ -905,14 +905,14 @@ namespace CaixaFacil
                         {
                             decimal valorDevolver = valorAbatido - (valorVenda - desconto);
                            
-                            MessageBox.Show("Deverá ser devolvido o valor de R$ " + valorDevolver + "! Por conta que o cliente tinha em sua conta uma pendência de R$ " + valorRestante + " e abateu R$ " + valorAbatido + ", com a devolução do item selecionado que está no valor de R$ " + valorSubTotal + " o cliente passa a não ter dívidas e terá o direito de receber o valor de R$ " + valorDevolver, "Aviso do sistema Gerenciamento Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show("Deverá ser devolvido o valor de R$ " + valorDevolver + "! Por conta que o cliente tinha em sua conta uma pendência de R$ " + valorRestante + " e abateu R$ " + valorAbatido + ", com a devolução do item selecionado que está no valor de R$ " + valorSubTotal + " o cliente passa a não ter dívidas e terá o direito de receber o valor de R$ " + valorDevolver, "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
 
                             AlterarValorAbatidoPagamentoParcial();
                             subValorVendaValorAbatido = 0;
                         }
                         else
-                            MessageBox.Show("Com a devolução do(a) " + dgv_ListaVenda.CurrentRow.Cells["ColDescricao"].Value.ToString() + " o cliente passa a dever R$ " + subValorVendaValorAbatido, "Aviso do sistema Gerenciamento Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Com a devolução do(a) " + dgv_ListaVenda.CurrentRow.Cells["ColDescricao"].Value.ToString() + " o cliente passa a dever R$ " + subValorVendaValorAbatido, "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else if (valorVenda == valorAbatido)
                     {
@@ -922,7 +922,7 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    MessageBox.Show("Com a devolução do(a) " + dgv_ListaVenda.CurrentRow.Cells["ColDescricao"].Value.ToString() + " o cliente passa a dever R$ " + subValorVendaValorAbatido, "Aviso do sistema Gerenciamento Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Com a devolução do(a) " + dgv_ListaVenda.CurrentRow.Cells["ColDescricao"].Value.ToString() + " o cliente passa a dever R$ " + subValorVendaValorAbatido, "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
               
                 if(subValorVendaValorAbatido >= 0)

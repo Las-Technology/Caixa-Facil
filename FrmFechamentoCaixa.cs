@@ -238,7 +238,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Insira o valor total em caixa!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Insira o valor total em caixa!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_ValorTotalCaixa.Focus();
             }
         }

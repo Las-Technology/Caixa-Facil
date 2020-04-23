@@ -56,21 +56,21 @@ namespace CaixaFacil
            
             if (txt_Cliente.Text == "")
             {
-                MessageBox.Show("Informe o nome do cliente! Campo obrigatório!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o nome do cliente! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.SetError(txt_Cliente, "Campo obrigatório!");
                 txt_Cliente.Focus();
                 return;
             }
             else if (txt_Servico.Text == "")
             {
-                MessageBox.Show("Informe o serviço a prestar! Campo obrigatório!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o serviço a prestar! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.SetError(txt_Servico, "Campo obrigatório!");
                 txt_Servico.Focus();
                 return;
             }
             else if (!mask_Horario.MaskCompleted)
             {
-                MessageBox.Show("Informe o o horário para o agendamento! Campo obrigatório!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o o horário para o agendamento! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.SetError(mask_Horario, "Campo obrigatório!");
                 mask_Horario.Focus();
                 return;
@@ -93,7 +93,7 @@ namespace CaixaFacil
                     agendamento.telefone = mask_Telefone.Text;
                     agendamento.email = txt_Email.Text.Trim();
                     agendamento.Agendar();
-                    MessageBox.Show("Agendamento realizado com sucesso!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Agendamento realizado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btn_Limpar_Click(sender, e);
                 }
                 catch (Exception ex)
@@ -139,21 +139,21 @@ namespace CaixaFacil
           
             if (txt_Cliente.Text == "")
             {
-                MessageBox.Show("Informe o nome do cliente! Campo obrigatório!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o nome do cliente! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.SetError(txt_Cliente, "Campo obrigatório!");
                 txt_Cliente.Focus();
                 return;
             }
             else if (txt_Servico.Text == "")
             {
-                MessageBox.Show("Informe o serviço a prestar! Campo obrigatório!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o serviço a prestar! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.SetError(txt_Servico, "Campo obrigatório!");
                 txt_Servico.Focus();
                 return;
             }
             else if (!mask_Horario.MaskCompleted)
             {
-                MessageBox.Show("Informe o o horário para o agendamento! Campo obrigatório!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o o horário para o agendamento! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.SetError(mask_Horario, "Campo obrigatório!");
                 mask_Horario.Focus();
                 return;
@@ -176,7 +176,7 @@ namespace CaixaFacil
                     agendamento.servico = txt_Servico.Text.Trim();
                     agendamento.telefone = mask_Telefone.Text;
                     agendamento.email = txt_Email.Text.Trim(); agendamento.AtualizarAgendamento();
-                    MessageBox.Show("Agendamento atualizado com sucesso!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Agendamento atualizado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btn_Limpar_Click(sender, e);
                 }
                 catch (Exception ex)
@@ -209,7 +209,7 @@ namespace CaixaFacil
             {
                 if (txt_Servico.Text == "" && txt_Cliente.Text == "")
                 {
-                    MessageBox.Show("Informa os dados para ser excluido!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Informa os dados para ser excluido!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -219,7 +219,7 @@ namespace CaixaFacil
                     agendamento.horario = mask_Horario.Text;
                     agendamento.servico = txt_Servico.Text.Trim();
                     agendamento.ExluirAgendamento();
-                    MessageBox.Show("Agendamento excluido com sucesso!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Agendamento excluido com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btn_Limpar_Click(sender, e);
                 }
             }

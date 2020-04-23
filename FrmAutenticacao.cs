@@ -122,7 +122,7 @@ namespace CaixaFacil
 
                         if (Caixa.dataEntrada != DataAtual)
                         {
-                            if (MessageBox.Show("O caixa anterior está aberto. Feche o caixa para prosseguir.", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                            if (MessageBox.Show("O caixa anterior está aberto. Feche o caixa para prosseguir.", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
                             {
                                 this.Visible = false;
                                 FrmFechamentoCaixa fechamentoCaixa = new FrmFechamentoCaixa("", "", Funcao);
@@ -142,10 +142,10 @@ namespace CaixaFacil
                         {
                             if (CodigoUsuario == Id_Usuario)
                             {
-                                if (MessageBox.Show("O Caixa está aberto! Deseja Continuar?", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                if (MessageBox.Show("O Caixa está aberto! Deseja Continuar?", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                                 {
                                     this.Visible = false;
-                                    FrmPrincipal frmprincipal = new FrmPrincipal(Id_Usuario, NomeUsuario, Funcao);
+                                    FrmTelaPrincipal frmprincipal = new FrmTelaPrincipal(Id_Usuario, NomeUsuario, Funcao);
                                     frmprincipal.ShowDialog();
                                 }
                                 else
@@ -163,12 +163,12 @@ namespace CaixaFacil
                             else if (CodigoUsuario != Id_Usuario && Funcao == "ADMINISTRADOR")
                             {
                                 this.Visible = false;
-                                FrmPrincipal frmprincipal = new FrmPrincipal(Id_Usuario, NomeUsuario, Funcao);
+                                FrmTelaPrincipal frmprincipal = new FrmTelaPrincipal(Id_Usuario, NomeUsuario, Funcao);
                                 frmprincipal.ShowDialog();
                             }
                             else
                             {
-                                if (MessageBox.Show("Feche o caixa para continuar.", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                                if (MessageBox.Show("Feche o caixa para continuar.", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
                                 {
                                     this.Visible = false;
                                     FrmFechamentoCaixa fechamentoCaixa = new FrmFechamentoCaixa("", "", Funcao);
@@ -196,12 +196,12 @@ namespace CaixaFacil
             }
             else if (txt_Senha.Text == "")
             {
-                MessageBox.Show("Digite a sua senha!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Digite a sua senha!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_Senha.Focus();
             }
             else
             {
-                MessageBox.Show("Senha incorreta!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Senha incorreta!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_Senha.Clear();
                 txt_Senha.Focus();
                 InformarDicaSenha();
@@ -219,7 +219,7 @@ namespace CaixaFacil
 
         private void InformarCaixaAberto()
         {
-            MessageBox.Show("O Caixa anterior está aberto! Para prosseguir o caixa deverá ser fechado!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show("O Caixa anterior está aberto! Para prosseguir o caixa deverá ser fechado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             FrmFechamentoCaixa fechamentoCaixa = new FrmFechamentoCaixa("", "", Funcao);
             fechamentoCaixa.ShowDialog();
             if (Caixa.SituacaoCaixa() == false)
@@ -338,7 +338,7 @@ namespace CaixaFacil
 
                     while (Veriguacao == false)
                     {
-                        MessageBox.Show("A resposta de segurança não bate com a Resposta cadastrada no sistema!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("A resposta de segurança não bate com a Resposta cadastrada no sistema!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         vnu.ShowDialog();
                         rs = vnu.RespostaSeguranca;
                         if (rs != "")

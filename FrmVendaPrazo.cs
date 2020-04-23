@@ -51,7 +51,7 @@ namespace CaixaFacil
                     this.Close();
                  //else
                  //{
-                 //    MessageBox.Show("Venda não permitida. O cliente tem conta(s) vencida(s) com a empresa!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                 //    MessageBox.Show("Venda não permitida. O cliente tem conta(s) vencida(s) com a empresa!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                  //}
                 }
                     else
@@ -103,7 +103,7 @@ namespace CaixaFacil
                 {
                     string dataVenda = Tabela.Rows[0]["DataVenda"].ToString();
                     string vencimento = Tabela.Rows[0]["DataVencimento"].ToString();
-                    MessageBox.Show("O cliente selecionado tem uma conta pendente realizada no dia: " + dataVenda + " que vence(u) no dia: " + vencimento, "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("O cliente selecionado tem uma conta pendente realizada no dia: " + dataVenda + " que vence(u) no dia: " + vencimento, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             catch (Exception ex)

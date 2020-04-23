@@ -118,18 +118,18 @@ namespace CaixaFacil
                     InformarValorabatido();
                     Abater();
                     AtualizarValorReceber();
-                    MessageBox.Show("Valor Abatido com sucesso! Valor Restante: " + txt_ValorRestante.Text, "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Valor Abatido com sucesso! Valor Restante: " + txt_ValorRestante.Text, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Informe valor menor ou igual ao valor da conta para abatimento!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Informe valor menor ou igual ao valor da conta para abatimento!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
 
             }
             else
             {
-                MessageBox.Show("Informe o valor para abater a conta!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o valor para abater a conta!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

@@ -216,12 +216,12 @@ namespace CaixaFacil
 
                             if (EstoqueAtual == 0)
                             {
-                                MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 txt_Codigo_Barra.Focus();
                             }
                             else if (EstoqueAtual < Quantidade)
                             {
-                                MessageBox.Show("A quantidade exigida é maior que o estoque atual gravada no banco de dados. Por favor Atualize o estoque!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show("A quantidade exigida é maior que o estoque atual gravada no banco de dados. Por favor Atualize o estoque!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 txt_Codigo_Barra.Clear();
                                 txt_Codigo_Barra.Focus();
                             }
@@ -238,11 +238,11 @@ namespace CaixaFacil
                                 EstoqueAtual = produto.estoqueAtual;
                                 if (EstoqueAtual == 0)
                                 {
-                                    MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 }
                                 else if (EstoqueAtual <= EstoqueMinimo)
                                 {
-                                    MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 }
                             }
                         }
@@ -253,7 +253,7 @@ namespace CaixaFacil
                 //}
                 //else
                 //{
-                //    MessageBox.Show("Insira a quantidade! Campo obrigatório!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //    MessageBox.Show("Insira a quantidade! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 //    nd_Quantidade.Focus();
                 //}
             }
@@ -283,12 +283,12 @@ namespace CaixaFacil
 
                             if (EstoqueAtual == 0 && Unidade != "Serviço")
                             {
-                                MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 txt_Codigo_Barra.Focus();
                             }
                             else if (EstoqueAtual < Quantidade && Unidade != "Serviço")
                             {
-                                MessageBox.Show("A quantidade exigida é maior que o estoque atual gravada no banco de dados. Por favor Atualize o estoque!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show("A quantidade exigida é maior que o estoque atual gravada no banco de dados. Por favor Atualize o estoque!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 txt_Codigo_Barra.Clear();
                                 txt_Codigo_Barra.Focus();
                             }
@@ -305,11 +305,11 @@ namespace CaixaFacil
                                 EstoqueAtual = produto.estoqueAtual;
                                 if (EstoqueAtual == 0 && Unidade != "Serviço")
                                 {
-                                    MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 }
                                 else if (EstoqueAtual <= EstoqueMinimo && Unidade != "Serviço")
                                 {
-                                    MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico!Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico!Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 }
                             }
                         }
@@ -320,7 +320,7 @@ namespace CaixaFacil
                 //}
                 //else
                 //{
-                //    MessageBox.Show("Insira a quantidade! Campo obrigatório!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //    MessageBox.Show("Insira a quantidade! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 //    nd_Quantidade.Focus();
                 //}                
             }
@@ -351,12 +351,12 @@ namespace CaixaFacil
 
                         if (EstoqueAtual == 0)
                         {
-                            MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             txt_Codigo_Barra.Focus();
                         }
                         else if (EstoqueAtual < Quantidade)
                         {
-                            MessageBox.Show("A quantidade exigida é maior que o estoque atual gravada no banco de dados. Por favor Atualize o estoque!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show("A quantidade exigida é maior que o estoque atual gravada no banco de dados. Por favor Atualize o estoque!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             txt_Codigo_Barra.Clear();
                             txt_Codigo_Barra.Focus();
                         }
@@ -373,11 +373,11 @@ namespace CaixaFacil
                             EstoqueAtual = produto.estoqueAtual;
                             if (EstoqueAtual == 0)
                             {
-                                MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             }
                             else if (EstoqueAtual <= EstoqueMinimo)
                             {
-                                MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             }
                         }
                     }
@@ -388,7 +388,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Insira a quantidade! Campo obrigatório!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Insira a quantidade! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 nd_Quantidade.Focus();
             }
             btn_Remover.Enabled = false;
@@ -500,7 +500,7 @@ namespace CaixaFacil
 
                             if (EstoqueAtual == 0 && descricaoCategoria != "Serviço")
                             {
-                                MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 txt_Codigo_Barra.Clear();
                                 txt_Codigo_Barra.Focus();
                             }
@@ -522,11 +522,11 @@ namespace CaixaFacil
                                 EstoqueAtual = produto.estoqueAtual;
                                 if (EstoqueAtual == 0 && descricaoCategoria != "Serviço")
                                 {
-                                    MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 }
                                 else if (EstoqueAtual <= EstoqueMinimo && descricaoCategoria != "Serviço")
                                 {
-                                    MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 }
                             }
                         }
@@ -560,13 +560,13 @@ namespace CaixaFacil
 
                             if (EstoqueAtual == 0 && descricaoCategoria != "Serviço")
                             {
-                                MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 txt_Codigo_Barra.Clear();
                                 txt_Codigo_Barra.Focus();
                             }
                             else if (EstoqueAtual < Quantidade && descricaoCategoria != "Serviço")
                             {
-                                MessageBox.Show("A quantidade exigida é maior que o estoque atual gravada no banco de dados. Por favor Atualize o estoque ou verifique se houve erro de digitação!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show("A quantidade exigida é maior que o estoque atual gravada no banco de dados. Por favor Atualize o estoque ou verifique se houve erro de digitação!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 txt_Codigo_Barra.Clear();
                                 txt_Codigo_Barra.Focus();
                             }
@@ -587,11 +587,11 @@ namespace CaixaFacil
                                 EstoqueAtual = produto.estoqueAtual;
                                 if (EstoqueAtual == 0 && descricaoCategoria != "Serviço")
                                 {
-                                    MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 }
                                 else if (EstoqueAtual <= EstoqueMinimo && descricaoCategoria != "Serviço")
                                 {
-                                    MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                                 }
                             }
                         }
@@ -606,7 +606,7 @@ namespace CaixaFacil
             //}
             //else
             //{
-            //    MessageBox.Show("Insira a quantidade! Campo obrigatório!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //    MessageBox.Show("Insira a quantidade! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             //    nd_Quantidade.Focus();
             //}
         }         
@@ -799,12 +799,13 @@ namespace CaixaFacil
                     InserirItensvenda();
                     
                     loadTelaInicial();
+                    Backup.GerarBackup();
                 }
                 
             }
             else
             {
-                MessageBox.Show("Não há itens para venda! Verifique...", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Não há itens para venda! Verifique...", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_Codigo_Barra.Focus();
             }
         }
@@ -845,6 +846,7 @@ namespace CaixaFacil
                     InserirItensvenda();
 
                     loadTelaInicial();
+                    Backup.GerarBackup();
                 }
             }
             else
@@ -876,11 +878,12 @@ namespace CaixaFacil
                     }
 
                     loadTelaInicial();
+                    Backup.GerarBackup();
                 }
             }
             else
             {
-                MessageBox.Show("Não há itens para venda! Verifique...", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Não há itens para venda! Verifique...", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_Codigo_Barra.Focus();
             }
         }
@@ -964,6 +967,7 @@ namespace CaixaFacil
                     }
 
                     loadTelaInicial();
+                    Backup.GerarBackup();
                 }
             }
             else
@@ -1233,7 +1237,7 @@ namespace CaixaFacil
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Mensagem do sistema 'Gerenciamento Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Mensagem do sistema 'Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1315,10 +1319,11 @@ namespace CaixaFacil
                     }
 
                     loadTelaInicial();
+                    Backup.GerarBackup();
                 }
             }
             else
-                MessageBox.Show("Não há itens para venda! Verifique...", "Mensagem do sistema 'Gerenciamento Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Não há itens para venda! Verifique...", "Mensagem do sistema 'Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void loadTelaInicial()
@@ -1393,7 +1398,7 @@ namespace CaixaFacil
             //}
             //else
             //{
-            //    MessageBox.Show("Insira a quantidade! Campo obrigatório!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //    MessageBox.Show("Insira a quantidade! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             //    nd_Quantidade.Focus();
             //}
             btn_Remover.Enabled = false;

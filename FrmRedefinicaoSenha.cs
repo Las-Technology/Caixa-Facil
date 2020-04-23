@@ -33,7 +33,7 @@ namespace CaixaFacil
                     usuario.usuario = lbl_Usuario.Text;
                     usuario.senha = Security.Cry(txt_ConfirmarSenha.Text);
                     usuario.RedefinirSenha();
-                    MessageBox.Show("Senha redefinida com sucesso!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Senha redefinida com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
                 catch (Exception ex)
@@ -43,7 +43,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("As senhas não correspondem", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("As senhas não correspondem", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

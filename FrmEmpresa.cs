@@ -274,7 +274,7 @@ namespace CaixaFacil
 
         private void CriarPasta()
         {
-            string Pasta = Settings.Default["Disco"].ToString() + @"Gerenciamento Caixa Fácil\Imagens do sistema\";
+            string Pasta = Settings.Default["Disco"].ToString() + @"Caixa Fácil\Imagens do sistema\";
             if (!Directory.Exists(Pasta))
             {
                 Directory.CreateDirectory(Pasta);
@@ -403,8 +403,8 @@ namespace CaixaFacil
                                 string NomedoArquivo = Path.GetFileName(Diretorio);
 
                                 FileInfo fileInfo = new FileInfo(ArquivoImagem);
-                                fileInfo.CopyTo(Settings.Default["Disco"].ToString() + @"Gerenciamento Caixa Fácil\Imagens do sistema\" + NomedoArquivo);
-                                Diretorio = Settings.Default["Disco"].ToString() + @"Gerenciamento Caixa Fácil\Imagens do sistema\" + NomedoArquivo;
+                                fileInfo.CopyTo(Settings.Default["Disco"].ToString() + @"Caixa Fácil\Imagens do sistema\" + NomedoArquivo);
+                                Diretorio = Settings.Default["Disco"].ToString() + @"Caixa Fácil\Imagens do sistema\" + NomedoArquivo;
                             }
                             catch
                             {
@@ -898,8 +898,8 @@ namespace CaixaFacil
                                 string NomedoArquivo = Path.GetFileName(Diretorio);
 
                                 FileInfo fileInfo = new FileInfo(ArquivoImagem);
-                                fileInfo.CopyTo(Settings.Default["Disco"].ToString() + @"Gerenciamento Caixa Fácil\Imagens do sistema\" + NomedoArquivo);
-                                Diretorio = Settings.Default["Disco"].ToString() + @"Gerenciamento Caixa Fácil\Imagens do sistema\" + NomedoArquivo;
+                                fileInfo.CopyTo(Settings.Default["Disco"].ToString() + @"Caixa Fácil\Imagens do sistema\" + NomedoArquivo);
+                                Diretorio = Settings.Default["Disco"].ToString() + @"Caixa Fácil\Imagens do sistema\" + NomedoArquivo;
                             }
                             catch
                             {

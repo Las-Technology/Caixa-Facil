@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="Classes\ClassAgendamento.cs" />
     <Compile Include="Classes\ClassAutenticacao.cs" />
+    <Compile Include="Classes\ClassBackup.cs" />
     <Compile Include="Classes\ClassCategoria.cs" />
     <Compile Include="Classes\ClassClientes.cs" />
     <Compile Include="Classes\ClassContasNaoContabilizada.cs" />
@@ -412,11 +413,11 @@
     <Compile Include="FrmPrecosProdutos.designer.cs">
       <DependentUpon>FrmPrecosProdutos.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmPrincipal.cs">
+    <Compile Include="FrmTelaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmPrincipal.designer.cs">
-      <DependentUpon>FrmPrincipal.cs</DependentUpon>
+    <Compile Include="FrmTelaPrincipal.designer.cs">
+      <DependentUpon>FrmTelaPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmProcurarAgenda.cs">
       <SubType>Form</SubType>
@@ -706,8 +707,8 @@
     <EmbeddedResource Include="FrmPrecosProdutos.resx">
       <DependentUpon>FrmPrecosProdutos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmPrincipal.resx">
-      <DependentUpon>FrmPrincipal.cs</DependentUpon>
+    <EmbeddedResource Include="FrmTelaPrincipal.resx">
+      <DependentUpon>FrmTelaPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmProcurarAgenda.resx">
       <DependentUpon>FrmProcurarAgenda.cs</DependentUpon>

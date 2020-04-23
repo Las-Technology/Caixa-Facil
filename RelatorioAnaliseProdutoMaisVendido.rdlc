@@ -963,7 +963,7 @@
                       </Style>
                     </TextRun>
                     <TextRun>
-                      <Value>Gerenciamento Caixa Fácil</Value>
+                      <Value>Caixa Fácil</Value>
                       <Style>
                         <FontStyle>Italic</FontStyle>
                         <FontFamily>times New Roman</FontFamily>

@@ -97,7 +97,7 @@ namespace CaixaFacil
                 fluxoCaixa.valorRecebidoDebito = 0.00m;
                 fluxoCaixa.AbrirCaixa();
                 this.Visible = false;
-                FrmPrincipal frmPrincipal = new FrmPrincipal(Id_Usuario, NomeUsuario, Funcao);
+                FrmTelaPrincipal frmPrincipal = new FrmTelaPrincipal(Id_Usuario, NomeUsuario, Funcao);
                 frmPrincipal.ShowDialog();
             }
             catch (Exception ex)

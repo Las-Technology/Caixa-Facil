@@ -150,7 +150,7 @@ namespace CaixaFacil
         {
             if (txt_ValorPago.Text == string.Empty)
             {
-                MessageBox.Show("Informe o valor pago!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o valor pago!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
@@ -161,7 +161,7 @@ namespace CaixaFacil
                     GerenciarCaixa();
                     BaixarPrazo();
                     AtualizarValorReceber();
-                    MessageBox.Show("Pagamento realizado com sucesso!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Pagamento realizado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
                 else

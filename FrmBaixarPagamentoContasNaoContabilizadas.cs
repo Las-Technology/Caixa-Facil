@@ -100,19 +100,19 @@ namespace CaixaFacil
                     contasNaoContabilizada.codigo = int.Parse(txt_Codigo.Text);
                     contasNaoContabilizada.valorConta = decimal.Parse(txt_ValorRestante.Text.Substring(3));
                     contasNaoContabilizada.AbaterVendaNaoContabilizada();
-                    MessageBox.Show("Valor Abatido com sucesso! Valor Restante: " + txt_ValorRestante.Text, "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Valor Abatido com sucesso! Valor Restante: " + txt_ValorRestante.Text, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     pagamentobaixado = true;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Informe valor menor ou igual ao valor da conta para abatimento!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Informe valor menor ou igual ao valor da conta para abatimento!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
 
             }
             else
             {
-                MessageBox.Show("Informe o valor para abater a conta!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o valor para abater a conta!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

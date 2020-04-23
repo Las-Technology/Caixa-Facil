@@ -138,7 +138,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Selecione o item a ser impresso!", "Mensagem do sistema 'Gerenciamento Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Selecione o item a ser impresso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

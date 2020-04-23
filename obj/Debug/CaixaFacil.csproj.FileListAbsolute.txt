@@ -240,7 +240,6 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmPesquisarPro
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmPesquisarServico.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmPesquisarUsuario.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmPrecosProdutos.resources
-C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmPrincipal.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmProcurarAgenda.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmProcurarValidadeProdutos.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmProduto.resources
@@ -275,3 +274,4 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.exe
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.pdb
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmVendaVista.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmListaVenda.resources
+C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmTelaPrincipal.resources
