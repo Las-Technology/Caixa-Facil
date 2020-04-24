@@ -9,7 +9,8 @@ namespace CaixaFacil
     {
         static string directory = Settings.Default["Disco"].ToString() + @"Caixa Fácil/Arquivo-Backup/";
         static string DataTempo;
-        public static void createDirectory()
+        
+        private static void createDirectory()
         {
             if (!Directory.Exists(directory))
             {

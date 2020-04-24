@@ -162,6 +162,7 @@ namespace CaixaFacil
                     BaixarPrazo();
                     AtualizarValorReceber();
                     MessageBox.Show("Pagamento realizado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Backup.GerarBackup();
                     this.Close();
                 }
                 else

@@ -167,7 +167,9 @@ namespace CaixaFacil
 
                     if (fecharPrograma == 2)
                     {
-                        GerarBackup();
+                        this.Cursor = Cursors.WaitCursor;
+                        Backup.GerarBackup();
+                        this.Cursor = Cursors.Default;
                         confirmacao = "ok";
                         Application.Exit();
                     }
@@ -190,57 +192,6 @@ namespace CaixaFacil
             {
                 MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
-            }
-        }
-
-        string Pasta, DataTempo;
-
-        private void CriarPasta()
-        {
-            Pasta = Settings.Default["Disco"].ToString() + @"Caixa Fácil\Arquivo-Backup\";
-            if (!Directory.Exists(Pasta))
-            {
-                Directory.CreateDirectory(Pasta);
-            }
-        }
-
-        private void SetHorarioBackup()
-        {
-            DateTime DataAtual = DateTime.Now;
-            int hr = DataAtual.Hour;
-            int min = DataAtual.Minute;
-            int sec = DataAtual.Second;
-            int dia = DataAtual.Day;
-            int mes = DataAtual.Month;
-            int ano = DataAtual.Year;
-
-
-            DataTempo = dia + "-" + mes + "-" + ano + "_" + hr + "_" + min + "_" + sec;
-        }
-
-        private void GerarBackup()
-        {
-            CriarPasta();
-            SetHorarioBackup();
-            Cursor = Cursors.WaitCursor;
-            SqlConnection conexao = new SqlConnection(Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdHJjGrOXTsH7b9NW1qcCpVJxD4wsfhTDR6OXOUSfCqDynZ+0PYEaREWQ=="));
-            _sql = "backup database dbControleVenda to disk = '" + Pasta + "Backup - " + DataTempo + ".bak'";
-            SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.CommandText = _sql;
-            try
-            {
-                conexao.Open();
-                comando.ExecuteNonQuery();
-                MessageBox.Show("Backup realizado com sucesso. O arquivo se encontra no diretório '" + Pasta + "Backup - " + DataTempo + ".bak'", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                Cursor = Cursors.Default;
-                conexao.Close();
             }
         }
 

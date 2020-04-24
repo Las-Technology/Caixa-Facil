@@ -102,6 +102,7 @@ namespace CaixaFacil
                     contasNaoContabilizada.AbaterVendaNaoContabilizada();
                     MessageBox.Show("Valor Abatido com sucesso! Valor Restante: " + txt_ValorRestante.Text, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     pagamentobaixado = true;
+                    Backup.GerarBackup();
                     this.Close();
                 }
                 else

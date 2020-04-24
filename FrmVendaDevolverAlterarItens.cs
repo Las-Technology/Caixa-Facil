@@ -360,6 +360,7 @@ namespace CaixaFacil
                 AlterarValoresPagamentoParcial_Parcelado();
                 verificarDataPagamento_E_AtualizarValoresFluxoCaixa();
                 ExcluirTodosItensVenda();
+                Backup.GerarBackup();
 
                 if (retirarValorCaixa)
                     GerenciarFluxoCaixa();
@@ -814,7 +815,7 @@ namespace CaixaFacil
 
             lblValorTotalComDesconto.Text = "R$ " + (valorVenda - desconto);
             lblValorTotalSemDesconto.Text = "R$ " + valorVenda;
-
+            Backup.GerarBackup();
             if (dgv_ListaVenda.Rows.Count == 0)
             {
                 this.Close();
