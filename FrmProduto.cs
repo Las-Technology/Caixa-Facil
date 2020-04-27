@@ -363,7 +363,7 @@ namespace CaixaFacil
                         Codigocategoria();
                         produto.Deletar();
                         categoria.Deletar();
-                        MessageBox.Show("Produto excluido com sucesso", "Aviso do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Produto excluido com sucesso", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         btn_LimparExclusao_Click(sender, e);
                         CodigoProduto();
                     }
@@ -375,7 +375,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("É necessário buscar os dados do produto para excluir do banco de dados!", "Aviso do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("É necessário buscar os dados do produto para excluir do banco de dados!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

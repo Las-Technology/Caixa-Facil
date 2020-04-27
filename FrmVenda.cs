@@ -144,19 +144,23 @@ namespace CaixaFacil
             {
                 btn_VenderPrazo_Click(sender, e);
             }
-            else if (Keys.F7 == e.KeyCode)
+            else if(e.KeyCode == Keys.F7)
             {
-                btn_VenderParcelado_Click(sender, e);
+                btnVendaMista_Click(sender, e);
             }
             else if (Keys.F8 == e.KeyCode)
             {
+                btn_VenderParcelado_Click(sender, e);
+            }
+            else if (Keys.F9 == e.KeyCode)
+            {
                 btnPagamentoCartao_Click(sender, e);
             }
-            else if (e.KeyCode == Keys.F9)
+            else if (e.KeyCode == Keys.F10)
             {
                 btn_CancelarVenda_Click(sender, e);
             }
-            else if (e.KeyCode == Keys.F10)
+            else if (e.KeyCode == Keys.F11)
             {
                 btn_BuscarServiço_Click(sender, e);
             }
@@ -532,7 +536,7 @@ namespace CaixaFacil
                         }
                         else
                         {
-                            MessageBox.Show("Produto não encontrado!", "Aviso do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show("Produto não encontrado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             txt_Codigo_Barra.Clear();
                             txt_Codigo_Barra.Focus();
                         }
@@ -597,7 +601,7 @@ namespace CaixaFacil
                         }
                         else
                         {
-                            MessageBox.Show("Produto não encontrado!", "Aviso do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show("Produto não encontrado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             txt_Codigo_Barra.Focus();
                             txt_Codigo_Barra.Clear();
                         }
@@ -777,7 +781,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Não há item(ns) para ser cancelada! Verifique!", "Aviso do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Não há item(ns) para ser cancelada! Verifique!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_Codigo_Barra.Focus();
             }
         }
@@ -851,7 +855,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Não há itens para a venda! Verifique...", "Aviso do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Não há itens para a venda! Verifique...", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_Codigo_Barra.Focus();
             }
         }
@@ -972,7 +976,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Não há itens para a venda! Verifique...", "Aviso do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Não há itens para a venda! Verifique...", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_Codigo_Barra.Focus();
             }
         }
@@ -1130,6 +1134,20 @@ namespace CaixaFacil
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnVendaMista_Click(object sender, EventArgs e)
+        {
+            if(DGV_ItensVenda.Rows.Count >= 1)
+            {
+                FrmVendaMista VendaMista = new FrmVendaMista(ValorTotal);
+                VendaMista.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Não há itens para a venda! Verifique...", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txt_Codigo_Barra.Focus();
             }
         }
 

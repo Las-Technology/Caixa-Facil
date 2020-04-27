@@ -551,6 +551,12 @@
     <Compile Include="FrmVendaDevolverAlterarItens.designer.cs">
       <DependentUpon>FrmVendaDevolverAlterarItens.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmVendaMista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmVendaMista.Designer.cs">
+      <DependentUpon>FrmVendaMista.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmVendaParcelas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -775,6 +781,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmVendaDevolverAlterarItens.resx">
       <DependentUpon>FrmVendaDevolverAlterarItens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmVendaMista.resx">
+      <DependentUpon>FrmVendaMista.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmVendaParcelas.resx">
       <DependentUpon>FrmVendaParcelas.cs</DependentUpon>
