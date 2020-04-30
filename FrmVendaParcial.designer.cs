@@ -43,6 +43,8 @@
             this.btn_FinalizarParcial = new System.Windows.Forms.Button();
             this.btn_CancelaVendaMisto = new System.Windows.Forms.Button();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.txtValorDesconto = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.txtValorTotalComDesconto = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_ValorRestante = new System.Windows.Forms.TextBox();
@@ -62,8 +64,6 @@
             this.txt_ValorAbatido = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.lbl_FecharVendaMisto = new System.Windows.Forms.Label();
-            this.txtValorDesconto = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
@@ -98,7 +98,7 @@
             this.groupBox13.Size = new System.Drawing.Size(496, 153);
             this.groupBox13.TabIndex = 20;
             this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "Pagamento";
+            this.groupBox13.Text = "Dados Cliente:";
             // 
             // lbl_Situacao
             // 
@@ -249,6 +249,28 @@
             this.groupBox12.TabIndex = 19;
             this.groupBox12.TabStop = false;
             // 
+            // txtValorDesconto
+            // 
+            this.txtValorDesconto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtValorDesconto.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtValorDesconto.Location = new System.Drawing.Point(39, 108);
+            this.txtValorDesconto.Name = "txtValorDesconto";
+            this.txtValorDesconto.Size = new System.Drawing.Size(129, 26);
+            this.txtValorDesconto.TabIndex = 315;
+            this.txtValorDesconto.Text = "R$ 0,00";
+            this.txtValorDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(35, 83);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(128, 19);
+            this.label2.TabIndex = 314;
+            this.label2.Text = "Valor do desconto";
+            // 
             // txtValorTotalComDesconto
             // 
             this.txtValorTotalComDesconto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -377,9 +399,9 @@
             this.lbl_DescontoPorcento.ForeColor = System.Drawing.Color.White;
             this.lbl_DescontoPorcento.Location = new System.Drawing.Point(12, 83);
             this.lbl_DescontoPorcento.Name = "lbl_DescontoPorcento";
-            this.lbl_DescontoPorcento.Size = new System.Drawing.Size(97, 19);
+            this.lbl_DescontoPorcento.Size = new System.Drawing.Size(101, 19);
             this.lbl_DescontoPorcento.TabIndex = 312;
-            this.lbl_DescontoPorcento.Text = "Desconto -%";
+            this.lbl_DescontoPorcento.Text = "Desconto - %";
             this.lbl_DescontoPorcento.Visible = false;
             // 
             // txt_DescontoDinheiro
@@ -483,28 +505,6 @@
             this.lbl_FecharVendaMisto.Click += new System.EventHandler(this.lbl_FecharVendaMisto_Click);
             this.lbl_FecharVendaMisto.MouseEnter += new System.EventHandler(this.lbl_FecharVendaMisto_MouseEnter);
             this.lbl_FecharVendaMisto.MouseLeave += new System.EventHandler(this.lbl_FecharVendaMisto_MouseLeave);
-            // 
-            // txtValorDesconto
-            // 
-            this.txtValorDesconto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtValorDesconto.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtValorDesconto.Location = new System.Drawing.Point(39, 108);
-            this.txtValorDesconto.Name = "txtValorDesconto";
-            this.txtValorDesconto.Size = new System.Drawing.Size(129, 26);
-            this.txtValorDesconto.TabIndex = 315;
-            this.txtValorDesconto.Text = "R$ 0,00";
-            this.txtValorDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(35, 83);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 19);
-            this.label2.TabIndex = 314;
-            this.label2.Text = "Valor do desconto";
             // 
             // FrmVendaParcial
             // 

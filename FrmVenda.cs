@@ -27,7 +27,7 @@ namespace CaixaFacil
             lbl_Hora.Text = DateTime.Now.ToLongTimeString();
             txt_ValorTotal.Text = "R$ 0,00";
             CodigoVenda();
-            txt_CodigoVenda.Text = codigoVenda;
+            lblCodigoVenda.Text = codigoVenda;
             txt_Codigo_Barra.Focus();           
         }
        
@@ -841,7 +841,7 @@ namespace CaixaFacil
                     if (vendaParcelas.repasseGerada)
                     {
                         this.Cursor = Cursors.WaitCursor;
-                        FrmRelatorioParcelas relatorioParcelas = new FrmRelatorioParcelas(txt_CodigoVenda.Text, NomeFantasia, Endereco, Numero, Cidade, Estado, Telefone, CNPJ);
+                        FrmRelatorioParcelas relatorioParcelas = new FrmRelatorioParcelas(lblCodigoVenda.Text, NomeFantasia, Endereco, Numero, Cidade, Estado, Telefone, CNPJ);
                         relatorioParcelas.ShowDialog();
                         this.Cursor = Cursors.Default;
 
@@ -876,7 +876,7 @@ namespace CaixaFacil
                     {
                         this.Cursor = Cursors.WaitCursor;
                         BuscarInformacaoEmpresa();                     
-                        FrmRelatorioPrazo relatorioPrazo = new FrmRelatorioPrazo(txt_CodigoVenda.Text, NomeFantasia, Endereco, Numero, Cidade, Estado, Telefone, CNPJ, Settings.Default["TempoPrazo"].ToString(), Bairro);
+                        FrmRelatorioPrazo relatorioPrazo = new FrmRelatorioPrazo(lblCodigoVenda.Text, NomeFantasia, Endereco, Numero, Cidade, Estado, Telefone, CNPJ, Settings.Default["TempoPrazo"].ToString(), Bairro);
                         relatorioPrazo.ShowDialog();
                         this.Cursor = Cursors.Default;
                     }
@@ -958,12 +958,12 @@ namespace CaixaFacil
                                 cliente = vendaVista.nomeCliente;
                             }
 
-                            FrmReciboPagamento reciboPagamento = new FrmReciboPagamento(lbl_Hora.Text, ValorDesconto, NomeFantasia, Cidade, Endereco, Numero, CNPJ, cliente, lbl_Data.Text, lbl_atendente.Text, txt_CodigoVenda.Text);
+                            FrmReciboPagamento reciboPagamento = new FrmReciboPagamento(lbl_Hora.Text, ValorDesconto, NomeFantasia, Cidade, Endereco, Numero, CNPJ, cliente, lbl_Data.Text, lbl_atendente.Text, lblCodigoVenda.Text);
                             reciboPagamento.ShowDialog();
                         }
                         else
                         {
-                            FrmCupom cupom = new FrmCupom(int.Parse(txt_CodigoVenda.Text), lbl_Hora.Text, NomeFantasia, Cidade, Estado, Endereco, Numero, CNPJ, cliente, lbl_Data.Text, lbl_atendente.Text, txt_CodigoVenda.Text, vendaVista.ValorPago, vendaVista.troco, Bairro);
+                            FrmCupom cupom = new FrmCupom(int.Parse(lblCodigoVenda.Text), lbl_Hora.Text, NomeFantasia, Cidade, Estado, Endereco, Numero, CNPJ, cliente, lbl_Data.Text, lbl_atendente.Text, lblCodigoVenda.Text, vendaVista.ValorPago, vendaVista.troco, Bairro);
                             cupom.ShowDialog();
                         }
 
@@ -992,7 +992,7 @@ namespace CaixaFacil
         {
             try
             {
-                venda.Id = int.Parse(txt_CodigoVenda.Text.Trim());
+                venda.Id = int.Parse(lblCodigoVenda.Text.Trim());
                 venda.parcelas = vendaParcelas.Parcelas.Rows.Count;
                 venda.dataVenda = DateTime.Now.ToShortDateString();
                 venda.horaVenda = lbl_Hora.Text;
@@ -1007,7 +1007,7 @@ namespace CaixaFacil
                 {
                     ParcelaVenda.vencimento = dr[1].ToString();
                     ParcelaVenda.valorParcelado = decimal.Parse(dr[2].ToString());
-                    ParcelaVenda.id_Venda = int.Parse(txt_CodigoVenda.Text);
+                    ParcelaVenda.id_Venda = int.Parse(lblCodigoVenda.Text);
                     ParcelaVenda.dataPagamento = "";
                     ParcelaVenda.horaPagamento = "";
                     ParcelaVenda.N_Parcela = int.Parse(dr[0].ToString());
@@ -1024,7 +1024,7 @@ namespace CaixaFacil
             }
 
             formaPagamento.descricao = "PARCELADO";
-            formaPagamento.id_Venda = int.Parse(txt_CodigoVenda.Text.Trim());
+            formaPagamento.id_Venda = int.Parse(lblCodigoVenda.Text.Trim());
             formaPagamento.InformarFormaPagamento();
             CaixaDia();
             GerenciarCaixa_V_Parcela();
@@ -1137,12 +1137,21 @@ namespace CaixaFacil
             }
         }
 
+        FrmVendaMista vendaMista;
         private void btnVendaMista_Click(object sender, EventArgs e)
         {
             if(DGV_ItensVenda.Rows.Count >= 1)
             {
-                FrmVendaMista VendaMista = new FrmVendaMista(ValorTotal);
-                VendaMista.ShowDialog();
+                vendaMista = new FrmVendaMista(ValorTotal);
+                vendaMista.ShowDialog();
+                if (vendaMista.isFinally)
+                {
+                    EfetuarVendaMista();
+                    InserirItensvenda();
+
+                    loadTelaInicial();
+                    Backup.GerarBackup();
+                }
             }
             else
             {
@@ -1151,15 +1160,51 @@ namespace CaixaFacil
             }
         }
 
-        Venda venda = new Venda();
+        private void EfetuarVendaMista()
+        {
+            try
+            {
+                venda.Id = int.Parse(lblCodigoVenda.Text.Trim());
+                venda.parcelas = 1;
+                venda.dataVenda = DateTime.Now.ToShortDateString();
+                venda.horaVenda = lbl_Hora.Text;
+                venda.valorTotal = ValorTotal;
+                venda.desconto = 0.00m;
+                venda.id_cliente = int.Parse(id_Cliente);
+                venda.id_usuario = Id_Usuario;
+                venda.lucro = LucroTotal;
+                venda.EfetuarVenda();
 
-      //verifica a situação do cliente antes da conclusão da venda durante o prazo da última compra
+                pagamentoMisto._valorDinheiro = vendaMista.valorDinheiro;
+                pagamentoMisto._valorCredDeb = vendaMista.valorCredDeb;
+                pagamentoMisto._formaPagamento = vendaMista.formaPagamento;
+                pagamentoMisto._idVenda = int.Parse(lblCodigoVenda.Text);
+                pagamentoMisto.EfetuarPagamentoMisto();
+
+                formaPagamento.descricao = "MISTO";
+                formaPagamento.id_Venda = int.Parse(lblCodigoVenda.Text.Trim());
+                formaPagamento.InformarFormaPagamento();
+                valorNCaixa = vendaMista.valorDinheiro;
+                CaixaDia();
+                GerenciarCaixa_V_ReceberPrazo();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        Venda venda = new Venda();
+        PagamentoMisto pagamentoMisto = new PagamentoMisto();
+
+        //verifica a situação do cliente antes da conclusão da venda durante o prazo da última compra
 
         private void EfetuarVendaPrazo()
         {
             try
             {
-                venda.Id = int.Parse(txt_CodigoVenda.Text.Trim());
+                venda.Id = int.Parse(lblCodigoVenda.Text.Trim());
                 venda.parcelas = 1;
                 venda.dataVenda = DateTime.Now.ToShortDateString();
                 venda.horaVenda = lbl_Hora.Text;
@@ -1172,14 +1217,14 @@ namespace CaixaFacil
 
                 ParcelaVenda.vencimento = DataVencimento;
                 ParcelaVenda.valorParcelado = ValorTotal;
-                ParcelaVenda.id_Venda = int.Parse(txt_CodigoVenda.Text);
+                ParcelaVenda.id_Venda = int.Parse(lblCodigoVenda.Text);
                 ParcelaVenda.dataPagamento = "";
                 ParcelaVenda.horaPagamento = "";
                 ParcelaVenda.N_Parcela = 1;
                 ParcelaVenda.inserirParcelas();
 
                 formaPagamento.descricao = "PRAZO";
-                formaPagamento.id_Venda = int.Parse(txt_CodigoVenda.Text.Trim());
+                formaPagamento.id_Venda = int.Parse(lblCodigoVenda.Text.Trim());
                 formaPagamento.InformarFormaPagamento();
                 CaixaDia();
                 GerenciarCaixa_V_ReceberPrazo();
@@ -1219,7 +1264,7 @@ namespace CaixaFacil
         {
             try
             {
-                venda.Id = int.Parse(txt_CodigoVenda.Text.Trim());
+                venda.Id = int.Parse(lblCodigoVenda.Text.Trim());
                 venda.parcelas = 1;
                 venda.dataVenda = DateTime.Now.ToShortDateString();
                 venda.horaVenda = lbl_Hora.Text;
@@ -1231,12 +1276,12 @@ namespace CaixaFacil
                 venda.EfetuarVenda();
 
                 formaPagamento.descricao = "PAGAMENTO PARCIAL";
-                formaPagamento.id_Venda = int.Parse(txt_CodigoVenda.Text.Trim());
+                formaPagamento.id_Venda = int.Parse(lblCodigoVenda.Text.Trim());
                 formaPagamento.InformarFormaPagamento();
 
                 PagamentoParcial.dataAbatimento = DateTime.Now.ToShortDateString();
                 PagamentoParcial.valorRestante = ValorRestante;
-                PagamentoParcial.id_Venda = int.Parse(txt_CodigoVenda.Text);
+                PagamentoParcial.id_Venda = int.Parse(lblCodigoVenda.Text);
                 PagamentoParcial.id_Cliente = int.Parse(id_Cliente);
                 PagamentoParcial.CodigoIdPagamentoParcial();
                 int id = PagamentoParcial.Id;
@@ -1319,7 +1364,7 @@ namespace CaixaFacil
         {
             if (DGV_ItensVenda.Rows.Count >= 1)
             {              
-                FrmFormaPagamento pagamentoCartao = new FrmFormaPagamento(txt_CodigoVenda.Text, ValorTotal, LucroTotal, Id_Usuario);
+                FrmFormaPagamento pagamentoCartao = new FrmFormaPagamento(lblCodigoVenda.Text, ValorTotal, LucroTotal, Id_Usuario);
                 pagamentoCartao.ShowDialog();
                 if (pagamentoCartao.Confirmacao == "Venda realizada com sucesso!")
                 {
@@ -1329,7 +1374,7 @@ namespace CaixaFacil
                         this.Cursor = Cursors.WaitCursor;
                         BuscarInformacaoEmpresa();
                         decimal valorDesconto = pagamentoCartao.Desconto;
-                        FrmReciboPagamento reciboPagamento = new FrmReciboPagamento(lbl_Hora.Text, valorDesconto, NomeFantasia, Cidade, Endereco, Numero, CNPJ, cliente, lbl_Data.Text, lbl_atendente.Text, txt_CodigoVenda.Text);
+                        FrmReciboPagamento reciboPagamento = new FrmReciboPagamento(lbl_Hora.Text, valorDesconto, NomeFantasia, Cidade, Endereco, Numero, CNPJ, cliente, lbl_Data.Text, lbl_atendente.Text, lblCodigoVenda.Text);
                         reciboPagamento.ShowDialog();
                         this.Cursor = Cursors.Default;
                         ValorTotal = 0.00m;
@@ -1348,7 +1393,7 @@ namespace CaixaFacil
         {
             DGV_ItensVenda.Rows.Clear();
             CodigoVenda();
-            txt_CodigoVenda.Text = codigoVenda;
+            lblCodigoVenda.Text = codigoVenda;
             ValorTotal = 0.00M;
             txt_ValorTotal.Text = "R$ " + ValorTotal;
             txt_Codigo_Barra.Focus();
@@ -1426,7 +1471,7 @@ namespace CaixaFacil
         {           
             try
             {
-                venda.Id = int.Parse(txt_CodigoVenda.Text.Trim());
+                venda.Id = int.Parse(lblCodigoVenda.Text.Trim());
                 venda.parcelas = 1;
                 venda.dataVenda = DateTime.Now.ToShortDateString();
                 venda.horaVenda = lbl_Hora.Text;
@@ -1437,7 +1482,7 @@ namespace CaixaFacil
                 venda.lucro = LucroTotal;
                 venda.EfetuarVenda();                              
                 formaPagamento.descricao = "VISTA";
-                formaPagamento.id_Venda = int.Parse(txt_CodigoVenda.Text.Trim());
+                formaPagamento.id_Venda = int.Parse(lblCodigoVenda.Text.Trim());
                 formaPagamento.InformarFormaPagamento();
                 valorNCaixa = ValorDesconto;
                 CaixaDia();
@@ -1538,7 +1583,7 @@ namespace CaixaFacil
                 produto.ConsultarProduto();
                 LucroVenda = produto.lucro * int.Parse(DGV_ItensVenda.Rows[i].Cells["ColumnQuantidade"].Value.ToString());
                 
-                itensVenda.id_venda = int.Parse(txt_CodigoVenda.Text);
+                itensVenda.id_venda = int.Parse(lblCodigoVenda.Text);
                 itensVenda.Valor = decimal.Parse(DGV_ItensVenda.Rows[i].Cells["ColumnSubTotal"].Value.ToString());
                 itensVenda.id_produto = int.Parse(DGV_ItensVenda.Rows[i].Cells["ColumnCodigo"].Value.ToString());
                 itensVenda.quantidade = int.Parse(DGV_ItensVenda.Rows[i].Cells["ColumnQuantidade"].Value.ToString());

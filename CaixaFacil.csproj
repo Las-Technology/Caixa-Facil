@@ -123,6 +123,7 @@
     <Compile Include="Classes\ClassFornecedor.cs" />
     <Compile Include="Classes\ClassItensVenda.cs" />
     <Compile Include="Classes\ClassPagamentoCartao.cs" />
+    <Compile Include="Classes\ClassPagamentoMisto.cs" />
     <Compile Include="Classes\ClassPagamentoParcial.cs" />
     <Compile Include="Classes\ClassParcelaVenda.cs" />
     <Compile Include="Classes\ClassPrestacaoServico.cs" />

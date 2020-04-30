@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -305,6 +299,14 @@ namespace CaixaFacil
                 "[Id_Venda]          INT NOT NULL," +
                 "PRIMARY KEY CLUSTERED([Id_FormaPagamento] ASC)," +
                 "FOREIGN KEY([Id_Venda]) REFERENCES[dbo].[Venda] ([Id_Venda]) ON DELETE CASCADE);" +
+
+                "CREATE TABLE [dbo].[PagamentoMisto](" +
+                "[Id_PagamentoMisto] INT NOT NULL PRIMARY KEY IDENTITY(1,1), " +
+                "[ValorDinheiro] DECIMAL(18, 2) NULL, " +
+                "[ValorCredDeb] DECIMAL(18, 2) NULL, " +
+                "[FormaPagamento]    VARCHAR(17) NULL," +
+                "[id_Venda] INT NULL," +
+                "FOREIGN KEY([id_Venda]) REFERENCES[dbo].[Venda] ([id_Venda]) ON DELETE CASCADE)" +
                 
                 "CREATE TABLE[dbo].[ItensVenda](" +
                 "[Id_ItensVenda] INT             IDENTITY(1, 1) NOT NULL," +

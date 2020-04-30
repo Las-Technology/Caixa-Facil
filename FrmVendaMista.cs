@@ -12,13 +12,21 @@ namespace CaixaFacil
 {
     public partial class FrmVendaMista : Form
     {
-        public FrmVendaMista(decimal ValorTotal)
+        public FrmVendaMista(decimal valorTotal)
         {
             InitializeComponent();
-            lblValorVenda.Text = "R$ " + ValorTotal;
+            lblValorVenda.Text = "R$ " + valorTotal;
+            this.valorTotal = valorTotal;
         }
 
-        private void label5_MouseLeave(object sender, EventArgs e)
+        public decimal valorDinheiro { get; set; }
+        public decimal valorCredDeb { get; set; }
+        public string formaPagamento { get; set; }
+        public bool isFinally = false;
+             
+        decimal valorTotal;
+
+        private void lblFechar_MouseLeave(object sender, EventArgs e)
         {
             lblFechar.BackColor = Color.Transparent;
         }
@@ -40,7 +48,107 @@ namespace CaixaFacil
 
         private void btn_Finalizar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (!string.IsNullOrWhiteSpace(txtValorDinheiro.Text))
+            {
+                if (decimal.Parse(txtValorDinheiro.Text) >= valorTotal)
+                {
+                    MessageBox.Show("O Valor em dinheiro não pode ser maior ou igual ao valor total da venda!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                valorCredDeb = decimal.Parse(txtValorCreditoAndDebito.Text);
+                valorDinheiro = decimal.Parse(txtValorDinheiro.Text);
+                formaPagamento = cbFormaPagamento.Text;
+                isFinally = true;
+
+                this.Close();
+            }
+            else
+                MessageBox.Show("Informe o valor que o cliente irá pagar em dinheiro!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void FrmVendaMista_Load(object sender, EventArgs e)
+        {
+            cbFormaPagamento.SelectedIndex = 0;
+            this.Size = new Size(542, 325);
+            gbPagamento.Location = new Point(26, 80);
+        }
+
+        private void FrmVendaMista_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                btn_CancelarVendaVista_Click(sender, e);
+            else if (e.KeyCode == Keys.F4)
+                btn_Descontar_Click(sender, e);
+            else if (e.KeyCode == Keys.F10)
+                btn_Finalizar_Click(sender, e);
+        }
+
+        private void txtValorDinheiro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (!char.IsDigit(e.KeyChar))
+                {
+                    if (((int)e.KeyChar) != ((int)Keys.Back))
+                        if (e.KeyChar != ',')
+                            e.Handled = true;
+                        else if (txtValorDinheiro.Text.IndexOf(',') > 0)
+                            e.Handled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtValorDinheiro_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtValorDinheiro.Text))
+            {
+                txtValorCreditoAndDebito.Text = (valorTotal - decimal.Parse(txtValorDinheiro.Text)).ToString();
+            }
+            else
+            {
+                txtValorCreditoAndDebito.Text = "";
+            }
+        }
+
+        private void txtValorDinheiro_Leave(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtValorDinheiro.Text))
+                txtValorDinheiro.Text = decimal.Parse(txtValorDinheiro.Text).ToString("0.00");
+        }
+
+        bool goDescontar = false;
+
+        private void btn_Descontar_Click(object sender, EventArgs e)
+        {
+            goDescontar = !goDescontar;
+            switch (goDescontar)
+            {
+                case true:
+                    lbl_DescontoDinheiro.Visible = true;
+                    txt_DescontoDinheiro.Visible = true;
+                    lbl_ValorDesconto.Visible = true;
+                    lbl_DescontoPorcento.Visible = true;
+                    txt_DescontoPorcento.Visible = true;
+                    txt_ValorTotalDesconto.Visible = true;
+                    this.Size = new Size(542, 379);
+                    gbPagamento.Location = new Point(28, 137);
+                    break;
+                case false:
+                    lbl_DescontoDinheiro.Visible = false;
+                    txt_DescontoDinheiro.Visible = false;
+                    lbl_ValorDesconto.Visible = false;
+                    txt_ValorTotalDesconto.Visible = false;
+                    lbl_DescontoPorcento.Visible = false;
+                    txt_DescontoPorcento.Visible = false;
+                    this.Size = new Size(542, 325);
+                    gbPagamento.Location = new Point(26, 80);
+                    break;
+            }
         }
     }
 }
