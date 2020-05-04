@@ -1168,9 +1168,9 @@ namespace CaixaFacil
                 venda.parcelas = 1;
                 venda.dataVenda = DateTime.Now.ToShortDateString();
                 venda.horaVenda = lbl_Hora.Text;
-                venda.valorTotal = ValorTotal;
-                venda.desconto = 0.00m;
-                venda.id_cliente = int.Parse(id_Cliente);
+                venda.valorTotal = ValorTotal - vendaMista.descontoDinheiro;
+                venda.desconto = vendaMista.descontoDinheiro;
+                venda.id_cliente = vendaMista.idCliente;
                 venda.id_usuario = Id_Usuario;
                 venda.lucro = LucroTotal;
                 venda.EfetuarVenda();

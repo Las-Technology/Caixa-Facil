@@ -41,6 +41,9 @@
             this.lbl_DescontoDinheiro = new System.Windows.Forms.Label();
             this.btn_Descontar = new System.Windows.Forms.Button();
             this.gbPagamento = new System.Windows.Forms.GroupBox();
+            this.lbl_Cliente = new System.Windows.Forms.Label();
+            this.lbl_ApresentacaoCliente = new System.Windows.Forms.Label();
+            this.btn_VincularCliente = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.cbFormaPagamento = new System.Windows.Forms.ComboBox();
             this.txtValorCreditoAndDebito = new System.Windows.Forms.TextBox();
@@ -57,7 +60,7 @@
             this.btn_Finalizar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Finalizar.Image = global::CaixaFacil.Properties.Resources.Ok_icon;
             this.btn_Finalizar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Finalizar.Location = new System.Drawing.Point(366, 307);
+            this.btn_Finalizar.Location = new System.Drawing.Point(366, 352);
             this.btn_Finalizar.Name = "btn_Finalizar";
             this.btn_Finalizar.Size = new System.Drawing.Size(164, 60);
             this.btn_Finalizar.TabIndex = 295;
@@ -73,7 +76,7 @@
             this.btn_CancelarVendaVista.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_CancelarVendaVista.Image = global::CaixaFacil.Properties.Resources.Button_Cancel_icon__1_;
             this.btn_CancelarVendaVista.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_CancelarVendaVista.Location = new System.Drawing.Point(187, 307);
+            this.btn_CancelarVendaVista.Location = new System.Drawing.Point(187, 352);
             this.btn_CancelarVendaVista.Name = "btn_CancelarVendaVista";
             this.btn_CancelarVendaVista.Size = new System.Drawing.Size(173, 60);
             this.btn_CancelarVendaVista.TabIndex = 294;
@@ -130,6 +133,8 @@
             this.txt_DescontoPorcento.Text = "0,00";
             this.txt_DescontoPorcento.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_DescontoPorcento.Visible = false;
+            this.txt_DescontoPorcento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_DescontoPorcento_KeyPress);
+            this.txt_DescontoPorcento.Leave += new System.EventHandler(this.txt_DescontoPorcento_Leave);
             // 
             // lbl_DescontoPorcento
             // 
@@ -154,6 +159,8 @@
             this.txt_DescontoDinheiro.Text = "0,00";
             this.txt_DescontoDinheiro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_DescontoDinheiro.Visible = false;
+            this.txt_DescontoDinheiro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_DescontoDinheiro_KeyPress);
+            this.txt_DescontoDinheiro.Leave += new System.EventHandler(this.txt_DescontoDinheiro_Leave);
             // 
             // txt_ValorTotalDesconto
             // 
@@ -208,6 +215,9 @@
             // 
             // gbPagamento
             // 
+            this.gbPagamento.Controls.Add(this.lbl_Cliente);
+            this.gbPagamento.Controls.Add(this.lbl_ApresentacaoCliente);
+            this.gbPagamento.Controls.Add(this.btn_VincularCliente);
             this.gbPagamento.Controls.Add(this.label3);
             this.gbPagamento.Controls.Add(this.cbFormaPagamento);
             this.gbPagamento.Controls.Add(this.txtValorCreditoAndDebito);
@@ -216,10 +226,46 @@
             this.gbPagamento.Controls.Add(this.label1);
             this.gbPagamento.Location = new System.Drawing.Point(28, 137);
             this.gbPagamento.Name = "gbPagamento";
-            this.gbPagamento.Size = new System.Drawing.Size(501, 159);
+            this.gbPagamento.Size = new System.Drawing.Size(501, 202);
             this.gbPagamento.TabIndex = 321;
             this.gbPagamento.TabStop = false;
             this.gbPagamento.Text = "Pagamento";
+            // 
+            // lbl_Cliente
+            // 
+            this.lbl_Cliente.AutoSize = true;
+            this.lbl_Cliente.ForeColor = System.Drawing.Color.White;
+            this.lbl_Cliente.Location = new System.Drawing.Point(253, 169);
+            this.lbl_Cliente.Name = "lbl_Cliente";
+            this.lbl_Cliente.Size = new System.Drawing.Size(0, 19);
+            this.lbl_Cliente.TabIndex = 309;
+            this.lbl_Cliente.Visible = false;
+            // 
+            // lbl_ApresentacaoCliente
+            // 
+            this.lbl_ApresentacaoCliente.AutoSize = true;
+            this.lbl_ApresentacaoCliente.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ApresentacaoCliente.ForeColor = System.Drawing.Color.White;
+            this.lbl_ApresentacaoCliente.Location = new System.Drawing.Point(250, 148);
+            this.lbl_ApresentacaoCliente.Name = "lbl_ApresentacaoCliente";
+            this.lbl_ApresentacaoCliente.Size = new System.Drawing.Size(62, 19);
+            this.lbl_ApresentacaoCliente.TabIndex = 308;
+            this.lbl_ApresentacaoCliente.Text = "Cliente:";
+            this.lbl_ApresentacaoCliente.Visible = false;
+            // 
+            // btn_VincularCliente
+            // 
+            this.btn_VincularCliente.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_VincularCliente.ForeColor = System.Drawing.Color.Black;
+            this.btn_VincularCliente.Image = global::CaixaFacil.Properties.Resources.User_Group_icon__1_1;
+            this.btn_VincularCliente.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_VincularCliente.Location = new System.Drawing.Point(18, 140);
+            this.btn_VincularCliente.Name = "btn_VincularCliente";
+            this.btn_VincularCliente.Size = new System.Drawing.Size(226, 48);
+            this.btn_VincularCliente.TabIndex = 307;
+            this.btn_VincularCliente.Text = "Vincular Cliente - F5";
+            this.btn_VincularCliente.UseVisualStyleBackColor = true;
+            this.btn_VincularCliente.Click += new System.EventHandler(this.btn_VincularCliente_Click);
             // 
             // label3
             // 
@@ -292,7 +338,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.ClientSize = new System.Drawing.Size(542, 379);
+            this.ClientSize = new System.Drawing.Size(542, 424);
             this.Controls.Add(this.gbPagamento);
             this.Controls.Add(this.txt_DescontoPorcento);
             this.Controls.Add(this.lbl_DescontoPorcento);
@@ -343,5 +389,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtValorDinheiro;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_Cliente;
+        private System.Windows.Forms.Label lbl_ApresentacaoCliente;
+        private System.Windows.Forms.Button btn_VincularCliente;
     }
 }
