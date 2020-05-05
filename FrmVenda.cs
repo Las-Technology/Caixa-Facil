@@ -1146,6 +1146,8 @@ namespace CaixaFacil
                 vendaMista.ShowDialog();
                 if (vendaMista.isFinally)
                 {
+                    descontoDinheiro = vendaMista.descontoDinheiro;
+
                     EfetuarVendaMista();
                     InserirItensvenda();
 
@@ -1186,12 +1188,59 @@ namespace CaixaFacil
                 formaPagamento.InformarFormaPagamento();
                 valorNCaixa = vendaMista.valorDinheiro;
                 CaixaDia();
-                GerenciarCaixa_V_ReceberPrazo();
-
+                GerenciarCaixa();
+                AtualizarValorDescontoCaixa();
+                ValorDesconto = vendaMista.valorDinheiro;
+                InformarValorRecebidoMisto();
+                GerenciarCaixa_V_ReceberMisto();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void InformarValorRecebidoMisto()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "Update FluxoCaixa set ValorRecebidoMisto = ValorRecebidoMisto + @ValorRecebidoMisto where HoraSaida = '' and DataSaida = ''";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@ValorRecebidoMisto", vendaMista.valorDinheiro);
+            comando.CommandText = _sql;
+            try
+            {
+                conexao.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        private void GerenciarCaixa_V_ReceberMisto()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "Update FluxoCaixa set ValorReceber = ValorReceber + @ValorReceber where HoraSaida = '' and DataSaida = ''";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@ValorReceber", vendaMista.valorCredDeb);
+            comando.CommandText = _sql;
+            try
+            {
+                conexao.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                conexao.Close();
             }
         }
 

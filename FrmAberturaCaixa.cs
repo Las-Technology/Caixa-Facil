@@ -83,6 +83,7 @@ namespace CaixaFacil
                 fluxoCaixa.valorRecebidoParcial = 0.00m;
                 fluxoCaixa.valorRecebidoPrazo = 0.00m;
                 fluxoCaixa.valorRecebidoVista = 0.00m;
+                fluxoCaixa.valorRecebidoMisto = 0.00m;
                 fluxoCaixa.entradaParcela = 0.00m;
                 if (parcelaVenda.VerificarVencimento() == true)
                 {

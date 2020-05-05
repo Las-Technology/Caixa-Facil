@@ -282,6 +282,7 @@ namespace CaixaFacil
                 "[ValorRecebidoPrazo] DECIMAL(18, 2) NULL," +
                 "[ValorRecebidoParcial] DECIMAL(18, 2) NULL," +
                 "[ValorRecebidoVista] DECIMAL(18, 2) NULL," +
+                "[ValorRecebidoMisto] DECIMAL(18, 2) NULL," +
                 "[ValorRecebidoParcela] DECIMAL(18, 2) NULL," +
                 "[ValorRecebidoCredito] DECIMAL(18, 2) NULL, " +
                 "[ValorRecebidoDebito] DECIMAL(18, 2) NULL," +

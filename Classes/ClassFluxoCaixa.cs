@@ -32,6 +32,7 @@ namespace CaixaFacil
         private decimal ValorRecebidoPrazo;
         private decimal ValorRecebidoParcial;
         private decimal ValorRecebidoVista;
+        private decimal ValorRecebidoMisto;
         private decimal ValorRecebidoParcela;
         private decimal EntradaParcela;
         private decimal ValorRecebidoCredito;
@@ -132,6 +133,11 @@ namespace CaixaFacil
             get { return ValorRecebidoVista; }
             set { ValorRecebidoVista = value; }
         }
+        public decimal valorRecebidoMisto
+        {
+            get { return ValorRecebidoMisto; }
+            set { ValorRecebidoMisto = value; }
+        }
         public decimal valorRecebidoParcela
         {
             get { return ValorRecebidoParcela; }
@@ -155,7 +161,7 @@ namespace CaixaFacil
         public void AbrirCaixa()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Insert into FluxoCaixa (ValorCaixa, ValorEntrada, DataEntrada, HoraEntrada, DataSaida, HoraSaida, Id_Usuario, ValorReceber, Desconto, ValorTotalCaixa, ValorRecebidoPrazo, ValorRecebidoParcial, ValorRecebidoVista, ValorRecebidoParcela, EntradaParcela, ValorRecebidoCredito, ValorRecebidoDebito) values (@ValorCaixa, @ValorEntrada, @DataEntrada, @HoraEntrada, @DataSaida, @HoraSaida, @Id_Usuario, @ValorReceber, @Desconto, @ValorTotalCaixa, @ValorRecebidoPrazo, @ValorRecebidoParcial, @ValorRecebidoVista, @ValorRecebidoParcela, @EntradaParcela, @ValorRecebidoCredito, @ValorRecebidoDebito)";
+            _sql = "Insert into FluxoCaixa (ValorCaixa, ValorEntrada, DataEntrada, HoraEntrada, DataSaida, HoraSaida, Id_Usuario, ValorReceber, Desconto, ValorTotalCaixa, ValorRecebidoPrazo, ValorRecebidoParcial, ValorRecebidoVista, ValorRecebidoParcela, EntradaParcela, ValorRecebidoCredito, ValorRecebidoDebito, ValorRecebidoMisto) values (@ValorCaixa, @ValorEntrada, @DataEntrada, @HoraEntrada, @DataSaida, @HoraSaida, @Id_Usuario, @ValorReceber, @Desconto, @ValorTotalCaixa, @ValorRecebidoPrazo, @ValorRecebidoParcial, @ValorRecebidoVista, @ValorRecebidoParcela, @EntradaParcela, @ValorRecebidoCredito, @ValorRecebidoDebito, @ValorRecebidoMisto)";
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@ValorEntrada", valorEntrada);
             comando.Parameters.AddWithValue("@Desconto", desconto);
@@ -171,6 +177,7 @@ namespace CaixaFacil
             comando.Parameters.AddWithValue("@ValorRecebidoParcial", valorRecebidoParcial);
             comando.Parameters.AddWithValue("@ValorRecebidoParcela", valorRecebidoParcela);
             comando.Parameters.AddWithValue("@ValorRecebidoVista", valorRecebidoVista);
+            comando.Parameters.AddWithValue("@ValorRecebidoMisto", valorRecebidoMisto);
             comando.Parameters.AddWithValue("@ValorRecebidoPrazo", valorRecebidoPrazo);
             comando.Parameters.AddWithValue("@ValorRecebidoCredito", valorRecebidoCredito);
             comando.Parameters.AddWithValue("@ValorRecebidoDebito", valorRecebidoDebito);
