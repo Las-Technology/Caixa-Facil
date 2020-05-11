@@ -1138,6 +1138,8 @@ namespace CaixaFacil
         }
 
         FrmVendaMista vendaMista;
+        ValorMistoAbatido valorMistoAbatido = new ValorMistoAbatido();
+
         private void btnVendaMista_Click(object sender, EventArgs e)
         {
             if(DGV_ItensVenda.Rows.Count >= 1)
@@ -1179,9 +1181,17 @@ namespace CaixaFacil
 
                 pagamentoMisto._valorDinheiro = vendaMista.valorDinheiro;
                 pagamentoMisto._valorCredDeb = vendaMista.valorCredDeb;
+                pagamentoMisto._valorRestante = vendaMista.valorRestante;
                 pagamentoMisto._formaPagamento = vendaMista.formaPagamento;
                 pagamentoMisto._idVenda = int.Parse(lblCodigoVenda.Text);
                 pagamentoMisto.EfetuarPagamentoMisto();
+                pagamentoMisto.InformarUltimoIdPagamentoMisto();
+
+                valorMistoAbatido._idPagamentoMisto = pagamentoMisto._idPagamentoMisto;
+                valorMistoAbatido._valorTotalAbatimento = (vendaMista.valorCredDeb + vendaMista.valorDinheiro);
+                valorMistoAbatido._dataPagamento = DateTime.Now.ToShortDateString();
+                valorMistoAbatido._horaPagamento = DateTime.Now.ToLongTimeString();
+                valorMistoAbatido.InserirValorMistoAbatido();
 
                 formaPagamento.descricao = "MISTO";
                 formaPagamento.id_Venda = int.Parse(lblCodigoVenda.Text.Trim());
@@ -1227,7 +1237,7 @@ namespace CaixaFacil
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Update FluxoCaixa set ValorReceber = ValorReceber + @ValorReceber where HoraSaida = '' and DataSaida = ''";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@ValorReceber", vendaMista.valorCredDeb);
+            comando.Parameters.AddWithValue("@ValorReceber", (vendaMista.valorCredDeb + vendaMista.valorRestante));
             comando.CommandText = _sql;
             try
             {
@@ -1245,6 +1255,7 @@ namespace CaixaFacil
         }
 
         Venda venda = new Venda();
+
         PagamentoMisto pagamentoMisto = new PagamentoMisto();
 
         //verifica a situação do cliente antes da conclusão da venda durante o prazo da última compra

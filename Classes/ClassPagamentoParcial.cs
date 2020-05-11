@@ -79,7 +79,8 @@ namespace CaixaFacil
             {
                 _sql = "Select Max(id_PagamentoParcial) From PagamentoParcial";
                 SqlCommand comando = new SqlCommand(_sql, conexao);
-                comando.CommandText = _sql; try
+                comando.CommandText = _sql; 
+                try
                 {                  
                     conexao.Open();
                     if (comando.ExecuteScalar() != DBNull.Value)

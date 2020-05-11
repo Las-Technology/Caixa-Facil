@@ -133,6 +133,7 @@
     <Compile Include="Classes\ClassValidacaoEmail.cs" />
     <Compile Include="Classes\ClassVenda.cs" />
     <Compile Include="Classes\CPF.cs" />
+    <Compile Include="Classes\ClassValorMistoAbatido.cs" />
     <Compile Include="Connected Services\WsCorreios\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

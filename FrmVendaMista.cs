@@ -21,16 +21,13 @@ namespace CaixaFacil
 
         public decimal valorDinheiro { get; set; }
         public decimal valorCredDeb { get; set; }
+        public decimal valorRestante { get; set; }
         public string formaPagamento { get; set; }
         public int idCliente = 1; 
         public bool isFinally = false;
         bool vincularCliente = false;
-        private decimal valorDescontoPorcento;
-        private decimal descontoPorcento;
         public decimal descontoDinheiro;
-        private decimal valorDesconto;
-
-        decimal valorTotal;
+        decimal valorDesconto, valorTotal, descontoPorcento, valorDescontoPorcento;
 
         private void lblFechar_MouseLeave(object sender, EventArgs e)
         {
@@ -56,6 +53,18 @@ namespace CaixaFacil
         {
             if (!string.IsNullOrWhiteSpace(txtValorDinheiro.Text))
             {
+                if (cbEditarValorCredDeb.Checked && !vincularCliente)
+                {
+                    MessageBox.Show("Vincule um cliente para efetuar a venda!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+             
+                if (cbEditarValorCredDeb.Checked && vincularCliente && valorRestante == 0.00m)
+                {
+                    MessageBox.Show("O Valor do pagamento pelo crédito|débito não foi alterado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
                 valorCredDeb = decimal.Parse(txtValorCreditoAndDebito.Text);
                 valorDinheiro = decimal.Parse(txtValorDinheiro.Text);
                 formaPagamento = cbFormaPagamento.Text;
@@ -70,7 +79,7 @@ namespace CaixaFacil
         private void FrmVendaMista_Load(object sender, EventArgs e)
         {
             cbFormaPagamento.SelectedIndex = 0;
-            this.Size = new Size(542, 367);
+            this.Size = new Size(542, 422);
             gbPagamento.Location = new Point(26, 80);
         }
 
@@ -105,36 +114,6 @@ namespace CaixaFacil
             }
         }
 
-        private void txtValorDinheiro_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(txtValorDinheiro.Text))
-                {
-                    if (decimal.Parse(txtValorDinheiro.Text) >= (valorTotal - descontoDinheiro) || decimal.Parse(txtValorDinheiro.Text) == 0.00m)
-                    {
-                        MessageBox.Show("O Valor em dinheiro não pode ser maior ou igual ao valor total da venda ou igual a zero!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        txtValorDinheiro.Focus();
-                        txtValorDinheiro.Clear();
-                        txtValorCreditoAndDebito.Clear();
-                        return;
-                    }
-                  
-                    txtValorCreditoAndDebito.Text = ((valorTotal - descontoDinheiro) - decimal.Parse(txtValorDinheiro.Text)).ToString();
-
-                    txtValorDinheiro.Text = decimal.Parse(txtValorDinheiro.Text).ToString("0.00");
-                }
-                else
-                {
-                    txtValorCreditoAndDebito.Text = "";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         bool goDescontar = false;
 
         private void btn_Descontar_Click(object sender, EventArgs e)
@@ -150,7 +129,7 @@ namespace CaixaFacil
                     txt_DescontoPorcento.Visible = true;
                     txt_ValorTotalDesconto.Visible = true;
                     txt_ValorTotalDesconto.Text = valorTotal.ToString();
-                    this.Size = new Size(542, 424);
+                    this.Size = new Size(542, 480);
                     gbPagamento.Location = new Point(28, 137);
                     break;
                 case false:
@@ -165,13 +144,19 @@ namespace CaixaFacil
                     txt_ValorTotalDesconto.Text = "0,00";
                     descontoDinheiro = 0.00M;
                     descontoPorcento = 0.00M;
-                    this.Size = new Size(542, 367);
+                    valorRestante = 0.00m;
+                    this.Size = new Size(542, 422);
                     gbPagamento.Location = new Point(26, 80);
+                    txtValorRestante.Text = "0,00";
                     break;
             }
 
-            if (!string.IsNullOrEmpty(txtValorDinheiro.Text))
-                txtValorCreditoAndDebito.Text = ((valorTotal - descontoDinheiro) - decimal.Parse(txtValorDinheiro.Text)).ToString();
+            if (!string.IsNullOrEmpty(txtValorDinheiro.Text) && !goDescontar)
+            {
+                txtValorCreditoAndDebito.Text = ((valorTotal - descontoDinheiro) - valorDinheiro).ToString();
+                valorRestante = 0.00M;
+                txtValorRestante.Text = "0,00";
+            }
         }
 
         private void btn_VincularCliente_Click(object sender, EventArgs e)
@@ -273,6 +258,74 @@ namespace CaixaFacil
             }
         }
 
+        private void txtValorCreditoAndDebito_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cbEditarValorCredDeb.Checked)
+                {
+                    valorRestante =  (valorTotal - descontoDinheiro) - valorDinheiro - decimal.Parse(txtValorCreditoAndDebito.Text);
+                    if(valorRestante < 0)
+                    {
+                        MessageBox.Show("Informe um valor menor. O valor informado ultrapassa o valor total da venda!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtValorCreditoAndDebito.Text = ((valorTotal - descontoDinheiro) - valorDinheiro).ToString();
+                        valorRestante = 0.00m;
+                        return;
+                    }
+                    txtValorRestante.Text = valorRestante.ToString("0.00");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtValorCreditoAndDebito_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (!char.IsDigit(e.KeyChar))
+                {
+                    if (((int)e.KeyChar) != ((int)Keys.Back))
+                        if (e.KeyChar != ',')
+                            e.Handled = true;
+                        else if (txtValorCreditoAndDebito.Text.IndexOf(',') > 0)
+                            e.Handled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtValorDinheiro_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(txtValorDinheiro.Text))
+                    txtValorDinheiro.Text = decimal.Parse(txtValorDinheiro.Text).ToString("0.00");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtValorCreditoAndDebito_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(txtValorCreditoAndDebito.Text))
+                    txtValorCreditoAndDebito.Text = decimal.Parse(txtValorCreditoAndDebito.Text).ToString("0.00");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void txt_DescontoDinheiro_Leave(object sender, EventArgs e)
         {
             if (txt_DescontoDinheiro.Text != "")
@@ -290,7 +343,7 @@ namespace CaixaFacil
                         txt_DescontoPorcento.Text = decimal.Parse(txt_DescontoPorcento.Text.Trim()).ToString("0.00");
 
                         if (!string.IsNullOrEmpty(txtValorDinheiro.Text))
-                            txtValorCreditoAndDebito.Text = ((valorTotal - descontoDinheiro) - decimal.Parse(txtValorDinheiro.Text)).ToString();
+                            txtValorCreditoAndDebito.Text = ((valorTotal - descontoDinheiro) - valorDinheiro).ToString();
                     }
                     else
                     {
@@ -299,6 +352,8 @@ namespace CaixaFacil
                         descontoPorcento = 0.00M;
                         descontoDinheiro = 0.00M;
                         txt_ValorTotalDesconto.Text = valorTotal.ToString();
+                        valorRestante = 0.00m;
+                        txtValorRestante.Text = "0,00";
                     }
                 }
                 catch (Exception ex)
@@ -311,8 +366,58 @@ namespace CaixaFacil
 
         private void txtValorDinheiro_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtValorDinheiro.Text))
-                txtValorCreditoAndDebito.Clear();
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(txtValorDinheiro.Text))
+                {
+                    valorDinheiro = decimal.Parse(txtValorDinheiro.Text);
+
+                    if (valorDinheiro >= (valorTotal - descontoDinheiro) || valorDinheiro == 0.00m)
+                    {
+                        MessageBox.Show("O Valor em dinheiro não pode ser maior ou igual ao valor total da venda ou igual a zero!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtValorDinheiro.Focus();
+                        txtValorDinheiro.Clear();
+                        txtValorCreditoAndDebito.Clear();
+                        return;
+                    }
+
+                    txtValorCreditoAndDebito.Text = ((valorTotal - descontoDinheiro) - valorDinheiro).ToString();
+
+                    if (cbEditarValorCredDeb.Checked)
+                    {
+                        if(!string.IsNullOrEmpty(txtValorDinheiro.Text))
+                        valorRestante = (valorTotal - descontoDinheiro) - valorDinheiro - decimal.Parse(txtValorCreditoAndDebito.Text);
+                        txtValorRestante.Text = valorRestante.ToString("0.00");
+                    }
+
+                }
+                else
+                {
+                    valorDinheiro = 0.00m;
+                    txtValorCreditoAndDebito.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cbEditarValorCredDeb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbEditarValorCredDeb.Checked)
+            {
+                txtValorCreditoAndDebito.ReadOnly = false;
+                txtValorRestante.Enabled = true;
+            }
+            else
+            {
+                txtValorCreditoAndDebito.ReadOnly = true;
+                txtValorRestante.Enabled = false;
+                txtValorRestante.Text = "0,00";
+                valorRestante = 0.00m;
+                txtValorCreditoAndDebito.Text = ((valorTotal - descontoDinheiro) - valorDinheiro).ToString();
+            }
         }
     }
 }
