@@ -16,18 +16,14 @@ namespace CaixaFacil
         public FrmPesquisarBoletos()
         {
             InitializeComponent();
+            cbMaxRows.SelectedIndex = 1;
         }
 
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
 
         private void FrmPesquisarBoletos_Load(object sender, EventArgs e)
         {
-            SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "SELECT Id, Beneficiario, NumeroDocumento, Vencimento, ValorDocumento, Referencia, Desconto FROM ContasPagar WHERE (Status = 'Não Pago')";
-            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
-            DataTable Tabela = new DataTable();
-            comando.Fill(Tabela);
-            dgv_Busca.DataSource = Tabela;
+            CarregarGrid();
         }
 
         public string Codigo { get; set; }
@@ -74,9 +70,28 @@ namespace CaixaFacil
 
         private void txt_Beneficiario_TextChanged(object sender, EventArgs e)
         {
-            string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3");
+            CarregarGrid();
+        }
+
+        private void CarregarGrid()
+        {
+            string filter = "";
+
+            if(cbMaxRows.Text != "Todos")
+            {
+                filter = " TOP " + cbMaxRows.Text;
+            }
+
+            if (string.IsNullOrWhiteSpace(txt_Beneficiario.Text))
+            {
+                _sql = "SELECT" + filter + " Id, Beneficiario, NumeroDocumento, Vencimento, ValorDocumento, Referencia, DataPagamento, Multa, Desconto, ValorPago, Status from ContasPagar";
+            }
+            else
+            {
+                _sql = "SELECT" + filter + " Id, Beneficiario, NumeroDocumento, Vencimento, ValorDocumento, Referencia, DataPagamento, Multa, Desconto, ValorPago, Status from ContasPagar where Beneficiario like '" + txt_Beneficiario.Text.Trim() + "%'";
+            }
+            
             SqlConnection conexao = new SqlConnection(stringConn);
-            string _sql = "Select * from ContasPagar where Beneficiario like '" + txt_Beneficiario.Text.Trim() + "%'";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.CommandText = _sql;
             try
@@ -106,6 +121,25 @@ namespace CaixaFacil
                 Beneficiario = linhas.Cells[1].Value.ToString();
                 this.Close();
             }
+        }
+
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarGrid();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                CarregarGrid();
         }
 
         private void dataGridView_Busca_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)

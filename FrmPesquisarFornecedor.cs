@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -20,19 +15,32 @@ namespace CaixaFacil
         public string Codigo { get; set; }
         public string Fornecedor { get; set; }
 
-        string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3");
+        string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
+
         private void FrmPesquisarFornecedor_Load(object sender, EventArgs e)
         {
-
+            cbMaxRows.SelectedIndex = 1;
             CarregarGrid();
         }
 
         private void CarregarGrid()
         {
+            string filter = "";
+            if (cbMaxRows.Text != "Todos")
+            {
+                filter = " TOP " + cbMaxRows.Text;
+            }
+
+            if (string.IsNullOrWhiteSpace(txt_Nome.Text))
+            {
+                _sql = "Select" + filter + " [Id_Fornecedor] ,[Nome] ,[CNPJ] ,[InscricaoEstadual] ,[Cep] ,[Bairro] ,[Endereco] ,[Numero] ,[Cidade] ,[Estado] ,[Telefone] ,[Celular] ,[Email] FROM Fornecedor";
+            }
+            else
+            {
+                _sql = "Select" + filter + " [Id_Fornecedor] ,[Nome] ,[CNPJ] ,[InscricaoEstadual] ,[Cep] ,[Bairro] ,[Endereco] ,[Numero] ,[Cidade] ,[Estado] ,[Telefone] ,[Celular] ,[Email] FROM Fornecedor WHERE  Nome like   '%" + txt_Nome.Text.Trim() + "%'";
+            }
+
             SqlConnection conexao = new SqlConnection(stringConn);
-
-            string _sql = "SELECT * FROM Fornecedor";
-
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.CommandText = _sql;
             try
@@ -53,6 +61,7 @@ namespace CaixaFacil
             }
 
         }
+
         int X = 0;
         int Y = 0;
         private void panelCabecalho_MouseDown(object sender, MouseEventArgs e)
@@ -86,27 +95,7 @@ namespace CaixaFacil
 
         private void txt_Nome_TextChanged(object sender, EventArgs e)
         {
-            if (txt_Nome.Text != string.Empty)
-            {
-                SqlConnection conexao = new SqlConnection(stringConn);
-                string _sql = "Select * FROM Fornecedor WHERE  Nome like   '%" + txt_Nome.Text.Trim() + "%'";
-                SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
-                comando.SelectCommand.CommandText = _sql;
-                DataTable Tabela = new DataTable();
-                comando.Fill(Tabela);
-                if (Tabela.Rows.Count > 0)
-                {
-                    dgv_Busca.DataSource = Tabela;
-                }
-                else
-                {
-                    MessageBox.Show("Dados não encontrado no banco de dados!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            else
-            {
-                CarregarGrid();
-            }
+            CarregarGrid();
         }
 
         private void txt_Nome_KeyDown(object sender, KeyEventArgs e)
@@ -126,6 +115,25 @@ namespace CaixaFacil
                 Codigo = LINHA.Cells[0].Value.ToString();
                 Fornecedor = LINHA.Cells[1].Value.ToString();
                 this.Close();
+            }
+        }
+
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarGrid();
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                CarregarGrid();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
             }
         }
 

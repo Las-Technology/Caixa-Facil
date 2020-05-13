@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -17,17 +12,37 @@ namespace CaixaFacil
         {
             InitializeComponent();
         }
+
         public string Codigo { get; set; }
         public string Descricao { get; set; }
         public string PrecoServico { get; set; }
 
-        string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3");
-        string _sql;
+        string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
         private void FrmPesquisarServico_Load(object sender, EventArgs e)
         {
+            cbMaxRows.SelectedIndex = 1;
+            CarregarGrid();
+        }
+
+        private void CarregarGrid()
+        {
+            string filter = "";
+
+            if(cbMaxRows.Text != "Todos")
+            {
+                filter = " TOP " + cbMaxRows.Text;
+            }
+
+            if (string.IsNullOrWhiteSpace(txt_Nome.Text))
+            {
+                _sql = "Select" + filter + " Produto.Id_Produto, Produto.Descricao, Produto.ValorVenda from Produto inner join Categoria on Categoria.Id_Categoria = Produto.Id_Categoria where Categoria.Descricao = 'Serviço'";
+            }
+            else
+            {
+                _sql = "Select" + filter + " Produto.Id_Produto, Produto.Descricao, Produto.ValorVenda from Produto inner join Categoria on Categoria.Id_Categoria = Produto.Id_Categoria where Produto.Descricao like '%" + txt_Nome.Text.Trim() + "%' and Categoria.Descricao = 'Serviço'";
+            }
 
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Select Produto.Id_Produto, Produto.Descricao, Produto.ValorVenda from Produto inner join Categoria on Categoria.Id_Categoria = Produto.Id_Categoria where Categoria.Descricao = 'Serviço'";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.CommandText = _sql;
             DataTable Tabela = new DataTable();
@@ -37,14 +52,7 @@ namespace CaixaFacil
 
         private void txt_Nome_TextChanged(object sender, EventArgs e)
         {
-
-            SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Select Produto.Id_Produto, Produto.Descricao, Produto.ValorVenda from Produto inner join Categoria on Categoria.Id_Categoria = Produto.Id_Categoria where Produto.Descricao like '%" + txt_Nome.Text.Trim() + "%' and Categoria.Descricao = 'Serviço'";
-            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
-            comando.SelectCommand.CommandText = _sql;
-            DataTable Tabela = new DataTable();
-            comando.Fill(Tabela);
-            dgv_Busca.DataSource = Tabela;
+            CarregarGrid();
         }
 
         private void btn_Fechar_Click(object sender, EventArgs e)
@@ -70,7 +78,7 @@ namespace CaixaFacil
             Y = this.Top - MousePosition.Y;
         }
 
-        private void panelCabecalho_MouseMove_1(object sender, MouseEventArgs e)
+        private void panelCabecalho_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
             this.Left = X + MousePosition.X;
@@ -90,6 +98,19 @@ namespace CaixaFacil
             }
         }
 
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarGrid();
+        }
+
         private void dgv_Busca_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             DataGridView dgv;
@@ -97,9 +118,10 @@ namespace CaixaFacil
             dgv_Busca.ClearSelection();
         }
 
-        private void panelCabecalho_MouseMove(object sender, MouseEventArgs e)
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.Enter)
+                CarregarGrid();
         }
     }
 }

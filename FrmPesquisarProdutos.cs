@@ -19,10 +19,43 @@ namespace CaixaFacil
         }
 
         private void FrmPesquisarProdutos_Load(object sender, EventArgs e)
-        {
-            // TODO: esta linha de código carrega dados na tabela 'dbControleVendaDataSet.TabelaProduto'. Você pode movê-la ou removê-la conforme necessário.
-            this.tabelaProdutoTableAdapter.Fill(this.dbControleVendaDataSet.TabelaProduto);
+        {           
+            cbMaxRows.SelectedIndex = 1;
+            CarregaGrid();
         }
+
+        private void CarregaGrid()
+        {
+            try
+            {
+                string filter = "";
+                if(cbMaxRows.Text != "Todos")
+                {
+                    filter = " TOP " + cbMaxRows.Text;
+                }
+
+                if (string.IsNullOrWhiteSpace(txt_Nome.Text))
+                {
+                    _sql = "SELECT" + filter + " Produto.Id_Produto, Produto.CodigoBarra, Produto.Descricao as DescricaoNome, Produto.Marca, Produto.DataValidade, Produto.ValorCusto, Produto.ValorVenda, Produto.EstoqueAtual, Produto.EstoqueMinimo, Produto.Unidade, Categoria.Descricao, Fornecedor.Nome, Produto.Lucro FROM Categoria INNER JOIN Produto ON Categoria.Id_Categoria = Produto.Id_Categoria INNER JOIN Fornecedor ON Produto.Id_Fornecedor = Fornecedor.Id_Fornecedor";
+                }
+                else
+                {
+                    _sql = "SELECT" + filter + " Produto.Id_Produto, Produto.CodigoBarra, Produto.Descricao as DescricaoNome, Produto.Marca, Produto.DataValidade, Produto.ValorCusto, Produto.ValorVenda, Produto.EstoqueAtual, Produto.EstoqueMinimo, Produto.Unidade, Categoria.Descricao, Fornecedor.Nome, Produto.Lucro FROM Categoria INNER JOIN Produto ON Categoria.Id_Categoria = Produto.Id_Categoria INNER JOIN Fornecedor ON Produto.Id_Fornecedor = Fornecedor.Id_Fornecedor WHERE Produto.Descricao like '%" + txt_Nome.Text.Trim() + "%'";
+                }
+
+                SqlConnection conexao = new SqlConnection(stringConn);
+                SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
+                comando.SelectCommand.CommandText = _sql;
+                DataTable Tabela = new DataTable();
+                comando.Fill(Tabela);
+                dgv_Busca.DataSource = Tabela;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3");
         string _sql;
         
@@ -72,13 +105,7 @@ namespace CaixaFacil
 
         private void txt_Nome_TextChanged(object sender, EventArgs e)
         {
-            SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "SELECT Produto.Id_Produto, Produto.CodigoBarra, Produto.Descricao as DescricaoNome, Produto.Marca, Produto.DataValidade, Produto.ValorCusto, Produto.ValorVenda, Produto.EstoqueAtual, Produto.EstoqueMinimo, Produto.Unidade, Categoria.Descricao, Fornecedor.Nome, Produto.Lucro FROM Categoria INNER JOIN Produto ON Categoria.Id_Categoria = Produto.Id_Categoria INNER JOIN Fornecedor ON Produto.Id_Fornecedor = Fornecedor.Id_Fornecedor WHERE Produto.Descricao like '%" + txt_Nome.Text.Trim() + "%'";
-            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
-            comando.SelectCommand.CommandText = _sql;
-            DataTable Tabela = new DataTable();
-            comando.Fill(Tabela);
-            dgv_Busca.DataSource = Tabela;
+            CarregaGrid();
         }
 
         private void fillByToolStripButton_Click(object sender, EventArgs e)
@@ -87,9 +114,9 @@ namespace CaixaFacil
             {
                
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
             }
 
         }
@@ -115,6 +142,25 @@ namespace CaixaFacil
             DataGridView dgv;
             dgv = (DataGridView)sender;
             dgv_Busca.ClearSelection();
+        }
+
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregaGrid();
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                CarregaGrid();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

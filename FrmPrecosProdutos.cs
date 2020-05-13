@@ -20,12 +20,37 @@ namespace CaixaFacil
 
         private void FrmPrecosProdutos_Load(object sender, EventArgs e)
         {
-            // TODO: esta linha de código carrega dados na tabela 'dbControleVendaDataSet.TablePrecosProduto'. Você pode movê-la ou removê-la conforme necessário.
-            this.tablePrecosProdutoTableAdapter.Fill(this.dbControleVendaDataSet.TablePrecosProduto);
-
+            cbMaxRows.SelectedIndex = 1;
+            CarregarGrid();
         }
-        
-      
+
+        string strinConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
+
+        private void CarregarGrid()
+        {
+            string filter = "";
+            if (cbMaxRows.Text != "Todos")
+            {
+                filter = " TOP " + cbMaxRows.Text;
+            }
+
+            if (string.IsNullOrWhiteSpace(txt_Nome.Text))
+            {
+                _sql = "Select" + filter + " Produto.Id_Produto, Produto.Descricao, Produto.ValorVenda, Produto.CodigoBarra from produto";
+            }
+            else
+            {
+                _sql = "Select" + filter + " Produto.Id_Produto, Produto.Descricao, Produto.ValorVenda, Produto.CodigoBarra from produto where descricao like '%" + txt_Nome.Text.Trim() + "%'";
+            }
+
+            SqlConnection conexao = new SqlConnection(strinConn);
+            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
+            comando.SelectCommand.CommandText = _sql;
+            DataTable Tabela = new DataTable();
+            comando.Fill(Tabela);
+            dgv_Busca.DataSource = Tabela;
+        }
+
         int X = 0, Y = 0;
         private void panelCabecalho_MouseDown(object sender, MouseEventArgs e)
         {
@@ -80,14 +105,7 @@ namespace CaixaFacil
 
         private void txt_Nome_TextChanged(object sender, EventArgs e)
         {
-            string strinConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3");
-            SqlConnection conexao = new SqlConnection(strinConn);
-            string _sql = "Select * from produto where descricao like '%" + txt_Nome.Text.Trim() + "%'";
-            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
-            comando.SelectCommand.CommandText = _sql;
-            DataTable Tabela = new DataTable();
-            comando.Fill(Tabela);
-            dgv_Busca.DataSource = Tabela;
+            CarregarGrid();
         }
 
         public int Codigo { get; set; }
@@ -110,6 +128,25 @@ namespace CaixaFacil
             DataGridView dgv;
             dgv = (DataGridView)sender;
             dgv.ClearSelection();
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                CarregarGrid();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarGrid();
         }
 
         private void btn_Fechar_Click(object sender, EventArgs e)

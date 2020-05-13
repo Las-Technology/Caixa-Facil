@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -16,15 +11,27 @@ namespace CaixaFacil
         public FrmPesquisarCliente()
         {
             InitializeComponent();
-        }
-        
-        string codigo = null;        
+            cbMaxRows.SelectedIndex = 1;
+        }    
       
         private void CarregarGrid()
         {
+            string filter = "";
+
+            if(cbMaxRows.Text != "Todos")
+            {
+                filter = " TOP " + cbMaxRows.Text;
+            }
+            if(string.IsNullOrWhiteSpace(txt_Nome.Text))
+            {
+                _sql = "Select" + filter +  " [Id_Cliente] ,[Nome] ,[DataNascimento] ,[CPF] ,[RG] ,[CEP] ,[Bairro] ,[Endereco] ,[Numero] ,[Cidade] ,[Estado] ,[Telefone] ,[Celular] ,[Email] from Cliente where id_Cliente <> 1";
+            }
+            else
+            {
+                _sql = "Select" + filter + "  [Id_Cliente] ,[Nome] ,[DataNascimento] ,[CPF] ,[RG] ,[CEP] ,[Bairro] ,[Endereco] ,[Numero] ,[Cidade] ,[Estado] ,[Telefone] ,[Celular] ,[Email] FROM Cliente WHERE  Nome like   '%" + txt_Nome.Text.Trim() + "%' and id_Cliente <> 1";
+            }
 
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Select * from Cliente where id_Cliente <> 1";
             SqlDataAdapter adapter = new SqlDataAdapter(_sql,conexao);
             adapter.SelectCommand.CommandText = _sql;
             try
@@ -103,33 +110,7 @@ namespace CaixaFacil
 
         private void txt_Nome_TextChanged(object sender, EventArgs e)
         {
-            if (txt_Nome.Text != string.Empty)
-            {
-                SqlConnection conexao = new SqlConnection(stringConn);
-                string _sql = "Select * FROM Cliente WHERE  Nome like   '%" + txt_Nome.Text.Trim() + "%' and id_Cliente <> 1";
-                SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
-                comando.SelectCommand.CommandText = _sql;
-                DataTable Tabela = new DataTable();
-                comando.Fill(Tabela);
-                if (Tabela.Rows.Count > 0)
-                {
-                    dgv_Busca.DataSource = Tabela;
-                    for (int i = 0; i < dgv_Busca.Rows.Count; i++)
-                    {
-                        string CPF = dgv_Busca.Rows[i].Cells["ColumnCPF"].Value.ToString();
-                        string RG = dgv_Busca.Rows[i].Cells["ColumnRG"].Value.ToString();
-
-                        dgv_Busca.Rows[i].Cells["ColumnCPF"].Value = Security.Dry(CPF);
-                        dgv_Busca.Rows[i].Cells["ColumnRG"].Value = Security.Dry(RG);
-                    }
-                }
-                else
-                    MessageBox.Show("Dados não encontrado no banco de dados!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                CarregarGrid();
-            }
+            CarregarGrid();
         }
 
         private void dgv_Busca_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -145,6 +126,25 @@ namespace CaixaFacil
                 Numero = LINHA.Cells[8].Value.ToString();
                 Telefone = LINHA.Cells[11].Value.ToString();
                 this.Close();
+            }
+        }
+
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarGrid();
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                CarregarGrid();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
             }
         }
 

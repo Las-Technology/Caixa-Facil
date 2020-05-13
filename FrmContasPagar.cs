@@ -16,6 +16,7 @@ namespace CaixaFacil
         public FrmContasPagar()
         {
             InitializeComponent();
+            cbMaxRows.SelectedIndex = 1;
         }
 
         private void txt_ValorDocumento_KeyPress(object sender, KeyPressEventArgs e)
@@ -587,10 +588,35 @@ namespace CaixaFacil
 
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
 
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                CarregarGrid();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarGrid();
+        }
+
         private void CarregarGrid()
-        {            
+        {
+            string filter = "";
+            if (cbMaxRows.Text != "Todos")
+            {
+                filter = " TOP " + cbMaxRows.Text;
+            }
+
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "SELECT Id, Beneficiario, NumeroDocumento, Vencimento, ValorDocumento, Referencia, Desconto FROM ContasPagar WHERE (Status = 'Não Pago')";
+            _sql = "SELECT" + filter + " Id, Beneficiario, NumeroDocumento, Vencimento, ValorDocumento, Referencia, Desconto FROM ContasPagar WHERE (Status = 'Não Pago')";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             DataTable Tabela = new DataTable();
             comando.Fill(Tabela);

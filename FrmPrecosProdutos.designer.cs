@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgv_Busca = new System.Windows.Forms.DataGridView();
             this.idProdutoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +47,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tablePrecosProdutoTableAdapter = new CaixaFacil.DbControleVendaDataSetTableAdapters.TablePrecosProdutoTableAdapter();
+            this.cbMaxRows = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Busca)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePrecosProdutoBindingSource)).BeginInit();
@@ -57,6 +59,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.cbMaxRows);
+            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.dgv_Busca);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txt_Nome);
@@ -73,6 +77,9 @@
             this.dgv_Busca.AllowUserToAddRows = false;
             this.dgv_Busca.AllowUserToDeleteRows = false;
             this.dgv_Busca.AllowUserToOrderColumns = true;
+            this.dgv_Busca.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_Busca.AutoGenerateColumns = false;
             this.dgv_Busca.BackgroundColor = System.Drawing.Color.White;
             this.dgv_Busca.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -87,7 +94,7 @@
             this.dgv_Busca.Name = "dgv_Busca";
             this.dgv_Busca.ReadOnly = true;
             this.dgv_Busca.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Busca.Size = new System.Drawing.Size(776, 309);
+            this.dgv_Busca.Size = new System.Drawing.Size(774, 260);
             this.dgv_Busca.TabIndex = 16;
             this.dgv_Busca.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Busca_CellClick);
             this.dgv_Busca.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_Busca_DataBindingComplete);
@@ -110,9 +117,9 @@
             // 
             this.valorVendaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.valorVendaDataGridViewTextBoxColumn.DataPropertyName = "ValorVenda";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.valorVendaDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.valorVendaDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.valorVendaDataGridViewTextBoxColumn.HeaderText = "Preço";
             this.valorVendaDataGridViewTextBoxColumn.Name = "valorVendaDataGridViewTextBoxColumn";
             this.valorVendaDataGridViewTextBoxColumn.ReadOnly = true;
@@ -138,9 +145,10 @@
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(155, 120);
+            this.label3.Location = new System.Drawing.Point(154, 120);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(129, 19);
@@ -149,9 +157,10 @@
             // 
             // txt_Nome
             // 
+            this.txt_Nome.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txt_Nome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_Nome.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Nome.Location = new System.Drawing.Point(288, 118);
+            this.txt_Nome.Location = new System.Drawing.Point(287, 118);
             this.txt_Nome.Margin = new System.Windows.Forms.Padding(2);
             this.txt_Nome.Name = "txt_Nome";
             this.txt_Nome.Size = new System.Drawing.Size(312, 26);
@@ -161,6 +170,8 @@
             // 
             // panelCabecalho
             // 
+            this.panelCabecalho.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCabecalho.BackColor = System.Drawing.Color.PaleTurquoise;
             this.panelCabecalho.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelCabecalho.Controls.Add(this.btn_Fechar);
@@ -168,9 +179,9 @@
             this.panelCabecalho.Controls.Add(this.btn_BuscarCliente);
             this.panelCabecalho.Controls.Add(this.label2);
             this.panelCabecalho.Controls.Add(this.label1);
-            this.panelCabecalho.Location = new System.Drawing.Point(3, -1);
+            this.panelCabecalho.Location = new System.Drawing.Point(-1, -1);
             this.panelCabecalho.Name = "panelCabecalho";
-            this.panelCabecalho.Size = new System.Drawing.Size(796, 92);
+            this.panelCabecalho.Size = new System.Drawing.Size(800, 92);
             this.panelCabecalho.TabIndex = 1;
             this.panelCabecalho.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelCabecalho_MouseDown);
             this.panelCabecalho.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelCabecalho_MouseMove);
@@ -182,7 +193,7 @@
             this.btn_Fechar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Fechar.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Fechar.ForeColor = System.Drawing.Color.Black;
-            this.btn_Fechar.Location = new System.Drawing.Point(744, 17);
+            this.btn_Fechar.Location = new System.Drawing.Point(748, 17);
             this.btn_Fechar.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Fechar.Name = "btn_Fechar";
             this.btn_Fechar.Size = new System.Drawing.Size(38, 41);
@@ -200,7 +211,7 @@
             this.btn_Minimizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Minimizar.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Minimizar.ForeColor = System.Drawing.Color.Black;
-            this.btn_Minimizar.Location = new System.Drawing.Point(698, 17);
+            this.btn_Minimizar.Location = new System.Drawing.Point(702, 17);
             this.btn_Minimizar.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Minimizar.Name = "btn_Minimizar";
             this.btn_Minimizar.Size = new System.Drawing.Size(38, 41);
@@ -243,6 +254,53 @@
             // 
             this.tablePrecosProdutoTableAdapter.ClearBeforeFill = true;
             // 
+            // cbMaxRows
+            // 
+            this.cbMaxRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.cbMaxRows.BackColor = System.Drawing.Color.White;
+            this.cbMaxRows.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.cbMaxRows.FormattingEnabled = true;
+            this.cbMaxRows.Items.AddRange(new object[] {
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60",
+            "70",
+            "80",
+            "90",
+            "100",
+            "200",
+            "300",
+            "400",
+            "500",
+            "600",
+            "700",
+            "800",
+            "900",
+            "1000",
+            "Todos"});
+            this.cbMaxRows.Location = new System.Drawing.Point(358, 441);
+            this.cbMaxRows.Name = "cbMaxRows";
+            this.cbMaxRows.Size = new System.Drawing.Size(132, 27);
+            this.cbMaxRows.TabIndex = 36;
+            this.cbMaxRows.SelectedIndexChanged += new System.EventHandler(this.cbMaxRows_SelectedIndexChanged);
+            this.cbMaxRows.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbMaxRows_KeyDown);
+            this.cbMaxRows.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbMaxRows_KeyPress);
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.label4.Location = new System.Drawing.Point(220, 444);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(133, 19);
+            this.label4.TabIndex = 35;
+            this.label4.Text = "Máximo de linhas:";
+            // 
             // FrmPrecosProdutos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -254,6 +312,7 @@
             this.Name = "FrmPrecosProdutos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Precos Produtos";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmPrecosProdutos_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -286,5 +345,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Descricao;
         private System.Windows.Forms.DataGridViewTextBoxColumn valorVendaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigoBarraDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ComboBox cbMaxRows;
+        private System.Windows.Forms.Label label4;
     }
 }

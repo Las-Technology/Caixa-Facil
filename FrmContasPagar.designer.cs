@@ -84,6 +84,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.contasPagarTableAdapter = new CaixaFacil.DbControleVendaDataSetTableAdapters.ContasPagarTableAdapter();
+            this.cbMaxRows = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.btnPesquisar.SuspendLayout();
@@ -325,6 +327,8 @@
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage2.Controls.Add(this.cbMaxRows);
+            this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.dataGridView_Consulta);
             this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
@@ -350,11 +354,10 @@
             this.referenciaDataGridViewTextBoxColumn,
             this.descontoDataGridViewTextBoxColumn});
             this.dataGridView_Consulta.DataSource = this.contasPagarBindingSource;
-            this.dataGridView_Consulta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_Consulta.Location = new System.Drawing.Point(4, 4);
             this.dataGridView_Consulta.Name = "dataGridView_Consulta";
             this.dataGridView_Consulta.ReadOnly = true;
-            this.dataGridView_Consulta.Size = new System.Drawing.Size(687, 334);
+            this.dataGridView_Consulta.Size = new System.Drawing.Size(687, 277);
             this.dataGridView_Consulta.TabIndex = 2;
             // 
             // beneficiarioDataGridViewTextBoxColumn
@@ -736,6 +739,53 @@
             // 
             this.contasPagarTableAdapter.ClearBeforeFill = true;
             // 
+            // cbMaxRows
+            // 
+            this.cbMaxRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.cbMaxRows.BackColor = System.Drawing.Color.White;
+            this.cbMaxRows.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.cbMaxRows.FormattingEnabled = true;
+            this.cbMaxRows.Items.AddRange(new object[] {
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60",
+            "70",
+            "80",
+            "90",
+            "100",
+            "200",
+            "300",
+            "400",
+            "500",
+            "600",
+            "700",
+            "800",
+            "900",
+            "1000",
+            "Todos"});
+            this.cbMaxRows.Location = new System.Drawing.Point(313, 298);
+            this.cbMaxRows.Name = "cbMaxRows";
+            this.cbMaxRows.Size = new System.Drawing.Size(132, 27);
+            this.cbMaxRows.TabIndex = 38;
+            this.cbMaxRows.SelectedIndexChanged += new System.EventHandler(this.cbMaxRows_SelectedIndexChanged);
+            this.cbMaxRows.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbMaxRows_KeyDown);
+            this.cbMaxRows.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbMaxRows_KeyPress);
+            // 
+            // label17
+            // 
+            this.label17.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.label17.Location = new System.Drawing.Point(175, 301);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(133, 19);
+            this.label17.TabIndex = 37;
+            this.label17.Text = "Máximo de linhas:";
+            // 
             // FrmContasPagar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -754,6 +804,7 @@
             this.btnPesquisar.ResumeLayout(false);
             this.btnPesquisar.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Consulta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.contasPagarBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbControleVendaDataSet)).EndInit();
@@ -822,5 +873,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn valorDocumentoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn referenciaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descontoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ComboBox cbMaxRows;
+        private System.Windows.Forms.Label label17;
     }
 }

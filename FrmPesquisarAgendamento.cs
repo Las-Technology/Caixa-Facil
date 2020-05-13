@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -17,6 +12,7 @@ namespace CaixaFacil
         {
             InitializeComponent();
             DataAgenda = Data;
+            cbMaxRows.SelectedIndex = 1;
             if (Data == "")
             {
                 CarregarDataGrid();
@@ -55,10 +51,26 @@ namespace CaixaFacil
             comando.Fill(tabela);
             dgv_Busca.DataSource = tabela;
         }
-        private void CarregarDataGrid()
+
+       private void CarregarDataGrid()
         {
+            string filter = "";
+
+            if(cbMaxRows.Text != "Todos")
+            {
+                filter = " TOP " + cbMaxRows.Text;
+            }
+
+            if (string.IsNullOrWhiteSpace(txt_Nome.Text))
+            {
+                _Sql = "SELECT" + filter + " Id_Agenda, NomeCliente, Data, Horario, Servico, Telefone, Email FROM Agenda";
+            }
+            else
+            {
+                _Sql = "SELECT" + filter + " Id_Agenda, NomeCliente, Data, Horario, Servico, Telefone, Email  from Agenda where NomeCliente like '" + txt_Nome.Text + "%'";
+            }
+
             SqlConnection conexao = new SqlConnection(stringConn);
-            _Sql = "Select * from Agenda";
             SqlDataAdapter comando = new SqlDataAdapter(_Sql, conexao);
             comando.SelectCommand.CommandText = _Sql;
             DataTable tabela = new DataTable();
@@ -101,13 +113,7 @@ namespace CaixaFacil
 
         private void txt_Nome_TextChanged(object sender, EventArgs e)
         {
-            SqlConnection conexao = new SqlConnection(stringConn);
-            _Sql = "Select * from Agenda where NomeCliente like '" + txt_Nome.Text + "%'";
-            SqlDataAdapter comando = new SqlDataAdapter(_Sql, conexao);
-            comando.SelectCommand.CommandText = _Sql;
-            DataTable tabela = new DataTable();
-            comando.Fill(tabela);
-            dgv_Busca.DataSource = tabela;
+            CarregarDataGrid();
         }
 
         private void dgv_Busca_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -130,18 +136,30 @@ namespace CaixaFacil
             }
         }
 
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarDataGrid();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                CarregarDataGrid();
+        }
+
         private void panelCabecalho_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
             this.Left = X + MousePosition.X;
             this.Top = Y + MousePosition.Y;
-        }
-
-        private void FrmPesquisarAgendamento_Load(object sender, EventArgs e)
-        {
-           
-        }
-
-        
+        }     
     }
 }

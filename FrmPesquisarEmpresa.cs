@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -20,7 +15,8 @@ namespace CaixaFacil
 
         private void FrmPesquisarEmpresa_Load(object sender, EventArgs e)
         {
-            this.tableEmpresaTableAdapter.Fill(this.dbControleVendaDataSet.TableEmpresa);
+            cbMaxRows.SelectedIndex = 1;
+            CarregarGrid();
         }
 
         private void btn_Fechar_MouseEnter(object sender, EventArgs e)
@@ -66,11 +62,31 @@ namespace CaixaFacil
 
         private void txt_Nome_TextChanged(object sender, EventArgs e)
         {
-            string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3");
+            CarregarGrid();
+        }
+
+        string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
+
+        private void CarregarGrid()
+        {
+            string filter = "";
+            if (cbMaxRows.Text != "Todos")
+            {
+                filter = " TOP " + cbMaxRows.Text;
+            }
+
+            if (string.IsNullOrWhiteSpace(txt_Nome.Text))
+            {
+                _sql = "Select" + filter +" [Id_Empresa], [RazaoSocial], [NomeFantasia], [AreaAtuacao], [CNPJ], [InscricaoEstadual], [Endereco], [CEP], [Numero], [Bairro], [Cidade], [Estado], [Telefone], [Celular], [Email], [LogoEmpresa] from Empresa";
+            }
+            else
+            {
+                _sql = "Select" + filter + " [Id_Empresa], [RazaoSocial], [NomeFantasia], [AreaAtuacao], [CNPJ], [InscricaoEstadual], [Endereco], [CEP], [Numero], [Bairro], [Cidade], [Estado], [Telefone], [Celular], [Email], [LogoEmpresa] from Empresa where RazaoSocial like '%" + txt_Nome.Text.Trim() + "%'";
+            }
+
             SqlConnection conexao = new SqlConnection(stringConn);
-            string _Sql = "Select * from Empresa where RazaoSocial like '%" + txt_Nome.Text.Trim() + "%'";
-            SqlDataAdapter comando = new SqlDataAdapter(_Sql, conexao);
-            comando.SelectCommand.CommandText = _Sql;
+            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
+            comando.SelectCommand.CommandText = _sql;
             try
             {
                 conexao.Open();
@@ -93,7 +109,21 @@ namespace CaixaFacil
                 Codigo = linhas.Cells[0].Value.ToString();
                 this.Close();
             }
-        }        
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                CarregarGrid();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
 
         private void dgv_Busca_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
