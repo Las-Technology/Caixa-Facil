@@ -240,6 +240,43 @@ namespace CaixaFacil
                 conexao.Close();
             }
         }
+
+        private void PagamentoMisto()
+        {
+            if (lblCodigo_Cliente.Text == "")
+            {
+                cod = 0;
+            }
+            else
+            {
+                cod = int.Parse(lblCodigo_Cliente.Text);
+            }
+            SqlConnection conexao = new SqlConnection(stringConn);
+            try
+            {
+                conexao.Open();
+                _sql = "SELECT PagamentoMisto.ID_Venda, PagamentoMisto.ValorRestante FROM PagamentoMisto INNER JOIN Venda ON  PagamentoMisto.Id_Venda = Venda.Id_Venda INNER JOIN Cliente ON Cliente.Id_Cliente = Venda.Id_Cliente INNER JOIN ValorMistoAbatido ON ValorMistoAbatido.Id_PagamentoMisto = PagamentoMisto.Id_PagamentoMisto WHERE PagamentoMisto.ValorRestante > 0 AND Cliente.Id_cliente = @id";
+                SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
+                comando.SelectCommand.Parameters.AddWithValue("@id", cod);
+                comando.SelectCommand.CommandText = _sql;
+                DataTable Tabela = new DataTable();
+                comando.Fill(Tabela);
+                dgv_PagamentoParcial.DataSource = Tabela;
+                if (Tabela.Rows.Count > 0)
+                {
+                    ValorRestante = decimal.Parse(Tabela.Rows[0]["ValorRestante"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
         private void ValorPrazo()
         {
             SqlConnection conexao = new SqlConnection(stringConn);

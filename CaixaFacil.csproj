@@ -129,6 +129,7 @@
     <Compile Include="Classes\ClassPrestacaoServico.cs" />
     <Compile Include="Classes\ClassProduto.cs" />
     <Compile Include="Classes\ClassSeguranca.cs" />
+    <Compile Include="Classes\ClassTipoPagamento.cs" />
     <Compile Include="Classes\ClassUsuario.cs" />
     <Compile Include="Classes\ClassValidacaoEmail.cs" />
     <Compile Include="Classes\ClassVenda.cs" />

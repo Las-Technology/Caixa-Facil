@@ -1134,6 +1134,7 @@ namespace CaixaFacil
 
         FrmVendaMista vendaMista;
         ValorMistoAbatido valorMistoAbatido = new ValorMistoAbatido();
+        TipoPagamento tipoPagamento = new TipoPagamento();
 
         private void btnVendaMista_Click(object sender, EventArgs e)
         {
@@ -1177,10 +1178,14 @@ namespace CaixaFacil
                 pagamentoMisto._valorDinheiro = vendaMista.valorDinheiro;
                 pagamentoMisto._valorCredDeb = vendaMista.valorCredDeb;
                 pagamentoMisto._valorRestante = vendaMista.valorRestante;
-                pagamentoMisto._formaPagamento = vendaMista.formaPagamento;
                 pagamentoMisto._idVenda = int.Parse(lblCodigoVenda.Text);
+                pagamentoMisto._idCliente = vendaMista.idCliente;
                 pagamentoMisto.EfetuarPagamentoMisto();
                 pagamentoMisto.InformarUltimoIdPagamentoMisto();
+
+                tipoPagamento.descricao = vendaMista.formaPagamento;
+                tipoPagamento.idVenda = int.Parse(lblCodigoVenda.Text);
+                tipoPagamento.InformarFormaPagamento();
 
                 valorMistoAbatido._idPagamentoMisto = pagamentoMisto._idPagamentoMisto;
                 valorMistoAbatido._valorTotalAbatimento = (vendaMista.valorCredDeb + vendaMista.valorDinheiro);

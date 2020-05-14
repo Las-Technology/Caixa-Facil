@@ -1,4 +1,6 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace CaixaFacil
 {
@@ -12,8 +14,8 @@ namespace CaixaFacil
         private decimal valorDinheiro;
         private decimal valorCredDeb;
         private decimal valorRestante;
-        private string formaPagamento;
         private int idVenda;
+        private int idCliente;
 
         public int _idPagamentoMisto
         {
@@ -35,32 +37,51 @@ namespace CaixaFacil
             get { return valorRestante; }
             set { valorRestante = value; }
         }
-        public string _formaPagamento
-        {
-            get { return formaPagamento; }
-            set { formaPagamento = value; }
-        }
         public int _idVenda
         {
             get { return idVenda; }
             set { idVenda = value; }
         }
+        public int _idCliente
+        {
+            get { return idCliente; }
+            set { idCliente = value; }
+        }
 
         public void EfetuarPagamentoMisto()
         {
-            SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "INSERT INTO PagamentoMisto VALUES (@ValorDinheiro, @ValorCredDeb, @ValorRestante, @FormaPagamento, @IdVenda)";
-            SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@ValorDinheiro", _valorDinheiro);
-            comando.Parameters.AddWithValue("@ValorCredDeb", _valorCredDeb);
-            comando.Parameters.AddWithValue("@ValorRestante", _valorRestante);
-            comando.Parameters.AddWithValue("@FormaPagamento", _formaPagamento);
-            comando.Parameters.AddWithValue("@IdVenda", _idVenda);
-            comando.CommandText = _sql;
+                SqlConnection conexao = new SqlConnection(stringConn);
             try
             {
                 conexao.Open();
-                comando.ExecuteNonQuery();
+                _sql = "SELECT PagamentoMisto.ID_Venda, PagamentoMisto.ValorRestante FROM PagamentoMisto INNER JOIN Venda ON  PagamentoMisto.Id_Venda = Venda.Id_Venda INNER JOIN Cliente ON Cliente.Id_Cliente = Venda.Id_Cliente WHERE PagamentoMisto.ValorRestante > 0 AND Cliente.Id_cliente = @id";
+                SqlDataAdapter adapter = new SqlDataAdapter(_sql, conexao);
+                adapter.SelectCommand.Parameters.AddWithValue("@id", _idCliente);
+                adapter.SelectCommand.CommandText = _sql;
+                DataTable Tabela = new DataTable();
+                adapter.Fill(Tabela);
+                if (Tabela.Rows.Count > 0)
+                {
+                    _sql = "update PagamentoMisto set ValorRestante = ValorRestante + @ValorRestante, ValorCredDeb = ValorCredDeb + @ValorCredDeb, ValorDinheiro = ValorDinheiro + @ValorDinheiro  from PagamentoMisto inner join Venda on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = venda.Id_Cliente  where Cliente.Id_Cliente = @id and PagamentoMisto.ValorRestante > 0";
+                    SqlCommand comando = new SqlCommand(_sql, conexao);
+                    comando.Parameters.AddWithValue("@id", idCliente);
+                    comando.Parameters.AddWithValue("@ValorRestante", valorRestante);
+                    comando.Parameters.AddWithValue("@ValorCredDeb", _valorCredDeb);
+                    comando.Parameters.AddWithValue("@ValorDinheiro", _valorDinheiro);
+                    comando.CommandText = _sql;
+                    comando.ExecuteNonQuery();
+                }
+                else
+                {
+                    _sql = "INSERT INTO PagamentoMisto VALUES (@ValorDinheiro, @ValorCredDeb, @ValorRestante, @IdVenda)";
+                    SqlCommand comando = new SqlCommand(_sql, conexao);
+                    comando.Parameters.AddWithValue("@ValorDinheiro", _valorDinheiro);
+                    comando.Parameters.AddWithValue("@ValorCredDeb", _valorCredDeb);
+                    comando.Parameters.AddWithValue("@ValorRestante", _valorRestante);
+                    comando.Parameters.AddWithValue("@IdVenda", _idVenda);
+                    comando.CommandText = _sql;
+                    comando.ExecuteNonQuery();
+                }
             }
             catch
             {
