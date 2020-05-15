@@ -131,7 +131,7 @@ namespace CaixaFacil
         }
 
         decimal ValorRecebido;
-        string CampoTabelaBancoDados;
+
         private void GerenciarCaixa()
         {
             if (cbFormaAbatimento.Text == "DINHEIRO")

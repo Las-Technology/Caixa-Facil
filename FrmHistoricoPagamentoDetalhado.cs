@@ -13,7 +13,6 @@ namespace CaixaFacil
 {
     public partial class FrmHistoricoPagamentoDetalhado : Form
     {
-        string FormaPagamento, CodCliente;
         int IdPagamentoParcial;
         public FrmHistoricoPagamentoDetalhado(string NVenda, string Cliente, string dateTime, decimal ValorVenda, string FormaPagamento, decimal ValorAbatido, decimal ValorRestante, int IdPagamentoParcial)
         {
@@ -25,7 +24,6 @@ namespace CaixaFacil
             txtFormaPagamento.Text = FormaPagamento;
             txtValorRestante.Text = "R$ " + ValorRestante.ToString();
             txtValorPago.Text = "R$ " + ValorAbatido.ToString();
-            this.CodCliente = CodCliente;
             this.IdPagamentoParcial = IdPagamentoParcial;
         }
 

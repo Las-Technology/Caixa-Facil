@@ -20,7 +20,6 @@ namespace CaixaFacil
         }
         int Id_Usuario;
         string NomeUsuario;
-        double prazoFechamento;
         private void FrmAutenticacao_Load(object sender, EventArgs e)
         {
             txt_Senha.Focus();
@@ -262,7 +261,7 @@ namespace CaixaFacil
             }
         }
 
-        string DicaSenha, AcaoFechar;
+        string AcaoFechar;
         bool Veriguacao;
 
         private void VerificarUsuario()

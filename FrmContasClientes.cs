@@ -101,39 +101,29 @@ namespace CaixaFacil
                 PagamentoPrazo();
                 PagamentoParcelas();
                 PagamentoParcial();
+                PagamentoMisto();
 
-                if (dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoPrazo.Rows.Count >= 1)
+                if ((dgv_PagamentoPrazo.Rows.Count >= 1 && dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoMisto.Rows.Count >= 1) || (dgv_PagamentoPrazo.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count == 0) ||(dgv_PagamentoPrazo.Rows.Count >= 1 && dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoMisto.Rows.Count == 0) || (dgv_PagamentoPrazo.Rows.Count >= 1 && dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count >= 1) || (dgv_PagamentoPrazo.Rows.Count >= 1 && dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count == 0))
                 {
                     tabPagamento.SelectedTab = Tab_ComprasPrazo;
                 }
-                else if (dgv_PagamentoPrazo.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoParcelas.Rows.Count == 0)
-                {
-                    tabPagamento.SelectedTab = Tab_ComprasPrazo;
-                }
-                else if (dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0)
+                else if ((dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count == 0) || (dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoMisto.Rows.Count >= 1 && dgv_PagamentoPrazo.Rows.Count == 0) || (dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoMisto.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0))
                 {
                     tabPagamento.SelectedTab = tab_ComprasParceladas;
                 }
-                else if (dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0)
+                else if ((dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count == 0) || (dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count >= 1))
                 {
                     tabPagamento.SelectedTab = tab_PagamentoParcial;
                 }
-                else if (dgv_PagamentoPrazo.Rows.Count >= 1 && dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count == 0)
+                else if (dgv_PagamentoMisto.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0)
                 {
-                    tabPagamento.SelectedTab = Tab_ComprasPrazo;
+                    tabPagamento.SelectedTab = tab_PagamentoMisto;
                 }
-                else if (dgv_PagamentoPrazo.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoParcelas.Rows.Count == 0)
-                {
-                    tabPagamento.SelectedTab = Tab_ComprasPrazo;
-                }
-                else if (dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoPrazo.Rows.Count == 0)
-                {
-                    tabPagamento.SelectedTab = tab_ComprasParceladas;
-                }
-                else if (dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0)
+                else if (dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count == 0)
                 {
                     MessageBox.Show("Não existe conta associada ao cliente: " + pesquisarCliente.Codigo + " - " + pesquisarCliente.Nome, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
+
                 dgv_PagamentoParcelas.ClearSelection();
             }
         }
@@ -204,7 +194,7 @@ namespace CaixaFacil
             }
         }
 
-        decimal ValorRestante;
+        decimal valorRestantePagamentoParcial, valorRestantePagamentoMisto;
         private void PagamentoParcial()
         {
             if (lblCodigo_Cliente.Text == "")
@@ -219,7 +209,7 @@ namespace CaixaFacil
             try
             {
                 conexao.Open();
-                _sql = "SELECT PagamentoParcial.ID_Venda, PagamentoParcial.ValorRestante, PagamentoParcial.DataAbatimento FROM PagamentoParcial INNER JOIN Venda ON  PagamentoParcial.Id_Venda = Venda.Id_Venda INNER JOIN Cliente ON Cliente.Id_Cliente = Venda.Id_Cliente WHERE PagamentoParcial.ValorRestante > 0 AND Cliente.Id_cliente = @id";
+                _sql = "SELECT DISTINCT PagamentoParcial.ID_Venda, PagamentoParcial.ValorRestante, MAX(ValorAbatido.DataPagamento) as DataPagamento FROM PagamentoParcial INNER JOIN Venda ON PagamentoParcial.Id_Venda = Venda.Id_Venda INNER JOIN Cliente ON Cliente.Id_Cliente = Venda.Id_Cliente INNER JOIN ValorAbatido ON ValorAbatido.Id_PagamentoParcial = PagamentoParcial.Id_PagamentoParcial WHERE PagamentoParcial.ValorRestante > 0 AND Cliente.Id_cliente = @id GROUP BY PagamentoParcial.Id_Venda, PagamentoParcial.ValorRestante";
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.Parameters.AddWithValue("@id", cod);
                 comando.SelectCommand.CommandText = _sql;
@@ -228,7 +218,7 @@ namespace CaixaFacil
                 dgv_PagamentoParcial.DataSource = Tabela;
                 if (Tabela.Rows.Count > 0)
                 {
-                    ValorRestante = decimal.Parse(Tabela.Rows[0]["ValorRestante"].ToString());
+                    valorRestantePagamentoParcial = decimal.Parse(Tabela.Rows[0]["ValorRestante"].ToString());
                 }
             }
             catch (Exception ex)
@@ -255,16 +245,16 @@ namespace CaixaFacil
             try
             {
                 conexao.Open();
-                _sql = "SELECT PagamentoMisto.ID_Venda, PagamentoMisto.ValorRestante FROM PagamentoMisto INNER JOIN Venda ON  PagamentoMisto.Id_Venda = Venda.Id_Venda INNER JOIN Cliente ON Cliente.Id_Cliente = Venda.Id_Cliente INNER JOIN ValorMistoAbatido ON ValorMistoAbatido.Id_PagamentoMisto = PagamentoMisto.Id_PagamentoMisto WHERE PagamentoMisto.ValorRestante > 0 AND Cliente.Id_cliente = @id";
+                _sql = "SELECT DISTINCT PagamentoMisto.ID_Venda, MAX(ValorMistoAbatido.DataPagamento) as DataPagamento, PagamentoMisto.ValorRestante FROM PagamentoMisto INNER JOIN Venda ON PagamentoMisto.Id_Venda = Venda.Id_Venda INNER JOIN Cliente ON Cliente.Id_Cliente = Venda.Id_Cliente INNER JOIN ValorMistoAbatido ON ValorMistoAbatido.Id_PagamentoMisto = PagamentoMisto.Id_PagamentoMisto WHERE PagamentoMisto.ValorRestante > 0 AND Cliente.Id_cliente = @id group By PagamentoMisto.ID_Venda, PagamentoMisto.ValorRestante";
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.Parameters.AddWithValue("@id", cod);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
                 comando.Fill(Tabela);
-                dgv_PagamentoParcial.DataSource = Tabela;
+                dgv_PagamentoMisto.DataSource = Tabela;
                 if (Tabela.Rows.Count > 0)
                 {
-                    ValorRestante = decimal.Parse(Tabela.Rows[0]["ValorRestante"].ToString());
+                    valorRestantePagamentoMisto = decimal.Parse(Tabela.Rows[0]["ValorRestante"].ToString());
                 }
             }
             catch (Exception ex)
@@ -365,9 +355,18 @@ namespace CaixaFacil
             {
                 if (dgv_PagamentoParcial.Rows.Count >= 1)
                 {
-                    FrmBaixarPagamentoParcial baixarPagamentoParcial = new FrmBaixarPagamentoParcial(ValorRestante, lblCodigo_Cliente.Text, lblNome_Cliente.Text);
+                    FrmBaixarPagamentoParcial baixarPagamentoParcial = new FrmBaixarPagamentoParcial(valorRestantePagamentoParcial, lblCodigo_Cliente.Text, lblNome_Cliente.Text);
                     baixarPagamentoParcial.ShowDialog();
                     PagamentoParcial();
+                }
+            }
+            else if (tabPagamento.SelectedTab == tab_PagamentoMisto)
+            {
+                if (dgv_PagamentoMisto.Rows.Count >= 1)
+                {
+                    FrmBaixarPagamentoMisto baixarPagamentoMisto = new FrmBaixarPagamentoMisto(valorRestantePagamentoMisto, lblCodigo_Cliente.Text, lblNome_Cliente.Text);
+                    baixarPagamentoMisto.ShowDialog();
+                    PagamentoMisto();
                 }
             }
         }

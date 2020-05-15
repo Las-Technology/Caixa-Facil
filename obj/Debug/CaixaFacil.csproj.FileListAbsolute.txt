@@ -276,3 +276,4 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmVendaVista.r
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmListaVenda.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmTelaPrincipal.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmVendaMista.resources
+C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmBaixarPagamentoMisto.resources
