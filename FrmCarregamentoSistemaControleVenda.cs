@@ -305,7 +305,6 @@ namespace CaixaFacil
                 "[Id_PagamentoMisto] INT NOT NULL PRIMARY KEY IDENTITY(1,1), " +
                 "[ValorDinheiro] DECIMAL(18, 2) NULL, " +
                 "[ValorCredDeb] DECIMAL(18, 2) NULL, " +
-                "[FormaPagamento]    VARCHAR(17) NULL," +
                 "[id_Venda] INT NULL," +
                 "FOREIGN KEY([id_Venda]) REFERENCES[dbo].[Venda] ([id_Venda]) ON DELETE CASCADE)" +
                 

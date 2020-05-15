@@ -68,11 +68,10 @@ namespace CaixaFacil
         private void Abater()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "update PagamentoParcial set ValorRestante = @Restante, dataAbatimento = @DataAbatimento from PagamentoParcial inner join Venda on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = venda.Id_Cliente where Cliente.Id_Cliente = @id and ValorRestante > 0";
+            _sql = "update PagamentoMisto set ValorRestante = @Restante from PagamentoMisto inner join Venda on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = venda.Id_Cliente where Cliente.Id_Cliente = @id and ValorRestante > 0";
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@id", txt_CodigoCliente.Text);
             comando.Parameters.AddWithValue("@Restante", ValorRestante);
-            comando.Parameters.AddWithValue("@DataAbatimento", DateTime.Now.ToShortDateString());
             try
             {
                 conexao.Open();
@@ -111,6 +110,7 @@ namespace CaixaFacil
                     CaixaDia();
                     GerenciarCaixa();
                     InformarValorabatido();
+                    InserirTipoPagamento();
                     Abater();
                     AtualizarValorReceber();
                     MessageBox.Show("Valor Abatido com sucesso! Valor Restante: " + txt_ValorRestante.Text, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -127,6 +127,11 @@ namespace CaixaFacil
             {
                 MessageBox.Show("Informe o valor para abater a conta!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private void InserirTipoPagamento()
+        {
+            
         }
 
         decimal ValorCaixa, ValorNCaixa;
@@ -180,11 +185,12 @@ namespace CaixaFacil
             }
         }
             
-        PagamentoParcial PagamentoParcial = new PagamentoParcial();
+        ValorMistoAbatido valorMistoAbatido = new ValorMistoAbatido();
+
         private void InformarValorabatido()
         {
              SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "select * from PagamentoParcial inner join Venda on Venda.Id_Venda= PagamentoParcial.Id_Venda inner join Cliente on Cliente.Id_Cliente=venda.Id_Cliente where Cliente.Id_Cliente = @ID_Cliente and PagamentoParcial.ValorRestante > 0";
+            _sql = "select * from PagamentoMisto inner join Venda on Venda.Id_Venda= PagamentoMisto.Id_Venda inner join Cliente on Cliente.Id_Cliente = venda.Id_Cliente where Cliente.Id_Cliente = @ID_Cliente and PagamentoMisto.ValorRestante > 0";
             try
             {
                 conexao.Open();
@@ -195,12 +201,12 @@ namespace CaixaFacil
                 comando.Fill(Tabela);
                 if (Tabela.Rows.Count > 0)
                 {
-                    int id = int.Parse(Tabela.Rows[0]["Id_PagamentoParcial"].ToString());
-                    PagamentoParcial.Id = id;
-                    PagamentoParcial.valorTotalAbatido = decimal.Parse(txt_ValorPago.Text);
-                    PagamentoParcial.dataAbatimento = DateTime.Now.ToShortDateString();
-                    PagamentoParcial.horaPagamento = DateTime.Now.ToLongTimeString();
-                    PagamentoParcial.InserirValorAbatido();
+                    int id = int.Parse(Tabela.Rows[0]["Id_PagamentoMisto"].ToString());
+                    valorMistoAbatido._idPagamentoMisto = id;
+                    valorMistoAbatido._valorTotalAbatimento = decimal.Parse(txt_ValorPago.Text);
+                    valorMistoAbatido._dataPagamento = DateTime.Now.ToShortDateString();
+                    valorMistoAbatido._horaPagamento = DateTime.Now.ToLongTimeString();
+                    valorMistoAbatido.InserirValorMistoAbatido();
                 }
             }
             catch
@@ -299,7 +305,7 @@ namespace CaixaFacil
             decimal ValorPago = decimal.Parse(txt_ValorPago.Text);
             ValorReceber -= ValorPago;
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "update FluxoCaixa set ValorReceber = @ValorReceber from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario inner join Venda on Venda.Id_Usuario=Usuario.Id_Usuario inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda where FluxoCaixa.Id_Fluxo = @Id_Fluxo and  PagamentoParcial.DataAbatimento = @DataEntrada and venda.DataVenda = @DataEntrada and Venda.HoraVenda > @HoraEntrada and Usuario.Id_Usuario = @Id_Usuario and cliente.Id_Cliente = @Id_Cliente";
+            _sql = "update FluxoCaixa set ValorReceber = @ValorReceber from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario inner join Venda on Venda.Id_Usuario = Usuario.Id_Usuario inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join ValorMistoAbatido on ValorMistoAbatido.Id_PagamentoMisto = PagamentoMisto.Id_PagamentoMisto where FluxoCaixa.Id_Fluxo = @Id_Fluxo and  ValorMistoAbatido.DataPagamento = @DataEntrada and venda.DataVenda = @DataEntrada and Venda.HoraVenda > @HoraEntrada and Usuario.Id_Usuario = @Id_Usuario and cliente.Id_Cliente = @Id_Cliente";
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@Id_Fluxo", Id_FluxoCaixa);
             comando.Parameters.AddWithValue("@DataEntrada", DataEntrada);
