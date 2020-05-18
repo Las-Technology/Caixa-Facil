@@ -343,11 +343,10 @@ namespace CaixaFacil
                 "FOREIGN KEY([Id_Fluxo]) REFERENCES[dbo].[FluxoCaixa] ([Id_Fluxo]));" +
                 
                 "CREATE TABLE[dbo].[TipoPagamento](" +
-                "[Id_TipoPagamenro] INT           IDENTITY(1, 1) NOT NULL," +
+                "[Id_TipoPagamento] INT           IDENTITY(1, 1) NOT NULL," +
                 "[Descricao]        VARCHAR(30)  NULL," +
-                "[DadosCartao] VARCHAR(MAX) NULL," +
                 "[Id_Venda] INT NOT NULL," +
-                "PRIMARY KEY CLUSTERED([Id_TipoPagamenro] ASC)," +
+                "PRIMARY KEY CLUSTERED([Id_TipoPagamento] ASC)," +
                 "FOREIGN KEY([Id_Venda]) REFERENCES[dbo].[Venda] ([Id_Venda]) ON DELETE CASCADE);" +
                 
                 "CREATE TABLE[dbo].[ValorAbatido](" +

@@ -65,6 +65,7 @@ namespace CaixaFacil
             PagamentoParcelas();
             PagamentoPrazo();
             PagamentoParcial();
+            PagamentoMisto();
             ValorTotal = 0.00m;
             Vencimento = "";
         }

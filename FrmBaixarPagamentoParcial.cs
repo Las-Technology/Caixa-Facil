@@ -22,7 +22,7 @@ namespace CaixaFacil
             txt_Nome.Text = NomeCliente;
             CodigoCaixa();
             ValoresCaixa();
-            cbFormaAbatimento.Text = "DINHEIRO";
+            cbTipoPagamento.Text = "DINHEIRO";
         }
 
         private void FrmBaixarPagamentoParcial_KeyDown(object sender, KeyEventArgs e)
@@ -116,6 +116,7 @@ namespace CaixaFacil
                     CaixaDia();
                     GerenciarCaixa();
                     InformarValorabatido();
+                    InserirTipoPagamento();
                     Abater();
                     AtualizarValorReceber();
                     MessageBox.Show("Valor Abatido com sucesso! Valor Restante: " + txt_ValorRestante.Text, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -132,6 +133,15 @@ namespace CaixaFacil
             {
                 MessageBox.Show("Informe o valor para abater a conta!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        TipoPagamento tipoPagamento = new TipoPagamento();
+
+        private void InserirTipoPagamento()
+        {
+            tipoPagamento.idPagamentoParcial = Id_PagamentoParcial;
+            tipoPagamento.descricao = cbTipoPagamento.Text;
+            tipoPagamento.InformarFormaPagamento();
         }
 
         decimal ValorCaixa, ValorNCaixa;
@@ -151,15 +161,15 @@ namespace CaixaFacil
         private void GerenciarCaixa()
         {
 
-            if (cbFormaAbatimento.Text == "DINHEIRO")
+            if (cbTipoPagamento.Text == "DINHEIRO")
             {
                 _sql = "Update FluxoCaixa set ValorCaixa = @ValorCaixa, ValorRecebidoParcial = ValorRecebidoParcial + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbFormaAbatimento.Text == "CRÉDITO")
+            else if (cbTipoPagamento.Text == "CRÉDITO")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoCredito = ValorRecebidoCredito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbFormaAbatimento.Text == "DÉBITO")
+            else if (cbTipoPagamento.Text == "DÉBITO")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoDebito = ValorRecebidoDebito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
@@ -186,6 +196,8 @@ namespace CaixaFacil
         }
             
         PagamentoParcial PagamentoParcial = new PagamentoParcial();
+        int Id_PagamentoParcial;
+
         private void InformarValorabatido()
         {
              SqlConnection conexao = new SqlConnection(stringConn);
@@ -200,8 +212,8 @@ namespace CaixaFacil
                 comando.Fill(Tabela);
                 if (Tabela.Rows.Count > 0)
                 {
-                    int id = int.Parse(Tabela.Rows[0]["Id_PagamentoParcial"].ToString());
-                    PagamentoParcial.Id = id;
+                    Id_PagamentoParcial = int.Parse(Tabela.Rows[0]["Id_PagamentoParcial"].ToString());
+                    PagamentoParcial.Id = Id_PagamentoParcial;
                     PagamentoParcial.valorTotalAbatido = decimal.Parse(txt_ValorPago.Text);
                     PagamentoParcial.dataAbatimento = DateTime.Now.ToShortDateString();
                     PagamentoParcial.horaPagamento = DateTime.Now.ToLongTimeString();

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panelPagamentoParcela = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbFormaAbatimento = new System.Windows.Forms.ComboBox();
             this.lbl_Fechar = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txt_NParcelas = new System.Windows.Forms.TextBox();
@@ -48,8 +50,6 @@
             this.txt_Troco = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_ValorPago = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cbFormaAbatimento = new System.Windows.Forms.ComboBox();
             this.panelPagamentoParcela.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,6 +85,31 @@
             this.panelPagamentoParcela.TabIndex = 0;
             this.panelPagamentoParcela.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelPagamentoParcela_MouseDown);
             this.panelPagamentoParcela.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelPagamentoParcela_MouseMove);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(330, 128);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(142, 19);
+            this.label2.TabIndex = 72;
+            this.label2.Text = "Tipo de Pagamento:";
+            // 
+            // cbFormaAbatimento
+            // 
+            this.cbFormaAbatimento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFormaAbatimento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cbFormaAbatimento.FormattingEnabled = true;
+            this.cbFormaAbatimento.Items.AddRange(new object[] {
+            "CRÉDITO",
+            "DÉBITO",
+            "DINHEIRO"});
+            this.cbFormaAbatimento.Location = new System.Drawing.Point(334, 150);
+            this.cbFormaAbatimento.Name = "cbFormaAbatimento";
+            this.cbFormaAbatimento.Size = new System.Drawing.Size(174, 27);
+            this.cbFormaAbatimento.TabIndex = 71;
             // 
             // lbl_Fechar
             // 
@@ -296,31 +321,6 @@
             this.txt_ValorPago.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_ValorPago.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_ValorPago_KeyPress);
             this.txt_ValorPago.Leave += new System.EventHandler(this.txt_ValorPago_Leave);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(330, 128);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(155, 19);
-            this.label2.TabIndex = 72;
-            this.label2.Text = "Forma de abatimento:";
-            // 
-            // cbFormaAbatimento
-            // 
-            this.cbFormaAbatimento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFormaAbatimento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cbFormaAbatimento.FormattingEnabled = true;
-            this.cbFormaAbatimento.Items.AddRange(new object[] {
-            "CRÉDITO",
-            "DÉBITO",
-            "DINHEIRO"});
-            this.cbFormaAbatimento.Location = new System.Drawing.Point(334, 150);
-            this.cbFormaAbatimento.Name = "cbFormaAbatimento";
-            this.cbFormaAbatimento.Size = new System.Drawing.Size(174, 27);
-            this.cbFormaAbatimento.TabIndex = 71;
             // 
             // FrmBaixarParcela
             // 

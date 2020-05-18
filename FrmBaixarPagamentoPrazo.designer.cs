@@ -231,9 +231,9 @@
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(482, 88);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(155, 19);
+            this.label6.Size = new System.Drawing.Size(141, 19);
             this.label6.TabIndex = 72;
-            this.label6.Text = "Forma de abatimento:";
+            this.label6.Text = "Tipo de pagamento:";
             // 
             // cbFormaAbatimento
             // 
