@@ -30,7 +30,7 @@
         {
             this.panelPagamentoParcela = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbFormaAbatimento = new System.Windows.Forms.ComboBox();
+            this.cbTipoPagamento = new System.Windows.Forms.ComboBox();
             this.lbl_Fechar = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txt_NParcelas = new System.Windows.Forms.TextBox();
@@ -57,7 +57,7 @@
             // 
             this.panelPagamentoParcela.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.panelPagamentoParcela.Controls.Add(this.label2);
-            this.panelPagamentoParcela.Controls.Add(this.cbFormaAbatimento);
+            this.panelPagamentoParcela.Controls.Add(this.cbTipoPagamento);
             this.panelPagamentoParcela.Controls.Add(this.lbl_Fechar);
             this.panelPagamentoParcela.Controls.Add(this.label9);
             this.panelPagamentoParcela.Controls.Add(this.txt_NParcelas);
@@ -97,19 +97,19 @@
             this.label2.TabIndex = 72;
             this.label2.Text = "Tipo de Pagamento:";
             // 
-            // cbFormaAbatimento
+            // cbTipoPagamento
             // 
-            this.cbFormaAbatimento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFormaAbatimento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cbFormaAbatimento.FormattingEnabled = true;
-            this.cbFormaAbatimento.Items.AddRange(new object[] {
-            "CRÉDITO",
-            "DÉBITO",
-            "DINHEIRO"});
-            this.cbFormaAbatimento.Location = new System.Drawing.Point(334, 150);
-            this.cbFormaAbatimento.Name = "cbFormaAbatimento";
-            this.cbFormaAbatimento.Size = new System.Drawing.Size(174, 27);
-            this.cbFormaAbatimento.TabIndex = 71;
+            this.cbTipoPagamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipoPagamento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cbTipoPagamento.FormattingEnabled = true;
+            this.cbTipoPagamento.Items.AddRange(new object[] {
+            "Cartão de Crédito",
+            "Cartão de Débito",
+            "Dinheiro"});
+            this.cbTipoPagamento.Location = new System.Drawing.Point(334, 150);
+            this.cbTipoPagamento.Name = "cbTipoPagamento";
+            this.cbTipoPagamento.Size = new System.Drawing.Size(174, 27);
+            this.cbTipoPagamento.TabIndex = 71;
             // 
             // lbl_Fechar
             // 
@@ -366,6 +366,6 @@
         private System.Windows.Forms.TextBox txt_ValorPago;
         private System.Windows.Forms.Label lbl_Fechar;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbFormaAbatimento;
+        private System.Windows.Forms.ComboBox cbTipoPagamento;
     }
 }

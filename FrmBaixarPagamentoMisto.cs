@@ -17,7 +17,7 @@ namespace CaixaFacil
             txt_Nome.Text = NomeCliente;
             CodigoCaixa();
             ValoresCaixa();
-            cbTipoPagamento.Text = "DINHEIRO";
+            cbTipoPagamento.Text = "Dinheiro";
         }
 
         private void FrmBaixarPagamentoParcial_KeyDown(object sender, KeyEventArgs e)
@@ -156,15 +156,15 @@ namespace CaixaFacil
         private void GerenciarCaixa()
         {
 
-            if (cbTipoPagamento.Text == "DINHEIRO")
+            if (cbTipoPagamento.Text == "Dinheiro")
             {
                 _sql = "Update FluxoCaixa set ValorCaixa = @ValorCaixa, ValorRecebidoParcial = ValorRecebidoParcial + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbTipoPagamento.Text == "CRÉDITO")
+            else if (cbTipoPagamento.Text == "Cartão de C´r")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoCredito = ValorRecebidoCredito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbTipoPagamento.Text == "DÉBITO")
+            else if (cbTipoPagamento.Text == "Cartão de Débito")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoDebito = ValorRecebidoDebito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -20,7 +15,7 @@ namespace CaixaFacil
             this.CodigoCliente = int.Parse(CodigoCliente);
             txt_Nome.Text = NomeCliente;
             txt_CodigoCliente.Text = CodigoCliente;
-            cbFormaAbatimento.Text = "DINHEIRO";
+            cbTipoPagamento.Text = "Dinheiro";
 
         }
         int CodigoCliente;
@@ -159,6 +154,7 @@ namespace CaixaFacil
                 {                    
                     CaixaDia();
                     GerenciarCaixa();
+                    InserirTipoPagamento();
                     BaixarPrazo();
                     AtualizarValorReceber();
                     MessageBox.Show("Pagamento realizado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -169,6 +165,42 @@ namespace CaixaFacil
                 {
                     MessageBox.Show("Valor pago menor que o valor da conta!", "Menssagem do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
+            }
+        }
+
+        TipoPagamento tipoPagamento = new TipoPagamento();
+
+        private void InserirTipoPagamento()
+        {
+            tipoPagamento.idParcela = MaxParcelaVenda();
+            tipoPagamento.descricao = cbTipoPagamento.Text;
+            tipoPagamento.InformarFormaPagamento();
+        }
+
+        private int MaxParcelaVenda()
+        {
+
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "SELECT Max(ParcelaVenda.Id_Parcela) as MaxIdParcela FROM ParcelaVenda inner join Venda ON Venda.Id_Venda = ParcelaVenda.Id_Venda INNER JOIN Cliente ON Venda.Id_Cliente = Cliente.Id_Cliente INNER JOIN FormaPagamento ON FormaPagamento.Id_Venda = Venda.Id_Venda WHERE(ParcelaVenda.DataPagamento = '') AND(FormaPagamento.Descricao = 'PRAZO') AND(Venda.Id_Cliente = @IdCliente)";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@IdCliente", txt_CodigoCliente.Text);
+            try
+            {
+                conexao.Open();
+                SqlDataReader dr = comando.ExecuteReader();
+                if (dr.Read())
+                    return int.Parse(dr["MaxIdParcela"].ToString());
+                else
+                    return 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
+            finally
+            {
+                conexao.Close();
             }
         }
 
@@ -187,15 +219,15 @@ namespace CaixaFacil
 
         private void GerenciarCaixa()
         {
-            if (cbFormaAbatimento.Text == "DINHEIRO")
+            if (cbTipoPagamento.Text == "Dinheiro")
             {
                 _sql = "Update FluxoCaixa set ValorCaixa = @ValorCaixa, ValorRecebidoPrazo = ValorRecebidoPrazo + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbFormaAbatimento.Text == "CRÉDITO")
+            else if (cbTipoPagamento.Text == "Cartão de Crédito")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoCredito = ValorRecebidoCredito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbFormaAbatimento.Text == "DÉBITO")
+            else if (cbTipoPagamento.Text == "Cartão de Débito")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoDebito = ValorRecebidoDebito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }

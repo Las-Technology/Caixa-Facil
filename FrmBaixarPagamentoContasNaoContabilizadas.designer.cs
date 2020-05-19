@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panelPagamentoParcial = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbTipoPagamento = new System.Windows.Forms.ComboBox();
             this.lbl_Fechar = new System.Windows.Forms.Label();
             this.lbl_Restante = new System.Windows.Forms.Label();
             this.txt_ValorRestante = new System.Windows.Forms.TextBox();
@@ -42,8 +44,6 @@
             this.btn_Cancelar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_ValorPago = new System.Windows.Forms.TextBox();
-            this.cbFormaAbatimento = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.panelPagamentoParcial.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +52,7 @@
             this.panelPagamentoParcial.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.panelPagamentoParcial.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelPagamentoParcial.Controls.Add(this.label2);
-            this.panelPagamentoParcial.Controls.Add(this.cbFormaAbatimento);
+            this.panelPagamentoParcial.Controls.Add(this.cbTipoPagamento);
             this.panelPagamentoParcial.Controls.Add(this.lbl_Fechar);
             this.panelPagamentoParcial.Controls.Add(this.lbl_Restante);
             this.panelPagamentoParcial.Controls.Add(this.txt_ValorRestante);
@@ -74,6 +74,31 @@
             this.panelPagamentoParcial.TabIndex = 0;
             this.panelPagamentoParcial.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelPagamentoParcial_MouseDown);
             this.panelPagamentoParcial.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelPagamentoParcial_MouseMove);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(426, 80);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(142, 19);
+            this.label2.TabIndex = 68;
+            this.label2.Text = "Tipo de Pagamento:";
+            // 
+            // cbTipoPagamento
+            // 
+            this.cbTipoPagamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipoPagamento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cbTipoPagamento.FormattingEnabled = true;
+            this.cbTipoPagamento.Items.AddRange(new object[] {
+            "Cartão de Crédito",
+            "Cartão de Débito",
+            "Dinheiro"});
+            this.cbTipoPagamento.Location = new System.Drawing.Point(430, 102);
+            this.cbTipoPagamento.Name = "cbTipoPagamento";
+            this.cbTipoPagamento.Size = new System.Drawing.Size(174, 27);
+            this.cbTipoPagamento.TabIndex = 67;
             // 
             // lbl_Fechar
             // 
@@ -224,31 +249,6 @@
             this.txt_ValorPago.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_ValorPago_KeyPress);
             this.txt_ValorPago.Leave += new System.EventHandler(this.txt_ValorPago_Leave);
             // 
-            // cbFormaAbatimento
-            // 
-            this.cbFormaAbatimento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFormaAbatimento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cbFormaAbatimento.FormattingEnabled = true;
-            this.cbFormaAbatimento.Items.AddRange(new object[] {
-            "CRÉDITO",
-            "DÉBITO",
-            "DINHEIRO"});
-            this.cbFormaAbatimento.Location = new System.Drawing.Point(430, 102);
-            this.cbFormaAbatimento.Name = "cbFormaAbatimento";
-            this.cbFormaAbatimento.Size = new System.Drawing.Size(174, 27);
-            this.cbFormaAbatimento.TabIndex = 67;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(426, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(155, 19);
-            this.label2.TabIndex = 68;
-            this.label2.Text = "Forma de abatimento:";
-            // 
             // FrmBaixarPagamentoContasNaoContabilizadas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -284,6 +284,6 @@
         private System.Windows.Forms.TextBox txt_ValorPago;
         private System.Windows.Forms.Label lbl_Fechar;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbFormaAbatimento;
+        private System.Windows.Forms.ComboBox cbTipoPagamento;
     }
 }

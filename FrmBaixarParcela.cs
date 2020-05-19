@@ -1,34 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
 {
     public partial class FrmBaixarParcela : Form
     {
-        public FrmBaixarParcela(int id_Venda, string Vencimento, string ValorParcela, string NumeroParcela, int CodigoCliente, string NomeCliente, int NTParcelas)
+        public FrmBaixarParcela(int id_Venda, string Vencimento, string ValorParcela, string NumeroParcela, int CodigoCliente, string NomeCliente, int NumeroTotalParcelas)
         {
             InitializeComponent();
             txt_CodigoCliente.Text = CodigoCliente.ToString();
             this.CodigoCliente = CodigoCliente;
             txt_Vencimento.Text = Vencimento;
             this.Vencimento = Vencimento;
-            NParcela = int.Parse(NumeroParcela);
+            this.NumeroParcela = int.Parse(NumeroParcela);
             txt_valorParcela.Text = "R$ " + ValorParcela;
-            txt_NParcelas.Text = NumeroParcela + "/" + NTParcelas;
+            txt_NParcelas.Text = NumeroParcela + "/" + NumeroTotalParcelas;
             txt_CodigoCliente.Text = CodigoCliente.ToString();
             txt_Nome.Text = NomeCliente;
             txt_CodigoVenda.Text = id_Venda.ToString();
             this.ValorParcela = decimal.Parse(ValorParcela);
         }
-        int CodigoCliente, NParcela;
+        int CodigoCliente, NumeroParcela;
         string Vencimento;
         private void txt_ValorPago_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -65,7 +60,7 @@ namespace CaixaFacil
 
         private void FrmBaixarParcela_Load(object sender, EventArgs e)
         {
-            cbFormaAbatimento.Text = "DINHEIRO";
+            cbTipoPagamento.Text = "Dinheiro";
             CodigoCaixa();
             ValoresCaixa();
         }
@@ -82,7 +77,7 @@ namespace CaixaFacil
             comando.Parameters.AddWithValue("@DataPagamento", DateTime.Now.ToShortDateString());
             comando.Parameters.AddWithValue("@HoraPagamento", DateTime.Now.ToLongTimeString());
             comando.Parameters.AddWithValue("@Id_Venda", txt_CodigoVenda.Text);
-            comando.Parameters.AddWithValue("@Parcela", NParcela);
+            comando.Parameters.AddWithValue("@Parcela", NumeroParcela);
             comando.Parameters.AddWithValue("@Vencimento", Vencimento);
             try
             {
@@ -134,6 +129,7 @@ namespace CaixaFacil
                 {
                     CaixaDia();
                     GerenciarCaixa();
+                    InserirTipoPagamento();
                     BaixarParcela();
                     AtualizarValorReceber();
                     
@@ -153,6 +149,44 @@ namespace CaixaFacil
             {
                 MessageBox.Show("Informe o valor pago!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_ValorPago.Focus();
+            }
+        }
+
+        TipoPagamento tipoPagamento = new TipoPagamento();
+
+        private void InserirTipoPagamento()
+        {
+            tipoPagamento.idParcela = getIdParcelaVenda();
+            tipoPagamento.descricao = cbTipoPagamento.Text;
+            tipoPagamento.InformarFormaPagamento();
+        }
+
+        private int getIdParcelaVenda()
+        {
+
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "SELECT ParcelaVenda.Id_Parcela FROM ParcelaVenda inner join Venda ON Venda.Id_Venda = ParcelaVenda.Id_Venda INNER JOIN Cliente ON Venda.Id_Cliente = Cliente.Id_Cliente INNER JOIN FormaPagamento ON FormaPagamento.Id_Venda = Venda.Id_Venda WHERE(ParcelaVenda.DataPagamento = '') AND(FormaPagamento.Descricao = 'PARCELADO') AND(Venda.Id_Cliente = @IdCliente) AND ParcelaVenda.Parcela = @NParcela and ParcelaVenda.Id_Venda = @IdVenda";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@IdCliente", txt_CodigoCliente.Text);
+            comando.Parameters.AddWithValue("@NParcela", NumeroParcela);
+            comando.Parameters.AddWithValue("@IdVenda", txt_CodigoVenda.Text);
+            try
+            {
+                conexao.Open();
+                SqlDataReader dr = comando.ExecuteReader();
+                if (dr.Read())
+                    return int.Parse(dr["Id_Parcela"].ToString());
+                else
+                    return 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
+            finally
+            {
+                conexao.Close();
             }
         }
 
@@ -229,15 +263,15 @@ namespace CaixaFacil
 
         private void GerenciarCaixa()
         {
-            if (cbFormaAbatimento.Text == "DINHEIRO")
+            if (cbTipoPagamento.Text == "Dinheiro")
             {
                 _sql = "Update FluxoCaixa set ValorCaixa = @ValorCaixa, ValorRecebidoParcela = ValorRecebidoParcela + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbFormaAbatimento.Text == "CRÉDITO")
+            else if (cbTipoPagamento.Text == "Cartão de Crédito")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoCredito = ValorRecebidoCredito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbFormaAbatimento.Text == "DÉBITO")
+            else if (cbTipoPagamento.Text == "Cartão de Débito")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoDebito = ValorRecebidoDebito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
