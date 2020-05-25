@@ -13,7 +13,7 @@ namespace CaixaFacil
 {
     public partial class frmGradeFluxoDia : Form
     {
-        public frmGradeFluxoDia(string Titulo, string Entradacaixa, string SaidaCaixa, string VendaVista, string Desconto, string SaldoCaixa, string Prazo, string Parcela, string Parcial, string ValorInfCaixa, string SaldoFinal, string CartaoDebito, string CartaoCredito, string Balanco)
+        public frmGradeFluxoDia(string Titulo, string Entradacaixa, string SaidaCaixa, string VendaVista, string Desconto, string SaldoCaixa, string Prazo, string Parcela, string Parcial, string ValorInfCaixa, string SaldoFinal, string CartaoDebito, string CartaoCredito, string Balanco, string Misto)
         {
             InitializeComponent();
             string ValorCaixa, SaldoFinalCaixa;
@@ -34,14 +34,15 @@ namespace CaixaFacil
             reportParameters.Add(new ReportParameter("VendaVista", VendaVista));
             reportParameters.Add(new ReportParameter("Prazo", Prazo));
             reportParameters.Add(new ReportParameter("Parcial", Parcial));
+            reportParameters.Add(new ReportParameter("Misto", Misto));
             reportParameters.Add(new ReportParameter("Parcela", Parcela));
             reportParameters.Add(new ReportParameter("SaldoCaixa", SaldoCaixa));
             reportParameters.Add(new ReportParameter("Desconto", Desconto));
             reportParameters.Add(new ReportParameter("ValorInformadoCaixa", ValorCaixa));
             reportParameters.Add(new ReportParameter("SaldoFinal", SaldoFinalCaixa));
-            reportParameters.Add(new ReportParameter("CartaoDebito", "R$ " + CartaoDebito));
-            reportParameters.Add(new ReportParameter("CartaoCredito", "R$ " + CartaoCredito));
-            reportParameters.Add(new ReportParameter("Balanco", "R$ " + Balanco));
+            reportParameters.Add(new ReportParameter("CartaoDebito", CartaoDebito));
+            reportParameters.Add(new ReportParameter("CartaoCredito", CartaoCredito));
+            reportParameters.Add(new ReportParameter("Balanco", Balanco));
             this.rv_GradeFluxoCaixa.LocalReport.SetParameters(reportParameters);
             this.rv_GradeFluxoCaixa.RefreshReport();
         }

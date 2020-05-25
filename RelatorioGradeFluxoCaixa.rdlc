@@ -231,11 +231,45 @@
                 </TextRuns>
                 <Style />
               </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Misto: </Value>
+                    <Style>
+                      <FontFamily>times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!Misto.Value</Value>
+                    <Style>
+                      <FontFamily>times New Roman</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
             <Top>3.59516cm</Top>
             <Left>0.68475cm</Left>
-            <Height>6.23563cm</Height>
+            <Height>7.02938cm</Height>
             <Width>5.22521cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -359,9 +393,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ValorInformadoCaixa</rd:DefaultName>
-            <Top>10.34203cm</Top>
+            <Top>11.00349cm</Top>
             <Left>0.68475cm</Left>
-            <Height>3.40458cm</Height>
+            <Height>2.74312cm</Height>
             <Width>5.59152cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
@@ -679,6 +713,10 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="Misto">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -754,6 +792,11 @@
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>3</RowIndex>
           <ParameterName>Balanco</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>Misto</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

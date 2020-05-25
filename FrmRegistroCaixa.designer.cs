@@ -40,6 +40,8 @@
             this.lbl_ValorInfCaixa = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lbl_Balanco = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.lbl_SaldoCaixa = new System.Windows.Forms.Label();
             this.lbl_Descontos = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -64,8 +66,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.lbl_Balanco = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lbl_RecebimentoMisto = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gb_ValoresPos.SuspendLayout();
@@ -91,7 +93,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(538, 680);
+            this.panel1.Size = new System.Drawing.Size(538, 730);
             this.panel1.TabIndex = 0;
             // 
             // groupBox2
@@ -101,7 +103,7 @@
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(11, 511);
+            this.groupBox2.Location = new System.Drawing.Point(11, 561);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(243, 156);
             this.groupBox2.TabIndex = 484;
@@ -157,9 +159,9 @@
             this.gb_ValoresPos.Controls.Add(this.lbl_ValorInfCaixa);
             this.gb_ValoresPos.Controls.Add(this.label5);
             this.gb_ValoresPos.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gb_ValoresPos.Location = new System.Drawing.Point(270, 419);
+            this.gb_ValoresPos.Location = new System.Drawing.Point(264, 414);
             this.gb_ValoresPos.Name = "gb_ValoresPos";
-            this.gb_ValoresPos.Size = new System.Drawing.Size(241, 169);
+            this.gb_ValoresPos.Size = new System.Drawing.Size(251, 169);
             this.gb_ValoresPos.TabIndex = 484;
             this.gb_ValoresPos.TabStop = false;
             this.gb_ValoresPos.Text = "Valores Pós-Fechamento do Caixa:";
@@ -215,12 +217,33 @@
             this.groupBox5.Controls.Add(this.label12);
             this.groupBox5.Controls.Add(this.label14);
             this.groupBox5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(264, 200);
+            this.groupBox5.Location = new System.Drawing.Point(264, 193);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(251, 204);
             this.groupBox5.TabIndex = 13;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Resumo:";
+            // 
+            // lbl_Balanco
+            // 
+            this.lbl_Balanco.BackColor = System.Drawing.Color.White;
+            this.lbl_Balanco.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_Balanco.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Balanco.Location = new System.Drawing.Point(10, 162);
+            this.lbl_Balanco.Name = "lbl_Balanco";
+            this.lbl_Balanco.Size = new System.Drawing.Size(189, 31);
+            this.lbl_Balanco.TabIndex = 485;
+            this.lbl_Balanco.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(10, 141);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(106, 19);
+            this.label4.TabIndex = 484;
+            this.label4.Text = "Balanço geral:";
             // 
             // lbl_SaldoCaixa
             // 
@@ -270,9 +293,9 @@
             this.btn_VisualizaImprimir.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_VisualizaImprimir.Image = global::CaixaFacil.Properties.Resources.Data_Grid_icon;
             this.btn_VisualizaImprimir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_VisualizaImprimir.Location = new System.Drawing.Point(264, 596);
+            this.btn_VisualizaImprimir.Location = new System.Drawing.Point(264, 589);
             this.btn_VisualizaImprimir.Name = "btn_VisualizaImprimir";
-            this.btn_VisualizaImprimir.Size = new System.Drawing.Size(233, 71);
+            this.btn_VisualizaImprimir.Size = new System.Drawing.Size(251, 71);
             this.btn_VisualizaImprimir.TabIndex = 12;
             this.btn_VisualizaImprimir.Text = "Visualizar e imprimir Grade";
             this.btn_VisualizaImprimir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -424,6 +447,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.lbl_RecebimentoMisto);
+            this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.lbl_RecebimentoParcial);
             this.groupBox3.Controls.Add(this.lbl_RecebimentoParcela);
             this.groupBox3.Controls.Add(this.lbl_RecebimentoPrazo);
@@ -433,7 +458,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(11, 285);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(243, 220);
+            this.groupBox3.Size = new System.Drawing.Size(243, 270);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Recebimentos:";
@@ -501,32 +526,32 @@
             this.label8.TabIndex = 2;
             this.label8.Text = "Prazo:";
             // 
-            // lbl_Balanco
+            // lbl_RecebimentoMisto
             // 
-            this.lbl_Balanco.BackColor = System.Drawing.Color.White;
-            this.lbl_Balanco.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_Balanco.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Balanco.Location = new System.Drawing.Point(10, 162);
-            this.lbl_Balanco.Name = "lbl_Balanco";
-            this.lbl_Balanco.Size = new System.Drawing.Size(189, 31);
-            this.lbl_Balanco.TabIndex = 485;
-            this.lbl_Balanco.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_RecebimentoMisto.BackColor = System.Drawing.Color.White;
+            this.lbl_RecebimentoMisto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_RecebimentoMisto.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_RecebimentoMisto.Location = new System.Drawing.Point(10, 231);
+            this.lbl_RecebimentoMisto.Name = "lbl_RecebimentoMisto";
+            this.lbl_RecebimentoMisto.Size = new System.Drawing.Size(189, 31);
+            this.lbl_RecebimentoMisto.TabIndex = 485;
+            this.lbl_RecebimentoMisto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label4
+            // label10
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(10, 141);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 19);
-            this.label4.TabIndex = 484;
-            this.label4.Text = "Balanço geral:";
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(6, 208);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(54, 19);
+            this.label10.TabIndex = 484;
+            this.label10.Text = "Misto:";
             // 
             // FrmRegistroCaixa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(538, 680);
+            this.ClientSize = new System.Drawing.Size(538, 730);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -594,5 +619,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label lbl_Balanco;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbl_RecebimentoMisto;
+        private System.Windows.Forms.Label label10;
     }
 }

@@ -42,6 +42,7 @@ namespace CaixaFacil
             VisualizarFluxoCaixaVendaPrazoCompleto();
             VisualizarFluxoCaixaParcelaCompleto();
             VisualizarFluxoCaixaParcialCompleto();
+            VisualizarFluxoCaixaMistoCompleto();
             VisualizarFluxoCaixaDescontoCompleto();
             VisualizarFluxoCaixaValorEntradaCompleto();
             VisualizarFluxoCaixaValorSaidaCaixaCompleto();
@@ -53,6 +54,37 @@ namespace CaixaFacil
             lbl_RecebimentoParcela.Text = "R$ " + (ValorRecebidoParcela + EntradaParcela);
             lbl_SaldoCaixa.Text = "R$ " + ((ValorCaixa - ValorSaida) + ValorEntrada);
             lbl_Balanco.Text = "R$ " + ((ValorCaixa - ValorSaida) + ValorEntrada + ValorCredito + ValorDebito);
+        }
+
+        private void VisualizarFluxoCaixaMistoCompleto()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "SELECT sum(FluxoCaixa.ValorRecebidoMisto) FROM  FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where Convert(Date, FluxoCaixa.DataEntrada, 103) between Convert(date, @DataInicial, 103) and Convert(Date, @DataFinal, 103)";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@DataInicial", DataInicial);
+            comando.Parameters.AddWithValue("@DataFinal", DataFinal);
+            comando.CommandText = _sql;
+            try
+            {
+                conexao.Open();
+                comando.ExecuteNonQuery();
+                if (comando.ExecuteScalar() == DBNull.Value)
+                {
+                    lbl_RecebimentoMisto.Text = "R$ 0,00";
+                }
+                else
+                {
+                    lbl_RecebimentoMisto.Text = "R$ " + comando.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
         }
 
         private void VisualizarFluxoCaixaDebitoCompleto()
@@ -506,7 +538,7 @@ namespace CaixaFacil
         private void btn_VisualizaImprimir_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
-            frmGradeFluxoDia gradeFluxoDia = new frmGradeFluxoDia(lbl_titulo.Text, lbl_EntradaCaixa.Text, lbl_SaidaCaixa.Text, lbl_ValorVenda.Text, lbl_Descontos.Text, lbl_SaldoCaixa.Text, lbl_RecebimentoPrazo.Text, lbl_RecebimentoParcela.Text, lbl_RecebimentoParcial.Text, lbl_ValorInfCaixa.Text, lbl_SaldoFinal.Text, lbl_CartaoDebito.Text, lbl_CartaoCredito.Text, lbl_Balanco.Text);
+            frmGradeFluxoDia gradeFluxoDia = new frmGradeFluxoDia(lbl_titulo.Text, lbl_EntradaCaixa.Text, lbl_SaidaCaixa.Text, lbl_ValorVenda.Text, lbl_Descontos.Text, lbl_SaldoCaixa.Text, lbl_RecebimentoPrazo.Text, lbl_RecebimentoParcela.Text, lbl_RecebimentoParcial.Text, lbl_ValorInfCaixa.Text, lbl_SaldoFinal.Text, lbl_CartaoDebito.Text, lbl_CartaoCredito.Text, lbl_Balanco.Text, lbl_RecebimentoMisto.Text);
             gradeFluxoDia.ShowDialog();
             this.Cursor = Cursors.Default;
         }
@@ -550,6 +582,7 @@ namespace CaixaFacil
             VisualizarFluxoCaixaVendaPrazoPeriodico();
             VisualizarFluxoCaixaParcelaPeriodico();
             VisualizarFluxoCaixaParcialPeriodico();
+            VisualizarFluxoCaixaMistoPeriodico();
             VisualizarFluxoCaixaDescontoPeriodico();
             VisualizarFluxoCaixaValorEntradaPeriodico();
             VisualizarFluxoCaixaValorSaidaCaixaPeriodico();
@@ -562,6 +595,39 @@ namespace CaixaFacil
             lbl_SaldoCaixa.Text = "R$ " + ((ValorCaixa - ValorSaida) + ValorEntrada);
             lbl_Balanco.Text = "R$ " + ((ValorCaixa - ValorSaida) + ValorEntrada + ValorCredito + ValorDebito);
         }
+
+        private void VisualizarFluxoCaixaMistoPeriodico()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "SELECT sum(FluxoCaixa.ValorRecebidoMisto) FROM  FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where Convert(Date, FluxoCaixa.DataEntrada, 103) between Convert(date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and Usuario.Id_Usuario = @Id_Usuario";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@DataInicial", DataInicial);
+            comando.Parameters.AddWithValue("@DataFinal", DataFinal);
+            comando.Parameters.AddWithValue("@Id_Usuario", Id_Usuario);
+            comando.CommandText = _sql;
+            try
+            {
+                conexao.Open();
+                comando.ExecuteNonQuery();
+                if (comando.ExecuteScalar() == DBNull.Value)
+                {
+                    lbl_RecebimentoMisto.Text = "R$ 0,00";
+                }
+                else
+                {
+                    lbl_RecebimentoMisto.Text = "R$ " + comando.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
         private void VisualizarFluxoCaixaPeriodico()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
@@ -1068,6 +1134,7 @@ namespace CaixaFacil
                     lbl_RecebimentoParcela.Text = "R$ " + (ValorParcela + EntradaParcela);
                     lbl_RecebimentoParcial.Text = "R$ " + Tabela.Rows[0]["ValorRecebidoParcial"].ToString();
                     lbl_RecebimentoPrazo.Text = "R$ " + Tabela.Rows[0]["ValorRecebidoPrazo"].ToString();
+                    lbl_RecebimentoMisto.Text = "R$ " + Tabela.Rows[0]["ValorRecebidoMisto"].ToString();
                     ValorCredito = decimal.Parse(Tabela.Rows[0]["ValorRecebidoCredito"].ToString());
                     ValorDebito = decimal.Parse(Tabela.Rows[0]["ValorRecebidoDebito"].ToString());
                     lbl_CartaoCredito.Text = "R$ " + ValorCredito;
