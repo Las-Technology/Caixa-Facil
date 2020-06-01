@@ -1083,12 +1083,12 @@ namespace CaixaFacil
                         if(subValorVendaValorAbatido < 0 && valorAbatido > 0)
                         {
                             //decimal valorDevolver = valorAbatido - (valorVenda - desconto);
-                            decimal valorDevolver = valorAbatido - (((valorAbatido + valorRestante) - desconto) - valorSubTotal);
+                            decimal valorDevolver = valorAbatido - (((valorAbatido + valorRestante + desconto) - valorSubTotal) - desconto);
                            
                             MessageBox.Show("Deverá ser devolvido o valor de R$ " + valorDevolver + "! Por conta que o cliente tinha em sua conta uma pendência de R$ " + valorRestante + " e abateu R$ " + valorAbatido + ", com a devolução do item selecionado que está no valor de R$ " + valorSubTotal + " o cliente passa a não ter dívidas e terá o direito de receber o valor de R$ " + valorDevolver, "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
 
-                            AlterarValorAbatidoPagamentoParcialOrMisto();
+                            //AlterarValorAbatidoPagamentoParcialOrMisto();
                             subValorVendaValorAbatido = 0;
                         }
                         else
@@ -1110,9 +1110,40 @@ namespace CaixaFacil
                         AlterarValorRestantePagamentoParcialOrMisto();
             }
 
+            GravarHistoricoDevolucao();
             AlterarLucroItens();
             AlterarValorDesconto();
             AlterarValor_E_LucroVenda();
+        }
+
+        private void GravarHistoricoDevolucao()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+            if(FormaPagamento == "PAGAMENTO PARCIAL")
+            _sql = "insert into HistoricoDevolucao (Id_Produto, ValorProduto, qtdItens, Id_PagamentoParcial, DataDevolucao) values (@IdProduto, @ValorProduto, @qtdItens, @IdPagamentoParcial, @DataDevolucao)";
+            else if (FormaPagamento == "MISTO")
+                _sql = "insert into HistoricoDevolucao (Id_Produto, ValorProduto, qtdItens, Id_PagamentoMisto, DataDevolucao) values (@IdProduto, @ValorProduto, @qtdItens, @IdPagamentoMisto, @DataDevolucao)";
+
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@IdProduto", dgv_ListaVenda.CurrentRow.Cells["ColCodProduto"].Value.ToString());
+            comando.Parameters.AddWithValue("@ValorProduto", subValoresTotalUnitario);
+            comando.Parameters.AddWithValue("@qtdItens", qtdItensDevolvido);
+            comando.Parameters.AddWithValue("@IdPagamentoParcial", IdPagamentoParcial);
+            comando.Parameters.AddWithValue("@IdPagamentoMisto", IdPagamentoMisto);
+            comando.Parameters.AddWithValue("@DataDevolucao", DateTime.Now.ToShortDateString());
+            try
+            {
+                conexao.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
         }
 
         private void AlterarValorAbatidoPagamentoParcialOrMisto()

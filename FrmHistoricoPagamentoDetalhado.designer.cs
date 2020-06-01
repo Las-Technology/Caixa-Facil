@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmHistoricoPagamentoDetalhado));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.btnVisualizar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtFormaPagamento = new System.Windows.Forms.TextBox();
@@ -67,6 +69,8 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.lblInfo);
             this.panel1.Controls.Add(this.btnVisualizar);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
@@ -78,13 +82,36 @@
             this.panel1.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(611, 518);
+            this.panel1.Size = new System.Drawing.Size(611, 556);
             this.panel1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Location = new System.Drawing.Point(40, 496);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(166, 47);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Visualizar Lista - F2";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(45, 449);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(547, 38);
+            this.lblInfo.TabIndex = 21;
+            this.lblInfo.Text = "Houve uma alteração na venda realizada. Clique no botão abaixo para visualizar a " +
+    "lista de\r\nitens que foi devolvida.\r\n";
+            this.lblInfo.Visible = false;
             // 
             // btnVisualizar
             // 
             this.btnVisualizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnVisualizar.Location = new System.Drawing.Point(136, 461);
+            this.btnVisualizar.Location = new System.Drawing.Point(209, 496);
             this.btnVisualizar.Name = "btnVisualizar";
             this.btnVisualizar.Size = new System.Drawing.Size(240, 47);
             this.btnVisualizar.TabIndex = 20;
@@ -258,9 +285,9 @@
             // btnFechar
             // 
             this.btnFechar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFechar.Location = new System.Drawing.Point(382, 461);
+            this.btnFechar.Location = new System.Drawing.Point(455, 496);
             this.btnFechar.Name = "btnFechar";
-            this.btnFechar.Size = new System.Drawing.Size(208, 47);
+            this.btnFechar.Size = new System.Drawing.Size(135, 47);
             this.btnFechar.TabIndex = 0;
             this.btnFechar.Text = "Fechar - ESC";
             this.btnFechar.UseVisualStyleBackColor = true;
@@ -362,7 +389,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(611, 518);
+            this.ClientSize = new System.Drawing.Size(611, 556);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -414,5 +441,7 @@
         private System.Windows.Forms.TextBox txtValorPago;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnVisualizar;
+        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -96,6 +96,7 @@
             this.cbFormaPagamento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cbFormaPagamento.FormattingEnabled = true;
             this.cbFormaPagamento.Items.AddRange(new object[] {
+            "Misto",
             "Parcela",
             "Parcial",
             "Prazo"});

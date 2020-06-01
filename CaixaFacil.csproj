@@ -326,6 +326,12 @@
     <Compile Include="FrmHistoricoPagamento.designer.cs">
       <DependentUpon>FrmHistoricoPagamento.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmListaDevolucao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmListaDevolucao.designer.cs">
+      <DependentUpon>FrmListaDevolucao.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmHistoricoPagamentoDetalhado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -676,6 +682,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmHistoricoPagamento.resx">
       <DependentUpon>FrmHistoricoPagamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmListaDevolucao.resx">
+      <DependentUpon>FrmListaDevolucao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmHistoricoPagamentoDetalhado.resx">
       <DependentUpon>FrmHistoricoPagamentoDetalhado.cs</DependentUpon>

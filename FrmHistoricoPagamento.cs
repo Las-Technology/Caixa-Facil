@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -39,20 +34,24 @@ namespace CaixaFacil
             }
         }
 
-        int idVenda, idPagamentoParcial; decimal ValorRestante, ValorAbatido;
-        private void informarValorVendaParcial()
+        int idPagamento; decimal ValorRestante, ValorAbatido;
+        private void informarValorVendaParcialOrMisto()
         {
-            InformarValorPagamentoParcial();
+            InformarValorPagamentoParcialOrMisto();
             InformarValorPagamentoAbatido();
             ValorVenda = ValorAbatido + ValorRestante;
         }
 
-        private void InformarValorPagamentoParcial()
+        private void InformarValorPagamentoParcialOrMisto()
         {
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select sum(PagamentoParcial.ValorRestante) as valor, PagamentoParcial.Id_PagamentoParcial from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0  and PagamentoParcial.Id_Venda = " + NVenda + " group by PagamentoParcial.Id_PagamentoParcial";
+                if (cbFormaPagamento.Text == "Parcial")
+                    _sql = "select sum(PagamentoParcial.ValorRestante) as valor, PagamentoParcial.Id_PagamentoParcial from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0  and PagamentoParcial.Id_Venda = " + NVenda + " group by PagamentoParcial.Id_PagamentoParcial";
+                else
+                    _sql = "select sum(PagamentoMisto.ValorRestante) as valor, PagamentoMisto.Id_PagamentoMisto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'MISTO' and PagamentoMisto.ValorRestante >= 0  and PagamentoMisto.Id_Venda = " + NVenda + " group by PagamentoMisto.Id_PagamentoMisto";
+
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
@@ -60,7 +59,10 @@ namespace CaixaFacil
                 if (Tabela.Rows.Count > 0)
                 {
                     ValorRestante = decimal.Parse(Tabela.Rows[0]["valor"].ToString());
-                    idPagamentoParcial = int.Parse(Tabela.Rows[0]["Id_PagamentoParcial"].ToString());
+                    if (cbFormaPagamento.Text == "Parcial")
+                        idPagamento = int.Parse(Tabela.Rows[0]["Id_PagamentoParcial"].ToString());
+                    else
+                        idPagamento = int.Parse(Tabela.Rows[0]["Id_PagamentoMisto"].ToString());
                 }
             }
             catch (Exception ex)
@@ -74,7 +76,10 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select sum(ValorAbatido.ValorTotalAbatimento) as valor from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join ValorAbatido on ValorAbatido.Id_PagamentoParcial = PagamentoParcial.Id_PagamentoParcial inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0  and PagamentoParcial.Id_PagamentoParcial = " + idPagamentoParcial;
+                if (cbFormaPagamento.Text == "Parcial")
+                    _sql = "select sum(ValorAbatido.ValorTotalAbatimento) as valor from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join ValorAbatido on ValorAbatido.Id_PagamentoParcial = PagamentoParcial.Id_PagamentoParcial inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0  and PagamentoParcial.Id_PagamentoParcial = " + idPagamento;
+                else
+                    _sql = "select sum(ValorMistoAbatido.ValorTotalAbatimento) as valor from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join ValorMistoAbatido on ValorMistoAbatido.Id_PagamentoMisto = PagamentoMisto.Id_PagamentoMisto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'MISTO' and PagamentoMisto.ValorRestante >= 0  and PagamentoMisto.Id_PagamentoMisto = " + idPagamento;
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
@@ -195,6 +200,10 @@ namespace CaixaFacil
                     {
                         _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0";
                     }
+                    else if (cbFormaPagamento.Text == "Misto")
+                    {
+                        _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'MISTO' and PagamentoMisto.ValorRestante >= 0";
+                    }
 
                     BuscarHistoricoPagamentoPorFormasPagamento();
                 }
@@ -259,7 +268,11 @@ namespace CaixaFacil
             {
                 _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0 and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
             }
-                BuscarHistoricoPagamentoPorFormasPagamento();
+            else if (cbFormaPagamento.Text == "Misto")
+            {
+                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'MISTO' and PagamentoMisto.ValorRestante >= 0 and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
+            }
+            BuscarHistoricoPagamentoPorFormasPagamento();
         }
 
         private void btnVerHistoricoPagamento_Click(object sender, EventArgs e)
@@ -268,9 +281,9 @@ namespace CaixaFacil
             {
                 if (dgvHistoricoPagamento.CurrentRow.Selected == true)
                 {
-                    if (cbFormaPagamento.Text == "Parcial")
+                    if (cbFormaPagamento.Text == "Parcial" || cbFormaPagamento.Text == "Misto")
                     {
-                        informarValorVendaParcial();
+                        informarValorVendaParcialOrMisto();
                     }
                     else if (cbFormaPagamento.Text == "Prazo")
                     {
@@ -281,7 +294,7 @@ namespace CaixaFacil
                         InformarValorPagamentoParcela();
                     }
 
-                    FrmHistoricoPagamentoDetalhado historicoPagamentoDetalhado = new FrmHistoricoPagamentoDetalhado(NVenda, Cliente, dateTime, ValorVenda, cbFormaPagamento.Text, ValorAbatido, ValorRestante, idPagamentoParcial);
+                    FrmHistoricoPagamentoDetalhado historicoPagamentoDetalhado = new FrmHistoricoPagamentoDetalhado(NVenda, Cliente, dateTime, ValorVenda, cbFormaPagamento.Text, ValorAbatido, ValorRestante, idPagamento);
                     historicoPagamentoDetalhado.ShowDialog();
                 }
                 else
