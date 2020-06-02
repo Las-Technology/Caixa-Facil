@@ -16,17 +16,17 @@ namespace CaixaFacil
 
         bool devolucaoItensTudo = false;
 
-        public FrmVendaDevolverAlterarItens(string CodVenda, string Cliente, string FormaPagamento, string valorVenda, string codCliente, string dataVenda, string desconto)
+        public FrmVendaDevolverAlterarItens(string codVenda, string Cliente, string FormaPagamento, string valorVenda, string codCliente, string dataVenda, string desconto)
         {
             InitializeComponent();
             this.dataVenda = dataVenda;
             this.desconto = decimal.Parse(desconto);
             this.valorVenda = decimal.Parse(valorVenda) + this.desconto;
-            lblCodigoVenda.Text = CodVenda;
+            lblCodigoVenda.Text = codVenda;
             lblCliente.Text = Cliente;
             lblValorTotalComDesconto.Text = "R$ " + valorVenda;
             lblDesconto.Text = "R$ " + desconto;
-            this.CodVenda = CodVenda;
+            this.codVenda = codVenda;
             this.FormaPagamento = FormaPagamento;
             this.codCliente = codCliente;
             lblValorTotalSemDesconto.Text = "R$ " + (decimal.Parse(valorVenda) + decimal.Parse(desconto));
@@ -136,7 +136,7 @@ namespace CaixaFacil
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "select ValorReceber from FluxoCaixa where DataSaida = '' and HoraSaida = ''";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@IdVenda", CodVenda);
+            comando.Parameters.AddWithValue("@IdVenda", codVenda);
             comando.CommandText = _sql;
             try
             {
@@ -161,7 +161,7 @@ namespace CaixaFacil
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "SELECT SUM(ParcelaVenda.ValorParcelado) as ValorPago FROM ParcelaVenda INNER JOIN FormaPagamento ON ParcelaVenda.Id_Venda = FormaPagamento.Id_Venda WHERE ParcelaVenda.Id_Venda = @IdVenda AND FormaPagamento.Descricao = 'PARCELADO'";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@IdVenda", CodVenda);
+            comando.Parameters.AddWithValue("@IdVenda", codVenda);
             comando.CommandText = _sql;
             try
             {
@@ -195,7 +195,7 @@ namespace CaixaFacil
                 _sql = "SELECT SUM(ParcelaVenda.ValorParcelado) as ValorPago FROM ParcelaVenda INNER JOIN FormaPagamento ON ParcelaVenda.Id_Venda = FormaPagamento.Id_Venda WHERE ParcelaVenda.Id_Venda = @IdVenda AND ParcelaVenda.DataPagamento <> '' AND FormaPagamento.Descricao = 'PRAZO'";
             }
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@IdVenda", CodVenda);
+            comando.Parameters.AddWithValue("@IdVenda", codVenda);
             comando.CommandText = _sql;
             try
             {
@@ -222,7 +222,7 @@ namespace CaixaFacil
 
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@IdCliente", codCliente);
-            comando.Parameters.AddWithValue("@IdVenda", CodVenda);
+            comando.Parameters.AddWithValue("@IdVenda", codVenda);
             comando.CommandText = _sql;
             try
             {
@@ -290,9 +290,9 @@ namespace CaixaFacil
                 {
 
                     if (FormaPagamento == "PAGAMENTO PARCIAL")
-                        _sql = "Select Min(Venda.Id_Venda) as MaxCodVenda from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Venda.Id_Venda > " + CodVenda + " and Venda.Id_Cliente = " + codCliente + " and FormaPagamento.Descricao = 'PAGAMENTO PARCIAL'";
+                        _sql = "Select Min(Venda.Id_Venda) as MaxCodVenda from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Venda.Id_Venda > " + codVenda + " and Venda.Id_Cliente = " + codCliente + " and FormaPagamento.Descricao = 'PAGAMENTO PARCIAL'";
                     else
-                        _sql = "Select Min(Venda.Id_Venda) as MaxCodVenda from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Venda.Id_Venda > " + CodVenda + " and Venda.Id_Cliente = " + codCliente + " and FormaPagamento.Descricao = 'MISTO'";
+                        _sql = "Select Min(Venda.Id_Venda) as MaxCodVenda from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Venda.Id_Venda > " + codVenda + " and Venda.Id_Cliente = " + codCliente + " and FormaPagamento.Descricao = 'MISTO'";
                 }
                 else if (MaxCodVenda > 0 && FormaPagamento == "PAGAMENTO PARCIAL")
                 {
@@ -341,7 +341,7 @@ namespace CaixaFacil
                 _sql = "select * from PagamentoMisto where Id_Venda = @IdVenda";
 
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@IdVenda", CodVenda);
+            comando.Parameters.AddWithValue("@IdVenda", codVenda);
             comando.CommandText = _sql;
             try
             {
@@ -406,7 +406,7 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select ItensVenda.id_ItensVenda, ItensVenda.Id_Produto, produto.Descricao, ItensVenda.Valor, ItensVenda.Quantidade, ItensVenda.lucroItens, Venda.DataVenda from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto where Venda.Id_Venda = " + CodVenda;
+                _sql = "select ItensVenda.id_ItensVenda, ItensVenda.Id_Produto, produto.Descricao, ItensVenda.Valor, ItensVenda.Quantidade, ItensVenda.lucroItens, Venda.DataVenda from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto where Venda.Id_Venda = " + codVenda;
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
@@ -419,7 +419,7 @@ namespace CaixaFacil
             }
         }
 
-        string CodVenda = "", FormaPagamento;
+        string codVenda = "", FormaPagamento;
 
         private void btnDevolverTudo_Click(object sender, EventArgs e)
         {
@@ -511,13 +511,13 @@ namespace CaixaFacil
                     if (FormaPagamento == "PAGAMENTO PARCIAL")
                     {
                         subValorVendaValorAbatido = ValorTotalPagamentoParcial - valorVenda - ReceberValorAbatido();
-                        if (int.Parse(CodVenda) >= IdVendaComValorRestante)
+                        if (int.Parse(codVenda) >= IdVendaComValorRestante)
                             AlterarValorRestantePagamentoParcialOrMisto();
                     }
                     else
                     {
                         subValorVendaValorAbatido = ValorTotalPagamentoMisto - valorVenda - ReceberValorAbatidoMisto();
-                        if (int.Parse(CodVenda) >= IdVendaComValorRestante)
+                        if (int.Parse(codVenda) >= IdVendaComValorRestante)
                             AlterarValorRestantePagamentoParcialOrMisto();
                     }
                 }
@@ -850,7 +850,7 @@ namespace CaixaFacil
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "delete from Venda where id_Venda = @IdVenda";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@IdVenda", CodVenda);
+            comando.Parameters.AddWithValue("@IdVenda", codVenda);
             comando.CommandText = _sql;
             try
             {
@@ -1106,7 +1106,7 @@ namespace CaixaFacil
                 }
 
                 if (subValorVendaValorAbatido >= 0)
-                    if (int.Parse(CodVenda) >= IdVendaComValorRestante)
+                    if (int.Parse(codVenda) >= IdVendaComValorRestante)
                         AlterarValorRestantePagamentoParcialOrMisto();
             }
 
@@ -1120,17 +1120,16 @@ namespace CaixaFacil
         {
             SqlConnection conexao = new SqlConnection(stringConn);
             if(FormaPagamento == "PAGAMENTO PARCIAL")
-            _sql = "insert into HistoricoDevolucao (Id_Produto, ValorProduto, qtdItens, Id_PagamentoParcial, DataDevolucao) values (@IdProduto, @ValorProduto, @qtdItens, @IdPagamentoParcial, @DataDevolucao)";
+            _sql = "insert into HistoricoDevolucao (Id_Produto, ValorProduto, qtdItens, Id_PagamentoParcial, DataDevolucao) values (@IdProduto, @ValorProduto, @qtdItens, @IdPagamento, @DataDevolucao)";
             else if (FormaPagamento == "MISTO")
-                _sql = "insert into HistoricoDevolucao (Id_Produto, ValorProduto, qtdItens, Id_PagamentoMisto, DataDevolucao) values (@IdProduto, @ValorProduto, @qtdItens, @IdPagamentoMisto, @DataDevolucao)";
+                _sql = "insert into HistoricoDevolucao (Id_Produto, ValorProduto, qtdItens, Id_PagamentoMisto, DataDevolucao) values (@IdProduto, @ValorProduto, @qtdItens, @IdPagamento, @DataDevolucao)";
 
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@IdProduto", dgv_ListaVenda.CurrentRow.Cells["ColCodProduto"].Value.ToString());
             comando.Parameters.AddWithValue("@ValorProduto", subValoresTotalUnitario);
             comando.Parameters.AddWithValue("@qtdItens", qtdItensDevolvido);
             comando.Parameters.AddWithValue("@IdPagamentoParcial", IdPagamentoParcial);
-            comando.Parameters.AddWithValue("@IdPagamentoMisto", IdPagamentoMisto);
-            comando.Parameters.AddWithValue("@DataDevolucao", DateTime.Now.ToShortDateString());
+            comando.Parameters.AddWithValue("@IdPagamento", getIdPagamentoParcialOrMisto());
             try
             {
                 conexao.Open();
@@ -1144,6 +1143,40 @@ namespace CaixaFacil
             {
                 conexao.Close();
             }
+        }
+
+        private int getIdPagamentoParcialOrMisto()
+        {
+            int IdPagamentoMisto = 0;
+
+            SqlConnection conexao = new SqlConnection(stringConn);
+            if (FormaPagamento == "PAGAMENTO PARCIAL")
+                _sql = "select Max(PagamentoParcial.Id_PagamentoParcial) as Id_PagamentoParcial from PagamentoParcial inner join Venda on venda.Id_Venda = PagamentoParcial.Id_Venda inner join Cliente on cliente.Id_Cliente = Venda.Id_Cliente where Venda.id_Venda <= @IdVenda and Venda.Id_Cliente = @IdCliente";
+            else
+                _sql = "select Max(PagamentoMisto.Id_PagamentoMisto) as Id_PagamentoMisto from PagamentoMisto inner join Venda on venda.Id_Venda = PagamentoMisto.Id_Venda inner join Cliente on cliente.Id_Cliente = Venda.Id_Cliente where Venda.id_Venda <= @IdVenda and Venda.Id_Cliente = @IdCliente";
+            
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@IdVenda", codVenda);
+            comando.Parameters.AddWithValue("@IdCliente", codCliente);
+            try
+            {
+                conexao.Open();
+                SqlDataReader dr = comando.ExecuteReader();
+                if (dr.Read())
+                {
+                    IdPagamentoMisto = int.Parse(dr["Id_PagamentoMisto"].ToString());
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fàcil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return IdPagamentoMisto;
         }
 
         private void AlterarValorAbatidoPagamentoParcialOrMisto()
@@ -1182,7 +1215,7 @@ namespace CaixaFacil
                 SqlConnection conexao = new SqlConnection(stringConn);
                 _sql = "update Venda set Desconto = 0.00 where id_Venda = @idVenda";
                 SqlCommand comando = new SqlCommand(_sql, conexao);
-                comando.Parameters.AddWithValue("@idVenda", CodVenda);
+                comando.Parameters.AddWithValue("@idVenda", codVenda);
                 comando.CommandText = _sql;
 
                 try
@@ -1232,7 +1265,7 @@ namespace CaixaFacil
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "update ParcelaVenda set DataPagamento = @DataPagamento, HoraPagamento = @HoraPagamento where id_Venda = @idVenda and DataPagamento = '' and HoraPagamento = ''";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@idVenda", CodVenda);
+            comando.Parameters.AddWithValue("@idVenda", codVenda);
             comando.Parameters.AddWithValue("@DataPagamento", DateTime.Now.ToShortDateString());
             comando.Parameters.AddWithValue("@HoraPagamento", DateTime.Now.ToShortTimeString());
             comando.CommandText = _sql;
@@ -1257,7 +1290,7 @@ namespace CaixaFacil
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "update Venda set ValorTotal = @ValorTotal, Lucro = Lucro - @Lucro where id_Venda = @idVenda";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@idVenda", CodVenda);
+            comando.Parameters.AddWithValue("@idVenda", codVenda);
             comando.Parameters.AddWithValue("@ValorTotal", (valorVenda - desconto));
             comando.Parameters.AddWithValue("@Lucro", ((lucroItens / qtdItens) * qtdItensDevolvido));
             comando.CommandText = _sql;
@@ -1282,7 +1315,7 @@ namespace CaixaFacil
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "update ParcelaVenda set valorParcelado = @ValorParcela where id_Venda = @idVenda and DataPagamento = '' and HoraPagamento = ''";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@idVenda", CodVenda);
+            comando.Parameters.AddWithValue("@idVenda", codVenda);
             comando.Parameters.AddWithValue("@ValorParcela", valorParcela);
             comando.CommandText = _sql;
 
@@ -1306,7 +1339,7 @@ namespace CaixaFacil
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "select count(Parcela) from ParcelaVenda where id_Venda = @idVenda and DataPagamento = '' and HoraPagamento = ''";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@idVenda", CodVenda);
+            comando.Parameters.AddWithValue("@idVenda", codVenda);
             comando.CommandText = _sql;
 
             try
@@ -1334,16 +1367,16 @@ namespace CaixaFacil
             {
                 if (qtdItensDevolvido == qtdItens)
                 {
-                    _sql = "delete from ItensVenda where id_Produto = " + dgv_ListaVenda.CurrentRow.Cells["ColCodProduto"].Value.ToString() + "and id_Venda = " + CodVenda;
+                    _sql = "delete from ItensVenda where id_Produto = " + dgv_ListaVenda.CurrentRow.Cells["ColCodProduto"].Value.ToString() + "and id_Venda = " + codVenda;
                 }
                 else
                 {
-                    _sql = "update ItensVenda set Quantidade = Quantidade - " + qtdItensDevolvido + ", Valor = Valor - ((Valor / " + qtdItens + ") * " + qtdItensDevolvido + ") where id_Produto = " + dgv_ListaVenda.CurrentRow.Cells["ColCodProduto"].Value.ToString() + "and id_Venda = " + CodVenda;
+                    _sql = "update ItensVenda set Quantidade = Quantidade - " + qtdItensDevolvido + ", Valor = Valor - ((Valor / " + qtdItens + ") * " + qtdItensDevolvido + ") where id_Produto = " + dgv_ListaVenda.CurrentRow.Cells["ColCodProduto"].Value.ToString() + "and id_Venda = " + codVenda;
                 }
             }
             else
             {
-                _sql = "delete from ItensVenda where id_Produto = " + dgv_ListaVenda.CurrentRow.Cells["ColCodProduto"].Value.ToString() + "and id_Venda = " + CodVenda;
+                _sql = "delete from ItensVenda where id_Produto = " + dgv_ListaVenda.CurrentRow.Cells["ColCodProduto"].Value.ToString() + "and id_Venda = " + codVenda;
             }
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.CommandText = _sql;

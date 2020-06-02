@@ -41,7 +41,7 @@ namespace CaixaFacil
         {
             SqlConnection conexao = new SqlConnection(stringConn);
 
-            if (FormaPagamento.ToUpper() == "PAGAMENTO PARCIAL")
+            if (FormaPagamento.ToUpper() == "PARCIAL")
                 _sql = "Select Produto.Id_Produto, Produto.Descricao, HistoricoDevolucao.ValorProduto, HistoricoDevolucao.qtdItens, HistoricoDevolucao.DataDevolucao from HistoricoDevolucao inner join Produto on Produto.Id_Produto = HistoricoDevolucao.Id_Produto where HistoricoDevolucao.Id_PagamentoParcial = @IdPagamento";
             else if (FormaPagamento.ToUpper() == "MISTO")
                 _sql = "Select Produto.Id_Produto, Produto.Descricao, HistoricoDevolucao.ValorProduto, HistoricoDevolucao.qtdItens, HistoricoDevolucao.DataDevolucao from HistoricoDevolucao inner join Produto on Produto.Id_Produto = HistoricoDevolucao.Id_Produto where HistoricoDevolucao.Id_PagamentoMisto = @IdPagamento";
@@ -58,7 +58,7 @@ namespace CaixaFacil
             decimal valorContaInicial = 0;
 
             SqlConnection conexao = new SqlConnection(stringConn);
-            if (FormaPagamento.ToUpper() == "PAGAMENTO PARCIAL")
+            if (FormaPagamento.ToUpper() == "PARCIAL")
                 _sql = "select sum(ItensVenda.Valor) as ValorItens, Venda.Desconto from Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join ItensVenda on ItensVenda.Id_Venda = PagamentoParcial.Id_Venda  where PagamentoParcial.Id_PagamentoParcial = @IdPagamento group by Venda.Desconto"; 
             if (FormaPagamento.ToUpper() == "MISTO")
                 _sql = "select sum(ItensVenda.Valor) as ValorItens, Venda.Desconto from Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join ItensVenda on ItensVenda.Id_Venda = PagamentoMisto.Id_Venda where PagamentoMisto.Id_PagamentoMisto = @IdPagamento group by Venda.Desconto"; 

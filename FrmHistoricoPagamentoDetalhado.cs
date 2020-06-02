@@ -29,7 +29,7 @@ namespace CaixaFacil
             if (VisualizarItensDevolvidos())
             {
                 lblInfo.Visible = true;
-                button1.Visible = true;
+                btnVisualizarLista.Visible = true;
                 return;
             }
 
@@ -40,27 +40,37 @@ namespace CaixaFacil
 
         private bool VisualizarItensDevolvidos()
         {
-            SqlConnection conexao = new SqlConnection(stringConn);
+            bool existsDate = false;
 
-            if (FormaPagamento.ToUpper() == "PAGAMENTO PARCIAL")
-                _sql = "Select * from HistoricoDevolucao where Id_PagamentoParcial = @IdPagamentoParcial";
-            else if (FormaPagamento.ToUpper() == "MISTO")
-                _sql = "Select * from HistoricoDevolucao where Id_PagamentoMisto = @IdPagamento";
+                SqlConnection conexao = new SqlConnection(stringConn);
 
-            SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@IdPagamento", IdPagamento);
-            conexao.Open();
-            SqlDataReader dr = comando.ExecuteReader();
-            if (dr.Read())
+                if (FormaPagamento.ToUpper() == "PARCIAL")
+                    _sql = "Select * from HistoricoDevolucao where Id_PagamentoParcial = @IdPagamento";
+                else if (FormaPagamento.ToUpper() == "MISTO")
+                    _sql = "Select * from HistoricoDevolucao where Id_PagamentoMisto = @IdPagamento";
+
+                SqlCommand comando = new SqlCommand(_sql, conexao);
+                comando.Parameters.AddWithValue("@IdPagamento", IdPagamento);
+
+            try
+            {
+                conexao.Open();
+                SqlDataReader dr = comando.ExecuteReader();
+                if (dr.Read())
+                {
+                    existsDate = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
             {
                 conexao.Close();
-                return true;
             }
-            else
-            {
-                conexao.Close();
-                return false;
-            }
+
+            return existsDate;
         }
 
         private void btn_Fechar_MouseEnter(object sender, EventArgs e)
@@ -91,6 +101,10 @@ namespace CaixaFacil
             {
                 btnFechar_Click(sender, e);
             }
+            if(e.KeyCode == Keys.F2)
+            {
+                btnVisualizarLista_Click(sender, e);
+            }
             if (e.KeyCode == Keys.F3)
             {
                 btnVisualizar_Click(sender, e);
@@ -110,7 +124,7 @@ namespace CaixaFacil
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnVisualizarLista_Click(object sender, EventArgs e)
         {
             FrmListaDevolucao listaDevolucao = new FrmListaDevolucao(IdPagamento, FormaPagamento);
             listaDevolucao.ShowDialog();

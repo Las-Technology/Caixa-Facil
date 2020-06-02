@@ -16,8 +16,9 @@ namespace CaixaFacil
         private int Id_Cliente;
         private int Id_ValorAbatido;
         private decimal ValorTotalAbatido;
-        private int Id_PagamentoParcial;
+        private int Id_PagamentoParcial = 1;
         private string HoraPagamento;
+       
         public int Id
         {
             get { return Id_PagamentoParcial; }
