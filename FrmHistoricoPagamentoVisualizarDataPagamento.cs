@@ -30,7 +30,7 @@ namespace CaixaFacil
             }
             else
             {
-                InformarDataEValorPagamentoParcialPago();
+                InformarDataEValorPagamentoParcialOrMistoPago();
             }
         }
 
@@ -73,13 +73,13 @@ namespace CaixaFacil
             }
         }
 
-        private void InformarDataEValorPagamentoParcialPago()
+        private void InformarDataEValorPagamentoParcialOrMistoPago()
         {
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
 
-                if (FormaPagamento.ToUpper() == "PAGAMENTO PARCIAL")
+                if (FormaPagamento.ToUpper() == "PARCIAL")
                     _sql = "select venda.id_Venda as venda, ValorAbatido.ValorTotalAbatimento as ValorAbatido,  ValorAbatido.DataPagamento as DataAbatimento,  ValorAbatido.HoraPagamento as HoraAbatimento from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join ValorAbatido on ValorAbatido.Id_PagamentoParcial = PagamentoParcial.Id_PagamentoParcial inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0 and ValorAbatido.ValorTotalAbatimento > 0  and PagamentoParcial.Id_PagamentoParcial = " + IdPagamento;
                 else if (FormaPagamento.ToUpper() == "MISTO")
                     _sql = "select venda.id_Venda as venda, ValorMistoAbatido.ValorTotalAbatimento as ValorAbatido,  ValorMistoAbatido.DataPagamento as DataAbatimento,  ValorMistoAbatido.HoraPagamento as HoraAbatimento from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join ValorMistoAbatido on ValorMistoAbatido.Id_PagamentoMisto = PagamentoMisto.Id_PagamentoMisto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'MISTO' and PagamentoMisto.ValorRestante >= 0 and ValorMistoAbatido.ValorTotalAbatimento > 0  and PagamentoMisto.Id_PagamentoMisto = " + IdPagamento;
