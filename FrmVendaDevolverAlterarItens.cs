@@ -330,7 +330,7 @@ namespace CaixaFacil
             }
         }
 
-        bool CodVendaIgual = false;
+        bool codVendaIgual = false;
 
         private void VerificarIdVenda()
         {
@@ -349,11 +349,11 @@ namespace CaixaFacil
                 SqlDataReader dr = comando.ExecuteReader();
                 if (dr.Read())
                 {
-                    CodVendaIgual = true;
+                    codVendaIgual = true;
                 }
                 else
                 {
-                    CodVendaIgual = false;
+                    codVendaIgual = false;
                 }
             }
             catch (Exception ex)
@@ -576,9 +576,10 @@ namespace CaixaFacil
 
                     VerificarIdVenda();
 
-                    if (CodVendaIgual)
-                    {
-                        getValorDescontoConta(); 
+                    getValorDescontoConta();
+
+                    if (codVendaIgual)
+                    {                       
                         InformarIdVendaMaximo();
                     }
 
@@ -588,13 +589,19 @@ namespace CaixaFacil
                     subValorVendaValorAbatido = valorAbatido - (((valorAbatido + valorRestante + desconto) - valorVenda) - desconto);
                     if (subValorVendaValorAbatido > 0)
                     {
-                        MessageBox.Show("Deverá ser devolvido o valor de R$ " + subValorVendaValorAbatido + "! Por conta que o cliente tinha em sua conta uma pendência de R$ " + valorRestante + " e abateu R$ " + valorAbatido + ", com a devolução do item selecionado que está no valor de R$ " + valorVenda + " o cliente passa a não ter dívidas e terá o direito de receber o valor de R$ " + subValorVendaValorAbatido, "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Deverá ser devolvido o valor de R$ " + subValorVendaValorAbatido + "! Por conta que o cliente tinha em sua conta uma pendência de R$ " + valorRestante + " e abateu R$ " + valorAbatido + ", com a devolução do item selecionado que está no valor de R$ " + valorVenda + " o cliente passa a não ter dívidas e terá o direito de receber o valor de R$ " + subValorVendaValorAbatido, "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         subValorVendaValorAbatido = 0;
                     }
                     else if (subValorVendaValorAbatido == 0)
                     {
-                        MessageBox.Show("Em sua conta que está por volta de R$ " + (valorAbatido + valorRestante) + " reais o Cliente estava devendo R$ " + valorRestante + " reais e já abateu em sua conta o valor de R$ " + valorAbatido + " reais. Com a devolução do(s) produto(s) envolvido(s) nesta operação que bate o valor de " + lblValorTotalComDesconto.Text + " reais, o valor da conta pendente zera e o cliente passa a não ter dívidas com o estabelicimento até o presente momento.", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Em sua conta que está por volta de R$ " + (valorAbatido + valorRestante) + " o Cliente estava devendo R$ " + valorRestante + " reais e já abateu em sua conta o valor de R$ " + valorAbatido + ". Com a devolução do(s) produto(s) envolvido(s) nesta operação que bate o valor de " + lblValorTotalComDesconto.Text + ", o valor da conta pendente zera e o cliente passa a não ter dívidas com o estabelicimento até o presente momento.", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    else if(subValorVendaValorAbatido < 0)
+                    {
+                        subValorVendaValorAbatido = (((valorAbatido + valorRestante + desconto) - valorVenda) - desconto) - valorAbatido;
+                        MessageBox.Show("Com a devolução dos produtos o cliente passa a dever R$ " + subValorVendaValorAbatido + ".", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
                     if (int.Parse(codVenda) >= IdVendaComValorRestante)
                         AlterarValorRestantePagamentoParcialOrMisto();
                 }
@@ -616,11 +623,16 @@ namespace CaixaFacil
 
         private void getValorDescontoConta()
         {
-            // Primeira coisa que deve ser feito é verificar se exsite outra compra neste formato pelo mesmo cliente
+            // Primeira coisa é pegar o id_Venda da tabela PagamentoParcial
+
+            GetIdVendaPagamentoParcialOrMisto();
+
+            // Agora deve verificar se existe outra compra neste formato pelo mesmo cliente
+
             if (VerificarOutrasContas())
             {
                 existsOutraConta = true;
-                GetIdPagamentoParcialAndIdVenda();
+                GetIdPagamentoParcialOrMistoAndIdVenda();
             }
 
             desconto = getDesconto();
@@ -635,27 +647,28 @@ namespace CaixaFacil
             {
                 if (existsOutraConta)
                 {
-                    _sql = "select sum(Venda.desconto) as desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and Venda.Id_Venda  between @CodVenda and @GetVenda";
+                    _sql = "select sum(Venda.desconto) as desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and Venda.Id_Venda between @IdVendaPagamento and @GetVenda";
                 }
                 else
                 {
-                    _sql = "select sum(Venda.desconto) as desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and Venda.Id_Venda >= @CodVenda";
+                    _sql = "select sum(Venda.desconto) as desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and Venda.Id_Venda >= @IdVendaPagamento";
                 }
             }
             else
             {
                 if (existsOutraConta)
                 {
-                    _sql = "select sum(Venda.desconto) as desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and FormaPagamento.Descricao = 'MISTO' and Venda.Id_Venda  between @CodVenda and @GetVenda";
+                    _sql = "select sum(Venda.desconto) as desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and FormaPagamento.Descricao = 'MISTO' and Venda.Id_Venda between @IdVendaPagamento and @GetVenda";
                 }
                 else
                 {
-                    _sql = "select sum(Venda.desconto) as desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and FormaPagamento.Descricao = 'MISTO' and Venda.Id_Venda >= @CodVenda";
+                    _sql = "select sum(Venda.desconto) as desconto from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and FormaPagamento.Descricao = 'MISTO' and Venda.Id_Venda >= @IdVendaPagamento";
                 }
             }
 
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@CodVenda", codVenda);
+            comando.Parameters.AddWithValue("@IdVendaPagamento", idVendaPagamentoParcialOrMisto);
             comando.Parameters.AddWithValue("@GetVenda", (getIdVenda - 1));
             comando.Parameters.AddWithValue("@IdCliente", codCliente);
             try
@@ -680,7 +693,8 @@ namespace CaixaFacil
         }
 
         int getIdVenda;
-        private void GetIdPagamentoParcialAndIdVenda()
+        
+        private void GetIdPagamentoParcialOrMistoAndIdVenda()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
             
@@ -711,14 +725,54 @@ namespace CaixaFacil
             }
         }
 
+        int idVendaPagamentoParcialOrMisto;
+
+        private void GetIdVendaPagamentoParcialOrMisto()
+        {
+            int idPagamento = idPagamentoParcial;
+            SqlConnection conexao = new SqlConnection(stringConn);
+
+            if (FormaPagamento == "PAGAMENTO PARCIAL")
+                _sql = "select Venda.Id_Venda from PagamentoParcial inner join Venda on Venda.id_Venda = PagamentoParcial.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and PagamentoParcial.Id_PagamentoParcial = @IdPagamento";
+            else
+            {
+                _sql = "select Venda.Id_Venda from PagamentoMisto inner join Venda on Venda.id_Venda = PagamentoMisto.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and PagamentoMisto.Id_PagamentoMisto = @IdPagamento";
+                idPagamento = idPagamentoMisto;
+            }
+
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@IdPagamento", idPagamento);
+            comando.Parameters.AddWithValue("@IdCliente", codCliente);
+            try
+            {
+                conexao.Open();
+                SqlDataReader dr = comando.ExecuteReader();
+                if (dr.Read())
+                {
+                    idVendaPagamentoParcialOrMisto = int.Parse(dr["Id_Venda"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+        
         private bool VerificarOutrasContas()
         {
             bool existsConta = false;
             int idPagamento = idPagamentoParcial;
 
             SqlConnection conexao = new SqlConnection(stringConn);
+
             if (FormaPagamento == "PAGAMENTO PARCIAL")
+            {
                 _sql = "select PagamentoParcial.Id_PagamentoParcial from PagamentoParcial inner join Venda on Venda.id_Venda = PagamentoParcial.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and PagamentoParcial.Id_PagamentoParcial > @IdPagamento";
+            }
             else
             {
                 _sql = "select PagamentoMisto.Id_PagamentoMisto from PagamentoMisto inner join Venda on Venda.id_Venda = PagamentoMisto.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and PagamentoMisto.Id_PagamentoMisto > @IdPagamento";
