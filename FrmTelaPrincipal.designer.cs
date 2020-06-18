@@ -454,10 +454,10 @@
             // 
             this.Menu_Movimentos.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Menu_AnaliseDeVendas,
-            this.menuAlterardevolverItensVenda,
             this.Menu_ContasClientes,
             this.Menu_ContasPagar,
             this.Menu_ContasReceber,
+            this.menuAlterardevolverItensVenda,
             this.Menu_RealizarVendas,
             this.menuVendasNãoContablizadas});
             this.Menu_Movimentos.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -474,7 +474,7 @@
             this.produtoMenosVendidosToolStripMenuItem});
             this.Menu_AnaliseDeVendas.Image = ((System.Drawing.Image)(resources.GetObject("Menu_AnaliseDeVendas.Image")));
             this.Menu_AnaliseDeVendas.Name = "Menu_AnaliseDeVendas";
-            this.Menu_AnaliseDeVendas.Size = new System.Drawing.Size(354, 22);
+            this.Menu_AnaliseDeVendas.Size = new System.Drawing.Size(306, 22);
             this.Menu_AnaliseDeVendas.Text = "Análise de vendas e serviços prestados";
             // 
             // Menu_AnaliseVenda
@@ -546,8 +546,8 @@
             this.menuAlterardevolverItensVenda.Image = ((System.Drawing.Image)(resources.GetObject("menuAlterardevolverItensVenda.Image")));
             this.menuAlterardevolverItensVenda.Name = "menuAlterardevolverItensVenda";
             this.menuAlterardevolverItensVenda.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.menuAlterardevolverItensVenda.Size = new System.Drawing.Size(354, 22);
-            this.menuAlterardevolverItensVenda.Text = "Alteração/devolução de itens da Venda";
+            this.menuAlterardevolverItensVenda.Size = new System.Drawing.Size(306, 22);
+            this.menuAlterardevolverItensVenda.Text = "Devolução de itens da Venda";
             this.menuAlterardevolverItensVenda.Click += new System.EventHandler(this.menuAlterardevolverItensVenda_Click);
             // 
             // Menu_ContasClientes
@@ -557,7 +557,7 @@
             this.Menu_ContasClientes.Name = "Menu_ContasClientes";
             this.Menu_ContasClientes.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.C)));
-            this.Menu_ContasClientes.Size = new System.Drawing.Size(354, 22);
+            this.Menu_ContasClientes.Size = new System.Drawing.Size(306, 22);
             this.Menu_ContasClientes.Text = "Contas Clientes";
             this.Menu_ContasClientes.Click += new System.EventHandler(this.Menu_ContasClientes_Click);
             // 
@@ -568,7 +568,7 @@
             this.Menu_ContasPagar.Name = "Menu_ContasPagar";
             this.Menu_ContasPagar.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.P)));
-            this.Menu_ContasPagar.Size = new System.Drawing.Size(354, 22);
+            this.Menu_ContasPagar.Size = new System.Drawing.Size(306, 22);
             this.Menu_ContasPagar.Text = "Contas a pagar";
             this.Menu_ContasPagar.Click += new System.EventHandler(this.Menu_ContasPagar_Click);
             // 
@@ -578,7 +578,7 @@
             this.Menu_ContasReceber.Image = ((System.Drawing.Image)(resources.GetObject("Menu_ContasReceber.Image")));
             this.Menu_ContasReceber.Name = "Menu_ContasReceber";
             this.Menu_ContasReceber.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.Menu_ContasReceber.Size = new System.Drawing.Size(354, 22);
+            this.Menu_ContasReceber.Size = new System.Drawing.Size(306, 22);
             this.Menu_ContasReceber.Text = "Contas a receber";
             this.Menu_ContasReceber.Click += new System.EventHandler(this.Menu_ContasReceber_Click);
             // 
@@ -588,7 +588,7 @@
             this.Menu_RealizarVendas.Image = ((System.Drawing.Image)(resources.GetObject("Menu_RealizarVendas.Image")));
             this.Menu_RealizarVendas.Name = "Menu_RealizarVendas";
             this.Menu_RealizarVendas.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.Menu_RealizarVendas.Size = new System.Drawing.Size(354, 22);
+            this.Menu_RealizarVendas.Size = new System.Drawing.Size(306, 22);
             this.Menu_RealizarVendas.Text = "Realizar Vendas";
             this.Menu_RealizarVendas.Click += new System.EventHandler(this.Menu_RealizarVendas_Click);
             // 
@@ -598,7 +598,7 @@
             this.menuVendasNãoContablizadas.Image = ((System.Drawing.Image)(resources.GetObject("menuVendasNãoContablizadas.Image")));
             this.menuVendasNãoContablizadas.Name = "menuVendasNãoContablizadas";
             this.menuVendasNãoContablizadas.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
-            this.menuVendasNãoContablizadas.Size = new System.Drawing.Size(354, 22);
+            this.menuVendasNãoContablizadas.Size = new System.Drawing.Size(306, 22);
             this.menuVendasNãoContablizadas.Text = "Vendas não contabilizadas";
             this.menuVendasNãoContablizadas.Click += new System.EventHandler(this.menuVendasNãoContablizadas_Click);
             // 
@@ -931,7 +931,7 @@
             this.menuAjustar.Text = "Ajustar";
             this.menuAjustar.Click += new System.EventHandler(this.menuAjustar_Click);
             // 
-            // FrmPrincipal
+            // FrmTelaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -942,7 +942,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "FrmPrincipal";
+            this.Name = "FrmTelaPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gerenciamento de Caixa Fácil";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

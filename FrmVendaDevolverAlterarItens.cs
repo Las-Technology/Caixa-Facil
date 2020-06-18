@@ -452,12 +452,16 @@ namespace CaixaFacil
                     }
                 }
 
-                if(int.Parse(codVenda) > getCodVendaPagamentoParcialOrMisto())
+                idPagamentoParcial = getIdPagamentoParcialOrMisto();
+                if (GetQtdRegistroVenda() > 1)
                 {
                     GravarTudoHistoricoDevolucao();
                 }
+                else
+                {
+                    RemoverHistoricoDevolucao();
+                }
 
-                idPagamentoParcial = getIdPagamentoParcialOrMisto();
                 AlterarValoresPagamentoParcialOrMisto_Parcelado();
                 verificarDataPagamento_E_AtualizarValoresFluxoCaixa();
                 ExcluirTodosItensVenda();
@@ -469,6 +473,67 @@ namespace CaixaFacil
                 AtualizarTodoEstoque();
                 this.Close();
             }
+        }
+
+        private int GetQtdRegistroVenda()
+        {
+            PegarRegistrosIdVendaAndIdPagamentoParcialOrMisto();
+
+            return getQuantidadeRegistroVenda();
+        }
+
+        private int getQuantidadeRegistroVenda()
+        {
+            int qtdRegistro = 0;
+
+            SqlConnection conexao = new SqlConnection(stringConn);
+            if (FormaPagamento == "PAGAMENTO PARCIAL")
+            {
+                if (existsOutraConta)
+                {
+                    _sql = "select count(Venda.Id_Venda) as Id_Venda from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and Venda.Id_Venda between @IdVendaPagamento and @GetVenda";
+                }
+                else
+                {
+                    _sql = "select count(Venda.Id_Venda) as Id_Venda from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and Venda.Id_Venda >= @IdVendaPagamento";
+                }
+            }
+            else
+            {
+                if (existsOutraConta)
+                {
+                    _sql = "select count(Venda.Id_Venda) as Id_Venda from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and FormaPagamento.Descricao = 'MISTO' and Venda.Id_Venda between @IdVendaPagamento and @GetVenda";
+                }
+                else
+                {
+                    _sql = "select count(Venda.Id_Venda) as Id_Venda from Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and FormaPagamento.Descricao = 'MISTO' and Venda.Id_Venda >= @IdVendaPagamento";
+                }
+            }
+
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@CodVenda", codVenda);
+            comando.Parameters.AddWithValue("@IdVendaPagamento", idVendaPagamentoParcialOrMisto);
+            comando.Parameters.AddWithValue("@GetVenda", (getIdVenda - 1));
+            comando.Parameters.AddWithValue("@IdCliente", codCliente);
+            try
+            {
+                conexao.Open();
+                SqlDataReader dr = comando.ExecuteReader();
+                if (dr.Read())
+                {
+                    qtdRegistro = int.Parse(dr["Id_Venda"].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return qtdRegistro;
         }
 
         private int getCodVendaPagamentoParcialOrMisto()
@@ -522,6 +587,35 @@ namespace CaixaFacil
                 comando.Parameters.AddWithValue("@qtdItens", int.Parse(row.Cells["ColQuantidade"].Value.ToString()));
                 comando.Parameters.AddWithValue("@IdPagamento", getIdPagamentoParcialOrMisto());
                 comando.Parameters.AddWithValue("@DataDevolucao", DateTime.Now.ToShortDateString());
+                try
+                {
+                    conexao.Open();
+                    comando.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conexao.Close();
+                }
+            }
+        }
+
+        private void RemoverHistoricoDevolucao()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+
+            foreach (DataGridViewRow row in dgv_ListaVenda.Rows)
+            {
+                if (FormaPagamento == "PAGAMENTO PARCIAL")
+                    _sql = "delete from HistoricoDevolucao where Id_PagamentoParcial = @IdPagamento";
+                else if (FormaPagamento == "MISTO")
+                    _sql = "delete from HistoricoDevolucao where Id_PagamentoMisto = @IdPagamento";
+
+                SqlCommand comando = new SqlCommand(_sql, conexao);
+                comando.Parameters.AddWithValue("@IdPagamento", getIdPagamentoParcialOrMisto());
                 try
                 {
                     conexao.Open();
@@ -623,6 +717,13 @@ namespace CaixaFacil
 
         private void getValorDescontoConta()
         {
+            PegarRegistrosIdVendaAndIdPagamentoParcialOrMisto();
+
+            desconto = getDesconto();
+        }
+
+        private void PegarRegistrosIdVendaAndIdPagamentoParcialOrMisto()
+        {
             // Primeira coisa é pegar o id_Venda da tabela PagamentoParcial
 
             GetIdVendaPagamentoParcialOrMisto();
@@ -634,8 +735,6 @@ namespace CaixaFacil
                 existsOutraConta = true;
                 GetIdPagamentoParcialOrMistoAndIdVenda();
             }
-
-            desconto = getDesconto();
         }
 
         private decimal getDesconto()
