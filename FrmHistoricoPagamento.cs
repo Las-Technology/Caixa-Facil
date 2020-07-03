@@ -49,7 +49,7 @@ namespace CaixaFacil
                 SqlConnection conexao = new SqlConnection(stringConn);
                 if (cbFormaPagamento.Text == "Parcial")
                     _sql = "select sum(PagamentoParcial.ValorRestante) as valor, PagamentoParcial.Id_PagamentoParcial from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0  and PagamentoParcial.Id_Venda = " + NVenda + " group by PagamentoParcial.Id_PagamentoParcial";
-                else
+                else if (cbFormaPagamento.Text == "Misto")
                     _sql = "select sum(PagamentoMisto.ValorRestante) as valor, PagamentoMisto.Id_PagamentoMisto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'MISTO' and PagamentoMisto.ValorRestante >= 0  and PagamentoMisto.Id_Venda = " + NVenda + " group by PagamentoMisto.Id_PagamentoMisto";
 
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);

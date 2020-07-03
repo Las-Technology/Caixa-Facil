@@ -85,11 +85,11 @@
             this.panel1.Size = new System.Drawing.Size(611, 556);
             this.panel1.TabIndex = 0;
             // 
-            // button1
+            // btnVisualizarLista
             // 
             this.btnVisualizarLista.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnVisualizarLista.Location = new System.Drawing.Point(40, 496);
-            this.btnVisualizarLista.Name = "button1";
+            this.btnVisualizarLista.Name = "btnVisualizarLista";
             this.btnVisualizarLista.Size = new System.Drawing.Size(166, 47);
             this.btnVisualizarLista.TabIndex = 22;
             this.btnVisualizarLista.Text = "Visualizar Lista - F2";
@@ -214,6 +214,7 @@
             this.txtValorVenda.ReadOnly = true;
             this.txtValorVenda.Size = new System.Drawing.Size(149, 26);
             this.txtValorVenda.TabIndex = 4;
+            this.txtValorVenda.TextChanged += new System.EventHandler(this.txtValorVenda_TextChanged);
             // 
             // label4
             // 

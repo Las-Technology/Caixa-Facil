@@ -32,10 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmHistoricoPagamentoVisualizarDataPagamento));
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvHistoricoPagamento = new System.Windows.Forms.DataGridView();
-            this.ColCodVenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColValorAbatimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColDataAbatimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColHoraAbatimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnFechar = new System.Windows.Forms.Button();
             this.PanelCabecalho = new System.Windows.Forms.Panel();
             this.Lbl_Titulo = new System.Windows.Forms.Label();
@@ -46,6 +42,11 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.ColCodVenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColValorAbatimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTipoPagamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColDataAbatimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColHoraAbatimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistoricoPagamento)).BeginInit();
             this.PanelCabecalho.SuspendLayout();
@@ -74,6 +75,7 @@
             this.dgvHistoricoPagamento.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColCodVenda,
             this.ColValorAbatimento,
+            this.colTipoPagamento,
             this.ColDataAbatimento,
             this.ColHoraAbatimento});
             this.dgvHistoricoPagamento.Location = new System.Drawing.Point(3, 73);
@@ -83,45 +85,6 @@
             this.dgvHistoricoPagamento.Size = new System.Drawing.Size(602, 294);
             this.dgvHistoricoPagamento.TabIndex = 4;
             this.dgvHistoricoPagamento.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvHistoricoPagamento_DataBindingComplete);
-            // 
-            // ColCodVenda
-            // 
-            this.ColCodVenda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColCodVenda.DataPropertyName = "Venda";
-            this.ColCodVenda.HeaderText = "Venda";
-            this.ColCodVenda.Name = "ColCodVenda";
-            this.ColCodVenda.ReadOnly = true;
-            this.ColCodVenda.Width = 72;
-            // 
-            // ColValorAbatimento
-            // 
-            this.ColValorAbatimento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColValorAbatimento.DataPropertyName = "ValorAbatido";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.ColValorAbatimento.DefaultCellStyle = dataGridViewCellStyle1;
-            this.ColValorAbatimento.HeaderText = "Valor Abatido";
-            this.ColValorAbatimento.Name = "ColValorAbatimento";
-            this.ColValorAbatimento.ReadOnly = true;
-            this.ColValorAbatimento.Width = 118;
-            // 
-            // ColDataAbatimento
-            // 
-            this.ColDataAbatimento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColDataAbatimento.DataPropertyName = "DataAbatimento";
-            this.ColDataAbatimento.HeaderText = "Data do abatimento";
-            this.ColDataAbatimento.Name = "ColDataAbatimento";
-            this.ColDataAbatimento.ReadOnly = true;
-            this.ColDataAbatimento.Width = 153;
-            // 
-            // ColHoraAbatimento
-            // 
-            this.ColHoraAbatimento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColHoraAbatimento.DataPropertyName = "HoraAbatimento";
-            this.ColHoraAbatimento.HeaderText = "Hora do Abatimento";
-            this.ColHoraAbatimento.Name = "ColHoraAbatimento";
-            this.ColHoraAbatimento.ReadOnly = true;
-            this.ColHoraAbatimento.Width = 158;
             // 
             // btnFechar
             // 
@@ -226,6 +189,54 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(150, 106);
             // 
+            // ColCodVenda
+            // 
+            this.ColCodVenda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColCodVenda.DataPropertyName = "Venda";
+            this.ColCodVenda.HeaderText = "Venda";
+            this.ColCodVenda.Name = "ColCodVenda";
+            this.ColCodVenda.ReadOnly = true;
+            this.ColCodVenda.Width = 72;
+            // 
+            // ColValorAbatimento
+            // 
+            this.ColValorAbatimento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColValorAbatimento.DataPropertyName = "ValorAbatido";
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.ColValorAbatimento.DefaultCellStyle = dataGridViewCellStyle1;
+            this.ColValorAbatimento.HeaderText = "Valor Abatido";
+            this.ColValorAbatimento.Name = "ColValorAbatimento";
+            this.ColValorAbatimento.ReadOnly = true;
+            this.ColValorAbatimento.Width = 118;
+            // 
+            // colTipoPagamento
+            // 
+            this.colTipoPagamento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colTipoPagamento.DataPropertyName = "especie";
+            this.colTipoPagamento.HeaderText = "Tipo de Pagamento (espécie)";
+            this.colTipoPagamento.Name = "colTipoPagamento";
+            this.colTipoPagamento.ReadOnly = true;
+            this.colTipoPagamento.Width = 210;
+            // 
+            // ColDataAbatimento
+            // 
+            this.ColDataAbatimento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColDataAbatimento.DataPropertyName = "DataAbatimento";
+            this.ColDataAbatimento.HeaderText = "Data do abatimento";
+            this.ColDataAbatimento.Name = "ColDataAbatimento";
+            this.ColDataAbatimento.ReadOnly = true;
+            this.ColDataAbatimento.Width = 153;
+            // 
+            // ColHoraAbatimento
+            // 
+            this.ColHoraAbatimento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColHoraAbatimento.DataPropertyName = "HoraAbatimento";
+            this.ColHoraAbatimento.HeaderText = "Hora do Abatimento";
+            this.ColHoraAbatimento.Name = "ColHoraAbatimento";
+            this.ColHoraAbatimento.ReadOnly = true;
+            this.ColHoraAbatimento.Width = 158;
+            // 
             // FrmHistoricoPagamentoVisualizarDataPagamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -264,6 +275,7 @@
         private System.Windows.Forms.DataGridView dgvHistoricoPagamento;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCodVenda;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColValorAbatimento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTipoPagamento;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColDataAbatimento;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColHoraAbatimento;
     }

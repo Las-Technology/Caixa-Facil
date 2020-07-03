@@ -16,6 +16,7 @@ namespace CaixaFacil
         public decimal valorDesconto { get;  set; }
         public decimal valorTotalComDesconto { get;  set; }
         public decimal descontoDinheiro;
+        public string TipoPagamento { get; set; }
         bool goDescontar = false;
         decimal descontoPorcento, valorDescontoPorcento, valorCliente;
 
@@ -83,6 +84,19 @@ namespace CaixaFacil
             {
                 if (!string.IsNullOrEmpty(lblCodigo_Cliente.Text))
                 {
+                    if (valorAbatido > 0)
+                    {
+                        if (cbFormaPagamento.SelectedIndex == -1)
+                        {
+                            ErrorProvider errorProvider = new ErrorProvider();
+                            MessageBox.Show("Informe qual o tipo de pagamento em espécie!", "Biblioteca Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            errorProvider.SetError(cbFormaPagamento, "Selecione O tipo em espécie!");
+                            cbFormaPagamento.Focus();
+                            return;
+                        }
+
+                        TipoPagamento = cbFormaPagamento.Text;
+                    }
                     vendaConfirmada = true;
                     if (valorAbatido == 0.00m)
                         valorRestante = valorTotal - descontoDinheiro;

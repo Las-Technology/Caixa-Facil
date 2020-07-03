@@ -64,6 +64,8 @@
             this.txt_ValorAbatido = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.lbl_FecharVendaMisto = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbFormaPagamento = new System.Windows.Forms.ComboBox();
             this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
@@ -95,7 +97,7 @@
             this.groupBox13.ForeColor = System.Drawing.Color.White;
             this.groupBox13.Location = new System.Drawing.Point(6, 176);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(496, 153);
+            this.groupBox13.Size = new System.Drawing.Size(512, 153);
             this.groupBox13.TabIndex = 20;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Dados Cliente:";
@@ -207,9 +209,9 @@
             this.btn_FinalizarParcial.ForeColor = System.Drawing.Color.Black;
             this.btn_FinalizarParcial.Image = global::CaixaFacil.Properties.Resources.Ok_icon;
             this.btn_FinalizarParcial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_FinalizarParcial.Location = new System.Drawing.Point(670, 283);
+            this.btn_FinalizarParcial.Location = new System.Drawing.Point(682, 283);
             this.btn_FinalizarParcial.Name = "btn_FinalizarParcial";
-            this.btn_FinalizarParcial.Size = new System.Drawing.Size(164, 46);
+            this.btn_FinalizarParcial.Size = new System.Drawing.Size(151, 46);
             this.btn_FinalizarParcial.TabIndex = 21;
             this.btn_FinalizarParcial.Text = "Finalizar - [F10]";
             this.btn_FinalizarParcial.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -222,7 +224,7 @@
             this.btn_CancelaVendaMisto.ForeColor = System.Drawing.Color.Black;
             this.btn_CancelaVendaMisto.Image = global::CaixaFacil.Properties.Resources.Button_Cancel_icon__1_;
             this.btn_CancelaVendaMisto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_CancelaVendaMisto.Location = new System.Drawing.Point(508, 283);
+            this.btn_CancelaVendaMisto.Location = new System.Drawing.Point(520, 283);
             this.btn_CancelaVendaMisto.Name = "btn_CancelaVendaMisto";
             this.btn_CancelaVendaMisto.Size = new System.Drawing.Size(162, 46);
             this.btn_CancelaVendaMisto.TabIndex = 22;
@@ -243,7 +245,7 @@
             this.groupBox12.Controls.Add(this.label33);
             this.groupBox12.Controls.Add(this.txt_ValorVenda);
             this.groupBox12.Controls.Add(this.label32);
-            this.groupBox12.Location = new System.Drawing.Point(509, 14);
+            this.groupBox12.Location = new System.Drawing.Point(524, 14);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(309, 261);
             this.groupBox12.TabIndex = 19;
@@ -361,6 +363,8 @@
             // 
             // groupBox11
             // 
+            this.groupBox11.Controls.Add(this.label3);
+            this.groupBox11.Controls.Add(this.cbFormaPagamento);
             this.groupBox11.Controls.Add(this.txt_DescontoPorcento);
             this.groupBox11.Controls.Add(this.lbl_DescontoPorcento);
             this.groupBox11.Controls.Add(this.txt_DescontoDinheiro);
@@ -373,7 +377,7 @@
             this.groupBox11.ForeColor = System.Drawing.Color.White;
             this.groupBox11.Location = new System.Drawing.Point(9, 14);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(494, 156);
+            this.groupBox11.Size = new System.Drawing.Size(509, 156);
             this.groupBox11.TabIndex = 18;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Pagamento";
@@ -497,7 +501,7 @@
             this.lbl_FecharVendaMisto.AutoSize = true;
             this.lbl_FecharVendaMisto.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_FecharVendaMisto.ForeColor = System.Drawing.Color.White;
-            this.lbl_FecharVendaMisto.Location = new System.Drawing.Point(824, -5);
+            this.lbl_FecharVendaMisto.Location = new System.Drawing.Point(840, -1);
             this.lbl_FecharVendaMisto.Name = "lbl_FecharVendaMisto";
             this.lbl_FecharVendaMisto.Size = new System.Drawing.Size(33, 31);
             this.lbl_FecharVendaMisto.TabIndex = 17;
@@ -506,12 +510,37 @@
             this.lbl_FecharVendaMisto.MouseEnter += new System.EventHandler(this.lbl_FecharVendaMisto_MouseEnter);
             this.lbl_FecharVendaMisto.MouseLeave += new System.EventHandler(this.lbl_FecharVendaMisto_MouseLeave);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(313, 20);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(138, 19);
+            this.label3.TabIndex = 315;
+            this.label3.Text = "Forma de pagamento";
+            // 
+            // cbFormaPagamento
+            // 
+            this.cbFormaPagamento.BackColor = System.Drawing.Color.White;
+            this.cbFormaPagamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFormaPagamento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cbFormaPagamento.FormattingEnabled = true;
+            this.cbFormaPagamento.Items.AddRange(new object[] {
+            "Dinheiro",
+            "Cartão de Crédito",
+            "Cartão de Débito"});
+            this.cbFormaPagamento.Location = new System.Drawing.Point(317, 44);
+            this.cbFormaPagamento.Name = "cbFormaPagamento";
+            this.cbFormaPagamento.Size = new System.Drawing.Size(158, 27);
+            this.cbFormaPagamento.TabIndex = 314;
+            // 
             // FrmVendaParcial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.ClientSize = new System.Drawing.Size(855, 342);
+            this.ClientSize = new System.Drawing.Size(874, 342);
             this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.btn_FinalizarParcial);
             this.Controls.Add(this.btn_CancelaVendaMisto);
@@ -575,5 +604,7 @@
         private System.Windows.Forms.Label lbl_DescontoDinheiro;
         private System.Windows.Forms.TextBox txtValorDesconto;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cbFormaPagamento;
     }
 }

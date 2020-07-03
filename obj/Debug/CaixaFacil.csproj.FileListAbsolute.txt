@@ -209,7 +209,6 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmBaixarPagame
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmBaixarPagamentoPrazo.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmBaixarParcela.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmBuscarContasNaoContabilizadas.resources
-C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmBuscarItensVendaAlterarExcluir.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmCarregamentoSistemaControleVenda.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmClientes.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmContasClientes.resources
@@ -261,7 +260,6 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmSobre.resour
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmUsuario.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmValidadeProduto.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmVenda.resources
-C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmVendaDevolverAlterarItens.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmVendaParcelas.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmVendaPrazo.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmVendaParcial.resources
@@ -278,3 +276,5 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmTelaPrincipa
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmVendaMista.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmBaixarPagamentoMisto.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmListaDevolucao.resources
+C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmBuscarItensVendaDevolucao.resources
+C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmVendaDevolucaoItens.resources

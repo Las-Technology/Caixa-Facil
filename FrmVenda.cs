@@ -185,10 +185,10 @@ namespace CaixaFacil
             {
                 btn_Sair_Click(sender, e);
             }
-            //else if (Control.ModifierKeys == Keys.Alt && e.KeyCode == Keys.F4)
-            //{
-
-            //}
+            else if (Control.ModifierKeys == Keys.Control && e.KeyCode == Keys.D)
+            {
+                btnDevolução_Click(sender, e);
+            }
         }
 
         private void btn_BuscarProdutos_Click(object sender, EventArgs e)
@@ -773,11 +773,12 @@ namespace CaixaFacil
             }
         }
 
+        FrmVendaParcial vendaParcial;
         private void btn_PagamentoParcial_Click(object sender, EventArgs e)
         {
             if (DGV_ItensVenda.Rows.Count >= 1)
             {
-                FrmVendaParcial vendaParcial = new FrmVendaParcial(ValorTotal);
+                vendaParcial = new FrmVendaParcial(ValorTotal);
                 vendaParcial.ShowDialog();
                 if (vendaParcial.vendaConfirmada)
                 {
@@ -1248,6 +1249,47 @@ namespace CaixaFacil
 
         Venda venda = new Venda();
 
+        private void btnDevolução_Click(object sender, EventArgs e)
+        {
+            if (ListaTodasVendas() == "true")
+            {
+                FrmBuscarItensVendaDevolucao alterarExcluirVenda = new FrmBuscarItensVendaDevolucao();
+                alterarExcluirVenda.ShowDialog();
+                CodigoVenda();
+                lblCodigoVenda.Text = codigoVenda;
+            }
+            else if (ListaTodasVendas() == "false")
+            {
+                MessageBox.Show("Não há vendas realizadas.", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private string ListaTodasVendas()
+        {
+            try
+            {
+                SqlConnection conexao = new SqlConnection(stringConn);
+                _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario";
+                SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
+                comando.SelectCommand.CommandText = _sql;
+                DataTable Tabela = new DataTable();
+                comando.Fill(Tabela);
+                if (Tabela.Rows.Count == 0)
+                {
+                    return "false";
+                }
+                else
+                {
+                    return "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "erro";
+            }
+        }
+
         PagamentoMisto pagamentoMisto = new PagamentoMisto();
 
         //verifica a situação do cliente antes da conclusão da venda durante o prazo da última compra
@@ -1344,6 +1386,14 @@ namespace CaixaFacil
                 PagamentoParcial.dataAbatimento = DateTime.Now.ToShortDateString();
                 PagamentoParcial.horaPagamento = DateTime.Now.ToLongTimeString();
                 PagamentoParcial.InserirValorAbatido();
+
+                if(ValorAbatido > 0)
+                {
+                    tipoPagamento.idPagamentoParcial = id;
+                    tipoPagamento.descricao = vendaParcial.TipoPagamento;
+                    tipoPagamento.InformarFormaPagamento();
+                }
+
                 valorNCaixa = ValorAbatido;
                 CaixaDia();
                 GerenciarCaixa();

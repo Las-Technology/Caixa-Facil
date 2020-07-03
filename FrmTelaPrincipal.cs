@@ -720,7 +720,7 @@ namespace CaixaFacil
         {
             if (ListaTodasVendas() == "true")
             {
-                FrmBuscarItensVendaAlterarExcluir alterarExcluirVenda = new FrmBuscarItensVendaAlterarExcluir();
+                FrmBuscarItensVendaDevolucao alterarExcluirVenda = new FrmBuscarItensVendaDevolucao();
                 alterarExcluirVenda.ShowDialog();
             }
             else if (ListaTodasVendas() == "false")

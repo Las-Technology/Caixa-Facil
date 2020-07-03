@@ -65,6 +65,7 @@
             this.lblValorTotalVenda = new System.Windows.Forms.Label();
             this.btn_Adcionar = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnDevolução = new System.Windows.Forms.Button();
             this.btn_BuscarServiço = new System.Windows.Forms.Button();
             this.btn_NovoCadastro = new System.Windows.Forms.Button();
             this.btn_BuscarProdutos = new System.Windows.Forms.Button();
@@ -486,6 +487,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.btnDevolução);
             this.groupBox4.Controls.Add(this.btn_BuscarServiço);
             this.groupBox4.Controls.Add(this.btn_NovoCadastro);
             this.groupBox4.Controls.Add(this.btn_BuscarProdutos);
@@ -497,15 +499,29 @@
             this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
             // 
+            // btnDevolução
+            // 
+            this.btnDevolução.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDevolução.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDevolução.Image = global::CaixaFacil.Properties.Resources.Broken_icon;
+            this.btnDevolução.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDevolução.Location = new System.Drawing.Point(9, 86);
+            this.btnDevolução.Name = "btnDevolução";
+            this.btnDevolução.Size = new System.Drawing.Size(397, 60);
+            this.btnDevolução.TabIndex = 15;
+            this.btnDevolução.Text = "Devolução de produtos - [CTRL + D]";
+            this.btnDevolução.UseVisualStyleBackColor = true;
+            this.btnDevolução.Click += new System.EventHandler(this.btnDevolução_Click);
+            // 
             // btn_BuscarServiço
             // 
             this.btn_BuscarServiço.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_BuscarServiço.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_BuscarServiço.Image = global::CaixaFacil.Properties.Resources.Very_Basic_Services_icon;
             this.btn_BuscarServiço.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_BuscarServiço.Location = new System.Drawing.Point(224, 86);
+            this.btn_BuscarServiço.Location = new System.Drawing.Point(412, 85);
             this.btn_BuscarServiço.Name = "btn_BuscarServiço";
-            this.btn_BuscarServiço.Size = new System.Drawing.Size(406, 60);
+            this.btn_BuscarServiço.Size = new System.Drawing.Size(326, 60);
             this.btn_BuscarServiço.TabIndex = 14;
             this.btn_BuscarServiço.Text = "Serviços - [F11]";
             this.btn_BuscarServiço.UseVisualStyleBackColor = true;
@@ -875,5 +891,6 @@
         private System.Windows.Forms.Button btnPagamentoCartao;
         private System.Windows.Forms.NumericUpDown nd_Quantidade;
         private System.Windows.Forms.Button btnVendaMista;
+        private System.Windows.Forms.Button btnDevolução;
     }
 }

@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace CaixaFacil
 {
-    public partial class FrmBuscarItensVendaAlterarExcluir : Form
+    public partial class FrmBuscarItensVendaDevolucao : Form
     {
-        public FrmBuscarItensVendaAlterarExcluir()
+        public FrmBuscarItensVendaDevolucao()
         {
             InitializeComponent();
         }
@@ -70,7 +70,7 @@ namespace CaixaFacil
             }
             else
             {
-                FrmVendaDevolverAlterarItens vendaAlterarExcluir = new FrmVendaDevolverAlterarItens(CodVenda, Cliente, FormaPagamento, ValorVenda, codCliente, dataVenda, desconto);
+                FrmVendaDevolucaoItens vendaAlterarExcluir = new FrmVendaDevolucaoItens(CodVenda, Cliente, FormaPagamento, ValorVenda, codCliente, dataVenda, desconto);
                 vendaAlterarExcluir.ShowDialog();
                 CodVenda = "";
                 if (txtNomeCliente.Text != "")

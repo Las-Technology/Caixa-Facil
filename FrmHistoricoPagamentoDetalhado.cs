@@ -8,20 +8,23 @@ namespace CaixaFacil
     public partial class FrmHistoricoPagamentoDetalhado : Form
     {
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql, FormaPagamento;
-        int IdPagamento;
+        int idPagamento;
+        decimal valorRestante;
 
-        public FrmHistoricoPagamentoDetalhado(string NVenda, string Cliente, string dateTime, decimal ValorVenda, string FormaPagamento, decimal ValorAbatido, decimal ValorRestante, int IdPagamento)
+        public FrmHistoricoPagamentoDetalhado(string NVenda, string cliente, string dateTime, decimal valorVenda, string formaPagamento, decimal valorAbatido, decimal valorRestante, int idPagamento)
         {
             InitializeComponent();
+
             txtCodigoVenda.Text = NVenda;
-            txtCliente.Text = Cliente;
+            txtCliente.Text = cliente;
             txtDateTime.Text = dateTime;
-            txtValorVenda.Text = "R$ " + ValorVenda.ToString();
-            this.FormaPagamento = FormaPagamento;
-            txtFormaPagamento.Text = FormaPagamento;
-            txtValorRestante.Text = "R$ " + ValorRestante.ToString();
-            txtValorPago.Text = "R$ " + ValorAbatido.ToString();
-            this.IdPagamento = IdPagamento;
+            txtValorVenda.Text = "R$ " + valorVenda.ToString();
+            this.FormaPagamento = formaPagamento;
+            txtFormaPagamento.Text = formaPagamento;
+            txtValorRestante.Text = "R$ " + valorRestante.ToString();
+            txtValorPago.Text = "R$ " + valorAbatido.ToString();
+            this.idPagamento = idPagamento;
+            this.valorRestante = valorRestante;
         }
 
         private void FrmListavenda_Load(object sender, EventArgs e)
@@ -30,6 +33,11 @@ namespace CaixaFacil
             {
                 lblInfo.Visible = true;
                 btnVisualizarLista.Visible = true;
+                if(valorRestante == 0)
+                {
+                    txtValorPago.Text = txtValorVenda.Text;
+                }
+
                 return;
             }
 
@@ -42,15 +50,18 @@ namespace CaixaFacil
         {
             bool existsDate = false;
 
-                SqlConnection conexao = new SqlConnection(stringConn);
+            SqlConnection conexao = new SqlConnection(stringConn);
 
-                if (FormaPagamento.ToUpper() == "PARCIAL")
-                    _sql = "Select * from HistoricoDevolucao where Id_PagamentoParcial = @IdPagamento";
-                else if (FormaPagamento.ToUpper() == "MISTO")
-                    _sql = "Select * from HistoricoDevolucao where Id_PagamentoMisto = @IdPagamento";
+            if (FormaPagamento.ToUpper() == "PARCIAL")
+                _sql = "Select * from HistoricoDevolucao where Id_PagamentoParcial = @IdPagamento";
+            else if (FormaPagamento.ToUpper() == "MISTO")
+                _sql = "Select * from HistoricoDevolucao where Id_PagamentoMisto = @IdPagamento";
+            else
+                return false;
 
-                SqlCommand comando = new SqlCommand(_sql, conexao);
-                comando.Parameters.AddWithValue("@IdPagamento", IdPagamento);
+
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@IdPagamento", idPagamento);
 
             try
             {
@@ -95,6 +106,11 @@ namespace CaixaFacil
             this.Close();
         }
 
+        private void txtValorVenda_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void FrmHistoricoPagamentoDetalhado_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -119,14 +135,14 @@ namespace CaixaFacil
             }
             else
             {
-                FrmHistoricoPagamentoVisualizarDataPagamento historicoPagamentoVisualizarDataPagamento = new FrmHistoricoPagamentoVisualizarDataPagamento(txtCodigoVenda.Text, txtFormaPagamento.Text, IdPagamento);
+                FrmHistoricoPagamentoVisualizarDataPagamento historicoPagamentoVisualizarDataPagamento = new FrmHistoricoPagamentoVisualizarDataPagamento(txtCodigoVenda.Text, txtFormaPagamento.Text, idPagamento);
                 historicoPagamentoVisualizarDataPagamento.ShowDialog();
             }
         }
 
         private void btnVisualizarLista_Click(object sender, EventArgs e)
         {
-            FrmListaDevolucao listaDevolucao = new FrmListaDevolucao(IdPagamento, FormaPagamento);
+            FrmListaDevolucao listaDevolucao = new FrmListaDevolucao(idPagamento, FormaPagamento);
             listaDevolucao.ShowDialog();
         }
 

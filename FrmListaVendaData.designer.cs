@@ -129,6 +129,7 @@
             this.cb_Selecao.FormattingEnabled = true;
             this.cb_Selecao.Items.AddRange(new object[] {
             "TODAS AS VENDAS",
+            "MISTO",
             "PRAZO",
             "PARCELADO",
             "PAGAMENTO PARCIAL",
