@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaixaFacil
 {
     class PagamentoParcial
     {
-         private string DataAbatimento;
+        private string DataAbatimento;
         private decimal ValorRestante;
         private int Id_Venda;
         private int Id_Cliente;

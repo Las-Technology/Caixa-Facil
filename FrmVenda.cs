@@ -198,8 +198,6 @@ namespace CaixaFacil
             {
                 FrmPesquisarProdutos produtos = new FrmPesquisarProdutos();
                 produtos.ShowDialog();
-                //if (nd_Quantidade.Text != "")
-                //{
                 CodigoBarra = txt_Codigo_Barra.Text;
                 Quantidade = int.Parse(nd_Quantidade.Value.ToString());
                 if (produtos.ID_PRODUTO != null)
@@ -253,19 +251,11 @@ namespace CaixaFacil
                 soma = ValorTotal;
                 ValorTotal = soma;
                 txt_ValorTotal.Text = "R$ " + ValorTotal.ToString();
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Insira a quantidade! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //    nd_Quantidade.Focus();
-                //}
             }
             else
             {
                 FrmPesquisarServico Servico = new FrmPesquisarServico();
                 Servico.ShowDialog();
-                //if (nd_Quantidade.Text != "")
-                //{
                 CodigoBarra = txt_Codigo_Barra.Text;
                 Quantidade = int.Parse(nd_Quantidade.Value.ToString());
                 if (Servico.Codigo != null)
@@ -320,12 +310,6 @@ namespace CaixaFacil
                 soma = ValorTotal;
                 ValorTotal = soma;
                 txt_ValorTotal.Text = "R$ " + ValorTotal.ToString();
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Insira a quantidade! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //    nd_Quantidade.Focus();
-                //}                
             }
         }
 
@@ -1176,8 +1160,10 @@ namespace CaixaFacil
                 pagamentoMisto.EfetuarPagamentoMisto();
                 pagamentoMisto.InformarUltimoIdPagamentoMisto();
 
-                tipoPagamento.descricao = vendaMista.formaPagamento;
+                tipoPagamento.descricao = vendaMista.formaPagamento + " e Dinheiro";
                 tipoPagamento.idPagamentoMisto = pagamentoMisto._idPagamentoMisto;
+                tipoPagamento.idPagamentoParcial = 0;
+                tipoPagamento.idParcela = 0;
                 tipoPagamento.InformarFormaPagamento();
 
                 valorMistoAbatido._idPagamentoMisto = pagamentoMisto._idPagamentoMisto;
@@ -1391,6 +1377,8 @@ namespace CaixaFacil
                 {
                     tipoPagamento.idPagamentoParcial = id;
                     tipoPagamento.descricao = vendaParcial.TipoPagamento;
+                    tipoPagamento.idPagamentoMisto = 0;
+                    tipoPagamento.idParcela = 0;
                     tipoPagamento.InformarFormaPagamento();
                 }
 

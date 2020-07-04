@@ -463,7 +463,12 @@ namespace CaixaFacil
                     else
                     {
                         RemoverHistoricoDevolucao();
+                        RemoverTipoPagamento();
                     }
+                }
+                else if(formaPagamento == "PRAZO" || formaPagamento == "PARCELADO")
+                {
+                    RemoverTipoPagamento();
                 }
 
                 AlterarValoresPagamentoParcialOrMisto_Parcelado();
@@ -476,6 +481,63 @@ namespace CaixaFacil
 
                 AtualizarTodoEstoque();
                 this.Close();
+            }
+        }
+
+        private void RemoverTipoPagamento()
+        {
+            int id;
+            if (formaPagamento == "PAGAMENTO PARCIAL" || formaPagamento == "MISTO")
+            {
+                id = IdPagamento;
+
+                if (formaPagamento == "PAGAMENTO PARCIAL")
+                    _sql = "delete from TipoPagamento where Id_PagamentoParcial = @Id";
+                else if (formaPagamento == "MISTO")
+                    _sql = "delete from TipoPagamento where Id_PagamentoMisto = @Id";
+
+                RemoverRowsTipoPagamento(id, _sql);
+            }
+
+            else if (formaPagamento == "PARCELADO" || formaPagamento == "PRAZO")
+            {
+                foreach(DataRow dr in getIdsParcela().Rows)
+                {
+                    _sql = "delete from TipoPagamento where Id_Parcela = @Id";
+                    id = int.Parse(dr["Id_Parcela"].ToString());
+                    RemoverRowsTipoPagamento(id, _sql);
+                }
+            }            
+        }
+
+        private DataTable getIdsParcela()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "Select Id_Parcela from ParcelaVenda where Id_Venda = @idVenda and DataPagamento <> ''";
+            SqlDataAdapter adapter = new SqlDataAdapter(_sql, conexao);
+            adapter.SelectCommand.Parameters.AddWithValue("@idVenda", codVenda);
+            DataTable tabela = new DataTable();
+            adapter.Fill(tabela);
+            return tabela;
+        }
+
+        private void RemoverRowsTipoPagamento(int id, string sql)
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+            SqlCommand comando = new SqlCommand(sql, conexao);
+            comando.Parameters.AddWithValue("@id", id);
+            try
+            {
+                conexao.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
             }
         }
 
