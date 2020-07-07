@@ -1160,7 +1160,7 @@ namespace CaixaFacil
                 pagamentoMisto.EfetuarPagamentoMisto();
                 pagamentoMisto.InformarUltimoIdPagamentoMisto();
 
-                tipoPagamento.descricao = vendaMista.formaPagamento + " e Dinheiro";
+                tipoPagamento.descricao = "R$ " + vendaMista.valorCredDeb + " em " + vendaMista.formaPagamento + " e R$ " + vendaMista.valorDinheiro + " em Dinheiro";
                 tipoPagamento.idPagamentoMisto = pagamentoMisto._idPagamentoMisto;
                 tipoPagamento.idPagamentoParcial = 0;
                 tipoPagamento.idParcela = 0;

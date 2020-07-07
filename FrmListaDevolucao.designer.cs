@@ -31,12 +31,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmListaDevolucao));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtValorContaAtual = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.txtValorItensDevolvidos = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtValorContaInicial = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.dgvListaItensDevolvidos = new System.Windows.Forms.DataGridView();
             this.ColIdProduto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,43 +57,21 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.txtValorContaAtual);
-            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txtValorItensDevolvidos);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.txtValorContaInicial);
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.dgvListaItensDevolvidos);
             this.panel1.Controls.Add(this.PanelCabecalho);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(611, 437);
+            this.panel1.Size = new System.Drawing.Size(683, 348);
             this.panel1.TabIndex = 0;
-            // 
-            // txtValorContaAtual
-            // 
-            this.txtValorContaAtual.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtValorContaAtual.Location = new System.Drawing.Point(160, 390);
-            this.txtValorContaAtual.Name = "txtValorContaAtual";
-            this.txtValorContaAtual.ReadOnly = true;
-            this.txtValorContaAtual.Size = new System.Drawing.Size(100, 26);
-            this.txtValorContaAtual.TabIndex = 10;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 392);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(139, 19);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Valor da Conta Atual:";
             // 
             // txtValorItensDevolvidos
             // 
             this.txtValorItensDevolvidos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtValorItensDevolvidos.Location = new System.Drawing.Point(187, 344);
+            this.txtValorItensDevolvidos.Location = new System.Drawing.Point(184, 307);
             this.txtValorItensDevolvidos.Name = "txtValorItensDevolvidos";
             this.txtValorItensDevolvidos.ReadOnly = true;
             this.txtValorItensDevolvidos.Size = new System.Drawing.Size(100, 26);
@@ -106,29 +80,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 346);
+            this.label2.Location = new System.Drawing.Point(8, 309);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(170, 19);
             this.label2.TabIndex = 7;
             this.label2.Text = "Valor dos itens devolvidos:";
-            // 
-            // txtValorContaInicial
-            // 
-            this.txtValorContaInicial.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtValorContaInicial.Location = new System.Drawing.Point(160, 303);
-            this.txtValorContaInicial.Name = "txtValorContaInicial";
-            this.txtValorContaInicial.ReadOnly = true;
-            this.txtValorContaInicial.Size = new System.Drawing.Size(100, 26);
-            this.txtValorContaInicial.TabIndex = 6;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 305);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 19);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Valor da Conta Inicial:";
             // 
             // dgvListaItensDevolvidos
             // 
@@ -146,7 +102,7 @@
             this.dgvListaItensDevolvidos.Location = new System.Drawing.Point(12, 73);
             this.dgvListaItensDevolvidos.Name = "dgvListaItensDevolvidos";
             this.dgvListaItensDevolvidos.ReadOnly = true;
-            this.dgvListaItensDevolvidos.Size = new System.Drawing.Size(586, 218);
+            this.dgvListaItensDevolvidos.Size = new System.Drawing.Size(658, 218);
             this.dgvListaItensDevolvidos.TabIndex = 4;
             // 
             // ColIdProduto
@@ -209,7 +165,7 @@
             this.PanelCabecalho.Location = new System.Drawing.Point(-1, -1);
             this.PanelCabecalho.Margin = new System.Windows.Forms.Padding(4);
             this.PanelCabecalho.Name = "PanelCabecalho";
-            this.PanelCabecalho.Size = new System.Drawing.Size(611, 67);
+            this.PanelCabecalho.Size = new System.Drawing.Size(683, 67);
             this.PanelCabecalho.TabIndex = 3;
             this.PanelCabecalho.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelCabecalho_MouseDown);
             this.PanelCabecalho.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PanelCabecalho_MouseMove);
@@ -242,7 +198,7 @@
             this.btn_Fechar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Fechar.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Fechar.ForeColor = System.Drawing.Color.White;
-            this.btn_Fechar.Location = new System.Drawing.Point(567, 4);
+            this.btn_Fechar.Location = new System.Drawing.Point(639, 4);
             this.btn_Fechar.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Fechar.Name = "btn_Fechar";
             this.btn_Fechar.Size = new System.Drawing.Size(38, 41);
@@ -293,7 +249,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(611, 437);
+            this.ClientSize = new System.Drawing.Size(683, 348);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -324,12 +280,8 @@
         private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
         private System.Windows.Forms.ToolStripContentPanel ContentPanel;
         private System.Windows.Forms.DataGridView dgvListaItensDevolvidos;
-        private System.Windows.Forms.TextBox txtValorContaAtual;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtValorItensDevolvidos;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtValorContaInicial;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColIdProduto;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColDescricao;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColValor;

@@ -45,7 +45,7 @@ namespace CaixaFacil
 
         private void btn_Finalizar_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txtValorDinheiro.Text))
+            if (!string.IsNullOrWhiteSpace(txtValorDinheiro.Text) && !string.IsNullOrWhiteSpace(txtValorCreditoAndDebito.Text))
             {
                 if (cbEditarValorCredDeb.Checked && !vincularCliente)
                 {
@@ -67,7 +67,7 @@ namespace CaixaFacil
                 this.Close();
             }
             else
-                MessageBox.Show("Informe o valor que o cliente irá pagar em dinheiro!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o valor em dinheiro e/ou valor em Cartão de Crédito|Débito!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void FrmVendaMista_Load(object sender, EventArgs e)
@@ -125,6 +125,7 @@ namespace CaixaFacil
                     txt_ValorTotalDesconto.Text = valorTotal.ToString();
                     this.Size = new Size(542, 480);
                     gbPagamento.Location = new Point(28, 137);
+                    txt_DescontoDinheiro.Focus();
                     break;
                 case false:
                     lbl_DescontoDinheiro.Visible = false;
@@ -258,15 +259,19 @@ namespace CaixaFacil
             {
                 if (cbEditarValorCredDeb.Checked)
                 {
-                    valorRestante =  (valorTotal - descontoDinheiro) - valorDinheiro - decimal.Parse(txtValorCreditoAndDebito.Text);
-                    if(valorRestante < 0)
+                    if (!string.IsNullOrWhiteSpace(txtValorCreditoAndDebito.Text))
                     {
-                        MessageBox.Show("Informe um valor menor. O valor informado ultrapassa o valor total da venda!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        txtValorCreditoAndDebito.Text = ((valorTotal - descontoDinheiro) - valorDinheiro).ToString();
-                        valorRestante = 0.00m;
-                        return;
+                        valorRestante = (valorTotal - descontoDinheiro) - valorDinheiro - decimal.Parse(txtValorCreditoAndDebito.Text);
+                        
+                        if (valorRestante < 0)
+                        {
+                            MessageBox.Show("Informe um valor menor. O valor informado ultrapassa o valor total da venda!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            txtValorCreditoAndDebito.Text = ((valorTotal - descontoDinheiro) - valorDinheiro).ToString();
+                            valorRestante = 0.00m;
+                            return;
+                        }
+                        txtValorRestante.Text = valorRestante.ToString("0.00");
                     }
-                    txtValorRestante.Text = valorRestante.ToString("0.00");
                 }
             }
             catch (Exception ex)
@@ -322,9 +327,10 @@ namespace CaixaFacil
 
         private void txt_DescontoDinheiro_Leave(object sender, EventArgs e)
         {
-            if (txt_DescontoDinheiro.Text != "")
+
+            try
             {
-                try
+                if (!string.IsNullOrWhiteSpace(txt_DescontoDinheiro.Text))
                 {
                     descontoDinheiro = decimal.Parse(txt_DescontoDinheiro.Text);
                     if (descontoDinheiro <= valorTotal)
@@ -350,11 +356,11 @@ namespace CaixaFacil
                         txtValorRestante.Text = "0,00";
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txt_DescontoDinheiro.Text = "0,00";
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txt_DescontoDinheiro.Text = "0,00";
             }
         }
 

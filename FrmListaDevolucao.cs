@@ -21,9 +21,7 @@ namespace CaixaFacil
         private void FrmListavenda_Load(object sender, EventArgs e)
         {
             dgvListaItensDevolvidos.DataSource = ListaItensDevolvidos();
-            txtValorContaInicial.Text = "R$ " + (getValorContaInicial() + getValorItensDevolvidos());
             txtValorItensDevolvidos.Text = "R$ " + getValorItensDevolvidos();
-            txtValorContaAtual.Text = "R$ " + getValorContaInicial();
         }
 
         private decimal getValorItensDevolvidos()
@@ -51,39 +49,6 @@ namespace CaixaFacil
             DataTable Tabela = new DataTable();
             adapter.Fill(Tabela);
             return Tabela;
-        }
-
-        private decimal getValorContaInicial()
-        {
-            decimal valorContaInicial = 0;
-
-            SqlConnection conexao = new SqlConnection(stringConn);
-            if (FormaPagamento.ToUpper() == "PARCIAL")
-                _sql = "select sum(ItensVenda.Valor) as ValorItens, Venda.Desconto from Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join ItensVenda on ItensVenda.Id_Venda = PagamentoParcial.Id_Venda  where PagamentoParcial.Id_PagamentoParcial = @IdPagamento group by Venda.Desconto"; 
-            if (FormaPagamento.ToUpper() == "MISTO")
-                _sql = "select sum(ItensVenda.Valor) as ValorItens, Venda.Desconto from Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join ItensVenda on ItensVenda.Id_Venda = PagamentoMisto.Id_Venda where PagamentoMisto.Id_PagamentoMisto = @IdPagamento group by Venda.Desconto"; 
-            SqlCommand comando=new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@IdPagamento", IdPagamento);
-            comando.CommandText = _sql;
-            try
-            {
-                conexao.Open();
-                SqlDataReader dr = comando.ExecuteReader();
-                if (dr.Read())
-                {
-                    valorContaInicial = decimal.Parse(dr["ValorItens"].ToString()) - decimal.Parse(dr["Desconto"].ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conexao.Close();
-            }
-
-            return valorContaInicial;
         }
 
         private void btn_Fechar_MouseEnter(object sender, EventArgs e)

@@ -54,6 +54,8 @@
             this.txt_ValorVenda = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbFormaPagamento = new System.Windows.Forms.ComboBox();
             this.txt_DescontoPorcento = new System.Windows.Forms.TextBox();
             this.lbl_DescontoPorcento = new System.Windows.Forms.Label();
             this.txt_DescontoDinheiro = new System.Windows.Forms.TextBox();
@@ -64,8 +66,6 @@
             this.txt_ValorAbatido = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
             this.lbl_FecharVendaMisto = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbFormaPagamento = new System.Windows.Forms.ComboBox();
             this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
@@ -382,6 +382,32 @@
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Pagamento";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(313, 20);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(138, 19);
+            this.label3.TabIndex = 315;
+            this.label3.Text = "Forma de pagamento";
+            // 
+            // cbFormaPagamento
+            // 
+            this.cbFormaPagamento.BackColor = System.Drawing.Color.White;
+            this.cbFormaPagamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFormaPagamento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cbFormaPagamento.FormattingEnabled = true;
+            this.cbFormaPagamento.Items.AddRange(new object[] {
+            "Dinheiro",
+            "Cartão de Crédito",
+            "Cartão de Débito"});
+            this.cbFormaPagamento.Location = new System.Drawing.Point(317, 44);
+            this.cbFormaPagamento.Name = "cbFormaPagamento";
+            this.cbFormaPagamento.Size = new System.Drawing.Size(158, 27);
+            this.cbFormaPagamento.TabIndex = 314;
+            this.cbFormaPagamento.SelectedIndexChanged += new System.EventHandler(this.cbFormaPagamento_SelectedIndexChanged);
+            // 
             // txt_DescontoPorcento
             // 
             this.txt_DescontoPorcento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -509,31 +535,6 @@
             this.lbl_FecharVendaMisto.Click += new System.EventHandler(this.lbl_FecharVendaMisto_Click);
             this.lbl_FecharVendaMisto.MouseEnter += new System.EventHandler(this.lbl_FecharVendaMisto_MouseEnter);
             this.lbl_FecharVendaMisto.MouseLeave += new System.EventHandler(this.lbl_FecharVendaMisto_MouseLeave);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(313, 20);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(138, 19);
-            this.label3.TabIndex = 315;
-            this.label3.Text = "Forma de pagamento";
-            // 
-            // cbFormaPagamento
-            // 
-            this.cbFormaPagamento.BackColor = System.Drawing.Color.White;
-            this.cbFormaPagamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFormaPagamento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cbFormaPagamento.FormattingEnabled = true;
-            this.cbFormaPagamento.Items.AddRange(new object[] {
-            "Dinheiro",
-            "Cartão de Crédito",
-            "Cartão de Débito"});
-            this.cbFormaPagamento.Location = new System.Drawing.Point(317, 44);
-            this.cbFormaPagamento.Name = "cbFormaPagamento";
-            this.cbFormaPagamento.Size = new System.Drawing.Size(158, 27);
-            this.cbFormaPagamento.TabIndex = 314;
             // 
             // FrmVendaParcial
             // 

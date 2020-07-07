@@ -78,6 +78,8 @@ namespace CaixaFacil
 
         }
 
+        ErrorProvider errorProvider = new ErrorProvider();
+
         private void btn_FinalizarParcial_Click(object sender, EventArgs e)
         {
             try
@@ -87,8 +89,7 @@ namespace CaixaFacil
                     if (valorAbatido > 0)
                     {
                         if (cbFormaPagamento.SelectedIndex == -1)
-                        {
-                            ErrorProvider errorProvider = new ErrorProvider();
+                        {                            
                             MessageBox.Show("Informe qual o tipo de pagamento em espécie!", "Biblioteca Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             errorProvider.SetError(cbFormaPagamento, "Selecione O tipo em espécie!");
                             cbFormaPagamento.Focus();
@@ -204,6 +205,7 @@ namespace CaixaFacil
                     txt_ValorTotalDesconto.Visible = true;
                     groupBox13.Location = new Point(6, 176);
                     groupBox11.Size = new Size(494, 156);                   
+                    txt_DescontoDinheiro.Focus();
                     break; 
                 case false:
                     lbl_DescontoDinheiro.Visible = false;
@@ -297,6 +299,11 @@ namespace CaixaFacil
             {
                 MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void cbFormaPagamento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider.Clear();
         }
 
         private void txt_DescontoDinheiro_Leave(object sender, EventArgs e)

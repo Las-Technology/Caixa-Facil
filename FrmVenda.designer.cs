@@ -880,17 +880,17 @@
         private System.Windows.Forms.TextBox lblCodigoVenda;
         private System.Windows.Forms.DataGridView DGV_ItensVenda;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCodigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescricaoProduto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQuantidade;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUnidade;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValorUnitario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSubTotal;
         private System.Windows.Forms.Label lbl_Usuario;
         private System.Windows.Forms.Button btn_BuscarServiço;
         private System.Windows.Forms.Button btnPagamentoCartao;
         private System.Windows.Forms.NumericUpDown nd_Quantidade;
         private System.Windows.Forms.Button btnVendaMista;
         private System.Windows.Forms.Button btnDevolução;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCodigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDescricaoProduto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQuantidade;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUnidade;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnValorUnitario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSubTotal;
     }
 }

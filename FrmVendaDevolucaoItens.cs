@@ -730,9 +730,7 @@ namespace CaixaFacil
         decimal subValorVendaValorAbatido, subValorReceber, valorContaTotal, valorContaFinal;
 
         private void AlterarValoresPagamentoParcialOrMisto_Parcelado()
-        {
-            //if (ValorTotalPagamentoParcial >= valorVenda || ValorTotalPagamentoMisto >= valorVenda)
-            //{
+        {           
             // primeiro Verifica se o idVenda informado é igual ao idVenda da tabela Pagamento Parcial
 
             if (formaPagamento == "PAGAMENTO PARCIAL" || formaPagamento == "MISTO")
@@ -756,9 +754,10 @@ namespace CaixaFacil
                         if (GetQtdRegistroVenda() == 1)
                         {
                             valorDevolver = valorAbatido;
+                            MessageBox.Show("O(A) cliente  " + cliente + " abateu R$ "+ valorAbatido + " em uma conta que está no valor de " + lblValorTotalComDesconto.Text + ". Com a devolução o valor a ser devolvido ao cliente é de R$ " + valorDevolver + " reais.", "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-
-                        MessageBox.Show("Contabilizando a conta do(a) cliente  " + cliente + ", o valor total da conta é R$ " + (valorContaTotal - desconto) + ". O(A) cliente abateu R$ " + valorAbatido + " e com a devolução do(s) item(ns) selecionado(s) que está no valor de " + lblValorTotalComDesconto.Text + " o(a) cliente passa a não ter dívidas e terá o direito de receber o valor de R$ " + valorDevolver + ".", "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        else
+                            MessageBox.Show("Contabilizando a conta do(a) cliente  " + cliente + ", o valor total da conta é R$ " + (valorContaTotal - desconto) + ". O(A) cliente abateu R$ " + valorAbatido + " e com a devolução do(s) item(ns) selecionado(s) que está no valor de " + lblValorTotalComDesconto.Text + " o(a) cliente passa a não ter dívidas e receberá o valor de R$ " + valorDevolver + ".", "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         valorPago = valorDevolver;
                         subValorVendaValorAbatido = 0;
@@ -784,23 +783,12 @@ namespace CaixaFacil
 
                 if (codVendaIgual)
                 {
-                    InformarIdVendaMaximo();
+                    if (GetQtdRegistroVenda() > 1)
+                    {
+                        InformarIdVendaMaximo();
+                    }
                 }
             }
-
-           
-            //else
-            //{
-            //    subValorVendaValorAbatido = ValorTotalPagamentoMisto - valorVenda - ReceberValorAbatidoMisto();
-            //    if (int.Parse(codVenda) >= IdVendaComValorRestante)
-            //        AlterarValorRestantePagamentoParcialOrMisto();
-            //}
-            //}
-            //else
-            //{
-            //    ValorPago = valorAbatido;
-            //}
-
         }
 
         bool existsOutraConta = false;
@@ -1579,9 +1567,8 @@ namespace CaixaFacil
 
                             decimal valorDevolver = valorAbatido - ((valorContaTotal - valorSubTotal) - desconto);
 
-                            MessageBox.Show("Contabilizando a conta do(a) cliente  " + cliente + ", o valor total da conta é R$ " + (valorContaTotal - desconto) + ". O(A) cliente abateu R$ " + valorAbatido + " e com a devolução do(s) item selecionado(s) que está no valor de R$ " + valorSubTotal + " o(a) cliente passa a não ter dívidas e terá o direito de receber o valor de R$ " + valorDevolver + ".", "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Contabilizando a conta do(a) cliente  " + cliente + ", o valor total da conta é R$ " + (valorContaTotal - desconto) + ". O(A) cliente abateu R$ " + valorAbatido + " e com a devolução do(s) item selecionado(s) que está no valor de R$ " + valorSubTotal + " o(a) cliente passa a não ter dívidas e  receberá o valor de R$ " + valorDevolver + ".", "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                            //AlterarValorAbatidoPagamentoParcialOrMisto();
                             subValorVendaValorAbatido = 0;
                         }
                         else
@@ -1677,35 +1664,6 @@ namespace CaixaFacil
 
             return IdPagamento;
         }       
-
-        private void AlterarValorAbatidoPagamentoParcialOrMisto()
-        {
-            SqlConnection conexao = new SqlConnection(stringConn);
-            if(formaPagamento == "PAGAMENTO PARCIAL")
-            _sql = "update ValorAbatido set ValorTotalAbatimento = @Valor where Id_PagamentoParcial = @idPagamentoParcial";
-            else
-            _sql = "update ValorMistoAbatido set ValorTotalAbatimento = @Valor where Id_PagamentoMisto = @idPagamentoMisto";
-
-            SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@idPagamentoParcial", idPagamentoParcial);
-            comando.Parameters.AddWithValue("@idPagamentoMisto", idPagamentoMisto);
-            comando.Parameters.AddWithValue("@Valor", (valorVenda - desconto));
-            comando.CommandText = _sql;
-
-            try
-            {
-                conexao.Open();
-                comando.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conexao.Close();
-            }
-        }
 
         private void AlterarValorDesconto()
         {

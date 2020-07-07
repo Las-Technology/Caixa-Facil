@@ -72,7 +72,6 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmBaixar
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmBaixarPagamentoPrazo.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmBaixarParcela.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmBuscarContasNaoContabilizadas.resources
-C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmBuscarItensVendaAlterarExcluir.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmCarregamentoSistemaControleVenda.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmClientes.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmContasClientes.resources
@@ -104,7 +103,6 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmPesqui
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmPesquisarServico.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmPesquisarUsuario.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmPrecosProdutos.resources
-C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmPrincipal.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmProcurarAgenda.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmProcurarValidadeProdutos.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmProduto.resources
@@ -126,7 +124,6 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmSobre.
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmUsuario.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmValidadeProduto.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmVenda.resources
-C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmVendaDevolverAlterarItens.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmVendaParcelas.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmVendaVista.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmVendaPrazo.resources
@@ -138,3 +135,9 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\RdlCompile.compiled
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.csproj.CopyComplete
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.exe
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.pdb
+C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmBaixarPagamentoMisto.resources
+C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmBuscarItensVendaDevolucao.resources
+C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmListaDevolucao.resources
+C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmTelaPrincipal.resources
+C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmVendaDevolucaoItens.resources
+C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmVendaMista.resources
