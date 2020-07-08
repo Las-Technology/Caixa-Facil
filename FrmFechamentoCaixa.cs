@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -145,18 +140,96 @@ namespace CaixaFacil
                 ValoresSaidaCaixa();
                 txt_DateTimeAberturaCaixa.Text = DataEntrada + ", " + HoraEntrada;
                 txt_Operador.Text = NomeUsuario;
-                if (ValorReceber == 0)
-                {
-                    txt_ValorReceber.Text = "R$ 0,00";
-                }
-                else
-                {
-                    txt_ValorReceber.Text = "R$ " + ValorReceber;
-                }
+                txt_ValorReceber.Text = "R$ " + (SumValorReceberPagamentoMisto() + SumValorReceberPagamentoParceladoAndPrazo() + SumValorReceberPagamentoParcial());
 
                 //decimal saldo
                 txtValorCaixa.Text = "R$ " + ((ValoresRecebidos + ValorEntrada) - ValorSaida).ToString();
             }
+        }
+
+        private decimal SumValorReceberPagamentoParceladoAndPrazo()
+        {
+            decimal valorParceladoAndPrazo = 0;
+            
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "select sum(ParcelaVenda.ValorParcelado) as Valor from Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join FormaPagamento on FormaPagamento.id_Venda = Venda.id_Venda where Venda.DataVenda = convert(date, @DataVenda, 103) and ParcelaVenda.DataPagamento = '' and (FormaPagamento.Descricao = 'PARCELADO' or FormaPagamento.Descricao = 'PRAZO')";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@DataVenda", DateTime.Now.ToShortDateString());
+            try
+            {
+                conexao.Open();
+                if (comando.ExecuteScalar() != DBNull.Value)
+                {
+                    valorParceladoAndPrazo = decimal.Parse(comando.ExecuteScalar().ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return valorParceladoAndPrazo;
+        }
+
+
+        private decimal SumValorReceberPagamentoParcial()
+        {
+            decimal valorParcial = 0;
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "select sum(PagamentoParcial.ValorRestante) as Valor from Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda where Venda.DataVenda = convert(date, @DataVenda, 103) and PagamentoParcial.ValorRestante > 0";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@DataVenda", DateTime.Now.ToShortDateString());
+            try
+            {
+                conexao.Open();
+                if (comando.ExecuteScalar() != DBNull.Value)
+                {
+                    valorParcial = decimal.Parse(comando.ExecuteScalar().ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return valorParcial;
+        }
+
+
+        private decimal SumValorReceberPagamentoMisto()
+        {
+            decimal valorMisto = 0;
+
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "select sum(PagamentoMisto.ValorRestante) as Valor from Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda where Venda.DataVenda = convert(date, @DataVenda, 103) and PagamentoMisto.ValorRestante > 0";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@DataVenda", DateTime.Now.ToShortDateString());
+            try
+            {
+                conexao.Open();
+                if (comando.ExecuteScalar() != DBNull.Value)
+                {
+                    valorMisto = decimal.Parse(comando.ExecuteScalar().ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
+
+            return valorMisto;
         }
 
         private void HistoricoVendas()

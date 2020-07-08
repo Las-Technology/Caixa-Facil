@@ -1216,7 +1216,7 @@ namespace CaixaFacil
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Update FluxoCaixa set ValorReceber = ValorReceber + @ValorReceber where HoraSaida = '' and DataSaida = ''";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@ValorReceber", (vendaMista.valorCredDeb + vendaMista.valorRestante));
+            comando.Parameters.AddWithValue("@ValorReceber", vendaMista.valorRestante);
             comando.CommandText = _sql;
             try
             {

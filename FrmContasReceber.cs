@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -22,7 +17,9 @@ namespace CaixaFacil
             ValorContasReceberPrazo();
             ValorContasReceberParcela();
             ValorContasReceberParcial();
-            ValorTotalReceber = ValorReceberParcela + ValorReceberParcial + ValorReceberPrazo;
+            ValorContasReceberMisto();
+            ContasReceberMisto();
+            ValorTotalReceber = ValorReceberParcela + ValorReceberParcial + ValorReceberPrazo + ValorReceberMisto;
             lbl_ValorTotal.Text = "R$ " + ValorTotalReceber;
             areaAtuacao();
             if(AreaAtuacao == "SALÃO DE BELEZA" || AreaAtuacao == "PRESTAÇÃO DE SERVIÇO")
@@ -62,7 +59,36 @@ namespace CaixaFacil
             {
                 conexao.Close();
             }
+        }
 
+        private void ValorContasReceberMisto()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "SELECT Sum(PagamentoMisto.ValorRestante) FROM PagamentoMisto INNER JOIN Venda ON  PagamentoMisto.Id_Venda = Venda.Id_Venda INNER JOIN Cliente ON Cliente.Id_Cliente = Venda.Id_Cliente WHERE PagamentoMisto.ValorRestante > 0";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.CommandText = _sql;
+            try
+            {
+                conexao.Open();
+                if (comando.ExecuteScalar() == DBNull.Value)
+                {
+                    ValorReceberMisto = 0.00m;
+                    lblMisto.Text = "R$ " + ValorReceberMisto;
+                }
+                else
+                {
+                    ValorReceberMisto = decimal.Parse(comando.ExecuteScalar().ToString());
+                    lblMisto.Text = "R$ " + ValorReceberMisto;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                conexao.Close();
+            }
         }
 
         string AreaAtuacao;
@@ -187,6 +213,17 @@ namespace CaixaFacil
             dgv_Parcial.DataSource = Tabela;
         }
 
+        private void ContasReceberMisto()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "SELECT Cliente.Id_Cliente, Cliente.Nome, PagamentoMisto.ID_Venda, PagamentoMisto.ValorRestante FROM PagamentoMisto INNER JOIN Venda ON  PagamentoMisto.Id_Venda = Venda.Id_Venda INNER JOIN Cliente ON Cliente.Id_Cliente = Venda.Id_Cliente WHERE PagamentoMisto.ValorRestante > 0";
+            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
+            comando.SelectCommand.CommandText = _sql;
+            DataTable Tabela = new DataTable();
+            comando.Fill(Tabela);
+            dgv_Misto.DataSource = Tabela;
+        }
+
         private void btn_Fechar_MouseEnter(object sender, EventArgs e)
         {
             btn_Fechar.BackColor = Color.White;
@@ -220,12 +257,22 @@ namespace CaixaFacil
             dgv_Parcial.ClearSelection();
         }
 
+        private void dgv_Misto_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            DataGridView dgv;
+            dgv = (DataGridView)sender;
+            dgv.ClearSelection();
+        }
+
         private void btn_Fechar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
         int X = 0, Y = 0;
+
+        public decimal ValorReceberMisto { get; private set; }
+
         private void panelCabecalho_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;

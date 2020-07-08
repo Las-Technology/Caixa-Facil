@@ -12,7 +12,7 @@ namespace CaixaFacil
 
         int MaxCodVenda, idPagamentoParcial, qtdItens, qtdItensDevolvido = 1;
         int idPagamentoMisto;
-        decimal lucroItens, valorPago, valorRestante, valorAbatido, ValorTotalPagamentoParcial, valorVenda, valorEntrada, sumValorParcelado, valorSubTotal, ValorCaixaInicial, valorReceber, ValorRecebidoDebito, desconto, descontoVendaAtual;
+        decimal lucroItens, valorPago, valorRestante, valorAbatido, ValorTotalPagamentoParcial, valorVenda, valorEntrada, sumValorParcelado, valorSubTotal, ValorCaixaInicial, ValorRecebidoDebito, desconto, descontoVendaAtual;
 
         bool devolucaoItensTudo = false;
 
@@ -132,32 +132,7 @@ namespace CaixaFacil
             receberValor_e_IdPagamentoParcial();
             ValorTotalPagamentoParcial = valorRestante + ReceberValorAbatido();
         }
-
-        private void BuscarValorReceberFluxCaixa()
-        {
-            SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "select ValorReceber from FluxoCaixa where DataSaida = '' and HoraSaida = ''";
-            SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@IdVenda", codVenda);
-            comando.CommandText = _sql;
-            try
-            {
-                conexao.Open();
-                if (comando.ExecuteScalar() != DBNull.Value)
-                {
-                    valorReceber = decimal.Parse(comando.ExecuteScalar().ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conexao.Close();
-            }
-        }
-
+        
         private void VerificarParcelas_E_ValorEntrada()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
@@ -375,7 +350,6 @@ namespace CaixaFacil
             valorCaixa = (valorCaixa + ValorCaixaInicial) - ValorSaida;
             dgv_ListaVenda.ClearSelection();
             ListaTodasVendas();
-            BuscarValorReceberFluxCaixa();
         }
 
         private void IdentificarFluxoCaixa()
@@ -1068,29 +1042,12 @@ namespace CaixaFacil
         }
 
         private void verificarDataPagamento_E_AtualizarValoresFluxoCaixa()
-        {
-            if (formaPagamento == "PAGAMENTO PARCIAL" || formaPagamento == "MISTO")
-            {
-                VerificarDataAbatimentoDataVenda();
-                subValorReceber = valorReceber - (valorVenda - valorAbatido);
-                if (valorReceber >= subValorReceber)
-                    AtualizarValorReceberPagamentoParcialOrMisto();
-            }
-            else if (formaPagamento == "PRAZO")
-            {
-                subValorReceber = valorVenda;
-            }
-            else if (formaPagamento == "Cartão de Débito")
+        {            
+            if (formaPagamento == "Cartão de Débito")
             {
                 ValorRecebidoDebito = valorVenda;
                 AtualizarValorRecebidoDebito();
             }
-            else
-            {
-                subValorReceber = valorVenda - valorPago;
-            }
-            if (valorReceber >= subValorReceber)
-                AtualizarValorReceberPagamentoPrazoParcela();
         }
 
         private void AtualizarValorRecebidoDebito()
@@ -1119,104 +1076,8 @@ namespace CaixaFacil
             }
         }
 
-        private void AtualizarValorReceberPagamentoPrazoParcela()
-        {
-            if(qtdItens == 0)
-            {
-                qtdItens = 1;
-            }
-
-            if (formaPagamento == "PARCELADO" || formaPagamento == "PRAZO")
-            {
-                if (dataVenda == DateTime.Now.ToShortDateString())
-                {
-                    SqlConnection conexao = new SqlConnection(stringConn);
-
-                    _sql = "update fluxoCaixa set ValorReceber = ValorReceber - @ValorReceber where DataSaida = '' and HoraSaida = ''";
-
-                    SqlCommand comando = new SqlCommand(_sql, conexao);
-                    comando.Parameters.AddWithValue("@ValorReceber", ((valorSubTotal / qtdItens) * qtdItensDevolvido));
-                    comando.CommandText = _sql;
-                    try
-                    {
-                        conexao.Open();
-                        comando.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    finally
-                    {
-                        conexao.Close();
-                    }
-                }
-            }
-        }
-
-        private void AtualizarValorReceberPagamentoParcialOrMisto()
-        {
-            if (dataVenda == DateTime.Now.ToShortDateString() && DataAbatimento == DateTime.Now.ToShortDateString())
-            {
-                SqlConnection conexao = new SqlConnection(stringConn);
-
-                _sql = "update fluxoCaixa set ValorReceber = @ValorReceber where DataSaida = '' and HoraSaida = ''";
-
-                SqlCommand comando = new SqlCommand(_sql, conexao);
-                comando.Parameters.AddWithValue("@ValorReceber", subValorReceber);
-                comando.CommandText = _sql;
-                try
-                {
-                    conexao.Open();
-                    comando.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    conexao.Close();
-                }
-            }
-        }
-
         string DataAbatimento;
         decimal ValorPagamento;
-        private void VerificarDataAbatimentoDataVenda()
-        {
-            SqlConnection conexao = new SqlConnection(stringConn);
-
-            if (formaPagamento == "PAGAMENTO PARCIAL")
-                _sql = "Select ValorTotalAbatimento, DataPagamento from ValorAbatido where Id_PagamentoParcial = @IdPagamentoParcial";
-            else
-                _sql = "Select ValorTotalAbatimento, DataPagamento from ValorMistoAbatido where Id_PagamentoMisto = @IdPagamentoMisto";
-
-            SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@IdPagamentoParcial", idPagamentoParcial);
-            comando.Parameters.AddWithValue("@IdPagamentoMisto", idPagamentoMisto);
-            comando.CommandText = _sql;
-            try
-            {
-                conexao.Open();
-                SqlDataReader dr = comando.ExecuteReader();
-                if (dr.Read())
-                {
-                    ValorPagamento = decimal.Parse(dr["ValorTotalAbatimento"].ToString());
-                    DataAbatimento = dr["DataPagamento"].ToString();
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conexao.Close();
-            }
-        }
-
         private void AlterarValorRestantePagamentoParcialOrMisto()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
@@ -1440,21 +1301,10 @@ namespace CaixaFacil
             deleteUpdateItensVenda();
 
             subValorReceber = valorSubTotal;
-            if (formaPagamento == "PARCELADO" || formaPagamento == "PRAZO")
-            {
-                AtualizarValorReceberPagamentoPrazoParcela();
-            }
-            else if (formaPagamento == "Cartão de Débito")
+           if (formaPagamento == "Cartão de Débito")
             {
                 ValorRecebidoDebito = ((valorSubTotal / qtdItens) * qtdItensDevolvido);
                 AtualizarValorRecebidoDebito();
-            }
-            else if (formaPagamento == "PAGAMENTO PARCIAL" || formaPagamento == "MISTO")
-            {
-                subValorReceber = (valorReceber + valorAbatido) - ((valorSubTotal / qtdItens) * qtdItensDevolvido) - valorAbatido;
-                VerificarDataAbatimentoDataVenda();
-                if (valorReceber >= subValorReceber)
-                    AtualizarValorReceberPagamentoParcialOrMisto();
             }
             else if (formaPagamento == "VISTA")
             {
