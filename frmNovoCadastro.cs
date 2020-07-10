@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -19,15 +12,14 @@ namespace CaixaFacil
 
         private void btn_CadastroCliente_Click(object sender, EventArgs e)
         {           
-            FrmClientes clientes = new FrmClientes(NovoCadastro);
+            FrmClientes clientes = new FrmClientes();
             clientes.ShowDialog();
             
         }
-        string NovoCadastro = "Sim";
+
         private void btnCadastroProduto_Click(object sender, EventArgs e)
         {
-            NovoCadastro = null;
-            FrmProduto produto = new FrmProduto(NovoCadastro);
+            FrmProduto produto = new FrmProduto();
             produto.ShowDialog();
         }
 

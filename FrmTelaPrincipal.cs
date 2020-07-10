@@ -245,8 +245,7 @@ namespace CaixaFacil
 
         private void Menu_CadastroClientes_Click(object sender, EventArgs e)
         {
-            Atualizar = "Não";
-            FrmClientes clientes = new FrmClientes(Atualizar);
+            FrmClientes clientes = new FrmClientes();
             clientes.ShowDialog();
         }
         int X = 0;
@@ -294,8 +293,7 @@ namespace CaixaFacil
 
         private void btn_CadastroCliente_Click(object sender, EventArgs e)
         {
-            Atualizar = "Não";
-            FrmClientes clientes = new FrmClientes(Atualizar);
+            FrmClientes clientes = new FrmClientes();
             clientes.ShowDialog();
         }
 
@@ -311,14 +309,19 @@ namespace CaixaFacil
                 MessageBox.Show("Caixa Fechado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-        string Atualizar = null;
 
         public object SqlConnecyion { get; private set; }
 
+        FrmProduto produto;
+
         private void btn_atualizarEstoque_Click(object sender, EventArgs e)
         {
-            Atualizar = "Sim";
-            FrmProduto produto = new FrmProduto(Atualizar);
+            ShowFrmProduto();
+        }
+
+        private void ShowFrmProduto()
+        {
+            FrmProduto produto = new FrmProduto();
             produto.ShowDialog();
         }
 
@@ -555,9 +558,7 @@ namespace CaixaFacil
 
         private void Menu_Produtos_Click(object sender, EventArgs e)
         {
-            Atualizar = "Não";
-            FrmProduto produto = new FrmProduto(Atualizar);
-            produto.ShowDialog();
+            ShowFrmProduto();
         }
 
         private void Menu_RelatorioFechamentoCaixa_Click(object sender, EventArgs e)

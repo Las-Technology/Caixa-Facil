@@ -156,7 +156,6 @@ namespace CaixaFacil
                     GerenciarCaixa();
                     InserirTipoPagamento();
                     BaixarPrazo();
-                    AtualizarValorReceber();
                     MessageBox.Show("Pagamento realizado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Backup.GerarBackup();
                     this.Close();
@@ -255,7 +254,6 @@ namespace CaixaFacil
 
         int Id_FluxoCaixa, Id_Usuario;
         string DataEntrada, HoraEntrada;
-        decimal ValorReceber;
 
         public void CodigoCaixa()
         {
@@ -294,38 +292,8 @@ namespace CaixaFacil
                 {
                     DataEntrada = Tabela.Rows[0]["DataEntrada"].ToString();
                     HoraEntrada = Tabela.Rows[0]["HoraEntrada"].ToString();
-                    ValorReceber = decimal.Parse(Tabela.Rows[0]["ValorReceber"].ToString());
                     Id_Usuario = int.Parse(Tabela.Rows[0]["Id_Usuario"].ToString());
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conexao.Close();
-            }
-        }
-
-        private void AtualizarValorReceber()
-        {
-            decimal ValorPago = decimal.Parse(txt_ValorPago.Text);
-            ValorReceber -= ValorPago;
-            SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "update FluxoCaixa set ValorReceber = @ValorReceber from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario inner join Venda on Venda.Id_Usuario=Usuario.Id_Usuario inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_venda where FluxoCaixa.Id_Fluxo = @Id_Fluxo and venda.DataVenda = @DataEntrada and Venda.HoraVenda > @HoraEntrada and Usuario.Id_Usuario = @Id_Usuario and cliente.Id_Cliente = @Id_Cliente and FormaPagamento.Descricao = 'PRAZO'";
-            SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@Id_Fluxo", Id_FluxoCaixa);
-            comando.Parameters.AddWithValue("@DataEntrada", DataEntrada);
-            comando.Parameters.AddWithValue("@HoraEntrada", HoraEntrada);
-            comando.Parameters.AddWithValue("@Id_Usuario", Id_Usuario);
-            comando.Parameters.AddWithValue("@Id_Cliente", txt_CodigoCliente.Text);
-            comando.Parameters.AddWithValue("@ValorReceber", ValorReceber);
-            comando.CommandText = _sql;
-            try
-            {
-                conexao.Open();
-                comando.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

@@ -1,5 +1,10 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CaixaFacil
 {
@@ -21,6 +26,8 @@ namespace CaixaFacil
         private string Unidade;
         private int Id_Categoria;
         private int Id_Fornecedor;
+        private string NumeroNotaFiscal;
+        private string DataCadastro;
 
         public long id
         {
@@ -87,10 +94,21 @@ namespace CaixaFacil
             get { return Id_Fornecedor; }
             set { Id_Fornecedor = value; }
         }
+        public string numeroNotaFiscal
+        {
+            get { return NumeroNotaFiscal; }
+            set { NumeroNotaFiscal = value; }
+        }
+        public string dataCadastro
+        {
+            get { return DataCadastro; }
+            set { DataCadastro = value; }
+        }
+
         public void Cadastrar()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Insert into  produto values (@ID, @CodigoBarra, @descricao, @Marca, @DataValidade, @ValorCusto, @ValorVenda, @Lucro, @EstoqueAtual, @EstoqueMinimo, @Unidade, @id_categoria, @Id_Fornecedor)";
+            _sql = "Insert into  produto values (@ID, @CodigoBarra, @descricao, @Marca, @DataValidade, @ValorCusto, @ValorVenda, @Lucro, @EstoqueAtual, @EstoqueMinimo, @Unidade, @id_categoria, @Id_Fornecedor, @NumeroNotaFiscal, @DataCadastro)";
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@ID", id);
             comando.Parameters.AddWithValue("@CodigoBarra", codigoBarra);
@@ -105,6 +123,8 @@ namespace CaixaFacil
             comando.Parameters.AddWithValue("@Unidade", unidade);
             comando.Parameters.AddWithValue("@id_categoria", id_categoria);
             comando.Parameters.AddWithValue("@Id_Fornecedor", id_fornecedor);
+            comando.Parameters.AddWithValue("@NumeroNotaFiscal", numeroNotaFiscal);
+            comando.Parameters.AddWithValue("@DataCadastro", dataCadastro);
             comando.CommandText = _sql;
             try
                 
@@ -124,7 +144,7 @@ namespace CaixaFacil
         public void Atualizar()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "update produto set CodigoBarra = @CodigoBarra, descricao = @descricao, Marca = @Marca, DataValidade = @DataValidade, ValorCusto= @ValorCusto,ValorVenda = @ValorVenda, Lucro = @Lucro, EstoqueAtual = @EstoqueAtual, Unidade = @Unidade, Id_Fornecedor = @idFornecedor where id_Produto = @id";
+            _sql = "update produto set CodigoBarra = @CodigoBarra, descricao = @descricao, Marca = @Marca, DataValidade = @DataValidade, ValorCusto = @ValorCusto, ValorVenda = @ValorVenda, Lucro = @Lucro, EstoqueAtual = @EstoqueAtual, EstoqueMinimo = @EstoqueMinimo, Unidade = @Unidade, Id_Fornecedor = @idFornecedor, NumeroNotaFiscal = @NumeroNotaFiscal,  DataCadastro = @DataCadastro where id_Produto = @id";
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@id", id);
             comando.Parameters.AddWithValue("@CodigoBarra", codigoBarra);
@@ -138,6 +158,8 @@ namespace CaixaFacil
             comando.Parameters.AddWithValue("@EstoqueMinimo", estoqueMinimo);
             comando.Parameters.AddWithValue("@Unidade", unidade);
             comando.Parameters.AddWithValue("@idFornecedor", id_fornecedor);
+            comando.Parameters.AddWithValue("@NumeroNotaFiscal", numeroNotaFiscal);
+            comando.Parameters.AddWithValue("@DataCadastro", dataCadastro);
             comando.CommandText = _sql;
             try
             {
@@ -202,6 +224,8 @@ namespace CaixaFacil
                     estoqueMinimo = int.Parse(Tabela.Rows[0]["EstoqueMinimo"].ToString());
                     unidade = Tabela.Rows[0]["Unidade"].ToString();
                     id_categoria = int.Parse(Tabela.Rows[0]["Id_Categoria"].ToString());
+                    numeroNotaFiscal = Tabela.Rows[0]["NumeroNotaFiscal"].ToString();
+                    dataCadastro = Tabela.Rows[0]["DataCadastro"].ToString();
                     return true;
                 }
                 else
@@ -246,6 +270,8 @@ namespace CaixaFacil
                     estoqueMinimo = int.Parse(Tabela.Rows[0]["EstoqueMinimo"].ToString());
                     unidade = Tabela.Rows[0]["Unidade"].ToString();
                     id_categoria = int.Parse(Tabela.Rows[0]["Id_Categoria"].ToString());
+                    numeroNotaFiscal = Tabela.Rows[0]["NumeroNotaFiscal"].ToString();
+                    dataCadastro = Tabela.Rows[0]["DataCadastro"].ToString();
                     return true;
                 }
                 else
@@ -288,6 +314,8 @@ namespace CaixaFacil
                     estoqueMinimo = int.Parse(Tabela.Rows[0]["EstoqueMinimo"].ToString());
                     unidade = Tabela.Rows[0]["Unidade"].ToString();
                     id_categoria = int.Parse(Tabela.Rows[0]["Id_Categoria"].ToString());
+                    numeroNotaFiscal = Tabela.Rows[0]["NumeroNotaFiscal"].ToString();
+                    dataCadastro = Tabela.Rows[0]["DataCadastro"].ToString();
                     return true;
                 }
                 else

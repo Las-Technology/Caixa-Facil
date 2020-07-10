@@ -66,10 +66,10 @@
             this.produtoMenosVendidosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Memu_DataServico = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_todosServiçosPrestados = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuAlterardevolverItensVenda = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_ContasClientes = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_ContasPagar = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_ContasReceber = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuAlterardevolverItensVenda = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_RealizarVendas = new System.Windows.Forms.ToolStripMenuItem();
             this.menuVendasNãoContablizadas = new System.Windows.Forms.ToolStripMenuItem();
             this.diversosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -252,7 +252,7 @@
             this.PanelCorpo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PanelCorpo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.PanelCorpo.BackColor = System.Drawing.Color.White;
             this.PanelCorpo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PanelCorpo.Controls.Add(this.linkLabel_NoticaçaoAgendamento);
             this.PanelCorpo.Controls.Add(this.linkNotificacao);
@@ -540,16 +540,6 @@
             this.Menu_todosServiçosPrestados.Text = "Todos Serviços Prestados";
             this.Menu_todosServiçosPrestados.Click += new System.EventHandler(this.Menu_todosServiçosPrestados_Click);
             // 
-            // menuAlterardevolverItensVenda
-            // 
-            this.menuAlterardevolverItensVenda.BackColor = System.Drawing.Color.Aquamarine;
-            this.menuAlterardevolverItensVenda.Image = ((System.Drawing.Image)(resources.GetObject("menuAlterardevolverItensVenda.Image")));
-            this.menuAlterardevolverItensVenda.Name = "menuAlterardevolverItensVenda";
-            this.menuAlterardevolverItensVenda.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.menuAlterardevolverItensVenda.Size = new System.Drawing.Size(306, 22);
-            this.menuAlterardevolverItensVenda.Text = "Devolução de itens da Venda";
-            this.menuAlterardevolverItensVenda.Click += new System.EventHandler(this.menuAlterardevolverItensVenda_Click);
-            // 
             // Menu_ContasClientes
             // 
             this.Menu_ContasClientes.BackColor = System.Drawing.Color.Aquamarine;
@@ -581,6 +571,16 @@
             this.Menu_ContasReceber.Size = new System.Drawing.Size(306, 22);
             this.Menu_ContasReceber.Text = "Contas a receber";
             this.Menu_ContasReceber.Click += new System.EventHandler(this.Menu_ContasReceber_Click);
+            // 
+            // menuAlterardevolverItensVenda
+            // 
+            this.menuAlterardevolverItensVenda.BackColor = System.Drawing.Color.Aquamarine;
+            this.menuAlterardevolverItensVenda.Image = ((System.Drawing.Image)(resources.GetObject("menuAlterardevolverItensVenda.Image")));
+            this.menuAlterardevolverItensVenda.Name = "menuAlterardevolverItensVenda";
+            this.menuAlterardevolverItensVenda.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.menuAlterardevolverItensVenda.Size = new System.Drawing.Size(306, 22);
+            this.menuAlterardevolverItensVenda.Text = "Devolução de itens da Venda";
+            this.menuAlterardevolverItensVenda.Click += new System.EventHandler(this.menuAlterardevolverItensVenda_Click);
             // 
             // Menu_RealizarVendas
             // 

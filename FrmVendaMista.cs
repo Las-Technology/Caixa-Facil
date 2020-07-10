@@ -16,7 +16,7 @@ namespace CaixaFacil
         public decimal valorDinheiro { get; set; }
         public decimal valorCredDeb { get; set; }
         public decimal valorRestante { get; set; }
-        public string formaPagamento { get; set; }
+        public string tipoPagamento { get; set; }
         public int idCliente = 1; 
         public bool isFinally = false;
         bool vincularCliente = false;
@@ -61,7 +61,7 @@ namespace CaixaFacil
 
                 valorCredDeb = decimal.Parse(txtValorCreditoAndDebito.Text);
                 valorDinheiro = decimal.Parse(txtValorDinheiro.Text);
-                formaPagamento = cbFormaPagamento.Text;
+                tipoPagamento = cbFormaPagamento.Text;
                 isFinally = true;
 
                 this.Close();

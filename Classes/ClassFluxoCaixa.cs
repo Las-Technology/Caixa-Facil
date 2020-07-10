@@ -191,6 +191,29 @@ namespace CaixaFacil
                 conexao.Close();
             }
         }
+
+        public void AlterarValorReceber()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "Update FluxoCaixa set ValorReceber = @ValorReceber where HoraSaida = '' and DataSaida = ''";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@ValorReceber", valorReceber);
+            comando.CommandText = _sql;
+            try
+            {
+                conexao.Open();
+                comando.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
         public void GerenciarCaixa()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
@@ -211,6 +234,7 @@ namespace CaixaFacil
                 conexao.Close();
             }
         }
+
         public void FinalizarCaixa()
         {
             SqlConnection conexao = new SqlConnection(stringConn);

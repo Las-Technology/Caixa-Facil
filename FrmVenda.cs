@@ -1006,9 +1006,8 @@ namespace CaixaFacil
         {
             decimal EntradaParcela = vendaParcelas.valorEntrada;
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Update FluxoCaixa set ValorReceber = ValorReceber + @ValorReceber, EntradaParcela = EntradaParcela + @EntradaParcela where HoraSaida = '' and DataSaida = ''";
+            _sql = "Update FluxoCaixa set EntradaParcela = EntradaParcela + @EntradaParcela where HoraSaida = '' and DataSaida = ''";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@ValorReceber", vendaParcelas.ValorParcelamento);
             comando.Parameters.AddWithValue("@EntradaParcela", EntradaParcela);
             comando.CommandText = _sql;
             try
@@ -1160,7 +1159,7 @@ namespace CaixaFacil
                 pagamentoMisto.EfetuarPagamentoMisto();
                 pagamentoMisto.InformarUltimoIdPagamentoMisto();
 
-                tipoPagamento.descricao = "R$ " + vendaMista.valorCredDeb + " em " + vendaMista.formaPagamento + " e R$ " + vendaMista.valorDinheiro + " em Dinheiro";
+                tipoPagamento.descricao = "R$ " + vendaMista.valorCredDeb + " em " + vendaMista.tipoPagamento + " e R$ " + vendaMista.valorDinheiro + " em Dinheiro";
                 tipoPagamento.idPagamentoMisto = pagamentoMisto._idPagamentoMisto;
                 tipoPagamento.idPagamentoParcial = 0;
                 tipoPagamento.idParcela = 0;
@@ -1181,7 +1180,6 @@ namespace CaixaFacil
                 AtualizarValorDescontoCaixa();
                 ValorDesconto = vendaMista.valorDinheiro;
                 InformarValorRecebidoMisto();
-                GerenciarCaixa_V_ReceberMisto();
             }
             catch (Exception ex)
             {
@@ -1191,32 +1189,16 @@ namespace CaixaFacil
 
         private void InformarValorRecebidoMisto()
         {
+            string column = "ValorRecebidoDebito";
+
+            if (vendaMista.tipoPagamento == "Cartão de Crédito")
+                column = "ValorRecebidoCredito";
+
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Update FluxoCaixa set ValorRecebidoMisto = ValorRecebidoMisto + @ValorRecebidoMisto where HoraSaida = '' and DataSaida = ''";
+            _sql = "Update FluxoCaixa set ValorRecebidoMisto = ValorRecebidoMisto + @ValorRecebidoMisto, " + column + " = " + column + " + @ValorRecebidoCreDeb where HoraSaida = '' and DataSaida = ''";
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@ValorRecebidoMisto", vendaMista.valorDinheiro);
-            comando.CommandText = _sql;
-            try
-            {
-                conexao.Open();
-                comando.ExecuteNonQuery();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                conexao.Close();
-            }
-        }
-
-        private void GerenciarCaixa_V_ReceberMisto()
-        {
-            SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Update FluxoCaixa set ValorReceber = ValorReceber + @ValorReceber where HoraSaida = '' and DataSaida = ''";
-            SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@ValorReceber", vendaMista.valorRestante);
+            comando.Parameters.AddWithValue("@ValorRecebidoCreDeb", vendaMista.valorCredDeb);
             comando.CommandText = _sql;
             try
             {
@@ -1307,34 +1289,11 @@ namespace CaixaFacil
                 formaPagamento.id_Venda = int.Parse(lblCodigoVenda.Text.Trim());
                 formaPagamento.InformarFormaPagamento();
                 CaixaDia();
-                GerenciarCaixa_V_ReceberPrazo();
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void GerenciarCaixa_V_ReceberPrazo()
-        {
-            SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Update FluxoCaixa set ValorReceber = ValorReceber + @ValorReceber where HoraSaida = '' and DataSaida = ''";
-            SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@ValorReceber", ValorTotal);
-            comando.CommandText = _sql;
-            try
-            {
-                conexao.Open();
-                comando.ExecuteNonQuery();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                conexao.Close();
             }
         }
 
@@ -1381,8 +1340,11 @@ namespace CaixaFacil
                     tipoPagamento.idParcela = 0;
                     tipoPagamento.InformarFormaPagamento();
                 }
+                if (vendaParcial.TipoPagamento == "Dinheiro" || vendaParcial.TipoPagamento == "")
+                    valorNCaixa = ValorAbatido;
+                else
+                    valorNCaixa = 0.00m;
 
-                valorNCaixa = ValorAbatido;
                 CaixaDia();
                 GerenciarCaixa();
                 GerenciarCaixa_V_Parcial();
@@ -1396,12 +1358,18 @@ namespace CaixaFacil
 
         private void GerenciarCaixa_V_Parcial()
         {
-            decimal ValorRecebidoParcial = ValorAbatido;
+            decimal ValorRecebido = ValorAbatido;
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Update FluxoCaixa set ValorReceber = ValorReceber + @ValorReceber, ValorRecebidoParcial = ValorRecebidoParcial + @ValorRecebidoParcial where HoraSaida = '' and DataSaida = ''";
+
+            if (vendaParcial.TipoPagamento == "Dinheiro" || vendaParcial.TipoPagamento == "")
+                _sql = "Update FluxoCaixa set ValorRecebidoParcial = ValorRecebidoParcial + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
+            else if(vendaParcial.TipoPagamento == "Cartão de Crédito")
+                _sql = "Update FluxoCaixa set ValorRecebidoCredito = ValorRecebidoCredito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
+            else if(vendaParcial.TipoPagamento == "Cartão de Débito")
+                _sql = "Update FluxoCaixa set ValorRecebidoDebito = ValorRecebidoDebito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
+
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@ValorReceber", ValorRestante);
-            comando.Parameters.AddWithValue("@ValorRecebidoParcial", ValorRecebidoParcial);
+            comando.Parameters.AddWithValue("@ValorRecebido", ValorRecebido);
             comando.CommandText = _sql;
             try
             {

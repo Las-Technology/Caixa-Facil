@@ -140,7 +140,8 @@ namespace CaixaFacil
                 ValoresSaidaCaixa();
                 txt_DateTimeAberturaCaixa.Text = DataEntrada + ", " + HoraEntrada;
                 txt_Operador.Text = NomeUsuario;
-                txt_ValorReceber.Text = "R$ " + (SumValorReceberPagamentoMisto() + SumValorReceberPagamentoParceladoAndPrazo() + SumValorReceberPagamentoParcial());
+                ValorReceber = (SumValorReceberPagamentoMisto() + SumValorReceberPagamentoParceladoAndPrazo() + SumValorReceberPagamentoParcial());
+                txt_ValorReceber.Text = "R$ " + ValorReceber;
 
                 //decimal saldo
                 txtValorCaixa.Text = "R$ " + ((ValoresRecebidos + ValorEntrada) - ValorSaida).ToString();
@@ -149,12 +150,13 @@ namespace CaixaFacil
 
         private decimal SumValorReceberPagamentoParceladoAndPrazo()
         {
-            decimal valorParceladoAndPrazo = 0;
+            decimal valorParceladoAndPrazo = 0.00m;
             
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "select sum(ParcelaVenda.ValorParcelado) as Valor from Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join FormaPagamento on FormaPagamento.id_Venda = Venda.id_Venda where Venda.DataVenda = convert(date, @DataVenda, 103) and ParcelaVenda.DataPagamento = '' and (FormaPagamento.Descricao = 'PARCELADO' or FormaPagamento.Descricao = 'PRAZO')";
+            _sql = "select sum(ParcelaVenda.ValorParcelado) as Valor from Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join FormaPagamento on FormaPagamento.id_Venda = Venda.id_Venda where Venda.DataVenda = convert(date, @DataVenda, 103) and ParcelaVenda.DataPagamento = '' and (FormaPagamento.Descricao = 'PARCELADO' or FormaPagamento.Descricao = 'PRAZO') and Venda.HoraVenda >= convert(datetime, @HoraVenda, 103)";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@DataVenda", DateTime.Now.ToShortDateString());
+            comando.Parameters.AddWithValue("@DataVenda", DataEntrada);
+            comando.Parameters.AddWithValue("@HoraVenda", HoraEntrada);
             try
             {
                 conexao.Open();
@@ -178,11 +180,12 @@ namespace CaixaFacil
 
         private decimal SumValorReceberPagamentoParcial()
         {
-            decimal valorParcial = 0;
+            decimal valorParcial = 0.00m;
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "select sum(PagamentoParcial.ValorRestante) as Valor from Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda where Venda.DataVenda = convert(date, @DataVenda, 103) and PagamentoParcial.ValorRestante > 0";
+            _sql = "select sum(PagamentoParcial.ValorRestante) as Valor from Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda where Venda.DataVenda = convert(date, @DataVenda, 103) and PagamentoParcial.ValorRestante > 0 and Venda.HoraVenda >= convert(datetime, @HoraVenda, 103)";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@DataVenda", DateTime.Now.ToShortDateString());
+            comando.Parameters.AddWithValue("@DataVenda", DataEntrada);
+            comando.Parameters.AddWithValue("@HoraVenda", HoraEntrada);
             try
             {
                 conexao.Open();
@@ -206,12 +209,13 @@ namespace CaixaFacil
 
         private decimal SumValorReceberPagamentoMisto()
         {
-            decimal valorMisto = 0;
+            decimal valorMisto = 0.00m;
 
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "select sum(PagamentoMisto.ValorRestante) as Valor from Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda where Venda.DataVenda = convert(date, @DataVenda, 103) and PagamentoMisto.ValorRestante > 0";
+            _sql = "select sum(PagamentoMisto.ValorRestante) as Valor from Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda where Venda.DataVenda = convert(date, @DataVenda, 103) and PagamentoMisto.ValorRestante > 0 and Venda.HoraVenda >= convert(datetime, @HoraVenda, 103)";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@DataVenda", DateTime.Now.ToShortDateString());
+            comando.Parameters.AddWithValue("@DataVenda", DataEntrada);
+            comando.Parameters.AddWithValue("@HoraVenda", HoraEntrada);
             try
             {
                 conexao.Open();
@@ -260,7 +264,7 @@ namespace CaixaFacil
 
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3");
         string _sql;
-        int Id_FluxoCaixa;
+
         public void CodigoCaixa()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
@@ -300,6 +304,8 @@ namespace CaixaFacil
                     FluxoCaixa.horaSaida = DateTime.Now.ToLongTimeString();
                     FluxoCaixa.saldoCaixa = Saldo;
                     FluxoCaixa.valorTotalCaixa = ValorTotalCaixa;
+                    FluxoCaixa.valorReceber = ValorReceber;
+                    FluxoCaixa.AlterarValorReceber();
                     FluxoCaixa.FinalizarCaixa();
                     MessageBox.Show("Caixa do dia Fechado!", "Fechamento do Caixa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
@@ -461,7 +467,6 @@ namespace CaixaFacil
                     DataEntrada = Tabela.Rows[0]["DataEntrada"].ToString();
                     HoraEntrada = Tabela.Rows[0]["HoraEntrada"].ToString();
                     NomeUsuario = Tabela.Rows[0]["Nome"].ToString();
-                    ValorReceber = decimal.Parse(Tabela.Rows[0]["ValorReceber"].ToString());
                     txt_Desconto.Text = "R$ " + Tabela.Rows[0]["Desconto"].ToString();
                     txt_ValorCredito.Text = "R$ " + Tabela.Rows[0]["ValorRecebidoCredito"].ToString();
                     txt_ValorDebito.Text = "R$ " + Tabela.Rows[0]["ValorRecebidoDebito"].ToString();

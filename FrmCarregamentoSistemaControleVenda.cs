@@ -239,6 +239,8 @@ namespace CaixaFacil
                 "[Unidade]       VARCHAR(30)    NULL," +
                 "[Id_Categoria] INT NOT NULL," +
                 "[Id_Fornecedor]INT NULL," +
+                "[NumeroNotaFiscal] VARCHAR(MAX) NULL, " +
+                "[DataCadastro] VARCHAR(10) NULL, " +
                 "PRIMARY KEY CLUSTERED([Id_Produto] ASC)," +
                 "FOREIGN KEY([Id_Fornecedor]) REFERENCES[dbo].[Fornecedor] ([Id_Fornecedor])," +
                 "FOREIGN KEY([Id_Categoria]) REFERENCES[dbo].[Categoria] ([Id_Categoria]));" +

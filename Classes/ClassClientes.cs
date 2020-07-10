@@ -98,12 +98,37 @@ namespace CaixaFacil
             set { Email = value; }
         }
         string _sql;
+
+        public bool VerificarCPFexists()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+
+            _sql = "Select * from Cliente where CPF = @CPF";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@CPF", CPF);
+            try
+            {
+                conexao.Open();
+                SqlDataReader dr = comando.ExecuteReader();
+                if (dr.Read())
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+         
         public void Cadastrar()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Insert into Cliente (Id_Cliente, Nome, DataNascimento,CPF, RG, Cep, Bairro," + 
-                "Endereco, Numero,Cidade,Estado,Telefone,Celular,Email) Values (@ID, @Nome, @DataNascimento, @CPF, @RG, @Cep, @Bairro," +
-                "@Endereco, @Numero,@Cidade,@Estado,@Telefone,@Celular,@Email)";
+            _sql = "Insert into Cliente (Id_Cliente, Nome, DataNascimento, CPF, RG, Cep, Bairro, Endereco, Numero, Cidade, Estado,Telefone, Celular, Email) Values (@ID, @Nome, @DataNascimento, @CPF, @RG, @Cep, @Bairro, @Endereco, @Numero, @Cidade, @Estado, @Telefone, @Celular, @Email)";
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@ID", id);
             comando.Parameters.AddWithValue("@Nome", nome);
@@ -119,7 +144,6 @@ namespace CaixaFacil
             comando.Parameters.AddWithValue("@Telefone", telefone);
             comando.Parameters.AddWithValue("@Celular", celular);
             comando.Parameters.AddWithValue("@Email", email);
-
             comando.CommandText = _sql;
             try
             {
@@ -135,6 +159,7 @@ namespace CaixaFacil
                 conexao.Close();
             }
         }
+
         public bool Consultar()
         {
             SqlConnection conexao = new SqlConnection(stringConn);

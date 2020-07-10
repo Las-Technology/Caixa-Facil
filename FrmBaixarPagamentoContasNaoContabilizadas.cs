@@ -192,7 +192,6 @@ namespace CaixaFacil
 
         int Id_FluxoCaixa, Id_Usuario;
         string DataEntrada, HoraEntrada;
-        decimal ValorReceber;
 
         public void CodigoCaixa()
         {
@@ -231,7 +230,6 @@ namespace CaixaFacil
                 {
                     DataEntrada = Tabela.Rows[0]["DataEntrada"].ToString();
                     HoraEntrada = Tabela.Rows[0]["HoraEntrada"].ToString();
-                    ValorReceber = decimal.Parse(Tabela.Rows[0]["ValorReceber"].ToString());
                     Id_Usuario = int.Parse(Tabela.Rows[0]["Id_Usuario"].ToString());
                 }
             }

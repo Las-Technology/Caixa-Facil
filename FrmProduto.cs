@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -14,20 +9,11 @@ namespace CaixaFacil
     public partial class FrmProduto : Form
     {
 
-        public FrmProduto(string resposta)
-        {
-            InitializeComponent();
-            if (resposta == "Sim")
-            {
-                tabProdutos.SelectedTab = TabAtualizar;
-                tabProdutos.Controls.Remove(tabCadastro);
-                tabProdutos.Controls.Remove(TabExclusao);        
-            }          
-        }
         public FrmProduto()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
+
         private void FrmProduto_Load(object sender, EventArgs e)
         {
             CodigoProduto();
@@ -100,13 +86,13 @@ namespace CaixaFacil
 
         private void btn_LimparExclusao_Click(object sender, EventArgs e)
         {
-            txt_CodigoProdutoExclusao.Clear();
-            txt_CategoriaExclusao.Clear();
-            txt_CodigoBarraExclusao.Clear();
-            txt_MarcaExclusao.Clear();
-            txt_NomeProdutoExclusao.Clear();
-            txt_EstoqueAtualExclusao.Clear();
-            txt_UnidadeExclusao.Clear();
+            txt_Codigo.Clear();
+            txt_Categoria.Clear();
+            txt_CodigoBarra.Clear();
+            txt_Marca.Clear();
+            txt_NomeProduto.Clear();
+            txt_EstoqueAtual.Clear();
+            txt_Unidade.Clear();
         }
 
         int X = 0;
@@ -125,7 +111,7 @@ namespace CaixaFacil
             this.Top = Y + MousePosition.Y;
         }
 
-        private void btn_Limpar_Click(object sender, EventArgs e)
+        private void LimparCampos()
         {
             txt_Lucro.Clear();
             txt_NomeFornecedor.Clear();
@@ -139,6 +125,9 @@ namespace CaixaFacil
             txt_EstoqueAtual.Clear();
             txt_EstoqueMinimo.Clear();
             txt_Unidade.Clear();
+            idFornecedor = 0;
+            Id_Categoria = "";
+            Id_Produto = 0;
 
         }
         private void btn_Fechar_MouseEnter(object sender, EventArgs e)
@@ -174,6 +163,8 @@ namespace CaixaFacil
 
         private void btn_Salvar_Click(object sender, EventArgs e)
         {
+            CodigoProduto();
+
             if (txt_NomeProduto.Text == string.Empty)
             {
                 MessageBox.Show("Preencha o campo 'Nome do produto'!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
@@ -275,10 +266,12 @@ namespace CaixaFacil
                     produto.unidade = txt_Unidade.Text.Trim();
                     produto.id_categoria = int.Parse(Id_Categoria);
                     produto.id_fornecedor = idFornecedor;
+                    produto.numeroNotaFiscal = txtNumeroContaFiscal.Text;
+                    produto.dataCadastro = dtDataCadastro.Text;
                     produto.Cadastrar();
                     MessageBox.Show("Produto cadastrado com sucesso!", "Informação do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     CodigoProduto();
-                    btn_Limpar_Click(sender, e);
+                    LimparCampos();
                 }
                 catch (Exception ex)
                 {
@@ -287,22 +280,25 @@ namespace CaixaFacil
             }
         }
 
+        int Id_Produto;
         private void btn_Pesquisar_Click(object sender, EventArgs e)
         {
             FrmPesquisarProdutos pesquisarProdutos = new FrmPesquisarProdutos();
             pesquisarProdutos.ShowDialog();
             if (pesquisarProdutos.ID_PRODUTO != null)
             {
-                txt_CodigoProdutoExclusao.Text = pesquisarProdutos.ID_PRODUTO;
-                comandoProduto();
-                ComandoCategoria();
+                Id_Produto = int.Parse(pesquisarProdutos.ID_PRODUTO);
+                txt_Codigo.Text = pesquisarProdutos.ID_PRODUTO;
+                txt_NomeFornecedor.Text = pesquisarProdutos.Fornecedor;
+                BuscarProduto();
+                BuscarCategoria();
             }
         }
 
-        private void comandoProduto()
+        private void BuscarProduto()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Select * from Produto where id_Produto = " + txt_CodigoProdutoExclusao.Text;
+            _sql = "Select * from Produto where id_Produto = " + txt_Codigo.Text;
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.CommandText = _sql;
             try
@@ -313,12 +309,19 @@ namespace CaixaFacil
                 if (Tabela.Rows.Count > 0)
                 {
                     
-                    txt_CodigoBarraExclusao.Text = Tabela.Rows[0]["CodigoBarra"].ToString();
-                    txt_NomeProdutoExclusao.Text = Tabela.Rows[0]["Descricao"].ToString();
-                    txt_MarcaExclusao.Text = Tabela.Rows[0]["Marca"].ToString();
-                    txt_EstoqueAtualExclusao.Text = Tabela.Rows[0]["EstoqueAtual"].ToString();
-                    txt_UnidadeExclusao.Text = Tabela.Rows[0]["Unidade"].ToString();
+                    txt_CodigoBarra.Text = Tabela.Rows[0]["CodigoBarra"].ToString();
+                    txt_NomeProduto.Text = Tabela.Rows[0]["Descricao"].ToString();
+                    txt_Marca.Text = Tabela.Rows[0]["Marca"].ToString();
+                    txt_EstoqueAtual.Text = Tabela.Rows[0]["EstoqueAtual"].ToString();
+                    txt_EstoqueMinimo.Text = Tabela.Rows[0]["EstoqueAtual"].ToString();
+                    txt_Unidade.Text = Tabela.Rows[0]["Unidade"].ToString();
+                    txt_PrecoVenda.Text = Tabela.Rows[0]["ValorVenda"].ToString();
+                    txt_PrecoCusto.Text = Tabela.Rows[0]["ValorCusto"].ToString();
+                    txt_Lucro.Text = Tabela.Rows[0]["Lucro"].ToString();
                     Id_Categoria = Tabela.Rows[0]["Id_Categoria"].ToString();
+                    idFornecedor = int.Parse( Tabela.Rows[0]["Id_Fornecedor"].ToString());
+                    dtDataCadastro.Text = Tabela.Rows[0]["DataCadastro"].ToString();
+                    txtNumeroContaFiscal.Text = Tabela.Rows[0]["NumeroNotaFiscal"].ToString();
                 }
             }
             catch (Exception ex)
@@ -327,7 +330,7 @@ namespace CaixaFacil
             }
         }
 
-        private void ComandoCategoria()
+        private void BuscarCategoria()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Select * from Categoria where id_Categoria = " + Id_Categoria;
@@ -340,7 +343,7 @@ namespace CaixaFacil
                 comando.Fill(Tabela);
                 if (Tabela.Rows.Count > 0)
                 {
-                    txt_CategoriaExclusao.Text = Tabela.Rows[0]["Descricao"].ToString();
+                    txt_Categoria.Text = Tabela.Rows[0]["Descricao"].ToString();
                    
                 }
             }
@@ -352,19 +355,19 @@ namespace CaixaFacil
 
         private void btn_Excluir_Click(object sender, EventArgs e)
         {
-            if (txt_CodigoProdutoExclusao.Text != string.Empty)
+            if (Id_Produto > 0)
             {
                 try
                 {
                     categoria.id = int.Parse(Id_Categoria);
-                    produto.id = int.Parse(txt_CodigoProdutoExclusao.Text);
+                    produto.id = Id_Produto;
                     if (MessageBox.Show("Deseja mesmo excluir este produto?", "Pergunta do sistema.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         Codigocategoria();
                         produto.Deletar();
                         categoria.Deletar();
                         MessageBox.Show("Produto excluido com sucesso", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        btn_LimparExclusao_Click(sender, e);
+                        LimparCampos();
                         CodigoProduto();
                     }
                 }
@@ -375,7 +378,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("É necessário buscar os dados do produto para excluir do banco de dados!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe os dados do produto para excluir!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -537,32 +540,33 @@ namespace CaixaFacil
             pesquisarProdutos.ShowDialog();
             if (pesquisarProdutos.ID_PRODUTO != null)
             {
-                txt_CodigoEdicao.Text = pesquisarProdutos.ID_PRODUTO;
+                txt_Codigo.Text = pesquisarProdutos.ID_PRODUTO;
                 AtualizarCategoria();
                 produto.id = int.Parse(pesquisarProdutos.ID_PRODUTO);
                 produto.ConsultarCodigoProduto();
-                txt_CodigoBarraEdicao.Text = produto.codigoBarra;
-                txt_NomeProdutoEdicao.Text = produto.descricao;
-                txt_MarcaEdicao.Text = produto.marca;
-                mask_DataValidadeEdicao.Text = produto.datavalidade;
-                txt_PrecoCustoEdicao.Text = produto.valorCusto.ToString();
-                txt_PrecoVendaEdicao.Text = produto.valorVenda.ToString();
-                txt_LucroEdicao.Text = produto.lucro.ToString();
-                txt_EstoqueAtualEdicao.Text = produto.estoqueAtual.ToString();
-                txt_EstoqueMinimoEdicao.Text = produto.estoqueMinimo.ToString();
-                txt_UnidadeEdicao.Text = produto.unidade;
-                txt_CategoriaEdicao.Text = pesquisarProdutos.Descricao;               
-                txt_fornecedorEdicao.Text = pesquisarProdutos.Fornecedor;
-                btn_PesquisarFornecedor.Enabled = true;
+                txt_CodigoBarra.Text = produto.codigoBarra;
+                txt_NomeProduto.Text = produto.descricao;
+                txt_Marca.Text = produto.marca;
+                txt_DataValidade.Text = produto.datavalidade;
+                txt_PrecoCusto.Text = produto.valorCusto.ToString();
+                txt_PrecoVenda.Text = produto.valorVenda.ToString();
+                txt_Lucro.Text = produto.lucro.ToString();
+                txt_EstoqueAtual.Text = produto.estoqueAtual.ToString();
+                txt_EstoqueMinimo.Text = produto.estoqueMinimo.ToString();
+                txt_Unidade.Text = produto.unidade;
+                txt_Categoria.Text = pesquisarProdutos.Descricao;               
+                txt_NomeFornecedor.Text = pesquisarProdutos.Fornecedor;
+                btn_Buscar.Enabled = true;
             }
             btn_AdicionarQuantidade.Enabled = true;
         }
+
         public void AtualizarCategoria()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Select Produto.Id_Fornecedor,Produto.Id_Categoria from Produto inner join Categoria on categoria.Id_Categoria=Produto.Id_Categoria inner join Fornecedor on Fornecedor.Id_Fornecedor=Produto.Id_Fornecedor where Produto.Id_Produto = @Id";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
-            comando.SelectCommand.Parameters.AddWithValue("@Id", txt_CodigoEdicao.Text);
+            comando.SelectCommand.Parameters.AddWithValue("@Id", txt_Codigo.Text);
             comando.SelectCommand.CommandText = _sql;
             try
             {
@@ -588,176 +592,113 @@ namespace CaixaFacil
             if (pesquisarFornecedor.Codigo != null)
             {
                 idFornecedor = int.Parse(pesquisarFornecedor.Codigo);
-                txt_fornecedorEdicao.Text = pesquisarFornecedor.Fornecedor;
-            }
-        }
-
-        private void txt_CodigoEdicao_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (txt_CodigoEdicao.Text == "")
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    btn_PesquisarCodigoProduto_Click(sender, e);
-                }
-            }
-            else
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    btn_Editar_Click(sender, e);
-                }
-            }
-        }
-
-        private void txt_fornecedorEdicao_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (txt_CodigoEdicao.Text == "")
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    btn_PesquisarFornecedor_Click(sender, e);
-                }
-            }
-            else
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    btn_Editar_Click(sender, e);
-                }
+                txt_NomeFornecedor.Text = pesquisarFornecedor.Fornecedor;
             }
         }
 
         private void btn_AdicionarQuantidade_Click(object sender, EventArgs e)
         {
-            FrmAdicionarQuantidade adicionarQuantidade = new FrmAdicionarQuantidade(txt_EstoqueAtualEdicao.Text);
+            FrmAdicionarQuantidade adicionarQuantidade = new FrmAdicionarQuantidade(txt_EstoqueAtual.Text);
             adicionarQuantidade.ShowDialog();
-            long EstoqueAtual = long.Parse(txt_EstoqueAtualEdicao.Text);
             long quantidade = adicionarQuantidade.Quantidade;
-            txt_EstoqueAtualEdicao.Text = (EstoqueAtual + quantidade).ToString();
-        }
 
-        private void btn_LimparAtualizar_Click(object sender, EventArgs e)
-        {
-            btn_AdicionarQuantidade.Enabled = false;
-            txt_CodigoEdicao.Clear();
-            txt_LucroEdicao.Clear();
-            txt_fornecedorEdicao.Clear();
-            txt_CategoriaEdicao.Clear();
-            txt_CodigoBarraEdicao.Clear();
-            mask_DataValidadeEdicao.Text = "00000000";
-            txt_MarcaEdicao.Clear();
-            txt_NomeProdutoEdicao.Clear();
-            txt_PrecoVendaEdicao.Clear();
-            txt_PrecoCustoEdicao.Clear();
-            txt_EstoqueAtualEdicao.Clear();
-            txt_EstoqueMinimoEdicao.Clear();
-            txt_UnidadeEdicao.Clear();
-            btn_PesquisarFornecedor.Enabled = false;
+            if (!string.IsNullOrWhiteSpace(txt_EstoqueAtual.Text))
+            {
+                long EstoqueAtual = long.Parse(txt_EstoqueAtual.Text);
+                txt_EstoqueAtual.Text = (EstoqueAtual + quantidade).ToString();
+            }
+            else
+                txt_EstoqueAtual.Text = quantidade.ToString();
         }
 
         private void btn_Editar_Click(object sender, EventArgs e)
         {
-            if (txt_NomeProdutoEdicao.Text == string.Empty)
+            if (txt_NomeProduto.Text == string.Empty)
             {
                 MessageBox.Show("Preencha o campo 'Nome do produto'!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                
                 errorProvider.Clear();
-                errorProvider.SetError(txt_NomeProdutoEdicao, "Campo obrigatório!");
-                txt_NomeProdutoEdicao.Focus();
+                errorProvider.SetError(txt_NomeProduto, "Campo obrigatório!");
+                txt_NomeProduto.Focus();
                 return;
             }
-            else if (txt_fornecedorEdicao.Text == string.Empty)
+            else if (txt_NomeFornecedor.Text == string.Empty)
             {
-                MessageBox.Show("Tecle o botão buscar e selecione o fornecedor do produto a ser inserido no sistema!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
+                MessageBox.Show("Clique no botão buscar e selecione o fornecedor do produto a ser inserido no sistema!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
                 errorProvider.Clear();
-                errorProvider.SetError(txt_fornecedorEdicao, "Campo obrigatório!");
-                txt_fornecedorEdicao.Focus();
+                errorProvider.SetError(txt_NomeFornecedor, "Campo obrigatório!");
+                txt_NomeFornecedor.Focus();
                 return;
             }
-            else if (txt_MarcaEdicao.Text == string.Empty)
+            else if (txt_Marca.Text == string.Empty)
             {
                 MessageBox.Show("Preencha o campo 'Marca'!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.Clear();
-                errorProvider.SetError(txt_MarcaEdicao, "Campo obrigatório!");
-                txt_MarcaEdicao.Focus();
+                errorProvider.SetError(txt_Marca, "Campo obrigatório!");
+                txt_Marca.Focus();
                 return;
             }
-            else if (txt_CategoriaEdicao.Text == string.Empty)
+            else if (txt_Categoria.Text == string.Empty)
             {
                 MessageBox.Show("Indique a categoria do produto!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
                 errorProvider.Clear();
-                errorProvider.SetError(txt_CategoriaEdicao, "Campo obrigatório!");
+                errorProvider.SetError(txt_Categoria, "Campo obrigatório!");
                 txt_Categoria.Focus();
                 return;
             }
-            else if (!mask_DataValidadeEdicao.MaskCompleted)
+            else if (!txt_DataValidade.MaskCompleted)
             {
                 MessageBox.Show("Coloque a data da validade do produto. Se a validade é indeterminada preencha 00/00/0000!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
                 errorProvider.Clear();
-                errorProvider.SetError(mask_DataValidadeEdicao, "Campo obrigatório!");
-                mask_DataValidadeEdicao.Focus();
+                errorProvider.SetError(txt_DataValidade, "Campo obrigatório!");
+                txt_DataValidade.Focus();
                 return;
             }
-            else if (txt_PrecoCustoEdicao.Text == string.Empty)
+            else if (txt_PrecoCusto.Text == string.Empty)
             {
                 MessageBox.Show("Coloque o preço custo do produto", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
-                errorProvider.SetError(txt_PrecoCustoEdicao, "Campo obrigatório!");
-                txt_PrecoCustoEdicao.Focus();
+                errorProvider.SetError(txt_PrecoCusto, "Campo obrigatório!");
+                txt_PrecoCusto.Focus();
                 return;
             }
-            else if (txt_PrecoVendaEdicao.Text == string.Empty)
+            else if (txt_PrecoVenda.Text == string.Empty)
             {
                 MessageBox.Show("Coloque o valor da venda!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.Clear();
-                errorProvider.SetError(txt_PrecoVendaEdicao, "Campo obrigatório!");
-                txt_PrecoVendaEdicao.Focus();
+                errorProvider.SetError(txt_PrecoVenda, "Campo obrigatório!");
+                txt_PrecoVenda.Focus();
                 return;
             }
-            else if (txt_EstoqueMinimoEdicao.Text == string.Empty)
+            else if (txt_EstoqueMinimo.Text == string.Empty)
             {
                 MessageBox.Show("Coloque a quantidade mínima que o estoque deve ter. Ex: 2.", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); errorProvider.Clear();
-                errorProvider.SetError(txt_EstoqueMinimoEdicao, "Campo obrigatório!");
-                txt_EstoqueMinimoEdicao.Focus();
+                errorProvider.SetError(txt_EstoqueMinimo, "Campo obrigatório!");
+                txt_EstoqueMinimo.Focus();
                 return;
             }
-            else if (txt_EstoqueAtualEdicao.Text == string.Empty)
+            else if (txt_EstoqueAtual.Text == string.Empty)
             {
                 MessageBox.Show("Coloque a quantidade atual no estoque!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); errorProvider.Clear();
-                errorProvider.SetError(txt_EstoqueAtualEdicao, "Campo obrigatório!");
-                txt_EstoqueAtualEdicao.Focus();
+                errorProvider.SetError(txt_EstoqueAtual, "Campo obrigatório!");
+                txt_EstoqueAtual.Focus();
                 return;
             }
 
-            else if (txt_UnidadeEdicao.Text == string.Empty)
+            else if (txt_Unidade.Text == string.Empty)
             {
                 MessageBox.Show("Coloque a unidade. Ex: unidade. Kg. etc...", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
                 errorProvider.Clear();
-                errorProvider.SetError(txt_UnidadeEdicao, "Campo obrigatório!");
-                txt_UnidadeEdicao.Focus();
+                errorProvider.SetError(txt_Unidade, "Campo obrigatório!");
+                txt_Unidade.Focus();
                 return;
             }
             else
             {
                 try
                 {
-                    categoria.id = int.Parse(Id_Categoria);
-                    categoria.Descricao = txt_CategoriaEdicao.Text.Trim();
-                    categoria.Atualizar();
-                    produto.id = int.Parse(txt_CodigoEdicao.Text);
-                    produto.descricao = txt_NomeProdutoEdicao.Text.Trim();
-                    produto.codigoBarra = txt_CodigoBarraEdicao.Text;
-                    produto.marca = txt_MarcaEdicao.Text.Trim();
-                    produto.datavalidade = mask_DataValidadeEdicao.Text;
-                    produto.valorVenda = decimal.Parse(txt_PrecoVendaEdicao.Text.Trim());
-                    produto.valorCusto = decimal.Parse(txt_PrecoCustoEdicao.Text.Trim());
-                    produto.lucro = decimal.Parse(txt_LucroEdicao.Text);
-                    produto.estoqueAtual = int.Parse(txt_EstoqueAtualEdicao.Text.Trim());
-                    produto.estoqueMinimo = int.Parse(txt_EstoqueMinimoEdicao.Text.Trim());
-                    produto.unidade = txt_UnidadeEdicao.Text.Trim();
-                    produto.id_fornecedor = idFornecedor;
-                    produto.Atualizar();
-                    MessageBox.Show("Produto atualizado com sucesso!", "Informação do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    btn_LimparAtualizar_Click(sender, e);
+                    if (Id_Produto > 0)
+                        EditarProduto();
+                    else
+                        MessageBox.Show("Informe os dados do produto para concluir as alterações dos dados", "Validação CPF", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 catch (Exception ex)
                 {
@@ -766,235 +707,30 @@ namespace CaixaFacil
             }
         }
 
-        private void txt_CodigoBarraEdicao_TextChanged(object sender, EventArgs e)
+        private void EditarProduto()
         {
-            errorProvider.Clear();
-        }
+            categoria.id = int.Parse(Id_Categoria);
+            categoria.Descricao = txt_Categoria.Text.Trim();
+            categoria.Atualizar();
+            produto.id = int.Parse(txt_Codigo.Text);
+            produto.descricao = txt_NomeProduto.Text.Trim();
+            produto.codigoBarra = txt_CodigoBarra.Text;
+            produto.marca = txt_Marca.Text.Trim();
+            produto.datavalidade = txt_DataValidade.Text;
+            produto.valorVenda = decimal.Parse(txt_PrecoVenda.Text.Trim());
+            produto.valorCusto = decimal.Parse(txt_PrecoCusto.Text.Trim());
+            produto.lucro = decimal.Parse(txt_Lucro.Text);
+            produto.estoqueAtual = int.Parse(txt_EstoqueAtual.Text.Trim());
+            produto.estoqueMinimo = int.Parse(txt_EstoqueMinimo.Text.Trim());
+            produto.unidade = txt_Unidade.Text.Trim();
+            produto.id_fornecedor = idFornecedor;
+            produto.numeroNotaFiscal = txtNumeroContaFiscal.Text;
+            produto.dataCadastro = dtDataCadastro.Text;
+            produto.Atualizar();
 
-        private void txt_NomeProdutoEdicao_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider.Clear();
-        }
-
-        private void txt_fornecedorEdicao_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider.Clear();
-        }
-
-        private void txt_MarcaEdicao_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider.Clear();
-        }
-
-        private void txt_CategoriaEdicao_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider.Clear();
-        }
-
-        private void txt_DescricaoEdicao_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider.Clear();
-        }
-
-        private void mask_DataValidadeEdicao_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-            errorProvider.Clear();
-        }
-
-        private void txt_PrecoCustoEdicao_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider.Clear();
-        }
-
-        private void txt_PrecoVendaEdicao_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider.Clear();
-        }
-
-        private void txt_EstoqueMinimoEdicao_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider.Clear();
-        }
-
-        private void txt_EstoqueAtualEdicao_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider.Clear();
-        }
-
-        private void txt_UnidadeEdicao_TextChanged(object sender, EventArgs e)
-        {
-            errorProvider.Clear();
-        }
-
-        private void txt_EstoqueMinimoEdicao_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txt_EstoqueAtualEdicao_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txt_PrecoVendaEdicao_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar))
-            {
-                if (((int)e.KeyChar) != ((int)Keys.Back))
-                    if (e.KeyChar != ',')
-                        e.Handled = true;
-                    else if (txt_PrecoVendaEdicao.Text.IndexOf(',') > 0)
-                        e.Handled = true;
-            }
-        }
-
-        private void txt_PrecoCustoEdicao_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar))
-            {
-                if (((int)e.KeyChar) != ((int)Keys.Back))
-                    if (e.KeyChar != ',')
-                        e.Handled = true;
-                    else if (txt_PrecoCustoEdicao.Text.IndexOf(',') > 0)
-                        e.Handled = true;
-            }
-        }
-
-        private void txt_PrecoVendaEdicao_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txt_PrecoVendaEdicao.Text != "" && txt_PrecoCustoEdicao.Text != "")
-                {
-                    PrecoVenda = decimal.Parse(txt_PrecoVendaEdicao.Text);
-                    PrecoCusto = decimal.Parse(txt_PrecoCustoEdicao.Text);
-                    Lucro = PrecoVenda - PrecoCusto;
-                    txt_LucroEdicao.Text = Lucro.ToString();
-                    txt_PrecoVendaEdicao.Text = Convert.ToDecimal(txt_PrecoVendaEdicao.Text.Trim()).ToString("0.00");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txt_PrecoVendaEdicao.Clear();
-            }
-        }
-
-        private void txt_PrecoCustoEdicao_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txt_PrecoCustoEdicao.Text != "")
-                {
-                    txt_PrecoCustoEdicao.Text = Convert.ToDecimal(txt_PrecoCustoEdicao.Text.Trim()).ToString("0.00");
-                    if (txt_PrecoVendaEdicao.Text != "" && txt_PrecoCustoEdicao.Text != "")
-                    {
-                        PrecoVenda = decimal.Parse(txt_PrecoVendaEdicao.Text);
-                        PrecoCusto = decimal.Parse(txt_PrecoCustoEdicao.Text);
-                        Lucro = PrecoVenda - PrecoCusto;
-                        txt_LucroEdicao.Text = Lucro.ToString();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txt_PrecoCustoEdicao.Clear();
-            }
-        }
-
-        private void txt_NomeProdutoEdicao_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Editar_Click(sender, e);
-            }
-        }
-
-        private void txt_MarcaEdicao_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Editar_Click(sender, e);
-            }
-        }
-
-        private void txt_CategoriaEdicao_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Editar_Click(sender, e);
-            }
-        }
-
-        private void txt_DescricaoEdicao_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Editar_Click(sender, e);
-            }
-        }
-
-        private void mask_DataValidadeEdicao_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Editar_Click(sender, e);
-            }
-        }
-
-        private void txt_PrecoCustoEdicao_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Editar_Click(sender, e);
-            }
-        }
-
-        private void txt_PrecoVendaEdicao_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Editar_Click(sender, e);
-            }
-        }
-
-        private void txt_LucroEdicao_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Editar_Click(sender, e);
-            }
-        }
-
-        private void txt_EstoqueMinimoEdicao_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Editar_Click(sender, e);
-            }
-        }
-
-        private void txt_EstoqueAtualEdicao_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Editar_Click(sender, e);
-            }
-        }
-
-        private void txt_UnidadeEdicao_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Editar_Click(sender, e);
-            }
+            MessageBox.Show("Produto atualizado com sucesso!", "Informação do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LimparCampos();
+            CodigoProduto();
         }
 
         ClassFornecedor Fornecedor = new ClassFornecedor();
@@ -1013,73 +749,66 @@ namespace CaixaFacil
             
         }
 
-        private void txt_NomeProduto_KeyDown(object sender, KeyEventArgs e)
+        private void txt_EstoqueAtual_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
             {
-                btn_Salvar_Click(sender, e);
+                e.Handled = true;
             }
         }
 
-        private void txt_Marca_KeyDown(object sender, KeyEventArgs e)
+        private void txtNumeroContaFiscal_TextChanged(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Salvar_Click(sender, e);
-            }
+            errorProvider.Clear();
         }
 
-        private void txt_Categoria_KeyDown(object sender, KeyEventArgs e)
+        private void txt_PrecoVenda_TextChanged(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Salvar_Click(sender, e);
-            }
+            errorProvider.Clear();
         }
 
-        private void txt_DataValidade_KeyDown(object sender, KeyEventArgs e)
+        private void txt_EstoqueMinimo_TextChanged(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Salvar_Click(sender, e);
-            }
+            errorProvider.Clear();
         }
 
-        private void txt_PrecoVenda_KeyDown(object sender, KeyEventArgs e)
+        private void txt_EstoqueAtual_TextChanged(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Salvar_Click(sender, e);
-            }
+            errorProvider.Clear();
         }
 
-        private void txt_EstoqueMinimo_KeyDown(object sender, KeyEventArgs e)
+        private void FrmProduto_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
+            if (e.KeyCode == Keys.F1)
                 btn_Salvar_Click(sender, e);
-            }
+            else if (e.KeyCode == Keys.F2)
+                btn_Pesquisar_Click(sender, e);
+            else if (e.KeyCode == Keys.F3)
+                btn_Editar_Click(sender, e);
+            else if (e.KeyCode == Keys.F4)
+                btn_Excluir_Click(sender, e);
         }
 
         private void txt_EstoqueAtual_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
+                btn_AdicionarQuantidade_Click(sender, e);
+        }
+
+        private void txt_CodigoBarra_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
             {
-                btn_Salvar_Click(sender, e);
+                e.Handled = true;
             }
         }
 
-        private void txt_Unidade_KeyDown(object sender, KeyEventArgs e)
+        private void txtNumeroContaFiscal_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
             {
-                btn_Salvar_Click(sender, e);
+                e.Handled = true;
             }
-        }
-
-        private void tabCadastro_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void txt_PrecoVenda_Leave(object sender, EventArgs e)
@@ -1106,19 +835,9 @@ namespace CaixaFacil
 
         private void txt_NomeFornecedor_KeyDown(object sender, KeyEventArgs e)
         {
-            if (txt_NomeFornecedor.Text == "")
+            if (e.KeyCode == Keys.Enter)
             {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    btn_Buscar_Click(sender, e);
-                }
-            }
-            else
-            {
-                if (e.KeyCode == Keys.Enter)
-                {
-                    btn_Salvar_Click(sender, e);
-                }
+                btn_Buscar_Click(sender, e);
             }
         }
     }    

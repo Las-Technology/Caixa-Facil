@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -36,11 +31,11 @@ namespace CaixaFacil
 
                 if (string.IsNullOrWhiteSpace(txt_Nome.Text))
                 {
-                    _sql = "SELECT" + filter + " Produto.Id_Produto, Produto.CodigoBarra, Produto.Descricao as DescricaoNome, Produto.Marca, Produto.DataValidade, Produto.ValorCusto, Produto.ValorVenda, Produto.EstoqueAtual, Produto.EstoqueMinimo, Produto.Unidade, Categoria.Descricao, Fornecedor.Nome, Produto.Lucro FROM Categoria INNER JOIN Produto ON Categoria.Id_Categoria = Produto.Id_Categoria INNER JOIN Fornecedor ON Produto.Id_Fornecedor = Fornecedor.Id_Fornecedor";
+                    _sql = "SELECT" + filter + " Produto.Id_Produto, Produto.CodigoBarra, Produto.Descricao as DescricaoNome, Produto.Marca, Produto.DataValidade, Produto.ValorCusto, Produto.ValorVenda, Produto.EstoqueAtual, Produto.EstoqueMinimo, Produto.Unidade, Categoria.Descricao, Fornecedor.Nome, Produto.Lucro, Produto.NumeroNotaFiscal, Produto.DataCadastro FROM Categoria INNER JOIN Produto ON Categoria.Id_Categoria = Produto.Id_Categoria INNER JOIN Fornecedor ON Produto.Id_Fornecedor = Fornecedor.Id_Fornecedor";
                 }
                 else
                 {
-                    _sql = "SELECT" + filter + " Produto.Id_Produto, Produto.CodigoBarra, Produto.Descricao as DescricaoNome, Produto.Marca, Produto.DataValidade, Produto.ValorCusto, Produto.ValorVenda, Produto.EstoqueAtual, Produto.EstoqueMinimo, Produto.Unidade, Categoria.Descricao, Fornecedor.Nome, Produto.Lucro FROM Categoria INNER JOIN Produto ON Categoria.Id_Categoria = Produto.Id_Categoria INNER JOIN Fornecedor ON Produto.Id_Fornecedor = Fornecedor.Id_Fornecedor WHERE Produto.Descricao like '%" + txt_Nome.Text.Trim() + "%'";
+                    _sql = "SELECT" + filter + " Produto.Id_Produto, Produto.CodigoBarra, Produto.Descricao as DescricaoNome, Produto.Marca, Produto.DataValidade, Produto.ValorCusto, Produto.ValorVenda, Produto.EstoqueAtual, Produto.EstoqueMinimo, Produto.Unidade, Categoria.Descricao, Fornecedor.Nome, Produto.Lucro, Produto.NumeroNotaFiscal, Produto.DataCadastro FROM Categoria INNER JOIN Produto ON Categoria.Id_Categoria = Produto.Id_Categoria INNER JOIN Fornecedor ON Produto.Id_Fornecedor = Fornecedor.Id_Fornecedor WHERE Produto.Descricao like '%" + txt_Nome.Text.Trim() + "%'";
                 }
 
                 SqlConnection conexao = new SqlConnection(stringConn);
@@ -127,12 +122,12 @@ namespace CaixaFacil
             if (Cont >= 0)
             {
                 DataGridViewRow LINHA = dgv_Busca.Rows[e.RowIndex];
-                ID_PRODUTO = LINHA.Cells[0].Value.ToString();
-                CodBarra = LINHA.Cells[1].Value.ToString();
-                Fornecedor = LINHA.Cells[12].Value.ToString();
-                Descricao = LINHA.Cells[3].Value.ToString();
-                Lucro = LINHA.Cells[7].Value.ToString();
-                ValorVenda = LINHA.Cells[6].Value.ToString();
+                ID_PRODUTO = LINHA.Cells["idProduto"].Value.ToString();
+                CodBarra = LINHA.Cells["codigoBarra"].Value.ToString();
+                Fornecedor = LINHA.Cells["nomeFornecedor"].Value.ToString();
+                Descricao = LINHA.Cells["nomeProduto"].Value.ToString();
+                Lucro = LINHA.Cells["lucro"].Value.ToString();
+                ValorVenda = LINHA.Cells["valorVenda"].Value.ToString();
                 this.Close();
             }
         }
