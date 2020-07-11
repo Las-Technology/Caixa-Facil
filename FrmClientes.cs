@@ -213,21 +213,6 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    if (mask_CPF.MaskCompleted)
-                    {
-                        string validar = mask_CPF.Text;
-                        if (CPF.ValidaCpf(validar) == false)
-                        {
-                            MessageBox.Show("O número do CPF é Inválido!", "Validação CPF", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            errorProvider.Clear();
-                            errorProvider.SetError(mask_CPF, "CPF inválido!");
-                            return;
-                        }
-                    }
-                    else
-                        mask_CPF.Clear();
-
-                 
                     SalvarCliente();
                 }
             }
@@ -242,7 +227,6 @@ namespace CaixaFacil
             cliente.id = int.Parse(txt_Codigo.Text);
             cliente.nome = txt_Nome.Text.Trim();
             cliente.dataNascimento = dateNascimento.Text;
-            cliente.CPF = Security.Cry(mask_CPF.Text);
             cliente.RG = Security.Cry(mask_RG.Text);
             cliente.CEP = mask_Cep.Text;
             cliente.bairro = txt_Bairro.Text.Trim();
@@ -255,11 +239,26 @@ namespace CaixaFacil
             cliente.email = txt_Email.Text.Trim();
 
             if (mask_CPF.MaskCompleted)
+            {
+                string validar = mask_CPF.Text;
+                if (CPF.ValidaCpf(validar) == false)
+                {
+                    MessageBox.Show("O número do CPF é Inválido!", "Validação CPF", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    errorProvider.Clear();
+                    errorProvider.SetError(mask_CPF, "CPF inválido!");
+                    return;
+                }
+
                 if (cliente.VerificarCPFexists())
                 {
                     MessageBox.Show("CPF já cadastrado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
+            }
+            else
+                mask_CPF.Clear();
+
+            cliente.CPF = Security.Cry(mask_CPF.Text);
 
             cliente.Cadastrar();
             MessageBox.Show("Cliente cadastrado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -555,21 +554,6 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    if (mask_CPF.MaskCompleted)
-                    {
-                        string validar = mask_CPF.Text;
-                        if (CPF.ValidaCpf(validar) == false)
-                        {
-                            MessageBox.Show("O número do CPF é Inválido!", "Validação CPF", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            mask_CPF.Focus();
-                            errorProvider.Clear();
-                            errorProvider.SetError(mask_CPF, "CPF inválido!");
-                            return;
-                        }
-                    }
-                    else
-                        mask_CPF.Clear();
-
                     if (idCliente > 0)
                         EditarCliente();
                     else
@@ -587,7 +571,6 @@ namespace CaixaFacil
             cliente.id = int.Parse(txt_Codigo.Text.Trim());
             cliente.nome = txt_Nome.Text.Trim();
             cliente.dataNascimento = dateNascimento.Text;
-            cliente.CPF = Security.Cry(mask_CPF.Text);
             cliente.RG = Security.Cry(mask_RG.Text);
             cliente.CEP = mask_Cep.Text;
             cliente.bairro = txt_Bairro.Text.Trim();
@@ -598,6 +581,30 @@ namespace CaixaFacil
             cliente.telefone = mask_Telefone.Text;
             cliente.celular = mask_Celular.Text;
             cliente.email = txt_Email.Text.Trim();
+
+            
+            if (mask_CPF.MaskCompleted)
+            {
+                string validar = mask_CPF.Text;
+                if (CPF.ValidaCpf(validar) == false)
+                {
+                    MessageBox.Show("O número do CPF é Inválido!", "Validação CPF", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    mask_CPF.Focus();
+                    errorProvider.Clear();
+                    errorProvider.SetError(mask_CPF, "CPF inválido!");
+                    return;
+                }
+
+                if (cliente.VerificarCPFexistsUpdate())
+                {
+                    MessageBox.Show("Há um cliente com o mesmo CPF cadastrado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+            }
+            else
+                mask_CPF.Clear();
+
+            cliente.CPF = Security.Cry(mask_CPF.Text);
 
             cliente.Atualizar();
 

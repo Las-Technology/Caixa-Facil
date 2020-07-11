@@ -25,7 +25,7 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.Desconto, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda";
+                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.Desconto, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Produto.Unidade <> 'serviço'";
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
@@ -89,7 +89,7 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.Desconto, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Cliente.Nome like '%" + txtNomeCliente.Text + "%'";
+                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.Desconto, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Cliente.Nome like '%" + txtNomeCliente.Text + "%' and Produto.Unidade <> 'serviço'";
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();

@@ -124,7 +124,33 @@ namespace CaixaFacil
                 conexao.Close();
             }
         }
-         
+        public bool VerificarCPFexistsUpdate()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+
+            _sql = "Select * from Cliente where CPF = @CPF and Id_Cliente <> @id";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@CPF", CPF);
+            comando.Parameters.AddWithValue("@id", id);
+            try
+            {
+                conexao.Open();
+                SqlDataReader dr = comando.ExecuteReader();
+                if (dr.Read())
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
         public void Cadastrar()
         {
             SqlConnection conexao = new SqlConnection(stringConn);

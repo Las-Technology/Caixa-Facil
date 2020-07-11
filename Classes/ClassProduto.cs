@@ -199,9 +199,8 @@ namespace CaixaFacil
 
         public bool ConsultarCodigoProduto()
         {
-
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Select * from Produto where Id_Produto = @Id_Produto";
+            _sql = "Select * from Produto where Id_Produto = @Id_Produto and Unidade <> 'Serviço'";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.Parameters.AddWithValue("@id_Produto", id);
             comando.SelectCommand.CommandText = _sql;
@@ -291,9 +290,51 @@ namespace CaixaFacil
 
         public bool ConsultarProduto()
         {
-
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Select * from Produto where Id_Produto = @Id_Produto";
+            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
+            comando.SelectCommand.Parameters.AddWithValue("@id_Produto", id);
+            comando.SelectCommand.CommandText = _sql;
+            try
+            {
+                conexao.Open();
+                DataTable Tabela = new DataTable();
+                comando.Fill(Tabela);
+                if (Tabela.Rows.Count > 0)
+                {
+                    id = int.Parse(Tabela.Rows[0]["Id_produto"].ToString());
+                    codigoBarra = Tabela.Rows[0]["CodigoBarra"].ToString();
+                    descricao = Tabela.Rows[0]["Descricao"].ToString();
+                    marca = Tabela.Rows[0]["Marca"].ToString();
+                    valorVenda = decimal.Parse(Tabela.Rows[0]["ValorVenda"].ToString());
+                    lucro = decimal.Parse(Tabela.Rows[0]["Lucro"].ToString());
+                    estoqueAtual = int.Parse(Tabela.Rows[0]["EstoqueAtual"].ToString());
+                    estoqueMinimo = int.Parse(Tabela.Rows[0]["EstoqueMinimo"].ToString());
+                    unidade = Tabela.Rows[0]["Unidade"].ToString();
+                    id_categoria = int.Parse(Tabela.Rows[0]["Id_Categoria"].ToString());
+                    numeroNotaFiscal = Tabela.Rows[0]["NumeroNotaFiscal"].ToString();
+                    dataCadastro = Tabela.Rows[0]["DataCadastro"].ToString();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+
+        public bool ConsultarCodigoServico()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+            _sql = "Select * from Produto where Id_Produto = @Id_Produto and Unidade = 'Serviço'";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.Parameters.AddWithValue("@id_Produto", id);
             comando.SelectCommand.CommandText = _sql;

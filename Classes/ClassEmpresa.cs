@@ -210,6 +210,7 @@ namespace CaixaFacil
                 comando.Fill(Tabela);
                 if (Tabela.Rows.Count > 0)
                 {
+                    id = int.Parse(Tabela.Rows[0]["Id_Empresa"].ToString());
                     razaoSocial = Tabela.Rows[0]["RazaoSocial"].ToString();
                     nomeFantasia = Tabela.Rows[0]["NomeFantasia"].ToString();
                     CNPJ = Tabela.Rows[0]["CNPJ"].ToString();

@@ -128,6 +128,8 @@ namespace CaixaFacil
             idFornecedor = 0;
             Id_Categoria = "";
             Id_Produto = 0;
+            dtDataCadastro.Text = DateTime.Now.ToShortDateString();
+            txtNumeroContaFiscal.Clear();
 
         }
         private void btn_Fechar_MouseEnter(object sender, EventArgs e)
@@ -269,7 +271,7 @@ namespace CaixaFacil
                     produto.numeroNotaFiscal = txtNumeroContaFiscal.Text;
                     produto.dataCadastro = dtDataCadastro.Text;
                     produto.Cadastrar();
-                    MessageBox.Show("Produto cadastrado com sucesso!", "Informação do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Produto cadastrado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     CodigoProduto();
                     LimparCampos();
                 }
@@ -313,7 +315,7 @@ namespace CaixaFacil
                     txt_NomeProduto.Text = Tabela.Rows[0]["Descricao"].ToString();
                     txt_Marca.Text = Tabela.Rows[0]["Marca"].ToString();
                     txt_EstoqueAtual.Text = Tabela.Rows[0]["EstoqueAtual"].ToString();
-                    txt_EstoqueMinimo.Text = Tabela.Rows[0]["EstoqueAtual"].ToString();
+                    txt_EstoqueMinimo.Text = Tabela.Rows[0]["EstoqueMinimo"].ToString();
                     txt_Unidade.Text = Tabela.Rows[0]["Unidade"].ToString();
                     txt_PrecoVenda.Text = Tabela.Rows[0]["ValorVenda"].ToString();
                     txt_PrecoCusto.Text = Tabela.Rows[0]["ValorCusto"].ToString();
@@ -728,7 +730,7 @@ namespace CaixaFacil
             produto.dataCadastro = dtDataCadastro.Text;
             produto.Atualizar();
 
-            MessageBox.Show("Produto atualizado com sucesso!", "Informação do sistema...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Produto atualizado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LimparCampos();
             CodigoProduto();
         }

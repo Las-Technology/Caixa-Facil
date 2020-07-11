@@ -118,6 +118,7 @@
     <Compile Include="Classes\ClassContasNaoContabilizada.cs" />
     <Compile Include="Classes\ClassContasPagar.cs" />
     <Compile Include="Classes\ClassEmpresa.cs" />
+    <Compile Include="Classes\ClassEstoque.cs" />
     <Compile Include="Classes\ClassFluxoCaixa.cs" />
     <Compile Include="Classes\ClassFormaPagamento.cs" />
     <Compile Include="Classes\ClassFornecedor.cs" />
@@ -391,12 +392,6 @@
     </Compile>
     <Compile Include="FrmPesquisarCliente.designer.cs">
       <DependentUpon>FrmPesquisarCliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmPesquisarEmpresa.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmPesquisarEmpresa.designer.cs">
-      <DependentUpon>FrmPesquisarEmpresa.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmPesquisarFornecedor.cs">
       <SubType>Form</SubType>
@@ -715,9 +710,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPesquisarCliente.resx">
       <DependentUpon>FrmPesquisarCliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmPesquisarEmpresa.resx">
-      <DependentUpon>FrmPesquisarEmpresa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPesquisarFornecedor.resx">
       <DependentUpon>FrmPesquisarFornecedor.cs</DependentUpon>

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaixaFacil
 {
@@ -208,6 +203,59 @@ namespace CaixaFacil
                 telefone = Tabela.Rows[0]["Telefone"].ToString();
                 celular = Tabela.Rows[0]["Celular"].ToString();
                 email = Tabela.Rows[0]["Email"].ToString();
+            }
+        }
+
+        public bool VerificarCNPJexists()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+
+            _sql = "Select * from Fornecedor where CNPJ = @CNPJ";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@CNPJ", Cnpj);
+            try
+            {
+                conexao.Open();
+                SqlDataReader dr = comando.ExecuteReader();
+                if (dr.Read())
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+        
+        public bool VerificarCNPJexistsUpdate()
+        {
+            SqlConnection conexao = new SqlConnection(stringConn);
+
+            _sql = "Select * from Fornecedor where CNPJ = @CNPJ and Id_Fornecedor <> @id";
+            SqlCommand comando = new SqlCommand(_sql, conexao);
+            comando.Parameters.AddWithValue("@CNPJ", Cnpj);
+            comando.Parameters.AddWithValue("@id", id);
+            try
+            {
+                conexao.Open();
+                SqlDataReader dr = comando.ExecuteReader();
+                if (dr.Read())
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conexao.Close();
             }
         }
     }

@@ -54,6 +54,7 @@ namespace CaixaFacil
                 Menu_ListagemVendasRealizadasNoDia.Visible = false;
                 Menu_Fonecedores.Visible = false;
                 Menu_Produtos.Visible = false;
+                menuAlterardevolverItensVenda.Visible = false;
                 Menu_listagemDeProdutosCadastrados.Visible = false;
                 Menu_listagemDeServiçosCadastrados.Visible = false;
                 Menu_listagensDeClientesCadastrados.Visible = false;
@@ -591,7 +592,7 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario";
+                _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where Produto.Unidade <> 'serviço'";
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();

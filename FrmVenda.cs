@@ -107,9 +107,10 @@ namespace CaixaFacil
                 this.btn_BuscarProdutos.Size = new System.Drawing.Size(164, 60);
                 this.btn_BuscarProdutos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
                 btn_BuscarProdutos.TextAlign = ContentAlignment.MiddleCenter;
-                this.groupBox4.Size = new System.Drawing.Size(785, 93);
+                this.groupBox4.Size = new System.Drawing.Size(757, 93);
                 this.Text = "P.D.S";
                 lblValorTotalVenda.Text = "Valor Total do serviço: ";
+                btnDevolução.Visible = false;
             }
         }
 
@@ -194,63 +195,17 @@ namespace CaixaFacil
         private void btn_BuscarProdutos_Click(object sender, EventArgs e)
         {
             btn_Remover.Enabled = false;
+            Quantidade = int.Parse(nd_Quantidade.Value.ToString());
             if (AreaAtuacao != "SALÃO DE BELEZA" && AreaAtuacao != "PRESTAÇÃO DE SERVIÇO")
             {
                 FrmPesquisarProdutos produtos = new FrmPesquisarProdutos();
                 produtos.ShowDialog();
-                CodigoBarra = txt_Codigo_Barra.Text;
-                Quantidade = int.Parse(nd_Quantidade.Value.ToString());
                 if (produtos.ID_PRODUTO != null)
                 {
                     produto.id = int.Parse(produtos.ID_PRODUTO);
-                    if (produto.ConsultarProduto() == true)
-                    {
-                        CodigoProduto = produto.id.ToString();
-                        Descricao = produto.descricao;
-                        Unidade = produto.unidade;
-                        EstoqueAtual = produto.estoqueAtual;
-                        EstoqueMinimo = produto.estoqueMinimo;
-                        ValorVenda = produto.valorVenda;
-                        Subtotal = nd_Quantidade.Value * ValorVenda;
-                        LucroVenda = produto.lucro * Quantidade;
-                        LucroTotal += LucroVenda;
-
-                        if (EstoqueAtual == 0)
-                        {
-                            MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            txt_Codigo_Barra.Focus();
-                        }
-                        else if (EstoqueAtual < Quantidade)
-                        {
-                            MessageBox.Show("A quantidade exigida é maior que o estoque atual gravada no banco de dados. Por favor Atualize o estoque!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            txt_Codigo_Barra.Clear();
-                            txt_Codigo_Barra.Focus();
-                        }
-                        else
-                        {
-                            DGV_ItensVenda.Rows.Add(CodigoProduto, Descricao, nd_Quantidade.Value, Unidade, ValorVenda, Subtotal);
-                            ValorTotal = ValorTotal + Subtotal;
-                            txt_Codigo_Barra.Clear();
-                            txt_Codigo_Barra.Focus();
-                            nd_Quantidade.Value = 1;
-                            DGV_ItensVenda.CurrentRow.Selected = false;
-                            atualizarEstoque_CodigoProduto();
-                            produto.ConsultarProduto();
-                            EstoqueAtual = produto.estoqueAtual;
-                            if (EstoqueAtual == 0)
-                            {
-                                MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }
-                            else if (EstoqueAtual <= EstoqueMinimo)
-                            {
-                                MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }
-                        }
-                    }
+                    produto.ConsultarCodigoProduto();
+                    AdicionarItensValue();
                 }
-                soma = ValorTotal;
-                ValorTotal = soma;
-                txt_ValorTotal.Text = "R$ " + ValorTotal.ToString();
             }
             else
             {
@@ -261,7 +216,7 @@ namespace CaixaFacil
                 if (Servico.Codigo != null)
                 {
                     produto.id = int.Parse(Servico.Codigo);
-                    if (produto.ConsultarProduto() == true)
+                    if (produto.ConsultarProduto())
                     {
                         CodigoProduto = produto.id.ToString();
                         Descricao = produto.descricao;
@@ -274,37 +229,12 @@ namespace CaixaFacil
                         LucroVenda = produto.lucro * Quantidade;
                         LucroTotal += LucroVenda;
 
-                        if (EstoqueAtual == 0 && Unidade != "Serviço")
-                        {
-                            MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            txt_Codigo_Barra.Focus();
-                        }
-                        else if (EstoqueAtual < Quantidade && Unidade != "Serviço")
-                        {
-                            MessageBox.Show("A quantidade exigida é maior que o estoque atual gravada no banco de dados. Por favor Atualize o estoque!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            txt_Codigo_Barra.Clear();
-                            txt_Codigo_Barra.Focus();
-                        }
-                        else
-                        {
-                            DGV_ItensVenda.Rows.Add(CodigoProduto, Descricao, nd_Quantidade.Value, Unidade, ValorVenda, Subtotal);
-                            ValorTotal = ValorTotal + Subtotal;
-                            txt_Codigo_Barra.Clear();
-                            txt_Codigo_Barra.Focus();
-                            nd_Quantidade.Value = 1;
-                            DGV_ItensVenda.CurrentRow.Selected = false;
-                            atualizarEstoque_CodigoProduto();
-                            produto.ConsultarProduto();
-                            EstoqueAtual = produto.estoqueAtual;
-                            if (EstoqueAtual == 0 && Unidade != "Serviço")
-                            {
-                                MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }
-                            else if (EstoqueAtual <= EstoqueMinimo && Unidade != "Serviço")
-                            {
-                                MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico!Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }
-                        }
+                        DGV_ItensVenda.Rows.Add(CodigoProduto, Descricao, nd_Quantidade.Value, Unidade, ValorVenda, Subtotal);
+                        ValorTotal = ValorTotal + Subtotal;
+                        txt_Codigo_Barra.Clear();
+                        txt_Codigo_Barra.Focus();
+                        nd_Quantidade.Value = 1;
+                        DGV_ItensVenda.CurrentRow.Selected = false;
                     }
                 }
                 soma = ValorTotal;
@@ -323,57 +253,9 @@ namespace CaixaFacil
             if (precosProdutos.Codigo >= 1)
             {
                 produto.id = precosProdutos.Codigo;
-                if (produto.ConsultarProduto() == true)
-                {
-                    CodigoProduto = produto.id.ToString();
-                    Descricao = produto.descricao;
-                    Unidade = produto.unidade;
-                    EstoqueAtual = produto.estoqueAtual;
-                    EstoqueMinimo = produto.estoqueMinimo;
-                    ValorVenda = produto.valorVenda;
-                    Subtotal = nd_Quantidade.Value * ValorVenda;
-                    LucroVenda = produto.lucro * Quantidade;
-                    LucroTotal += LucroVenda;
-
-                    if (EstoqueAtual == 0)
-                    {
-                        MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        txt_Codigo_Barra.Focus();
-                    }
-                    else if (EstoqueAtual < Quantidade)
-                    {
-                        MessageBox.Show("A quantidade exigida é maior que o estoque atual gravada no banco de dados. Por favor Atualize o estoque!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        txt_Codigo_Barra.Clear();
-                        txt_Codigo_Barra.Focus();
-                    }
-                    else
-                    {
-                        DGV_ItensVenda.Rows.Add(CodigoProduto, Descricao, nd_Quantidade.Value, Unidade, ValorVenda, Subtotal);
-                        ValorTotal = ValorTotal + Subtotal;
-                        txt_Codigo_Barra.Clear();
-                        txt_Codigo_Barra.Focus();
-                        nd_Quantidade.Value = 1;
-                        DGV_ItensVenda.CurrentRow.Selected = false;
-                        atualizarEstoque_CodigoProduto();
-                        produto.ConsultarProduto();
-                        EstoqueAtual = produto.estoqueAtual;
-                        if (EstoqueAtual == 0)
-                        {
-                            MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        }
-                        else if (EstoqueAtual <= EstoqueMinimo)
-                        {
-                            MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        }
-                    }
-                }
+                produto.ConsultarCodigoProduto();
+                AdicionarItensValue();
             }
-
-            soma = ValorTotal;
-            ValorTotal = soma;
-            txt_ValorTotal.Text = "R$ " + ValorTotal.ToString();
-
-            btn_Remover.Enabled = false;
         }
 
         // Instância da classe Produto e categoria
@@ -392,37 +274,31 @@ namespace CaixaFacil
         string CodigoProduto;
         decimal LucroVenda;
         decimal LucroTotal;
+
         private void btn_Adcionar_Click(object sender, EventArgs e)
-        {
+        { 
             AdicionarItens();
         }
+
+        Estoque estoque = new Estoque();
+
         private void atualizarEstoque_CodigoProduto()
         {
-            produto.id = int.Parse(CodigoProduto);
-            produto.ConsultarProduto();
-
-            EstoqueAtual = produto.estoqueAtual;
-            EstoqueAtualizado = EstoqueAtual - Quantidade;
-            SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Update Produto set EstoqueAtual  = " + EstoqueAtualizado + "where id_Produto = @id and Unidade <> 'Serviço'";
-            SqlCommand command = new SqlCommand(_sql, conexao);
-            command.Parameters.AddWithValue("@id", CodigoProduto);
-            command.CommandText = _sql;
             try
             {
-                conexao.Open();
-                command.ExecuteNonQuery();
+                foreach(DataGridViewRow row in DGV_ItensVenda.Rows)
+                {
+                    estoque.id = int.Parse(row.Cells["ColumnCodigo"].Value.ToString());
+                    estoque.quantidade = int.Parse(row.Cells["ColumnQuantidade"].Value.ToString());
+                    estoque.AtualizarEstoque();
+                }
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            finally
-            {
-                conexao.Close();
-            }
         }
+
         private void AtualizarEstoque_CodigoBarra()
         {
             produto.codigoBarra = CodigoBarra;
@@ -455,178 +331,139 @@ namespace CaixaFacil
         {
             btn_Remover.Enabled = false;
 
-            CodigoBarra = txt_Codigo_Barra.Text;
-            Quantidade = int.Parse(nd_Quantidade.Value.ToString());
-
             if (txt_Codigo_Barra.Text != string.Empty)
             {
                 if (cbOpcao.Checked)
                 {
                     produto.codigoBarra = txt_Codigo_Barra.Text.Trim();
-                    if (produto.ConsultarCodigoBarra() == true)
-                    {
-                        CodigoProduto = produto.id.ToString();
-                        Descricao = produto.descricao;
-                        ValorVenda = produto.valorVenda;
-                        EstoqueAtual = produto.estoqueAtual;
-                        EstoqueMinimo = produto.estoqueMinimo;
-                        Unidade = produto.unidade;
-                        int Id_Categoria = produto.id_categoria;
-                        categoria.id = Id_Categoria;
-                        categoria.Cosultar();
-                        string descricaoCategoria = categoria.Descricao;
-                        LucroVenda = produto.lucro * Quantidade;
-                        LucroTotal += LucroVenda;
-                        Subtotal = nd_Quantidade.Value * ValorVenda;
-
-                        if (EstoqueAtual == 0 && descricaoCategoria != "Serviço")
-                        {
-                            MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            txt_Codigo_Barra.Clear();
-                            txt_Codigo_Barra.Focus();
-                        }
-                        else
-                        {
-                            DGV_ItensVenda.Rows.Add(CodigoProduto, Descricao, nd_Quantidade.Value, Unidade, ValorVenda, Subtotal);
-                            ValorTotal = ValorTotal + Subtotal;
-                            txt_Codigo_Barra.Clear();
-                            txt_Codigo_Barra.Focus();
-                            nd_Quantidade.Value = 1;
-                            DGV_ItensVenda.CurrentRow.Selected = false;
-
-                            soma = ValorTotal;
-                            ValorTotal = soma;
-                            txt_ValorTotal.Text = "R$ " + ValorTotal.ToString();
-                            AtualizarEstoque_CodigoBarra();
-                            produto.id = int.Parse(CodigoProduto);
-                            produto.ConsultarProduto();
-                            EstoqueAtual = produto.estoqueAtual;
-                            if (EstoqueAtual == 0 && descricaoCategoria != "Serviço")
-                            {
-                                MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }
-                            else if (EstoqueAtual <= EstoqueMinimo && descricaoCategoria != "Serviço")
-                            {
-                                MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }
-                        }
-                    }
-                    else
+                    if (!produto.ConsultarCodigoBarra())
                     {
                         MessageBox.Show("Produto não encontrado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         txt_Codigo_Barra.Clear();
                         txt_Codigo_Barra.Focus();
+                        return;
                     }
                 }
                 else
                 {
                     produto.id = long.Parse(txt_Codigo_Barra.Text.Trim());
-                    if (produto.ConsultarProduto() == true)
+                    if (AreaAtuacao != "SALÃO DE BELEZA" && AreaAtuacao != "PRESTAÇÃO DE SERVIÇO")
                     {
-                        CodigoProduto = produto.id.ToString();
-                        Descricao = produto.descricao;
-                        ValorVenda = produto.valorVenda;
-                        EstoqueAtual = produto.estoqueAtual;
-                        EstoqueMinimo = produto.estoqueMinimo;
-                        Unidade = produto.unidade;
-                        int Id_Categoria = produto.id_categoria;
-                        categoria.id = Id_Categoria;
-                        categoria.Cosultar();
-                        string descricaoCategoria = categoria.Descricao;
-
-                        LucroVenda = produto.lucro * Quantidade;
-                        LucroTotal += LucroVenda;
-
-                        Subtotal = nd_Quantidade.Value * ValorVenda;
-
-                        if (EstoqueAtual == 0 && descricaoCategoria != "Serviço")
+                        if (!produto.ConsultarCodigoProduto())
                         {
-                            MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            txt_Codigo_Barra.Clear();
+                            MessageBox.Show("Produto não encontrado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             txt_Codigo_Barra.Focus();
-                        }
-                        else if (EstoqueAtual < Quantidade && descricaoCategoria != "Serviço")
-                        {
-                            MessageBox.Show("A quantidade exigida é maior que o estoque atual gravada no banco de dados. Por favor Atualize o estoque ou verifique se houve erro de digitação!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             txt_Codigo_Barra.Clear();
-                            txt_Codigo_Barra.Focus();
-                        }
-                        else
-                        {
-                            DGV_ItensVenda.Rows.Add(CodigoProduto, Descricao, nd_Quantidade.Value, Unidade, ValorVenda, Subtotal);
-                            ValorTotal = ValorTotal + Subtotal;
-                            txt_Codigo_Barra.Clear();
-                            txt_Codigo_Barra.Focus();
-                            nd_Quantidade.Value = 1;
-                            DGV_ItensVenda.CurrentRow.Selected = false;
-
-                            soma = ValorTotal;
-                            ValorTotal = soma;
-                            txt_ValorTotal.Text = "R$ " + ValorTotal.ToString();
-                            atualizarEstoque_CodigoProduto();
-                            produto.ConsultarProduto();
-                            EstoqueAtual = produto.estoqueAtual;
-                            if (EstoqueAtual == 0 && descricaoCategoria != "Serviço")
-                            {
-                                MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }
-                            else if (EstoqueAtual <= EstoqueMinimo && descricaoCategoria != "Serviço")
-                            {
-                                MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }
+                            return;
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Produto não encontrado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        txt_Codigo_Barra.Focus();
-                        txt_Codigo_Barra.Clear();
+                        if (!produto.ConsultarCodigoServico())
+                        {
+                            MessageBox.Show("Serviço não encontrado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            txt_Codigo_Barra.Focus();
+                            txt_Codigo_Barra.Clear();
+                            return;
+                        }
                     }
+                }
+
+                AdicionarItensValue();
+            }
+            else if (cbOpcao.Checked)
+                MessageBox.Show("Informe o código de barra!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            else if (AreaAtuacao != "SALÃO DE BELEZA" && AreaAtuacao != "PRESTAÇÃO DE SERVIÇO")
+                MessageBox.Show("Informe o código do produto!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            else
+                MessageBox.Show("Informe o código do Serviço!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void AdicionarItensValue()
+        {
+            Quantidade = int.Parse(nd_Quantidade.Value.ToString());
+
+            CodigoProduto = produto.id.ToString();
+            Descricao = produto.descricao;
+            ValorVenda = produto.valorVenda;
+            EstoqueAtual = produto.estoqueAtual;
+            EstoqueMinimo = produto.estoqueMinimo;
+            Unidade = produto.unidade;
+            int Id_Categoria = produto.id_categoria;
+            categoria.id = Id_Categoria;
+            categoria.Consultar();
+            string descricaoCategoria = categoria.Descricao;
+
+            LucroVenda = produto.lucro * Quantidade;
+            LucroTotal += LucroVenda;
+
+            Subtotal = nd_Quantidade.Value * ValorVenda;
+
+
+            if (DGV_ItensVenda.Rows.Count > 0)
+            {
+                ConsultarItens(CodigoProduto);
+            }
+
+            if (EstoqueAtual == 0 && descricaoCategoria != "Serviço")
+            {
+                MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txt_Codigo_Barra.Clear();
+                txt_Codigo_Barra.Focus();
+            }
+            else if (EstoqueAtual < Quantidade && descricaoCategoria != "Serviço")
+            {
+                MessageBox.Show("A quantidade exigida é maior que o estoque atual. Por favor Atualize o estoque ou verifique se houve erro de digitação!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txt_Codigo_Barra.Clear();
+                txt_Codigo_Barra.Focus();
+            }
+            else
+            {
+                DGV_ItensVenda.Rows.Add(CodigoProduto, Descricao, nd_Quantidade.Value, Unidade, ValorVenda, Subtotal);
+                ValorTotal = ValorTotal + Subtotal;
+                txt_Codigo_Barra.Clear();
+                txt_Codigo_Barra.Focus();
+                nd_Quantidade.Value = 1;
+                DGV_ItensVenda.CurrentRow.Selected = false;
+
+                soma = ValorTotal;
+                ValorTotal = soma;
+                txt_ValorTotal.Text = "R$ " + ValorTotal.ToString();
+                EstoqueAtual -= Quantidade;
+                if (EstoqueAtual == 0 && descricaoCategoria != "Serviço")
+                {
+                    MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else if (EstoqueAtual <= EstoqueMinimo && descricaoCategoria != "Serviço")
+                {
+                    MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
         }
 
-        private void AtualizarEstoque_CancelarItem()
+        private void ConsultarItens(string codigoProduto)
         {
-            produto.id = int.Parse(CodigoProduto);
-            produto.ConsultarProduto();
-
-            EstoqueAtual = produto.estoqueAtual;
-            EstoqueAtualizado = EstoqueAtual + QuantidadeItens;
-            SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Update Produto set EstoqueAtual  = " + EstoqueAtualizado + "where Id_Produto = @id_Produto and Unidade <> 'Serviço'";
-            SqlCommand command = new SqlCommand(_sql, conexao);
-            command.Parameters.AddWithValue("@Id_Produto", CodigoProduto);
-            command.CommandText = _sql;
-            try
+            foreach (DataGridViewRow row in DGV_ItensVenda.Rows)
             {
-                conexao.Open();
-                command.ExecuteNonQuery();
-            }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conexao.Close();
+                if(row.Cells["ColumnCodigo"].Value.ToString() == codigoProduto)
+                {
+                    EstoqueAtual -= int.Parse(row.Cells["ColumnQuantidade"].Value.ToString());
+                }
             }
         }
+        
         private void RemoverItens()
         {
             try
             {
                 if (DGV_ItensVenda.Rows.Count >= 0)
                 {
-
                     DGV_ItensVenda.Rows.Remove(DGV_ItensVenda.CurrentRow);
                     ValorSubt = ValorTotal - sub;
                     txt_ValorTotal.Text = "R$ " + ValorSubt.ToString();
                     txt_Codigo_Barra.Focus();
                     btn_Remover.Enabled = false;
                     ValorTotal = ValorSubt;
-                    AtualizarEstoque_CancelarItem();
                     DiminuirLucro();
                 }
 
@@ -637,6 +474,7 @@ namespace CaixaFacil
                 MessageBox.Show(ex.Message, "...", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         public void DiminuirLucro()
         {
             produto.id = int.Parse(CodigoProduto);
@@ -678,7 +516,6 @@ namespace CaixaFacil
                 if (dr == DialogResult.Yes)
                 {
                     Fechar = true;
-                    atualizarEstoque_VendaCancelado();
                     this.Close();
                 }
                 else
@@ -696,30 +533,7 @@ namespace CaixaFacil
         {
             Sair();
         }
-        private void atualizarEstoque_VendaCancelado()
-        {
-            SqlConnection conexao = new SqlConnection(stringConn);
-            for (int i = 0; i < DGV_ItensVenda.Rows.Count; i++)
-            {
-                SqlCommand command = new SqlCommand("Update Produto set EstoqueAtual  = EstoqueAtual + " + DGV_ItensVenda.Rows[i].Cells["ColumnQuantidade"].Value + " where Unidade <> 'Serviço' and id_Produto = " + DGV_ItensVenda.Rows[i].Cells[0].Value, conexao);
 
-
-                try
-                {
-                    conexao.Open();
-                    command.ExecuteNonQuery();
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    conexao.Close();
-                }
-            }
-        }
         private void btn_CancelarVenda_Click(object sender, EventArgs e)
         {
             if (DGV_ItensVenda.Rows.Count > 0)
@@ -736,7 +550,6 @@ namespace CaixaFacil
 
                 if (dr == DialogResult.Yes)
                 {
-                    atualizarEstoque_VendaCancelado();
                     DGV_ItensVenda.Rows.Clear();
                     btn_Remover.Enabled = false;
                     txt_Codigo_Barra.Clear();
@@ -952,8 +765,6 @@ namespace CaixaFacil
                 txt_Codigo_Barra.Focus();
             }
         }
-
-
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -1237,7 +1048,7 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario";
+                _sql = "select Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where Produto.Unidade <> 'serviço'";
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
@@ -1361,7 +1172,7 @@ namespace CaixaFacil
             decimal ValorRecebido = ValorAbatido;
             SqlConnection conexao = new SqlConnection(stringConn);
 
-            if (vendaParcial.TipoPagamento == "Dinheiro" || vendaParcial.TipoPagamento == "")
+            if (vendaParcial.TipoPagamento == "Dinheiro" || string.IsNullOrEmpty(vendaParcial.TipoPagamento))
                 _sql = "Update FluxoCaixa set ValorRecebidoParcial = ValorRecebidoParcial + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             else if(vendaParcial.TipoPagamento == "Cartão de Crédito")
                 _sql = "Update FluxoCaixa set ValorRecebidoCredito = ValorRecebidoCredito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
@@ -1394,7 +1205,7 @@ namespace CaixaFacil
             }
         }
 
-        ClassItensVenda itensVenda = new ClassItensVenda();
+        ItensVenda itensVenda = new ItensVenda();
         ClassFormaPagamento formaPagamento = new ClassFormaPagamento();
 
         ClassParcelaVenda ParcelaVenda = new ClassParcelaVenda();
@@ -1484,8 +1295,7 @@ namespace CaixaFacil
         {
             FrmPesquisarServico pesquisarServico = new FrmPesquisarServico();
             pesquisarServico.ShowDialog();
-            //if (nd_Quantidade.Text != "")
-            //{
+           
             if (pesquisarServico.Codigo != null)
             {
                 produto.id = int.Parse(pesquisarServico.Codigo);
@@ -1508,20 +1318,11 @@ namespace CaixaFacil
                     txt_Codigo_Barra.Focus();
                     nd_Quantidade.Value = 1;
                     DGV_ItensVenda.CurrentRow.Selected = false;
-                    atualizarEstoque_CodigoProduto();
-                    produto.ConsultarProduto();
-                    EstoqueAtual = produto.estoqueAtual;
                 }
             }
             soma = ValorTotal;
             ValorTotal = soma;
             txt_ValorTotal.Text = "R$ " + ValorTotal.ToString();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Insira a quantidade! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //    nd_Quantidade.Focus();
-            //}
             btn_Remover.Enabled = false;
         }
 
@@ -1648,7 +1449,10 @@ namespace CaixaFacil
                 itensVenda.LucroItens = LucroVenda;
                 itensVenda.AdicionarItensVenda();
             }
+
+            atualizarEstoque_CodigoProduto();
         }
+
         private void txt_Codigo_Barra_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

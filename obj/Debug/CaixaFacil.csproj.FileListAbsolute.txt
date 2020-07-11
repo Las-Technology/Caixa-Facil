@@ -233,7 +233,6 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmPagamentoCar
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmPesquisarAgendamento.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmPesquisarBoletos.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmPesquisarCliente.resources
-C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmPesquisarEmpresa.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmPesquisarFornecedor.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmPesquisarProdutos.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\Debug\CaixaFacil.FrmPesquisarServico.resources

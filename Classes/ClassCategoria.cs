@@ -93,7 +93,7 @@ namespace CaixaFacil
                 conexao.Close();
             }
         }
-        public void Cosultar()
+        public void Consultar()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "select * from categoria where Id_Categoria = @Id";
