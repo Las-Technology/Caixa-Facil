@@ -30,10 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_PesquisarServico = new System.Windows.Forms.Button();
-            this.btn_EditarServico = new System.Windows.Forms.Button();
-            this.btn_LimparServico = new System.Windows.Forms.Button();
-            this.btn_SalvarServico = new System.Windows.Forms.Button();
+            this.btn_Editar = new System.Windows.Forms.Button();
+            this.btn_Pesquisar = new System.Windows.Forms.Button();
+            this.btn_Salvar = new System.Windows.Forms.Button();
             this.label29 = new System.Windows.Forms.Label();
             this.txt_PrecoServico = new System.Windows.Forms.TextBox();
             this.txt_DescricaoServico = new System.Windows.Forms.TextBox();
@@ -52,11 +51,11 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.btn_PesquisarServico);
-            this.panel1.Controls.Add(this.btn_EditarServico);
-            this.panel1.Controls.Add(this.btn_LimparServico);
-            this.panel1.Controls.Add(this.btn_SalvarServico);
+            this.panel1.Controls.Add(this.btn_Editar);
+            this.panel1.Controls.Add(this.btn_Pesquisar);
+            this.panel1.Controls.Add(this.btn_Salvar);
             this.panel1.Controls.Add(this.label29);
             this.panel1.Controls.Add(this.txt_PrecoServico);
             this.panel1.Controls.Add(this.txt_DescricaoServico);
@@ -70,64 +69,47 @@
             this.panel1.Size = new System.Drawing.Size(634, 315);
             this.panel1.TabIndex = 0;
             // 
-            // btn_PesquisarServico
+            // btn_Editar
             // 
-            this.btn_PesquisarServico.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_PesquisarServico.Image = global::CaixaFacil.Properties.Resources.magnifying_glass_icon;
-            this.btn_PesquisarServico.Location = new System.Drawing.Point(170, 226);
-            this.btn_PesquisarServico.Name = "btn_PesquisarServico";
-            this.btn_PesquisarServico.Size = new System.Drawing.Size(144, 75);
-            this.btn_PesquisarServico.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.btn_PesquisarServico, "Pesquisar");
-            this.btn_PesquisarServico.UseVisualStyleBackColor = true;
-            this.btn_PesquisarServico.Click += new System.EventHandler(this.btn_PesquisarServico_Click);
+            this.btn_Editar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Editar.Image = global::CaixaFacil.Properties.Resources.Text_Edit_icon__1_;
+            this.btn_Editar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Editar.Location = new System.Drawing.Point(406, 228);
+            this.btn_Editar.Name = "btn_Editar";
+            this.btn_Editar.Size = new System.Drawing.Size(153, 45);
+            this.btn_Editar.TabIndex = 161;
+            this.btn_Editar.TabStop = false;
+            this.btn_Editar.Text = "Editar - F3";
+            this.btn_Editar.UseVisualStyleBackColor = true;
+            this.btn_Editar.Click += new System.EventHandler(this.btn_Editar_Click);
             // 
-            // btn_EditarServico
+            // btn_Pesquisar
             // 
-            this.btn_EditarServico.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_EditarServico.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_EditarServico.ForeColor = System.Drawing.Color.White;
-            this.btn_EditarServico.Image = global::CaixaFacil.Properties.Resources.Text_Edit_icon;
-            this.btn_EditarServico.Location = new System.Drawing.Point(325, 226);
-            this.btn_EditarServico.Margin = new System.Windows.Forms.Padding(5);
-            this.btn_EditarServico.Name = "btn_EditarServico";
-            this.btn_EditarServico.Size = new System.Drawing.Size(144, 75);
-            this.btn_EditarServico.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.btn_EditarServico, "Atualizar");
-            this.btn_EditarServico.UseVisualStyleBackColor = true;
-            this.btn_EditarServico.Click += new System.EventHandler(this.btn_EditarServico_Click);
+            this.btn_Pesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Pesquisar.Image = global::CaixaFacil.Properties.Resources.magnifying_glass_icon;
+            this.btn_Pesquisar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Pesquisar.Location = new System.Drawing.Point(240, 228);
+            this.btn_Pesquisar.Name = "btn_Pesquisar";
+            this.btn_Pesquisar.Size = new System.Drawing.Size(160, 45);
+            this.btn_Pesquisar.TabIndex = 160;
+            this.btn_Pesquisar.TabStop = false;
+            this.btn_Pesquisar.Text = "Buscar - F2";
+            this.btn_Pesquisar.UseVisualStyleBackColor = true;
+            this.btn_Pesquisar.Click += new System.EventHandler(this.btn_Pesquisar_Click);
             // 
-            // btn_LimparServico
+            // btn_Salvar
             // 
-            this.btn_LimparServico.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_LimparServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_LimparServico.ForeColor = System.Drawing.Color.White;
-            this.btn_LimparServico.Image = global::CaixaFacil.Properties.Resources.CleanMyMac_1_icon;
-            this.btn_LimparServico.Location = new System.Drawing.Point(20, 226);
-            this.btn_LimparServico.Margin = new System.Windows.Forms.Padding(5);
-            this.btn_LimparServico.Name = "btn_LimparServico";
-            this.btn_LimparServico.Size = new System.Drawing.Size(144, 75);
-            this.btn_LimparServico.TabIndex = 8;
-            this.btn_LimparServico.Text = "__";
-            this.toolTip1.SetToolTip(this.btn_LimparServico, "Limpar");
-            this.btn_LimparServico.UseVisualStyleBackColor = true;
-            this.btn_LimparServico.Click += new System.EventHandler(this.btn_LimparServico_Click);
-            // 
-            // btn_SalvarServico
-            // 
-            this.btn_SalvarServico.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_SalvarServico.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_SalvarServico.ForeColor = System.Drawing.Color.White;
-            this.btn_SalvarServico.Image = global::CaixaFacil.Properties.Resources.Save_icon;
-            this.btn_SalvarServico.Location = new System.Drawing.Point(478, 226);
-            this.btn_SalvarServico.Margin = new System.Windows.Forms.Padding(5);
-            this.btn_SalvarServico.Name = "btn_SalvarServico";
-            this.btn_SalvarServico.Size = new System.Drawing.Size(144, 75);
-            this.btn_SalvarServico.TabIndex = 4;
-            this.btn_SalvarServico.Text = "__";
-            this.toolTip1.SetToolTip(this.btn_SalvarServico, "Salvar");
-            this.btn_SalvarServico.UseVisualStyleBackColor = true;
-            this.btn_SalvarServico.Click += new System.EventHandler(this.btn_SalvarServico_Click);
+            this.btn_Salvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Salvar.Image = global::CaixaFacil.Properties.Resources.Save_icon__1_1;
+            this.btn_Salvar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Salvar.Location = new System.Drawing.Point(77, 228);
+            this.btn_Salvar.Name = "btn_Salvar";
+            this.btn_Salvar.Size = new System.Drawing.Size(154, 45);
+            this.btn_Salvar.TabIndex = 159;
+            this.btn_Salvar.TabStop = false;
+            this.btn_Salvar.Text = "Salvar - F1";
+            this.btn_Salvar.UseVisualStyleBackColor = true;
+            this.btn_Salvar.Click += new System.EventHandler(this.btn_Salvar_Click);
             // 
             // label29
             // 
@@ -175,6 +157,7 @@
             this.txt_CodigoServico.ReadOnly = true;
             this.txt_CodigoServico.Size = new System.Drawing.Size(91, 26);
             this.txt_CodigoServico.TabIndex = 0;
+            this.txt_CodigoServico.TabStop = false;
             // 
             // label13
             // 
@@ -211,6 +194,8 @@
             this.panelCabecalho.Name = "panelCabecalho";
             this.panelCabecalho.Size = new System.Drawing.Size(633, 68);
             this.panelCabecalho.TabIndex = 3;
+            this.panelCabecalho.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelCabecalho_MouseDown);
+            this.panelCabecalho.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelCabecalho_MouseMove);
             // 
             // btn_Minimizar
             // 
@@ -222,6 +207,7 @@
             this.btn_Minimizar.Name = "btn_Minimizar";
             this.btn_Minimizar.Size = new System.Drawing.Size(38, 38);
             this.btn_Minimizar.TabIndex = 12;
+            this.btn_Minimizar.TabStop = false;
             this.btn_Minimizar.Text = "__";
             this.btn_Minimizar.UseVisualStyleBackColor = true;
             this.btn_Minimizar.Click += new System.EventHandler(this.btn_Minimizar_Click);
@@ -238,6 +224,7 @@
             this.btn_Fechar.Name = "btn_Fechar";
             this.btn_Fechar.Size = new System.Drawing.Size(38, 38);
             this.btn_Fechar.TabIndex = 11;
+            this.btn_Fechar.TabStop = false;
             this.btn_Fechar.Text = "X";
             this.btn_Fechar.UseVisualStyleBackColor = true;
             this.btn_Fechar.Click += new System.EventHandler(this.btn_Fechar_Click);
@@ -273,11 +260,13 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmServico";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro Serviço";
             this.Load += new System.EventHandler(this.FrmServico_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmServico_KeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelCabecalho.ResumeLayout(false);
@@ -300,10 +289,9 @@
         private System.Windows.Forms.TextBox txt_CodigoServico;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button btn_PesquisarServico;
-        private System.Windows.Forms.Button btn_EditarServico;
-        private System.Windows.Forms.Button btn_LimparServico;
-        private System.Windows.Forms.Button btn_SalvarServico;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btn_Editar;
+        private System.Windows.Forms.Button btn_Pesquisar;
+        private System.Windows.Forms.Button btn_Salvar;
     }
 }

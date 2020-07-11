@@ -200,7 +200,7 @@
             this.btn_Excluir.Size = new System.Drawing.Size(162, 45);
             this.btn_Excluir.TabIndex = 19;
             this.btn_Excluir.TabStop = false;
-            this.btn_Excluir.Text = "Excluir - F4";
+            this.btn_Excluir.Text = "Excluir - F5";
             this.btn_Excluir.UseVisualStyleBackColor = true;
             this.btn_Excluir.Click += new System.EventHandler(this.btn_Excluir_Click);
             // 

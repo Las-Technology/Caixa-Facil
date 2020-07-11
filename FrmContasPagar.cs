@@ -202,7 +202,7 @@ namespace CaixaFacil
                 DateTime resultado = DateTime.MinValue;
                 if (!DateTime.TryParse(this.mask_Vencimento.Text.Trim(), out resultado))
                 {
-                    MessageBox.Show("Data Inválida!", "Informação do sistema.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Data Inválida!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     mask_Vencimento.Clear();
                     mask_Vencimento.Focus();
                 }

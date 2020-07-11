@@ -115,7 +115,6 @@ namespace CaixaFacil
 
         private void LimparCampos()
         {
-            txt_Codigo.Clear();
             txt_Nome.Clear();
             txt_Endereco.Clear();
             txt_Email.Clear();
@@ -227,6 +226,7 @@ namespace CaixaFacil
             cliente.id = int.Parse(txt_Codigo.Text);
             cliente.nome = txt_Nome.Text.Trim();
             cliente.dataNascimento = dateNascimento.Text;
+            cliente.CPF = Security.Cry(mask_CPF.Text);
             cliente.RG = Security.Cry(mask_RG.Text);
             cliente.CEP = mask_Cep.Text;
             cliente.bairro = txt_Bairro.Text.Trim();
@@ -256,9 +256,7 @@ namespace CaixaFacil
                 }
             }
             else
-                mask_CPF.Clear();
-
-            cliente.CPF = Security.Cry(mask_CPF.Text);
+                cliente.CPF = Security.Cry("");
 
             cliente.Cadastrar();
             MessageBox.Show("Cliente cadastrado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -477,9 +475,14 @@ namespace CaixaFacil
 
         private void btn_Editar_Click(object sender, EventArgs e)
         {
-            //código para  editar os dados do cliente
             try
             {
+                if (idCliente == 0)
+                {
+                    MessageBox.Show("Informe os dados do cliente para concluir as alterações dos dados", "Validação CPF", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
                 if (txt_Codigo.Text == string.Empty)
                 {
                     MessageBox.Show("Preencha o campo 'Código'! ", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -554,10 +557,7 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    if (idCliente > 0)
-                        EditarCliente();
-                    else
-                        MessageBox.Show("Informe os dados do cliente para concluir as alterações dos dados", "Validação CPF", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    EditarCliente();
                 }
             }
             catch (Exception ex)
@@ -572,6 +572,7 @@ namespace CaixaFacil
             cliente.nome = txt_Nome.Text.Trim();
             cliente.dataNascimento = dateNascimento.Text;
             cliente.RG = Security.Cry(mask_RG.Text);
+            cliente.CPF = Security.Cry(mask_CPF.Text);
             cliente.CEP = mask_Cep.Text;
             cliente.bairro = txt_Bairro.Text.Trim();
             cliente.endereco = txt_Endereco.Text.Trim();
@@ -586,7 +587,7 @@ namespace CaixaFacil
             if (mask_CPF.MaskCompleted)
             {
                 string validar = mask_CPF.Text;
-                if (CPF.ValidaCpf(validar) == false)
+                if (!CPF.ValidaCpf(validar))
                 {
                     MessageBox.Show("O número do CPF é Inválido!", "Validação CPF", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     mask_CPF.Focus();
@@ -602,9 +603,8 @@ namespace CaixaFacil
                 }
             }
             else
-                mask_CPF.Clear();
+                cliente.CPF = Security.Cry("");
 
-            cliente.CPF = Security.Cry(mask_CPF.Text);
 
             cliente.Atualizar();
 
@@ -655,28 +655,28 @@ namespace CaixaFacil
 
         private void btn_Excluir_Click(object sender, EventArgs e)
         {
-            //código instaciado da classe classCliente
-            //função para excluir os dados do cliente
-            if (idCliente > 0)
+            if (idCliente == 0)
             {
-                cliente.id = int.Parse(txt_Codigo.Text);
-                if (MessageBox.Show("Deseja mesmo excluir os dados do cliente?", "Pergunta do sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                MessageBox.Show("É necessário preencher os campos para excluir os dados!", "Mensagem do sistema.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            cliente.id = int.Parse(txt_Codigo.Text);
+          
+            if (MessageBox.Show("Deseja mesmo excluir os dados do cliente?", "Caixa Fácil", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            {
+                try
                 {
-                    try
-                    {
-                        cliente.Deletar();
-                        MessageBox.Show("Dados do cliente deletado com sucesso!", "Informação do sistema.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LimparCampos();
-                        codigoCliente();
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Não é permitido a exclusão! Existe registros de venda(s) do cliente", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
+                    cliente.Deletar();
+                    MessageBox.Show("Dados do cliente deletado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimparCampos();
+                    codigoCliente();
+                }
+                catch
+                {
+                    MessageBox.Show("Não é permitido a exclusão! Existe registros de venda(s) do cliente", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
-            else
-                MessageBox.Show("É necessário preencher os campos para excluir os dados dos banco de dados!", "Mensagem do sistema.", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }       
 
         private void dateNascimento_Leave(object sender, EventArgs e)
@@ -757,7 +757,7 @@ namespace CaixaFacil
                 btn_Pesquisar_Click(sender, e);
             else if (e.KeyCode == Keys.F3)
                 btn_Editar_Click(sender, e);
-            else if (e.KeyCode == Keys.F4)
+            else if (e.KeyCode == Keys.F5)
                 btn_Excluir_Click(sender, e);
         }
     }

@@ -160,10 +160,12 @@ namespace CaixaFacil
             else
             {
                 try
-                { 
+                {
+                    CodigoFornecedor();
                     Fornecedor.id = int.Parse(txt_Codigo.Text);
                     Fornecedor.nome = txt_RazaoSocial.Text.Trim();
                     Fornecedor.Inscricao = mask_InscricaoEstadual.Text;
+                    Fornecedor.Cnpj = mask_CNPJ.Text;
                     Fornecedor.CEP = mask_Cep.Text;
                     Fornecedor.bairro = txt_Bairro.Text.Trim();
                     Fornecedor.endereco = txt_Endereco.Text.Trim();
@@ -192,9 +194,7 @@ namespace CaixaFacil
                         }
                     }
                     else
-                        mask_CNPJ.Clear();
-
-                    Fornecedor.Cnpj = mask_CNPJ.Text;
+                        Fornecedor.Cnpj = "";                    
 
                     Fornecedor.Cadastrar();
                     MessageBox.Show("Fornecedor cadastrado com sucesso!", "Aviso do sistema!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -220,7 +220,6 @@ namespace CaixaFacil
 
         private void LimparCampos()
         {
-            txt_Codigo.Clear();
             txt_RazaoSocial.Clear();
             mask_CNPJ.Clear();
             mask_InscricaoEstadual.Clear();
@@ -238,6 +237,12 @@ namespace CaixaFacil
 
         private void btn_Editar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(IdFornecedor))
+            {
+                MessageBox.Show("Busque as informações para alteração dos dados!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             if (txt_RazaoSocial.Text == string.Empty)
             {
                 MessageBox.Show("Preencha o campo 'Razão Social'!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); errorProvider.Clear();
@@ -269,6 +274,7 @@ namespace CaixaFacil
                     }
 
                     Fornecedor.nome = txt_RazaoSocial.Text.Trim();
+                    Fornecedor.Cnpj = mask_CNPJ.Text;
                     Fornecedor.Inscricao = mask_InscricaoEstadual.Text;
                     Fornecedor.CEP = mask_Cep.Text;
                     Fornecedor.bairro = txt_Bairro.Text.Trim();
@@ -298,9 +304,9 @@ namespace CaixaFacil
                         }
                     }
                     else
-                        mask_CNPJ.Clear();
+                        Fornecedor.Cnpj = "";
 
-                    Fornecedor.Cnpj = mask_CNPJ.Text;
+
 
                     Fornecedor.Atualizar();
                     MessageBox.Show("Dados do Fornecedor atualizado com sucesso!", "Aviso do sistema!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -501,7 +507,7 @@ namespace CaixaFacil
                 btn_Pesquisar_Click(sender, e);
             else if (e.KeyCode == Keys.F3)
                 btn_Editar_Click(sender, e);
-            else if (e.KeyCode == Keys.F4)
+            else if (e.KeyCode == Keys.F5)
                 btn_Excluir_Click(sender, e);
         }
 

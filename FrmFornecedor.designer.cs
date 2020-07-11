@@ -125,7 +125,7 @@
             this.btn_Excluir.Size = new System.Drawing.Size(162, 45);
             this.btn_Excluir.TabIndex = 102;
             this.btn_Excluir.TabStop = false;
-            this.btn_Excluir.Text = "Excluir - F4";
+            this.btn_Excluir.Text = "Excluir - F5";
             this.btn_Excluir.UseVisualStyleBackColor = true;
             this.btn_Excluir.Click += new System.EventHandler(this.btn_Excluir_Click);
             // 
@@ -191,6 +191,7 @@
             this.btn_BuscarCep.Name = "btn_BuscarCep";
             this.btn_BuscarCep.Size = new System.Drawing.Size(106, 31);
             this.btn_BuscarCep.TabIndex = 77;
+            this.btn_BuscarCep.TabStop = false;
             this.btn_BuscarCep.Text = "Buscar CEP";
             this.btn_BuscarCep.UseVisualStyleBackColor = true;
             this.btn_BuscarCep.Click += new System.EventHandler(this.btn_BuscarCep_Click);
@@ -201,7 +202,7 @@
             this.mask_InscricaoEstadual.Location = new System.Drawing.Point(363, 184);
             this.mask_InscricaoEstadual.Name = "mask_InscricaoEstadual";
             this.mask_InscricaoEstadual.Size = new System.Drawing.Size(91, 26);
-            this.mask_InscricaoEstadual.TabIndex = 75;
+            this.mask_InscricaoEstadual.TabIndex = 2;
             this.mask_InscricaoEstadual.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mask_InscricaoEstadual_MaskInputRejected);
             // 
             // txt_Numero
@@ -211,7 +212,7 @@
             this.txt_Numero.MaxLength = 10;
             this.txt_Numero.Name = "txt_Numero";
             this.txt_Numero.Size = new System.Drawing.Size(100, 26);
-            this.txt_Numero.TabIndex = 80;
+            this.txt_Numero.TabIndex = 7;
             this.txt_Numero.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt_Numero.TextChanged += new System.EventHandler(this.txt_Numero_TextChanged);
             this.txt_Numero.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_Numero_KeyPress);
@@ -226,6 +227,7 @@
             this.txt_Codigo.ReadOnly = true;
             this.txt_Codigo.Size = new System.Drawing.Size(91, 26);
             this.txt_Codigo.TabIndex = 72;
+            this.txt_Codigo.TabStop = false;
             // 
             // txt_Cidade
             // 
@@ -236,7 +238,7 @@
             this.txt_Cidade.MaxLength = 100;
             this.txt_Cidade.Name = "txt_Cidade";
             this.txt_Cidade.Size = new System.Drawing.Size(362, 26);
-            this.txt_Cidade.TabIndex = 81;
+            this.txt_Cidade.TabIndex = 9;
             this.txt_Cidade.TextChanged += new System.EventHandler(this.txt_Cidade_TextChanged);
             // 
             // txt_Email
@@ -247,7 +249,7 @@
             this.txt_Email.MaxLength = 100;
             this.txt_Email.Name = "txt_Email";
             this.txt_Email.Size = new System.Drawing.Size(390, 26);
-            this.txt_Email.TabIndex = 85;
+            this.txt_Email.TabIndex = 12;
             this.txt_Email.TextChanged += new System.EventHandler(this.txt_Email_TextChanged);
             // 
             // txt_Bairro
@@ -259,7 +261,7 @@
             this.txt_Bairro.MaxLength = 50;
             this.txt_Bairro.Name = "txt_Bairro";
             this.txt_Bairro.Size = new System.Drawing.Size(282, 26);
-            this.txt_Bairro.TabIndex = 78;
+            this.txt_Bairro.TabIndex = 5;
             this.txt_Bairro.TextChanged += new System.EventHandler(this.txt_Bairro_TextChanged);
             // 
             // txt_Endereco
@@ -271,7 +273,7 @@
             this.txt_Endereco.MaxLength = 100;
             this.txt_Endereco.Name = "txt_Endereco";
             this.txt_Endereco.Size = new System.Drawing.Size(362, 26);
-            this.txt_Endereco.TabIndex = 79;
+            this.txt_Endereco.TabIndex = 6;
             this.txt_Endereco.TextChanged += new System.EventHandler(this.txt_Endereco_TextChanged);
             // 
             // txt_RazaoSocial
@@ -283,7 +285,7 @@
             this.txt_RazaoSocial.MaxLength = 100;
             this.txt_RazaoSocial.Name = "txt_RazaoSocial";
             this.txt_RazaoSocial.Size = new System.Drawing.Size(339, 26);
-            this.txt_RazaoSocial.TabIndex = 73;
+            this.txt_RazaoSocial.TabIndex = 1;
             this.txt_RazaoSocial.TextChanged += new System.EventHandler(this.txt_RazaoSocial_TextChanged);
             // 
             // label16
@@ -316,7 +318,7 @@
             this.mask_Celular.Mask = "(00) 00000-0000";
             this.mask_Celular.Name = "mask_Celular";
             this.mask_Celular.Size = new System.Drawing.Size(122, 26);
-            this.mask_Celular.TabIndex = 84;
+            this.mask_Celular.TabIndex = 11;
             this.mask_Celular.ValidatingType = typeof(System.DateTime);
             this.mask_Celular.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mask_Celular_MaskInputRejected);
             // 
@@ -338,7 +340,7 @@
             this.mask_Telefone.Mask = "(00) 0000-0000";
             this.mask_Telefone.Name = "mask_Telefone";
             this.mask_Telefone.Size = new System.Drawing.Size(113, 26);
-            this.mask_Telefone.TabIndex = 83;
+            this.mask_Telefone.TabIndex = 10;
             this.mask_Telefone.ValidatingType = typeof(System.DateTime);
             this.mask_Telefone.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mask_Telefone_MaskInputRejected);
             // 
@@ -402,7 +404,7 @@
             this.cb_Estado.Location = new System.Drawing.Point(516, 319);
             this.cb_Estado.Name = "cb_Estado";
             this.cb_Estado.Size = new System.Drawing.Size(75, 27);
-            this.cb_Estado.TabIndex = 82;
+            this.cb_Estado.TabIndex = 9;
             this.cb_Estado.SelectedIndexChanged += new System.EventHandler(this.cb_Estado_SelectedIndexChanged);
             // 
             // label11
@@ -457,7 +459,7 @@
             this.mask_Cep.Mask = "00000-000";
             this.mask_Cep.Name = "mask_Cep";
             this.mask_Cep.Size = new System.Drawing.Size(84, 26);
-            this.mask_Cep.TabIndex = 76;
+            this.mask_Cep.TabIndex = 3;
             this.mask_Cep.ValidatingType = typeof(System.DateTime);
             this.mask_Cep.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mask_Cep_MaskInputRejected);
             this.mask_Cep.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mask_Cep_KeyDown);
@@ -540,6 +542,7 @@
             this.btn_Fechar.Name = "btn_Fechar";
             this.btn_Fechar.Size = new System.Drawing.Size(38, 38);
             this.btn_Fechar.TabIndex = 569;
+            this.btn_Fechar.TabStop = false;
             this.btn_Fechar.Text = "X";
             this.btn_Fechar.UseVisualStyleBackColor = false;
             this.btn_Fechar.Click += new System.EventHandler(this.btn_Fechar_Click);
@@ -556,6 +559,7 @@
             this.btn_Minimizar.Name = "btn_Minimizar";
             this.btn_Minimizar.Size = new System.Drawing.Size(38, 38);
             this.btn_Minimizar.TabIndex = 568;
+            this.btn_Minimizar.TabStop = false;
             this.btn_Minimizar.Text = "__";
             this.btn_Minimizar.UseVisualStyleBackColor = false;
             this.btn_Minimizar.Click += new System.EventHandler(this.btn_Minimizar_Click);

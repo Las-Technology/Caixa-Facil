@@ -488,6 +488,12 @@ namespace CaixaFacil
         string Cod;
         private void btn_editar_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(Cod))
+            {
+                MessageBox.Show("Busque as informações para alteração dos dados!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             if (txt_RazaoSocial.Text == string.Empty)
             {
                 MessageBox.Show("Preencha o campo 'Razão Social'!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); errorProvider.Clear();
@@ -581,55 +587,51 @@ namespace CaixaFacil
                 {
                     if (ValidarCNPJ() == true)
                     {
-                        if (!string.IsNullOrEmpty(Cod))
+                        empresa.id = int.Parse(Cod);
+                        empresa.razaoSocial = txt_RazaoSocial.Text.Trim();
+                        empresa.nomeFantasia = txt_NomeFantasia.Text.Trim();
+                        empresa.areaAtuacao = cb_AreaAtuacao.Text;
+                        empresa.CNPJ = mask_CNPJ.Text;
+                        empresa.inscricao = mask_InscricaoEstadual.Text;
+                        empresa.endereco = txt_Logradouro.Text.Trim();
+                        empresa.CEP = mask_Cep.Text;
+                        empresa.numero = int.Parse(txt_Numero.Text.Trim());
+                        empresa.bairro = txt_Bairro.Text.Trim();
+                        empresa.cidade = txt_Cidade.Text.Trim();
+                        empresa.estado = cb_Estado.Text;
+                        empresa.celular = mask_celular.Text;
+                        empresa.email = txt_Email.Text.Trim();
+                        empresa.telefone = mask_Telefone.Text;
+                        if (Diretorio == null)
                         {
-                            empresa.id = int.Parse(Cod);
-                            empresa.razaoSocial = txt_RazaoSocial.Text.Trim();
-                            empresa.nomeFantasia = txt_NomeFantasia.Text.Trim();
-                            empresa.areaAtuacao = cb_AreaAtuacao.Text;
-                            empresa.CNPJ = mask_CNPJ.Text;
-                            empresa.inscricao = mask_InscricaoEstadual.Text;
-                            empresa.endereco = txt_Logradouro.Text.Trim();
-                            empresa.CEP = mask_Cep.Text;
-                            empresa.numero = int.Parse(txt_Numero.Text.Trim());
-                            empresa.bairro = txt_Bairro.Text.Trim();
-                            empresa.cidade = txt_Cidade.Text.Trim();
-                            empresa.estado = cb_Estado.Text;
-                            empresa.celular = mask_celular.Text;
-                            empresa.email = txt_Email.Text.Trim();
-                            empresa.telefone = mask_Telefone.Text;
-                            if (Diretorio == null)
-                            {
-                                Diretorio = "";
+                            Diretorio = "";
 
-                            }
-                            else if (Diretorio != null)
-                            {
-                                try
-                                {
-                                    CriarPasta();
-                                    string ArquivoImagem = Diretorio;
-                                    string NomedoArquivo = Path.GetFileName(Diretorio);
-
-                                    FileInfo fileInfo = new FileInfo(ArquivoImagem);
-                                    fileInfo.CopyTo(Settings.Default["Disco"].ToString() + @"Caixa Fácil\Imagens do sistema\" + NomedoArquivo);
-                                    Diretorio = Settings.Default["Disco"].ToString() + @"Caixa Fácil\Imagens do sistema\" + NomedoArquivo;
-                                }
-                                catch
-                                {
-                                }
-                            }
-                            else if (pb_ImagemEmpresa.Image == null)
-                            {
-                                Diretorio = "";
-                            }
-                            empresa.logoEmpresa = Diretorio;
-                            empresa.Atualizar();
-                            MessageBox.Show("Dados da empresa atualizada com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            LimparCampos();
                         }
-                        else
-                            MessageBox.Show("Busque as informações para alteração dos dados!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        else if (Diretorio != null)
+                        {
+                            try
+                            {
+                                CriarPasta();
+                                string ArquivoImagem = Diretorio;
+                                string NomedoArquivo = Path.GetFileName(Diretorio);
+
+                                FileInfo fileInfo = new FileInfo(ArquivoImagem);
+                                fileInfo.CopyTo(Settings.Default["Disco"].ToString() + @"Caixa Fácil\Imagens do sistema\" + NomedoArquivo);
+                                Diretorio = Settings.Default["Disco"].ToString() + @"Caixa Fácil\Imagens do sistema\" + NomedoArquivo;
+                            }
+                            catch
+                            {
+                            }
+                        }
+                        else if (pb_ImagemEmpresa.Image == null)
+                        {
+                            Diretorio = "";
+                        }
+                        empresa.logoEmpresa = Diretorio;
+                        empresa.Atualizar();
+                        MessageBox.Show("Dados da empresa atualizada com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LimparCampos();
+
                     }
                     else
                     {

@@ -67,11 +67,11 @@ namespace CaixaFacil
 
                 if (string.IsNullOrWhiteSpace(txt_Nome.Text))
                 {
-                    _sql = "Select" + filter + " [Id_Usuario], [Nome], [Funcao], [Email], [Usuario], [Senha], [Situacao], [DicaSenha], [PerguntaSeguranca], [RespostaSeguranca] FROM Usuario";
+                    _sql = "Select" + filter + " [Id_Usuario], [Nome], [Funcao], [Email], [Usuario], [Senha], [Situacao], [DicaSenha], [PerguntaSeguranca], [RespostaSeguranca] FROM Usuario where Situacao <> 'BLOQUEADO'";
                 }
                 else
                 {
-                    _sql = "Select" + filter + " [Id_Usuario], [Nome], [Funcao], [Email], [Usuario], [Senha], [Situacao], [DicaSenha], [PerguntaSeguranca], [RespostaSeguranca] FROM Usuario WHERE  Nome like  '%" + txt_Nome.Text.Trim() + "%'";
+                    _sql = "Select" + filter + " [Id_Usuario], [Nome], [Funcao], [Email], [Usuario], [Senha], [Situacao], [DicaSenha], [PerguntaSeguranca], [RespostaSeguranca] FROM Usuario WHERE  Nome like  '%" + txt_Nome.Text.Trim() + "%' and Situacao <> 'BLOQUEADO'";
                 }
 
                 SqlConnection conexao = new SqlConnection(stringConn);

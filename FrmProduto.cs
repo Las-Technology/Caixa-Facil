@@ -357,30 +357,29 @@ namespace CaixaFacil
 
         private void btn_Excluir_Click(object sender, EventArgs e)
         {
-            if (Id_Produto > 0)
+            try
             {
-                try
+                if (Id_Produto == 0)
                 {
-                    categoria.id = int.Parse(Id_Categoria);
-                    produto.id = Id_Produto;
-                    if (MessageBox.Show("Deseja mesmo excluir este produto?", "Pergunta do sistema.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        Codigocategoria();
-                        produto.Deletar();
-                        categoria.Deletar();
-                        MessageBox.Show("Produto excluido com sucesso", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LimparCampos();
-                        CodigoProduto();
-                    }
+                    MessageBox.Show("Informe os dados do produto para excluir!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
                 }
-                catch 
+
+                categoria.id = int.Parse(Id_Categoria);
+                produto.id = Id_Produto;
+                if (MessageBox.Show("Deseja mesmo excluir este produto?", "Caixa Fácil.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    MessageBox.Show("Não é permitido a exclusão! Existe registros de venda(s) do produto selecionado", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Codigocategoria();
+                    produto.Deletar();
+                    categoria.Deletar();
+                    MessageBox.Show("Produto excluido com sucesso", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimparCampos();
+                    CodigoProduto();
                 }
             }
-            else
+            catch
             {
-                MessageBox.Show("Informe os dados do produto para excluir!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Não é permitido a exclusão! Existe registros de venda(s) do produto selecionado", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -500,7 +499,7 @@ namespace CaixaFacil
                 DateTime resultado = DateTime.MinValue;
                 if (!DateTime.TryParse(this.txt_DataValidade.Text.Trim(), out resultado))
                 {
-                    MessageBox.Show("Data Inválida!", "Informação do sistema.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Data Inválida!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     txt_DataValidade.Clear();
                     txt_DataValidade.Focus();
                 }
@@ -615,6 +614,11 @@ namespace CaixaFacil
 
         private void btn_Editar_Click(object sender, EventArgs e)
         {
+            if (Id_Produto == 0)
+            {
+                MessageBox.Show("Informe os dados do produto para concluir as alterações dos dados", "Validação CPF", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             if (txt_NomeProduto.Text == string.Empty)
             {
                 MessageBox.Show("Preencha o campo 'Nome do produto'!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                
@@ -697,10 +701,7 @@ namespace CaixaFacil
             {
                 try
                 {
-                    if (Id_Produto > 0)
-                        EditarProduto();
-                    else
-                        MessageBox.Show("Informe os dados do produto para concluir as alterações dos dados", "Validação CPF", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    EditarProduto();
                 }
                 catch (Exception ex)
                 {
@@ -787,7 +788,7 @@ namespace CaixaFacil
                 btn_Pesquisar_Click(sender, e);
             else if (e.KeyCode == Keys.F3)
                 btn_Editar_Click(sender, e);
-            else if (e.KeyCode == Keys.F4)
+            else if (e.KeyCode == Keys.F5)
                 btn_Excluir_Click(sender, e);
         }
 

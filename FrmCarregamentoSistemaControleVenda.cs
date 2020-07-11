@@ -370,8 +370,8 @@ namespace CaixaFacil
                 "[Data_Conta] VARCHAR(10)    NULL," +
                 "PRIMARY KEY CLUSTERED([Id] ASC));"
                 +
-                
-                "insert into cliente values(1,'CLIENTE AVULSO','00/00/000','1txL80yiSZRON3oyvU5Luw==','ZG3pKrNg0qNZyduxtLfdvA==','000000','null','null',9,'null','null','','','')" +
+
+                "insert into cliente values(1,'CLIENTE AVULSO','00/00/000','V5Asc8VWwU2M740N7tXICQ==','ZG3pKrNg0qNZyduxtLfdvA==','000000','null','null',9,'null','null','','','')" +
                 
                 "use master;" +
                 

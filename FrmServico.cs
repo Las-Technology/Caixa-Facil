@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -18,108 +12,33 @@ namespace CaixaFacil
             InitializeComponent();
         }
 
-        private void btn_LimparServico_Click(object sender, EventArgs e)
+        int X = 0;
+        int Y = 0;
+       
+        private void panelCabecalho_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left) return;
+            X = this.Left - MousePosition.X;
+            Y = this.Top - MousePosition.Y;
+        }
+
+        private void panelCabecalho_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left) return;
+            this.Left = X + MousePosition.X;
+            this.Top = Y + MousePosition.Y;
+        }
+
+        private void LimparCampos()
         {
             txt_CodigoServico.Clear();
             txt_DescricaoServico.Clear();
             txt_PrecoServico.Clear();
-        }
-
-        private void btn_PesquisarServico_Click(object sender, EventArgs e)
-        {
-            FrmPesquisarServico pesquisarServico = new FrmPesquisarServico();
-            pesquisarServico.ShowDialog();
-            if (pesquisarServico.Codigo != null)
-            {
-                txt_CodigoServico.Text = pesquisarServico.Codigo;
-                txt_DescricaoServico.Text = pesquisarServico.Descricao;
-                txt_PrecoServico.Text = pesquisarServico.PrecoServico;
-            }
+            idServico = 0;
         }
 
         ClassPrestacaoServico prestacaoServico = new ClassPrestacaoServico();
         ErrorProvider errorProvider = new ErrorProvider();
-        private void btn_EditarServico_Click(object sender, EventArgs e)
-        {
-            if (txt_DescricaoServico.Text == "")
-            {
-                errorProvider.Clear();
-                MessageBox.Show("Informe o nome do seviço para ser atualizado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                errorProvider.SetError(txt_DescricaoServico, "Campo obrigatório!");
-                txt_DescricaoServico.Focus();
-                return;
-            }
-            else if (txt_PrecoServico.Text == "")
-            {
-                errorProvider.Clear();
-                MessageBox.Show("Informe o preço do seviço para ser cadastrado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                errorProvider.SetError(txt_PrecoServico, "Campo obrigatório!");
-                txt_PrecoServico.Focus();
-                return;
-            }
-            else
-            {
-                try
-                {
-                    prestacaoServico.id = int.Parse(txt_CodigoServico.Text);
-                    prestacaoServico.descricao = txt_DescricaoServico.Text.Trim();
-                    prestacaoServico.precoServico = decimal.Parse(txt_PrecoServico.Text);
-                    prestacaoServico.Atualizar();
-                    MessageBox.Show("Dados da prestação de Serviço atualizado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    btn_LimparServico_Click(sender, e);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void btn_SalvarServico_Click(object sender, EventArgs e)
-        {
-            if (txt_DescricaoServico.Text == "")
-            {
-                errorProvider.Clear();
-                MessageBox.Show("Informe o nome do seviço para ser cadastrado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                errorProvider.SetError(txt_DescricaoServico, "Campo obrigatório!");
-                txt_DescricaoServico.Focus();
-                return;
-            }
-            else if (txt_PrecoServico.Text == "")
-            {
-                errorProvider.Clear();
-                MessageBox.Show("Informe o preço do seviço para ser cadastrado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                errorProvider.SetError(txt_PrecoServico, "Campo obrigatório!");
-                txt_PrecoServico.Focus();
-                return;
-            }
-            else
-            {
-                try
-                {
-                    categoria.id = Id_Categoria;
-                    categoria.Descricao = "Serviço";
-                    categoria.Cadastrar();
-                    prestacaoServico.id = int.Parse(txt_CodigoServico.Text);
-                    prestacaoServico.descricao = txt_DescricaoServico.Text.Trim();
-                    prestacaoServico.precoServico = decimal.Parse(txt_PrecoServico.Text);
-                    prestacaoServico.lucro = decimal.Parse(txt_PrecoServico.Text);
-                    prestacaoServico.estoqueAtual = 0;
-                    prestacaoServico.estoqueMinimo = 0;
-                    prestacaoServico.unidade = "Serviço";
-                    prestacaoServico.id_Categoria = Id_Categoria;
-                    prestacaoServico.Cadastrar();
-                    MessageBox.Show("Serviço cadastrado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    btn_LimparServico_Click(sender, e);
-                    CodigoProduto();
-                    Codigocategoria();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
 
         private void FrmServico_Load(object sender, EventArgs e)
         {
@@ -212,6 +131,118 @@ namespace CaixaFacil
                     else if (txt_PrecoServico.Text.IndexOf(',') > 0)
                         e.Handled = true;
             }
+        }
+
+        private void btn_Salvar_Click(object sender, EventArgs e)
+        {
+            CodigoProduto();
+            if (txt_DescricaoServico.Text == "")
+            {
+                errorProvider.Clear();
+                MessageBox.Show("Informe o nome do seviço para ser cadastrado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                errorProvider.SetError(txt_DescricaoServico, "Campo obrigatório!");
+                txt_DescricaoServico.Focus();
+                return;
+            }
+            else if (txt_PrecoServico.Text == "")
+            {
+                errorProvider.Clear();
+                MessageBox.Show("Informe o preço do seviço para ser cadastrado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                errorProvider.SetError(txt_PrecoServico, "Campo obrigatório!");
+                txt_PrecoServico.Focus();
+                return;
+            }
+            else
+            {
+                try
+                {
+                    categoria.id = Id_Categoria;
+                    categoria.Descricao = "Serviço";
+                    categoria.Cadastrar();
+                    prestacaoServico.id = int.Parse(txt_CodigoServico.Text);
+                    prestacaoServico.descricao = txt_DescricaoServico.Text.Trim();
+                    prestacaoServico.precoServico = decimal.Parse(txt_PrecoServico.Text);
+                    prestacaoServico.lucro = decimal.Parse(txt_PrecoServico.Text);
+                    prestacaoServico.estoqueAtual = 0;
+                    prestacaoServico.estoqueMinimo = 0;
+                    prestacaoServico.unidade = "Serviço";
+                    prestacaoServico.id_Categoria = Id_Categoria;
+                    prestacaoServico.Cadastrar();
+                    MessageBox.Show("Serviço cadastrado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimparCampos();
+                    CodigoProduto();
+                    Codigocategoria();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        int idServico;
+        private void btn_Pesquisar_Click(object sender, EventArgs e)
+        {
+            FrmPesquisarServico pesquisarServico = new FrmPesquisarServico();
+            pesquisarServico.ShowDialog();
+            if (pesquisarServico.Codigo != null)
+            {
+                idServico = int.Parse(pesquisarServico.Codigo);
+                txt_CodigoServico.Text = pesquisarServico.Codigo;
+                txt_DescricaoServico.Text = pesquisarServico.Descricao;
+                txt_PrecoServico.Text = pesquisarServico.PrecoServico;
+            }
+        }
+
+        private void btn_Editar_Click(object sender, EventArgs e)
+        {
+            if (idServico == 0)
+            {
+                MessageBox.Show("Busque as informações para alteração dos dados!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (txt_DescricaoServico.Text == "")
+            {
+                errorProvider.Clear();
+                MessageBox.Show("Informe o nome do seviço para ser atualizado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                errorProvider.SetError(txt_DescricaoServico, "Campo obrigatório!");
+                txt_DescricaoServico.Focus();
+                return;
+            }
+            else if (txt_PrecoServico.Text == "")
+            {
+                errorProvider.Clear();
+                MessageBox.Show("Informe o preço do seviço para ser cadastrado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                errorProvider.SetError(txt_PrecoServico, "Campo obrigatório!");
+                txt_PrecoServico.Focus();
+                return;
+            }
+            else
+            {
+                try
+                {
+                    prestacaoServico.id = int.Parse(txt_CodigoServico.Text);
+                    prestacaoServico.descricao = txt_DescricaoServico.Text.Trim();
+                    prestacaoServico.precoServico = decimal.Parse(txt_PrecoServico.Text);
+                    prestacaoServico.Atualizar();
+                    MessageBox.Show("Dados da prestação de Serviço atualizado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimparCampos();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void FrmServico_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+                btn_Salvar_Click(sender, e);
+            else if (e.KeyCode == Keys.F2)
+                btn_Pesquisar_Click(sender, e);
+            else if (e.KeyCode == Keys.F3)
+                btn_Editar_Click(sender, e);
         }
 
         private void btn_Fechar_MouseEnter(object sender, EventArgs e)
