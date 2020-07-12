@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.vendaBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.DataSetRelatorio = new CaixaFacil.DataSetRelatorio();
             this.btn_Fechar = new System.Windows.Forms.Button();
@@ -71,7 +71,7 @@
             this.btn_Fechar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Fechar.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Fechar.ForeColor = System.Drawing.Color.Black;
-            this.btn_Fechar.Location = new System.Drawing.Point(1330, 5);
+            this.btn_Fechar.Location = new System.Drawing.Point(1326, 5);
             this.btn_Fechar.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.btn_Fechar.Name = "btn_Fechar";
             this.btn_Fechar.Size = new System.Drawing.Size(38, 41);
@@ -112,7 +112,7 @@
             this.panelCabecalho.Location = new System.Drawing.Point(0, 0);
             this.panelCabecalho.Margin = new System.Windows.Forms.Padding(4);
             this.panelCabecalho.Name = "panelCabecalho";
-            this.panelCabecalho.Size = new System.Drawing.Size(1376, 90);
+            this.panelCabecalho.Size = new System.Drawing.Size(1386, 90);
             this.panelCabecalho.TabIndex = 6;
             this.panelCabecalho.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelCabecalho_MouseDown);
             this.panelCabecalho.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelCabecalho_MouseMove);
@@ -133,6 +133,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.txt_Nome);
             this.panel1.Controls.Add(this.btn_InserirNome);
@@ -154,7 +155,7 @@
             // 
             // btn_InserirNome
             // 
-            this.btn_InserirNome.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_InserirNome.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_InserirNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_InserirNome.Location = new System.Drawing.Point(773, 6);
             this.btn_InserirNome.Name = "btn_InserirNome";
@@ -176,9 +177,9 @@
             // rv_Recibo
             // 
             this.rv_Recibo.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource1.Name = "DataSet1";
-            reportDataSource1.Value = this.vendaBindingSource2;
-            this.rv_Recibo.LocalReport.DataSources.Add(reportDataSource1);
+            reportDataSource2.Name = "DataSet1";
+            reportDataSource2.Value = this.vendaBindingSource2;
+            this.rv_Recibo.LocalReport.DataSources.Add(reportDataSource2);
             this.rv_Recibo.LocalReport.ReportEmbeddedResource = "CaixaFacil.NotaPromissoria.rdlc";
             this.rv_Recibo.Location = new System.Drawing.Point(3, 16);
             this.rv_Recibo.Name = "rv_Recibo";

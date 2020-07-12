@@ -56,7 +56,7 @@
             this.PanelCabecalho.Location = new System.Drawing.Point(-1, 0);
             this.PanelCabecalho.Margin = new System.Windows.Forms.Padding(4);
             this.PanelCabecalho.Name = "PanelCabecalho";
-            this.PanelCabecalho.Size = new System.Drawing.Size(414, 72);
+            this.PanelCabecalho.Size = new System.Drawing.Size(594, 60);
             this.PanelCabecalho.TabIndex = 2;
             // 
             // Lbl_Titulo
@@ -88,7 +88,7 @@
             this.btn_Fechar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Fechar.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Fechar.ForeColor = System.Drawing.Color.White;
-            this.btn_Fechar.Location = new System.Drawing.Point(370, 4);
+            this.btn_Fechar.Location = new System.Drawing.Point(550, 4);
             this.btn_Fechar.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Fechar.Name = "btn_Fechar";
             this.btn_Fechar.Size = new System.Drawing.Size(38, 41);
@@ -101,7 +101,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.btn_Cancelar);
             this.panel1.Controls.Add(this.groupBox1);
@@ -112,7 +112,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(415, 320);
+            this.panel1.Size = new System.Drawing.Size(595, 405);
             this.panel1.TabIndex = 1;
             // 
             // btn_Cancelar
@@ -121,7 +121,7 @@
             this.btn_Cancelar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Cancelar.Image = global::CaixaFacil.Properties.Resources.Button_Cancel_icon__1_;
             this.btn_Cancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Cancelar.Location = new System.Drawing.Point(54, 266);
+            this.btn_Cancelar.Location = new System.Drawing.Point(243, 333);
             this.btn_Cancelar.Name = "btn_Cancelar";
             this.btn_Cancelar.Size = new System.Drawing.Size(161, 45);
             this.btn_Cancelar.TabIndex = 9;
@@ -136,24 +136,26 @@
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(47, 122);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(320, 138);
+            this.groupBox1.Size = new System.Drawing.Size(509, 205);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Motivo:";
             // 
             // rTB_Motivo
             // 
+            this.rTB_Motivo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.rTB_Motivo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rTB_Motivo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rTB_Motivo.Location = new System.Drawing.Point(3, 22);
             this.rTB_Motivo.Name = "rTB_Motivo";
-            this.rTB_Motivo.Size = new System.Drawing.Size(314, 113);
+            this.rTB_Motivo.Size = new System.Drawing.Size(503, 180);
             this.rTB_Motivo.TabIndex = 2;
             this.rTB_Motivo.Text = "";
             // 
             // txt_Valor
             // 
-            this.txt_Valor.Location = new System.Drawing.Point(110, 90);
+            this.txt_Valor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_Valor.Location = new System.Drawing.Point(99, 86);
             this.txt_Valor.Name = "txt_Valor";
             this.txt_Valor.Size = new System.Drawing.Size(116, 26);
             this.txt_Valor.TabIndex = 0;
@@ -165,7 +167,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(60, 93);
+            this.label1.Location = new System.Drawing.Point(49, 89);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 19);
             this.label1.TabIndex = 4;
@@ -175,7 +177,7 @@
             // 
             this.btn_Retirar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Retirar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Retirar.Location = new System.Drawing.Point(221, 266);
+            this.btn_Retirar.Location = new System.Drawing.Point(410, 333);
             this.btn_Retirar.Name = "btn_Retirar";
             this.btn_Retirar.Size = new System.Drawing.Size(143, 45);
             this.btn_Retirar.TabIndex = 3;
@@ -187,7 +189,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 320);
+            this.ClientSize = new System.Drawing.Size(595, 405);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

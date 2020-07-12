@@ -18,13 +18,13 @@ namespace CaixaFacil
         {
             string filter = "";
 
-            if(cbMaxRows.Text != "Todos")
+            if(cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
             {
                 filter = " TOP " + cbMaxRows.Text;
             }
             if(string.IsNullOrWhiteSpace(txt_Nome.Text))
             {
-                _sql = "Select" + filter +  " [Id_Cliente] ,[Nome] ,[DataNascimento] ,[CPF] ,[RG] ,[CEP] ,[Bairro] ,[Endereco] ,[Numero] ,[Cidade] ,[Estado] ,[Telefone] ,[Celular] ,[Email] from Cliente where id_Cliente <> 1";
+                _sql = "Select " + filter +  " [Id_Cliente] ,[Nome] ,[DataNascimento] ,[CPF] ,[RG] ,[CEP] ,[Bairro] ,[Endereco] ,[Numero] ,[Cidade] ,[Estado] ,[Telefone] ,[Celular] ,[Email] from Cliente where id_Cliente <> 1";
             }
             else
             {

@@ -36,19 +36,6 @@
             this.cbMaxRows = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dgv_Busca = new System.Windows.Forms.DataGridView();
-            this.tabelaProdutoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dbControleVendaDataSet = new CaixaFacil.DbControleVendaDataSet();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txt_Nome = new System.Windows.Forms.TextBox();
-            this.panelCabecalho = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btn_Fechar = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.valorCusto1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valorVenda1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lucroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabelaProdutoTableAdapter = new CaixaFacil.DbControleVendaDataSetTableAdapters.TabelaProdutoTableAdapter();
             this.idProduto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codigoBarra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nomeProduto = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,6 +51,19 @@
             this.unidadeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NomeCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nomeFornecedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabelaProdutoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dbControleVendaDataSet = new CaixaFacil.DbControleVendaDataSet();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txt_Nome = new System.Windows.Forms.TextBox();
+            this.panelCabecalho = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btn_Fechar = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.valorCusto1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valorVenda1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lucroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabelaProdutoTableAdapter = new CaixaFacil.DbControleVendaDataSetTableAdapters.TabelaProdutoTableAdapter();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Busca)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabelaProdutoBindingSource)).BeginInit();
@@ -73,6 +73,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.cbMaxRows);
             this.panel1.Controls.Add(this.label4);
@@ -171,119 +172,6 @@
             this.dgv_Busca.TabIndex = 12;
             this.dgv_Busca.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Busca_CellClick);
             this.dgv_Busca.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_Busca_DataBindingComplete);
-            // 
-            // tabelaProdutoBindingSource
-            // 
-            this.tabelaProdutoBindingSource.DataMember = "TabelaProduto";
-            this.tabelaProdutoBindingSource.DataSource = this.dbControleVendaDataSet;
-            // 
-            // dbControleVendaDataSet
-            // 
-            this.dbControleVendaDataSet.DataSetName = "DbControleVendaDataSet";
-            this.dbControleVendaDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(242, 97);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 19);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Nome do produto:";
-            // 
-            // txt_Nome
-            // 
-            this.txt_Nome.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txt_Nome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_Nome.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Nome.Location = new System.Drawing.Point(375, 95);
-            this.txt_Nome.Margin = new System.Windows.Forms.Padding(2);
-            this.txt_Nome.Name = "txt_Nome";
-            this.txt_Nome.Size = new System.Drawing.Size(408, 26);
-            this.txt_Nome.TabIndex = 10;
-            this.txt_Nome.TextChanged += new System.EventHandler(this.txt_Nome_TextChanged);
-            this.txt_Nome.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Nome_KeyDown);
-            // 
-            // panelCabecalho
-            // 
-            this.panelCabecalho.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelCabecalho.BackColor = System.Drawing.Color.DarkOrange;
-            this.panelCabecalho.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelCabecalho.Controls.Add(this.label2);
-            this.panelCabecalho.Controls.Add(this.label3);
-            this.panelCabecalho.Controls.Add(this.btn_Fechar);
-            this.panelCabecalho.Location = new System.Drawing.Point(0, -1);
-            this.panelCabecalho.Margin = new System.Windows.Forms.Padding(2);
-            this.panelCabecalho.Name = "panelCabecalho";
-            this.panelCabecalho.Size = new System.Drawing.Size(1086, 72);
-            this.panelCabecalho.TabIndex = 9;
-            this.panelCabecalho.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelCabecalho_MouseDown);
-            this.panelCabecalho.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelCabecalho_MouseMove);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(61, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(137, 19);
-            this.label2.TabIndex = 59;
-            this.label2.Text = "Pesquisar Produtos";
-            // 
-            // label3
-            // 
-            this.label3.Image = global::CaixaFacil.Properties.Resources.Preppy_icon;
-            this.label3.Location = new System.Drawing.Point(6, 2);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 63);
-            this.label3.TabIndex = 58;
-            this.label3.Text = "     ";
-            // 
-            // btn_Fechar
-            // 
-            this.btn_Fechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Fechar.BackColor = System.Drawing.Color.DarkOrange;
-            this.btn_Fechar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_Fechar.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Fechar.ForeColor = System.Drawing.Color.White;
-            this.btn_Fechar.Location = new System.Drawing.Point(1024, 6);
-            this.btn_Fechar.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_Fechar.Name = "btn_Fechar";
-            this.btn_Fechar.Size = new System.Drawing.Size(40, 42);
-            this.btn_Fechar.TabIndex = 57;
-            this.btn_Fechar.Text = "X";
-            this.toolTip1.SetToolTip(this.btn_Fechar, "Fechar");
-            this.btn_Fechar.UseVisualStyleBackColor = false;
-            this.btn_Fechar.Click += new System.EventHandler(this.btn_Fechar_Click);
-            this.btn_Fechar.MouseEnter += new System.EventHandler(this.btn_Fechar_MouseEnter);
-            this.btn_Fechar.MouseLeave += new System.EventHandler(this.btn_Fechar_MouseLeave);
-            // 
-            // valorCusto1DataGridViewTextBoxColumn
-            // 
-            this.valorCusto1DataGridViewTextBoxColumn.DataPropertyName = "ValorCusto1";
-            this.valorCusto1DataGridViewTextBoxColumn.HeaderText = "ValorCusto1";
-            this.valorCusto1DataGridViewTextBoxColumn.Name = "valorCusto1DataGridViewTextBoxColumn";
-            // 
-            // valorVenda1DataGridViewTextBoxColumn
-            // 
-            this.valorVenda1DataGridViewTextBoxColumn.DataPropertyName = "ValorVenda1";
-            this.valorVenda1DataGridViewTextBoxColumn.HeaderText = "ValorVenda1";
-            this.valorVenda1DataGridViewTextBoxColumn.Name = "valorVenda1DataGridViewTextBoxColumn";
-            // 
-            // lucroDataGridViewTextBoxColumn
-            // 
-            this.lucroDataGridViewTextBoxColumn.DataPropertyName = "Lucro";
-            this.lucroDataGridViewTextBoxColumn.HeaderText = "Lucro";
-            this.lucroDataGridViewTextBoxColumn.Name = "lucroDataGridViewTextBoxColumn";
-            // 
-            // tabelaProdutoTableAdapter
-            // 
-            this.tabelaProdutoTableAdapter.ClearBeforeFill = true;
             // 
             // idProduto
             // 
@@ -428,6 +316,119 @@
             this.nomeFornecedor.Name = "nomeFornecedor";
             this.nomeFornecedor.ReadOnly = true;
             this.nomeFornecedor.Width = 105;
+            // 
+            // tabelaProdutoBindingSource
+            // 
+            this.tabelaProdutoBindingSource.DataMember = "TabelaProduto";
+            this.tabelaProdutoBindingSource.DataSource = this.dbControleVendaDataSet;
+            // 
+            // dbControleVendaDataSet
+            // 
+            this.dbControleVendaDataSet.DataSetName = "DbControleVendaDataSet";
+            this.dbControleVendaDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(242, 97);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(129, 19);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Nome do produto:";
+            // 
+            // txt_Nome
+            // 
+            this.txt_Nome.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_Nome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_Nome.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Nome.Location = new System.Drawing.Point(375, 95);
+            this.txt_Nome.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_Nome.Name = "txt_Nome";
+            this.txt_Nome.Size = new System.Drawing.Size(408, 26);
+            this.txt_Nome.TabIndex = 10;
+            this.txt_Nome.TextChanged += new System.EventHandler(this.txt_Nome_TextChanged);
+            this.txt_Nome.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Nome_KeyDown);
+            // 
+            // panelCabecalho
+            // 
+            this.panelCabecalho.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelCabecalho.BackColor = System.Drawing.Color.DarkOrange;
+            this.panelCabecalho.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelCabecalho.Controls.Add(this.label2);
+            this.panelCabecalho.Controls.Add(this.label3);
+            this.panelCabecalho.Controls.Add(this.btn_Fechar);
+            this.panelCabecalho.Location = new System.Drawing.Point(0, -1);
+            this.panelCabecalho.Margin = new System.Windows.Forms.Padding(2);
+            this.panelCabecalho.Name = "panelCabecalho";
+            this.panelCabecalho.Size = new System.Drawing.Size(1086, 72);
+            this.panelCabecalho.TabIndex = 9;
+            this.panelCabecalho.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelCabecalho_MouseDown);
+            this.panelCabecalho.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelCabecalho_MouseMove);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(61, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(137, 19);
+            this.label2.TabIndex = 59;
+            this.label2.Text = "Pesquisar Produtos";
+            // 
+            // label3
+            // 
+            this.label3.Image = global::CaixaFacil.Properties.Resources.Preppy_icon;
+            this.label3.Location = new System.Drawing.Point(6, 2);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 63);
+            this.label3.TabIndex = 58;
+            this.label3.Text = "     ";
+            // 
+            // btn_Fechar
+            // 
+            this.btn_Fechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Fechar.BackColor = System.Drawing.Color.DarkOrange;
+            this.btn_Fechar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_Fechar.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Fechar.ForeColor = System.Drawing.Color.White;
+            this.btn_Fechar.Location = new System.Drawing.Point(1024, 6);
+            this.btn_Fechar.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Fechar.Name = "btn_Fechar";
+            this.btn_Fechar.Size = new System.Drawing.Size(40, 42);
+            this.btn_Fechar.TabIndex = 57;
+            this.btn_Fechar.Text = "X";
+            this.toolTip1.SetToolTip(this.btn_Fechar, "Fechar");
+            this.btn_Fechar.UseVisualStyleBackColor = false;
+            this.btn_Fechar.Click += new System.EventHandler(this.btn_Fechar_Click);
+            this.btn_Fechar.MouseEnter += new System.EventHandler(this.btn_Fechar_MouseEnter);
+            this.btn_Fechar.MouseLeave += new System.EventHandler(this.btn_Fechar_MouseLeave);
+            // 
+            // valorCusto1DataGridViewTextBoxColumn
+            // 
+            this.valorCusto1DataGridViewTextBoxColumn.DataPropertyName = "ValorCusto1";
+            this.valorCusto1DataGridViewTextBoxColumn.HeaderText = "ValorCusto1";
+            this.valorCusto1DataGridViewTextBoxColumn.Name = "valorCusto1DataGridViewTextBoxColumn";
+            // 
+            // valorVenda1DataGridViewTextBoxColumn
+            // 
+            this.valorVenda1DataGridViewTextBoxColumn.DataPropertyName = "ValorVenda1";
+            this.valorVenda1DataGridViewTextBoxColumn.HeaderText = "ValorVenda1";
+            this.valorVenda1DataGridViewTextBoxColumn.Name = "valorVenda1DataGridViewTextBoxColumn";
+            // 
+            // lucroDataGridViewTextBoxColumn
+            // 
+            this.lucroDataGridViewTextBoxColumn.DataPropertyName = "Lucro";
+            this.lucroDataGridViewTextBoxColumn.HeaderText = "Lucro";
+            this.lucroDataGridViewTextBoxColumn.Name = "lucroDataGridViewTextBoxColumn";
+            // 
+            // tabelaProdutoTableAdapter
+            // 
+            this.tabelaProdutoTableAdapter.ClearBeforeFill = true;
             // 
             // FrmPesquisarProdutos
             // 

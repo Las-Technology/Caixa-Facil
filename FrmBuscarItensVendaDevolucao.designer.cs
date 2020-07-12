@@ -28,24 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbMaxRows = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnProsseguir = new System.Windows.Forms.Button();
             this.txtNomeCliente = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgv_ListaVenda = new System.Windows.Forms.DataGridView();
-            this.PanelCabecalho = new System.Windows.Forms.Panel();
-            this.Lbl_Titulo = new System.Windows.Forms.Label();
-            this.Lbl_Icone = new System.Windows.Forms.Label();
-            this.btn_Fechar = new System.Windows.Forms.Button();
-            this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
-            this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
-            this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
-            this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
-            this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.ColCodVenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCodCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,6 +48,15 @@
             this.ColDataVenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColHoraVenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColOperador = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PanelCabecalho = new System.Windows.Forms.Panel();
+            this.Lbl_Titulo = new System.Windows.Forms.Label();
+            this.Lbl_Icone = new System.Windows.Forms.Label();
+            this.btn_Fechar = new System.Windows.Forms.Button();
+            this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ListaVenda)).BeginInit();
@@ -65,6 +67,8 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.cbMaxRows);
+            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.btnProsseguir);
             this.panel1.Controls.Add(this.txtNomeCliente);
             this.panel1.Controls.Add(this.label1);
@@ -75,6 +79,53 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(805, 600);
             this.panel1.TabIndex = 0;
+            // 
+            // cbMaxRows
+            // 
+            this.cbMaxRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.cbMaxRows.BackColor = System.Drawing.Color.White;
+            this.cbMaxRows.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.cbMaxRows.FormattingEnabled = true;
+            this.cbMaxRows.Items.AddRange(new object[] {
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60",
+            "70",
+            "80",
+            "90",
+            "100",
+            "200",
+            "300",
+            "400",
+            "500",
+            "600",
+            "700",
+            "800",
+            "900",
+            "1000",
+            "Todos"});
+            this.cbMaxRows.Location = new System.Drawing.Point(354, 538);
+            this.cbMaxRows.Name = "cbMaxRows";
+            this.cbMaxRows.Size = new System.Drawing.Size(132, 27);
+            this.cbMaxRows.TabIndex = 28;
+            this.cbMaxRows.SelectedIndexChanged += new System.EventHandler(this.cbMaxRows_SelectedIndexChanged);
+            this.cbMaxRows.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbMaxRows_KeyDown);
+            this.cbMaxRows.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbMaxRows_KeyPress);
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.label4.Location = new System.Drawing.Point(216, 541);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(133, 19);
+            this.label4.TabIndex = 27;
+            this.label4.Text = "Máximo de linhas:";
             // 
             // btnProsseguir
             // 
@@ -124,14 +175,14 @@
             this.dgv_ListaVenda.BackgroundColor = System.Drawing.Color.White;
             this.dgv_ListaVenda.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dgv_ListaVenda.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_ListaVenda.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_ListaVenda.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgv_ListaVenda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_ListaVenda.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColCodVenda,
@@ -143,14 +194,14 @@
             this.ColDataVenda,
             this.ColHoraVenda,
             this.ColOperador});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_ListaVenda.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_ListaVenda.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgv_ListaVenda.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_ListaVenda.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dgv_ListaVenda.Location = new System.Drawing.Point(3, 16);
@@ -161,6 +212,90 @@
             this.dgv_ListaVenda.TabIndex = 0;
             this.dgv_ListaVenda.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ListaVenda_CellClick);
             this.dgv_ListaVenda.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_ListaVenda_DataBindingComplete);
+            // 
+            // ColCodVenda
+            // 
+            this.ColCodVenda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColCodVenda.DataPropertyName = "Id_Venda";
+            this.ColCodVenda.HeaderText = "Cod. Venda";
+            this.ColCodVenda.Name = "ColCodVenda";
+            this.ColCodVenda.ReadOnly = true;
+            this.ColCodVenda.Width = 98;
+            // 
+            // ColCodCliente
+            // 
+            this.ColCodCliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColCodCliente.DataPropertyName = "Id_Cliente";
+            this.ColCodCliente.HeaderText = "Cód. Cliente";
+            this.ColCodCliente.Name = "ColCodCliente";
+            this.ColCodCliente.ReadOnly = true;
+            this.ColCodCliente.Width = 101;
+            // 
+            // ColCliente
+            // 
+            this.ColCliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColCliente.DataPropertyName = "NomeCliente";
+            this.ColCliente.HeaderText = "Cliente";
+            this.ColCliente.Name = "ColCliente";
+            this.ColCliente.ReadOnly = true;
+            this.ColCliente.Width = 71;
+            // 
+            // ColValorVenda
+            // 
+            this.ColValorVenda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColValorVenda.DataPropertyName = "ValorTotal";
+            dataGridViewCellStyle8.Format = "C2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.ColValorVenda.DefaultCellStyle = dataGridViewCellStyle8;
+            this.ColValorVenda.HeaderText = "Valor Venda";
+            this.ColValorVenda.Name = "ColValorVenda";
+            this.ColValorVenda.ReadOnly = true;
+            this.ColValorVenda.Width = 101;
+            // 
+            // ColDesconto
+            // 
+            this.ColDesconto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColDesconto.DataPropertyName = "Desconto";
+            this.ColDesconto.HeaderText = "Desconto";
+            this.ColDesconto.Name = "ColDesconto";
+            this.ColDesconto.ReadOnly = true;
+            this.ColDesconto.Width = 86;
+            // 
+            // ColFormaPagamento
+            // 
+            this.ColFormaPagamento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColFormaPagamento.DataPropertyName = "Descricao";
+            this.ColFormaPagamento.HeaderText = "Forma de pagamento";
+            this.ColFormaPagamento.Name = "ColFormaPagamento";
+            this.ColFormaPagamento.ReadOnly = true;
+            this.ColFormaPagamento.Width = 150;
+            // 
+            // ColDataVenda
+            // 
+            this.ColDataVenda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColDataVenda.DataPropertyName = "DataVenda";
+            this.ColDataVenda.HeaderText = "Data Venda";
+            this.ColDataVenda.Name = "ColDataVenda";
+            this.ColDataVenda.ReadOnly = true;
+            this.ColDataVenda.Width = 99;
+            // 
+            // ColHoraVenda
+            // 
+            this.ColHoraVenda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColHoraVenda.DataPropertyName = "HoraVenda";
+            this.ColHoraVenda.HeaderText = "Hora Venda";
+            this.ColHoraVenda.Name = "ColHoraVenda";
+            this.ColHoraVenda.ReadOnly = true;
+            this.ColHoraVenda.Width = 99;
+            // 
+            // ColOperador
+            // 
+            this.ColOperador.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColOperador.DataPropertyName = "NomeUsuario";
+            this.ColOperador.HeaderText = "Operador";
+            this.ColOperador.Name = "ColOperador";
+            this.ColOperador.ReadOnly = true;
+            this.ColOperador.Width = 84;
             // 
             // PanelCabecalho
             // 
@@ -254,98 +389,14 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(150, 106);
             // 
-            // ColCodVenda
-            // 
-            this.ColCodVenda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColCodVenda.DataPropertyName = "Id_Venda";
-            this.ColCodVenda.HeaderText = "Cod. Venda";
-            this.ColCodVenda.Name = "ColCodVenda";
-            this.ColCodVenda.ReadOnly = true;
-            this.ColCodVenda.Width = 98;
-            // 
-            // ColCodCliente
-            // 
-            this.ColCodCliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColCodCliente.DataPropertyName = "Id_Cliente";
-            this.ColCodCliente.HeaderText = "Cód. Cliente";
-            this.ColCodCliente.Name = "ColCodCliente";
-            this.ColCodCliente.ReadOnly = true;
-            this.ColCodCliente.Width = 101;
-            // 
-            // ColCliente
-            // 
-            this.ColCliente.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColCliente.DataPropertyName = "NomeCliente";
-            this.ColCliente.HeaderText = "Cliente";
-            this.ColCliente.Name = "ColCliente";
-            this.ColCliente.ReadOnly = true;
-            this.ColCliente.Width = 71;
-            // 
-            // ColValorVenda
-            // 
-            this.ColValorVenda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColValorVenda.DataPropertyName = "ValorTotal";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.ColValorVenda.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ColValorVenda.HeaderText = "Valor Venda";
-            this.ColValorVenda.Name = "ColValorVenda";
-            this.ColValorVenda.ReadOnly = true;
-            this.ColValorVenda.Width = 101;
-            // 
-            // ColDesconto
-            // 
-            this.ColDesconto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColDesconto.DataPropertyName = "Desconto";
-            this.ColDesconto.HeaderText = "Desconto";
-            this.ColDesconto.Name = "ColDesconto";
-            this.ColDesconto.ReadOnly = true;
-            this.ColDesconto.Width = 86;
-            // 
-            // ColFormaPagamento
-            // 
-            this.ColFormaPagamento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColFormaPagamento.DataPropertyName = "Descricao";
-            this.ColFormaPagamento.HeaderText = "Forma de pagamento";
-            this.ColFormaPagamento.Name = "ColFormaPagamento";
-            this.ColFormaPagamento.ReadOnly = true;
-            this.ColFormaPagamento.Width = 150;
-            // 
-            // ColDataVenda
-            // 
-            this.ColDataVenda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColDataVenda.DataPropertyName = "DataVenda";
-            this.ColDataVenda.HeaderText = "Data Venda";
-            this.ColDataVenda.Name = "ColDataVenda";
-            this.ColDataVenda.ReadOnly = true;
-            this.ColDataVenda.Width = 99;
-            // 
-            // ColHoraVenda
-            // 
-            this.ColHoraVenda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColHoraVenda.DataPropertyName = "HoraVenda";
-            this.ColHoraVenda.HeaderText = "Hora Venda";
-            this.ColHoraVenda.Name = "ColHoraVenda";
-            this.ColHoraVenda.ReadOnly = true;
-            this.ColHoraVenda.Width = 99;
-            // 
-            // ColOperador
-            // 
-            this.ColOperador.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColOperador.DataPropertyName = "NomeUsuario";
-            this.ColOperador.HeaderText = "Operador";
-            this.ColOperador.Name = "ColOperador";
-            this.ColOperador.ReadOnly = true;
-            this.ColOperador.Width = 84;
-            // 
-            // FrmBuscarItensVendaAlterarExcluir
+            // FrmBuscarItensVendaDevolucao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(805, 600);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FrmBuscarItensVendaAlterarExcluir";
+            this.Name = "FrmBuscarItensVendaDevolucao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alterar/Excluir Venda";
             this.Load += new System.EventHandler(this.FrmListavenda_Load);
@@ -385,5 +436,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColDataVenda;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColHoraVenda;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColOperador;
+        private System.Windows.Forms.ComboBox cbMaxRows;
+        private System.Windows.Forms.Label label4;
     }
 }

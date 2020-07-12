@@ -60,7 +60,7 @@ namespace CaixaFacil
             try
             {
                 string filter = "";
-                if (cbMaxRows.Text != "Todos")
+                if (cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
                 {
                     filter = " TOP " + cbMaxRows.Text;
                 }

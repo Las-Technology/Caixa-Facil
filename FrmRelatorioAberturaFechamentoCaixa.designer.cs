@@ -54,6 +54,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.cb_Opcao);
             this.panel1.Controls.Add(this.txt_Descricao);
@@ -67,6 +68,7 @@
             // 
             // cb_Opcao
             // 
+            this.cb_Opcao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.cb_Opcao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_Opcao.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cb_Opcao.FormattingEnabled = true;
@@ -81,6 +83,7 @@
             // 
             // txt_Descricao
             // 
+            this.txt_Descricao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_Descricao.Location = new System.Drawing.Point(110, 73);
             this.txt_Descricao.Name = "txt_Descricao";
             this.txt_Descricao.Size = new System.Drawing.Size(309, 26);
@@ -89,6 +92,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -110,6 +115,7 @@
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Location = new System.Drawing.Point(3, 116);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(706, 408);
             this.dataGridView1.TabIndex = 3;
             // 
@@ -119,6 +125,7 @@
             this.Column1.DataPropertyName = "Id_Fluxo";
             this.Column1.HeaderText = "Nº Caixa";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             this.Column1.Width = 90;
             // 
             // Column5
@@ -127,6 +134,7 @@
             this.Column5.DataPropertyName = "DataEntrada";
             this.Column5.HeaderText = "Data de Entrada";
             this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
             this.Column5.Width = 133;
             // 
             // Column7
@@ -135,6 +143,7 @@
             this.Column7.DataPropertyName = "HoraEntrada";
             this.Column7.HeaderText = "Hora da Entrada";
             this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
             this.Column7.Width = 135;
             // 
             // Column2
@@ -146,6 +155,7 @@
             this.Column2.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column2.HeaderText = "Valor de Entrada";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             this.Column2.Width = 136;
             // 
             // Column3
@@ -157,6 +167,7 @@
             this.Column3.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column3.HeaderText = "Valor em Caixa";
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             this.Column3.Width = 127;
             // 
             // Column6
@@ -165,6 +176,7 @@
             this.Column6.DataPropertyName = "DataSaida";
             this.Column6.HeaderText = "Data de Saída";
             this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             this.Column6.Width = 120;
             // 
             // Column8
@@ -173,6 +185,7 @@
             this.Column8.DataPropertyName = "HoraSaida";
             this.Column8.HeaderText = "Hora da Saída";
             this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
             this.Column8.Width = 122;
             // 
             // Column4
@@ -181,6 +194,7 @@
             this.Column4.DataPropertyName = "nome";
             this.Column4.HeaderText = "Operador";
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             this.Column4.Width = 94;
             // 
             // PanelCabecalho

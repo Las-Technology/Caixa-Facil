@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 using CaixaFacil.Properties;
 
@@ -589,6 +590,7 @@ namespace CaixaFacil
 
                     loadTelaInicial();
                     Backup.GerarBackup();
+                    soundPlayer.Play();
                 }
 
             }
@@ -636,6 +638,7 @@ namespace CaixaFacil
 
                     loadTelaInicial();
                     Backup.GerarBackup();
+                    soundPlayer.Play();
                 }
             }
             else
@@ -668,6 +671,7 @@ namespace CaixaFacil
 
                     loadTelaInicial();
                     Backup.GerarBackup();
+                    soundPlayer.Play();
                 }
             }
             else
@@ -757,6 +761,7 @@ namespace CaixaFacil
 
                     loadTelaInicial();
                     Backup.GerarBackup();
+                    soundPlayer.Play();
                 }
             }
             else
@@ -765,6 +770,9 @@ namespace CaixaFacil
                 txt_Codigo_Barra.Focus();
             }
         }
+
+
+        SoundPlayer soundPlayer = new SoundPlayer(Properties.Resources.Beep_Short);
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -938,6 +946,7 @@ namespace CaixaFacil
 
                     loadTelaInicial();
                     Backup.GerarBackup();
+                    soundPlayer.Play();
                 }
             }
             else
@@ -1252,6 +1261,7 @@ namespace CaixaFacil
 
                     loadTelaInicial();
                     Backup.GerarBackup();
+                    soundPlayer.Play();
                 }
             }
             else

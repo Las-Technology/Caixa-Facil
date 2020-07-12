@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbl_atendente = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -104,6 +104,7 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.lbl_atendente);
             this.panel1.Controls.Add(this.label4);
@@ -195,6 +196,7 @@
             this.btnVendaMista.Name = "btnVendaMista";
             this.btnVendaMista.Size = new System.Drawing.Size(199, 45);
             this.btnVendaMista.TabIndex = 26;
+            this.btnVendaMista.TabStop = false;
             this.btnVendaMista.Text = "Misto - [F7]";
             this.btnVendaMista.UseVisualStyleBackColor = true;
             this.btnVendaMista.Click += new System.EventHandler(this.btnVendaMista_Click);
@@ -211,6 +213,7 @@
             this.btnPagamentoCartao.Name = "btnPagamentoCartao";
             this.btnPagamentoCartao.Size = new System.Drawing.Size(199, 45);
             this.btnPagamentoCartao.TabIndex = 25;
+            this.btnPagamentoCartao.TabStop = false;
             this.btnPagamentoCartao.Text = "Pag. à Cartão- [F9]";
             this.btnPagamentoCartao.UseVisualStyleBackColor = true;
             this.btnPagamentoCartao.Click += new System.EventHandler(this.btnPagamentoCartao_Click);
@@ -227,6 +230,7 @@
             this.btn_PagamentoParcial.Name = "btn_PagamentoParcial";
             this.btn_PagamentoParcial.Size = new System.Drawing.Size(199, 45);
             this.btn_PagamentoParcial.TabIndex = 24;
+            this.btn_PagamentoParcial.TabStop = false;
             this.btn_PagamentoParcial.Text = "Parcial - [F5]";
             this.btn_PagamentoParcial.UseVisualStyleBackColor = true;
             this.btn_PagamentoParcial.Click += new System.EventHandler(this.btn_PagamentoParcial_Click);
@@ -243,6 +247,7 @@
             this.btn_Sair.Name = "btn_Sair";
             this.btn_Sair.Size = new System.Drawing.Size(199, 45);
             this.btn_Sair.TabIndex = 23;
+            this.btn_Sair.TabStop = false;
             this.btn_Sair.Text = "Sair - [ESC]";
             this.btn_Sair.UseVisualStyleBackColor = true;
             this.btn_Sair.Click += new System.EventHandler(this.btn_Sair_Click);
@@ -259,6 +264,7 @@
             this.btn_VenderParcelado.Name = "btn_VenderParcelado";
             this.btn_VenderParcelado.Size = new System.Drawing.Size(199, 45);
             this.btn_VenderParcelado.TabIndex = 22;
+            this.btn_VenderParcelado.TabStop = false;
             this.btn_VenderParcelado.Text = "Parcelamento - [F8]";
             this.btn_VenderParcelado.UseVisualStyleBackColor = true;
             this.btn_VenderParcelado.Click += new System.EventHandler(this.btn_VenderParcelado_Click);
@@ -275,6 +281,7 @@
             this.btn_VendaVista.Name = "btn_VendaVista";
             this.btn_VendaVista.Size = new System.Drawing.Size(199, 45);
             this.btn_VendaVista.TabIndex = 19;
+            this.btn_VendaVista.TabStop = false;
             this.btn_VendaVista.Text = " Vista - [F4]";
             this.btn_VendaVista.UseVisualStyleBackColor = true;
             this.btn_VendaVista.Click += new System.EventHandler(this.btn_VendaVista_Click);
@@ -291,6 +298,7 @@
             this.btn_VenderPrazo.Name = "btn_VenderPrazo";
             this.btn_VenderPrazo.Size = new System.Drawing.Size(199, 45);
             this.btn_VenderPrazo.TabIndex = 21;
+            this.btn_VenderPrazo.TabStop = false;
             this.btn_VenderPrazo.Text = "Prazo - [F6]";
             this.btn_VenderPrazo.UseVisualStyleBackColor = true;
             this.btn_VenderPrazo.Click += new System.EventHandler(this.btn_VenderPrazo_Click);
@@ -307,6 +315,7 @@
             this.btn_CancelarVenda.Name = "btn_CancelarVenda";
             this.btn_CancelarVenda.Size = new System.Drawing.Size(199, 45);
             this.btn_CancelarVenda.TabIndex = 20;
+            this.btn_CancelarVenda.TabStop = false;
             this.btn_CancelarVenda.Text = "Cancelar V - [F10]      ";
             this.btn_CancelarVenda.UseVisualStyleBackColor = true;
             this.btn_CancelarVenda.Click += new System.EventHandler(this.btn_CancelarVenda_Click);
@@ -372,6 +381,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.BackColor = System.Drawing.Color.White;
             this.groupBox1.Controls.Add(this.nd_Quantidade);
             this.groupBox1.Controls.Add(this.lblCodigoVenda);
             this.groupBox1.Controls.Add(this.cbOpcao);
@@ -392,6 +402,7 @@
             // 
             // nd_Quantidade
             // 
+            this.nd_Quantidade.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.nd_Quantidade.Font = new System.Drawing.Font("Times New Roman", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nd_Quantidade.Location = new System.Drawing.Point(661, 44);
             this.nd_Quantidade.Maximum = new decimal(new int[] {
@@ -417,6 +428,7 @@
             // 
             // lblCodigoVenda
             // 
+            this.lblCodigoVenda.BackColor = System.Drawing.Color.White;
             this.lblCodigoVenda.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lblCodigoVenda.Font = new System.Drawing.Font("Times New Roman", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCodigoVenda.Location = new System.Drawing.Point(19, 47);
@@ -425,6 +437,7 @@
             this.lblCodigoVenda.ReadOnly = true;
             this.lblCodigoVenda.Size = new System.Drawing.Size(127, 62);
             this.lblCodigoVenda.TabIndex = 21;
+            this.lblCodigoVenda.TabStop = false;
             this.lblCodigoVenda.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // cbOpcao
@@ -434,6 +447,7 @@
             this.cbOpcao.Name = "cbOpcao";
             this.cbOpcao.Size = new System.Drawing.Size(212, 23);
             this.cbOpcao.TabIndex = 20;
+            this.cbOpcao.TabStop = false;
             this.cbOpcao.Text = "Procurar por código de barras";
             this.cbOpcao.UseVisualStyleBackColor = true;
             this.cbOpcao.CheckedChanged += new System.EventHandler(this.cbOpcao_CheckedChanged);
@@ -448,6 +462,7 @@
             this.txt_ValorTotal.ReadOnly = true;
             this.txt_ValorTotal.Size = new System.Drawing.Size(258, 46);
             this.txt_ValorTotal.TabIndex = 15;
+            this.txt_ValorTotal.TabStop = false;
             this.txt_ValorTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btn_Remover
@@ -459,6 +474,7 @@
             this.btn_Remover.Name = "btn_Remover";
             this.btn_Remover.Size = new System.Drawing.Size(111, 38);
             this.btn_Remover.TabIndex = 19;
+            this.btn_Remover.TabStop = false;
             this.toolTip1.SetToolTip(this.btn_Remover, "Remover");
             this.btn_Remover.UseVisualStyleBackColor = true;
             this.btn_Remover.Click += new System.EventHandler(this.btn_Remover_Click);
@@ -481,6 +497,7 @@
             this.btn_Adcionar.Name = "btn_Adcionar";
             this.btn_Adcionar.Size = new System.Drawing.Size(111, 38);
             this.btn_Adcionar.TabIndex = 18;
+            this.btn_Adcionar.TabStop = false;
             this.toolTip1.SetToolTip(this.btn_Adcionar, "Adicionar");
             this.btn_Adcionar.UseVisualStyleBackColor = true;
             this.btn_Adcionar.Click += new System.EventHandler(this.btn_Adcionar_Click);
@@ -509,6 +526,7 @@
             this.btnDevolução.Name = "btnDevolução";
             this.btnDevolução.Size = new System.Drawing.Size(397, 60);
             this.btnDevolução.TabIndex = 15;
+            this.btnDevolução.TabStop = false;
             this.btnDevolução.Text = "Devolução de produtos - [CTRL + D]";
             this.btnDevolução.UseVisualStyleBackColor = true;
             this.btnDevolução.Click += new System.EventHandler(this.btnDevolução_Click);
@@ -523,6 +541,7 @@
             this.btn_BuscarServiço.Name = "btn_BuscarServiço";
             this.btn_BuscarServiço.Size = new System.Drawing.Size(326, 60);
             this.btn_BuscarServiço.TabIndex = 14;
+            this.btn_BuscarServiço.TabStop = false;
             this.btn_BuscarServiço.Text = "Serviços - [F11]";
             this.btn_BuscarServiço.UseVisualStyleBackColor = true;
             this.btn_BuscarServiço.Click += new System.EventHandler(this.btn_BuscarServiço_Click);
@@ -537,6 +556,7 @@
             this.btn_NovoCadastro.Name = "btn_NovoCadastro";
             this.btn_NovoCadastro.Size = new System.Drawing.Size(179, 60);
             this.btn_NovoCadastro.TabIndex = 13;
+            this.btn_NovoCadastro.TabStop = false;
             this.btn_NovoCadastro.Text = "Novo Cadastro - [F]";
             this.btn_NovoCadastro.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_NovoCadastro.UseVisualStyleBackColor = true;
@@ -552,6 +572,7 @@
             this.btn_BuscarProdutos.Name = "btn_BuscarProdutos";
             this.btn_BuscarProdutos.Size = new System.Drawing.Size(164, 60);
             this.btn_BuscarProdutos.TabIndex = 12;
+            this.btn_BuscarProdutos.TabStop = false;
             this.btn_BuscarProdutos.Text = "Produtos - [F2]";
             this.btn_BuscarProdutos.UseVisualStyleBackColor = true;
             this.btn_BuscarProdutos.Click += new System.EventHandler(this.btn_BuscarProdutos_Click);
@@ -566,6 +587,7 @@
             this.btn_BuscarPreços.Name = "btn_BuscarPreços";
             this.btn_BuscarPreços.Size = new System.Drawing.Size(156, 60);
             this.btn_BuscarPreços.TabIndex = 11;
+            this.btn_BuscarPreços.TabStop = false;
             this.btn_BuscarPreços.Text = "Preços - [F3]";
             this.btn_BuscarPreços.UseVisualStyleBackColor = true;
             this.btn_BuscarPreços.Click += new System.EventHandler(this.btn_BuscarPreços_Click);
@@ -580,6 +602,7 @@
             this.btn_ContasClientes.Name = "btn_ContasClientes";
             this.btn_ContasClientes.Size = new System.Drawing.Size(212, 60);
             this.btn_ContasClientes.TabIndex = 10;
+            this.btn_ContasClientes.TabStop = false;
             this.btn_ContasClientes.Text = " Contas de Clientes - [F1]";
             this.btn_ContasClientes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_ContasClientes.UseVisualStyleBackColor = true;
@@ -599,14 +622,14 @@
             this.DGV_ItensVenda.AllowUserToAddRows = false;
             this.DGV_ItensVenda.AllowUserToDeleteRows = false;
             this.DGV_ItensVenda.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGV_ItensVenda.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGV_ItensVenda.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DGV_ItensVenda.ColumnHeadersHeight = 30;
             this.DGV_ItensVenda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DGV_ItensVenda.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -623,13 +646,14 @@
             this.DGV_ItensVenda.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_ItensVenda.Size = new System.Drawing.Size(1013, 335);
             this.DGV_ItensVenda.TabIndex = 0;
+            this.DGV_ItensVenda.TabStop = false;
             this.DGV_ItensVenda.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_ItensVenda_CellClick);
             // 
             // ColumnCodigo
             // 
             this.ColumnCodigo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.ColumnCodigo.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.ColumnCodigo.DefaultCellStyle = dataGridViewCellStyle2;
             this.ColumnCodigo.HeaderText = "Código";
             this.ColumnCodigo.Name = "ColumnCodigo";
             this.ColumnCodigo.ReadOnly = true;
@@ -638,8 +662,8 @@
             // ColumnDescricaoProduto
             // 
             this.ColumnDescricaoProduto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.ColumnDescricaoProduto.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.ColumnDescricaoProduto.DefaultCellStyle = dataGridViewCellStyle3;
             this.ColumnDescricaoProduto.HeaderText = "Descrição";
             this.ColumnDescricaoProduto.Name = "ColumnDescricaoProduto";
             this.ColumnDescricaoProduto.ReadOnly = true;
@@ -647,8 +671,8 @@
             // ColumnQuantidade
             // 
             this.ColumnQuantidade.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.ColumnQuantidade.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.ColumnQuantidade.DefaultCellStyle = dataGridViewCellStyle4;
             this.ColumnQuantidade.HeaderText = "Quantidade";
             this.ColumnQuantidade.Name = "ColumnQuantidade";
             this.ColumnQuantidade.ReadOnly = true;
@@ -656,8 +680,8 @@
             // 
             // ColumnUnidade
             // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.ColumnUnidade.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.ColumnUnidade.DefaultCellStyle = dataGridViewCellStyle5;
             this.ColumnUnidade.HeaderText = "Unidade";
             this.ColumnUnidade.Name = "ColumnUnidade";
             this.ColumnUnidade.ReadOnly = true;
@@ -665,10 +689,10 @@
             // ColumnValorUnitario
             // 
             this.ColumnValorUnitario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle20.Format = "C2";
-            dataGridViewCellStyle20.NullValue = null;
-            this.ColumnValorUnitario.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.ColumnValorUnitario.DefaultCellStyle = dataGridViewCellStyle6;
             this.ColumnValorUnitario.HeaderText = "Valor Unitário";
             this.ColumnValorUnitario.Name = "ColumnValorUnitario";
             this.ColumnValorUnitario.ReadOnly = true;
@@ -677,10 +701,10 @@
             // ColumnSubTotal
             // 
             this.ColumnSubTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle21.Format = "C2";
-            dataGridViewCellStyle21.NullValue = null;
-            this.ColumnSubTotal.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle7.Format = "C2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.ColumnSubTotal.DefaultCellStyle = dataGridViewCellStyle7;
             this.ColumnSubTotal.HeaderText = "Valor SubTotal";
             this.ColumnSubTotal.Name = "ColumnSubTotal";
             this.ColumnSubTotal.ReadOnly = true;
@@ -771,6 +795,7 @@
             this.btn_Fechar.Name = "btn_Fechar";
             this.btn_Fechar.Size = new System.Drawing.Size(38, 41);
             this.btn_Fechar.TabIndex = 62;
+            this.btn_Fechar.TabStop = false;
             this.btn_Fechar.Text = "X";
             this.toolTip1.SetToolTip(this.btn_Fechar, "Fechar");
             this.btn_Fechar.UseVisualStyleBackColor = false;
@@ -790,6 +815,7 @@
             this.btn_Minimizar.Name = "btn_Minimizar";
             this.btn_Minimizar.Size = new System.Drawing.Size(38, 41);
             this.btn_Minimizar.TabIndex = 61;
+            this.btn_Minimizar.TabStop = false;
             this.btn_Minimizar.Text = "__";
             this.toolTip1.SetToolTip(this.btn_Minimizar, "Minimizar");
             this.btn_Minimizar.UseVisualStyleBackColor = false;

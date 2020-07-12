@@ -49,8 +49,8 @@
             // 
             // btn_Sair
             // 
-            this.btn_Sair.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_Sair.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_Sair.BackColor = System.Drawing.Color.White;
+            this.btn_Sair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Sair.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Sair.Location = new System.Drawing.Point(815, 308);
             this.btn_Sair.Name = "btn_Sair";
@@ -62,8 +62,8 @@
             // 
             // btnCadastroProduto
             // 
-            this.btnCadastroProduto.BackColor = System.Drawing.SystemColors.Control;
-            this.btnCadastroProduto.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCadastroProduto.BackColor = System.Drawing.Color.White;
+            this.btnCadastroProduto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCadastroProduto.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCadastroProduto.Location = new System.Drawing.Point(566, 308);
             this.btnCadastroProduto.Name = "btnCadastroProduto";
@@ -75,8 +75,8 @@
             // 
             // btn_CadastroCliente
             // 
-            this.btn_CadastroCliente.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_CadastroCliente.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_CadastroCliente.BackColor = System.Drawing.Color.White;
+            this.btn_CadastroCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_CadastroCliente.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_CadastroCliente.Location = new System.Drawing.Point(251, 308);
             this.btn_CadastroCliente.Name = "btn_CadastroCliente";

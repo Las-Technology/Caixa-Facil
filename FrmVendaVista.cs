@@ -54,7 +54,7 @@ namespace CaixaFacil
                 if (txt_ValorPago.Text != "")
                 {
                     ValorPago = decimal.Parse(txt_ValorPago.Text.Trim());
-                    troco = ValorPago - ValorTotal;
+                    troco = ValorPago - decimal.Parse(txt_ValorDesconto.Text);
                     txt_Troco.Text = troco.ToString();
                     txt_ValorPago.Text = ValorPago.ToString();
                     txt_ValorPago.Text = Convert.ToDouble(txt_ValorPago.Text.Trim()).ToString("0.00");
@@ -277,6 +277,7 @@ namespace CaixaFacil
         private void btn_Descontar_Click(object sender, EventArgs e)
         {
             goDescontar = !goDescontar;
+            txt_ValorDesconto.Text = ValorTotal.ToString();
 
             switch (goDescontar)
             {
@@ -290,7 +291,6 @@ namespace CaixaFacil
                     txt_DescontoPorcento.Visible = false;
                     txt_DescontoDinheiro.Text = "0,00";
                     txt_DescontoPorcento.Text = "0,00";
-                    txt_ValorDesconto.Text = "0,00";
                     ValorDesconto = decimal.Parse(txt_ValorDesconto.Text);
                     txt_Troco.Text = (ValorPago - ValorTotal).ToString();
                     descontoDinheiro = 0.00m;
@@ -304,7 +304,6 @@ namespace CaixaFacil
                     lbl_DescontoPorcento.Visible = true;
                     txt_DescontoPorcento.Visible = true;
                     txt_ValorDesconto.Visible = true;
-                    txt_ValorDesconto.Text = ValorTotal.ToString();
                     ValorDesconto = decimal.Parse(txt_ValorDesconto.Text);
                     break;
             }

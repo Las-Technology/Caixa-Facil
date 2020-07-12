@@ -60,14 +60,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lbl_RecebimentoMisto = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.lbl_RecebimentoParcial = new System.Windows.Forms.Label();
             this.lbl_RecebimentoParcela = new System.Windows.Forms.Label();
             this.lbl_RecebimentoPrazo = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.lbl_RecebimentoMisto = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gb_ValoresPos.SuspendLayout();
@@ -80,6 +80,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.gb_ValoresPos);
@@ -463,6 +464,27 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Recebimentos:";
             // 
+            // lbl_RecebimentoMisto
+            // 
+            this.lbl_RecebimentoMisto.BackColor = System.Drawing.Color.White;
+            this.lbl_RecebimentoMisto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_RecebimentoMisto.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_RecebimentoMisto.Location = new System.Drawing.Point(10, 231);
+            this.lbl_RecebimentoMisto.Name = "lbl_RecebimentoMisto";
+            this.lbl_RecebimentoMisto.Size = new System.Drawing.Size(189, 31);
+            this.lbl_RecebimentoMisto.TabIndex = 485;
+            this.lbl_RecebimentoMisto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(6, 208);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(54, 19);
+            this.label10.TabIndex = 484;
+            this.label10.Text = "Misto:";
+            // 
             // lbl_RecebimentoParcial
             // 
             this.lbl_RecebimentoParcial.BackColor = System.Drawing.Color.White;
@@ -525,27 +547,6 @@
             this.label8.Size = new System.Drawing.Size(51, 19);
             this.label8.TabIndex = 2;
             this.label8.Text = "Prazo:";
-            // 
-            // lbl_RecebimentoMisto
-            // 
-            this.lbl_RecebimentoMisto.BackColor = System.Drawing.Color.White;
-            this.lbl_RecebimentoMisto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_RecebimentoMisto.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_RecebimentoMisto.Location = new System.Drawing.Point(10, 231);
-            this.lbl_RecebimentoMisto.Name = "lbl_RecebimentoMisto";
-            this.lbl_RecebimentoMisto.Size = new System.Drawing.Size(189, 31);
-            this.lbl_RecebimentoMisto.TabIndex = 485;
-            this.lbl_RecebimentoMisto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(6, 208);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(54, 19);
-            this.label10.TabIndex = 484;
-            this.label10.Text = "Misto:";
             // 
             // FrmRegistroCaixa
             // 

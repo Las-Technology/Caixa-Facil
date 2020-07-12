@@ -71,9 +71,9 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(260, 214);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Aplicativo: Gerencimento Caixa Fácil\r\n\r\nVersão: 1.0\r\n\r\nDesenvolvida pela LAS Tech" +
-    "nology\r\n       Joelmir Rogério Carvalho\r\n\r\nEmail: lastechnology2018@gmail.com\r\nT" +
-    "elefone: (38) 998999737";
+            this.label2.Text = "Aplicativo: Caixa Fácil\r\n\r\nVersão: 2.0\r\n\r\nDesenvolvida pela LAS Technology\r\n     " +
+    "  Joelmir Rogério Carvalho\r\n\r\nEmail: lastechnology2018@gmail.com\r\nTelefone: (38)" +
+    " 9 99093710";
             // 
             // pictureBox1
             // 

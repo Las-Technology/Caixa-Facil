@@ -15,6 +15,7 @@ namespace CaixaFacil
 
         private void FrmListavenda_Load(object sender, EventArgs e)
         {
+            cbMaxRows.SelectedIndex = 1;
             ListaTodasVendas();
         }
 
@@ -24,8 +25,18 @@ namespace CaixaFacil
         {
             try
             {
+                string filter = "";
+
+                if (cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
+                    filter = "Top " + cbMaxRows.Text;
+
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.Desconto, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Produto.Unidade <> 'serviço'";
+
+                if (string.IsNullOrWhiteSpace(txtNomeCliente.Text))
+                    _sql = "select distinct " + filter + " Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.Desconto, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Produto.Unidade <> 'serviço'";
+                else 
+                    _sql = "select distinct " + filter + " Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.Desconto, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Cliente.Nome like '%" + txtNomeCliente.Text + "%' and Produto.Unidade <> 'serviço'";
+
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
@@ -86,20 +97,7 @@ namespace CaixaFacil
 
         private void txtNomeCliente_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.Desconto, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Cliente.Nome like '%" + txtNomeCliente.Text + "%' and Produto.Unidade <> 'serviço'";
-                SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
-                comando.SelectCommand.CommandText = _sql;
-                DataTable Tabela = new DataTable();
-                comando.Fill(Tabela);
-                dgv_ListaVenda.DataSource = Tabela;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            ListaTodasVendas();
         }
 
         private void dgv_ListaVenda_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -121,6 +119,25 @@ namespace CaixaFacil
         }
 
        string CodVenda = "", Cliente, horaVenda, dataVenda, atendente, ValorVenda, codCliente, desconto;
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                ListaTodasVendas();
+        }
+
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListaTodasVendas();
+        }
 
         private void Menu_Sair_Click(object sender, EventArgs e)
         {

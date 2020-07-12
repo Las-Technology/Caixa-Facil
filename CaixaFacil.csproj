@@ -1386,6 +1386,7 @@
     <None Include="Resources\Botão Restaurar.png" />
     <None Include="Resources\Contas-a-pagar-e-receber-300x227.png" />
     <None Include="Resources\10232901-fire-alphabets-in-flame-letter-e2.jpg" />
+    <None Include="Resources\Beep_Short.wav" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

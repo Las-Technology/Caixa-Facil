@@ -71,6 +71,8 @@
             this.lbl_CliProd = new System.Windows.Forms.Label();
             this.cbFilter = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cbMaxRows = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ListaVenda)).BeginInit();
             this.PanelCabecalho.SuspendLayout();
@@ -83,10 +85,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.dgv_ListaVenda);
             this.groupBox1.Location = new System.Drawing.Point(4, 144);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1158, 346);
+            this.groupBox1.Size = new System.Drawing.Size(1085, 346);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             // 
@@ -136,7 +141,7 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             this.dgv_ListaVenda.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgv_ListaVenda.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_ListaVenda.Size = new System.Drawing.Size(1152, 327);
+            this.dgv_ListaVenda.Size = new System.Drawing.Size(1079, 327);
             this.dgv_ListaVenda.TabIndex = 0;
             this.dgv_ListaVenda.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ListaVenda_CellClick);
             this.dgv_ListaVenda.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_ListaVenda_DataBindingComplete);
@@ -270,7 +275,7 @@
             this.PanelCabecalho.Location = new System.Drawing.Point(0, 0);
             this.PanelCabecalho.Margin = new System.Windows.Forms.Padding(4);
             this.PanelCabecalho.Name = "PanelCabecalho";
-            this.PanelCabecalho.Size = new System.Drawing.Size(1174, 67);
+            this.PanelCabecalho.Size = new System.Drawing.Size(1101, 67);
             this.PanelCabecalho.TabIndex = 5;
             this.PanelCabecalho.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelCabecalho_MouseDown);
             this.PanelCabecalho.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PanelCabecalho_MouseMove);
@@ -303,7 +308,7 @@
             this.btn_Fechar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Fechar.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Fechar.ForeColor = System.Drawing.Color.White;
-            this.btn_Fechar.Location = new System.Drawing.Point(1130, 4);
+            this.btn_Fechar.Location = new System.Drawing.Point(1057, 4);
             this.btn_Fechar.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Fechar.Name = "btn_Fechar";
             this.btn_Fechar.Size = new System.Drawing.Size(38, 41);
@@ -372,9 +377,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox2.Controls.Add(this.lbl_TotalDesconto);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(564, 520);
+            this.groupBox2.Location = new System.Drawing.Point(527, 520);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 100);
             this.groupBox2.TabIndex = 24;
@@ -393,9 +399,10 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox5.Controls.Add(this.lbl_TotalVendaDesconto);
             this.groupBox5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(781, 520);
+            this.groupBox5.Location = new System.Drawing.Point(744, 520);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(222, 100);
             this.groupBox5.TabIndex = 25;
@@ -414,9 +421,10 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox3.Controls.Add(this.lbl_TotalLucros);
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(141, 520);
+            this.groupBox3.Location = new System.Drawing.Point(104, 520);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(200, 100);
             this.groupBox3.TabIndex = 22;
@@ -435,9 +443,10 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox4.Controls.Add(this.lbl_TotalVendas);
             this.groupBox4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(358, 520);
+            this.groupBox4.Location = new System.Drawing.Point(321, 520);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(200, 100);
             this.groupBox4.TabIndex = 23;
@@ -456,9 +465,10 @@
             // 
             // txtCliProd
             // 
+            this.txtCliProd.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtCliProd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCliProd.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCliProd.Location = new System.Drawing.Point(272, 118);
+            this.txtCliProd.Location = new System.Drawing.Point(89, 112);
             this.txtCliProd.Name = "txtCliProd";
             this.txtCliProd.Size = new System.Drawing.Size(613, 26);
             this.txtCliProd.TabIndex = 26;
@@ -466,9 +476,10 @@
             // 
             // lbl_CliProd
             // 
+            this.lbl_CliProd.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbl_CliProd.AutoSize = true;
             this.lbl_CliProd.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_CliProd.Location = new System.Drawing.Point(268, 96);
+            this.lbl_CliProd.Location = new System.Drawing.Point(85, 90);
             this.lbl_CliProd.Name = "lbl_CliProd";
             this.lbl_CliProd.Size = new System.Drawing.Size(51, 19);
             this.lbl_CliProd.TabIndex = 27;
@@ -477,6 +488,7 @@
             // 
             // cbFilter
             // 
+            this.cbFilter.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cbFilter.BackColor = System.Drawing.Color.Silver;
             this.cbFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -485,7 +497,7 @@
             this.cbFilter.Items.AddRange(new object[] {
             "Cliente",
             "Produto"});
-            this.cbFilter.Location = new System.Drawing.Point(891, 117);
+            this.cbFilter.Location = new System.Drawing.Point(708, 111);
             this.cbFilter.Name = "cbFilter";
             this.cbFilter.Size = new System.Drawing.Size(121, 27);
             this.cbFilter.TabIndex = 28;
@@ -493,20 +505,71 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(887, 95);
+            this.label1.Location = new System.Drawing.Point(704, 89);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 19);
             this.label1.TabIndex = 29;
             this.label1.Text = "Buscar por:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // cbMaxRows
+            // 
+            this.cbMaxRows.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbMaxRows.BackColor = System.Drawing.Color.White;
+            this.cbMaxRows.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.cbMaxRows.FormattingEnabled = true;
+            this.cbMaxRows.Items.AddRange(new object[] {
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60",
+            "70",
+            "80",
+            "90",
+            "100",
+            "200",
+            "300",
+            "400",
+            "500",
+            "600",
+            "700",
+            "800",
+            "900",
+            "1000",
+            "Todos"});
+            this.cbMaxRows.Location = new System.Drawing.Point(956, 111);
+            this.cbMaxRows.Name = "cbMaxRows";
+            this.cbMaxRows.Size = new System.Drawing.Size(132, 27);
+            this.cbMaxRows.TabIndex = 31;
+            this.cbMaxRows.SelectedIndexChanged += new System.EventHandler(this.cbMaxRows_SelectedIndexChanged);
+            this.cbMaxRows.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbMaxRows_KeyDown);
+            this.cbMaxRows.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbMaxRows_KeyPress);
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.label4.Location = new System.Drawing.Point(838, 114);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(113, 19);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "Máx. de linhas:";
+            // 
             // FrmListaVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1172, 648);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1099, 648);
+            this.Controls.Add(this.cbMaxRows);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbFilter);
             this.Controls.Add(this.lbl_CliProd);
@@ -521,6 +584,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmListaVenda";
             this.Text = "FrmListaVenda1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ListaVenda)).EndInit();
             this.PanelCabecalho.ResumeLayout(false);
@@ -575,5 +639,7 @@
         private System.Windows.Forms.Label lbl_CliProd;
         private System.Windows.Forms.ComboBox cbFilter;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbMaxRows;
+        private System.Windows.Forms.Label label4;
     }
 }

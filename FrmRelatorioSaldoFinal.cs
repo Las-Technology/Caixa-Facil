@@ -1,25 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
 {
     public partial class FrmRelatorioSaldoFinal : Form
     {
-
-
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
 
         public FrmRelatorioSaldoFinal()
         {
             InitializeComponent();
+            cbMaxRows.SelectedIndex = 1;
         }
 
         private void btn_Fechar_Click(object sender, EventArgs e)
@@ -58,19 +52,27 @@ namespace CaixaFacil
             CarregarGrid();
         }
 
+        private string FilterRows()
+        {
+            if (cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text) && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
+                return "Top " + cbMaxRows.Text;
+            else
+                return "";
+        }
+
         private void CarregarGrid()
         {
             if ((cbxSaldoNegativo.Checked && cbxSaldoPositivo.Checked) || (!cbxSaldoPositivo.Checked && !cbxSaldoNegativo.Checked))
             {
-                _sql = "Select FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> ''";
+                _sql = "Select " + FilterRows() + " FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> ''";
             }
             else if (cbxSaldoPositivo.Checked)
             {
-                _sql = "Select FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and FluxoCaixa.SaldoCaixa >= 0";
+                _sql = "Select " + FilterRows() + " FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and FluxoCaixa.SaldoCaixa >= 0";
             }
             else if (cbxSaldoNegativo.Checked)
             {
-                _sql = "Select FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and FluxoCaixa.SaldoCaixa < 0";
+                _sql = "Select " + FilterRows() + " FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and FluxoCaixa.SaldoCaixa < 0";
             }
 
             SqlConnection conexao = new SqlConnection(stringConn);
@@ -85,7 +87,6 @@ namespace CaixaFacil
                 {
                     dgvDadosSaldoFinal.DataSource = Tabela;
                     DestacarSaldoNegativo();
-                    dgvDadosSaldoFinal.CurrentRow.Selected = false;
                 }
             }
             catch (Exception ex)
@@ -124,15 +125,13 @@ namespace CaixaFacil
                 _sql = "Select sum(SaldoCaixa) AS ValorCaixa from FluxoCaixa where DataSaida <> '' and SaldoCaixa < 0";
                 SomarValoresSaldoCaixa();
             }
-            
-
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             if (txt_Descricao.Text == "")
             {
-                _sql = "Select FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%' and CONVERT(Date, FluxoCaixa.DataEntrada, 103) BETWEEN CONVERT(Date, @DataInicial, 103) AND CONVERT(Date, @DataFinal, 103)";
+                _sql = "Select " + FilterRows() + " FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%' and CONVERT(Date, FluxoCaixa.DataEntrada, 103) BETWEEN CONVERT(Date, @DataInicial, 103) AND CONVERT(Date, @DataFinal, 103)";
             }
 
             if (cb_Opcao.SelectedIndex == 0)
@@ -146,15 +145,15 @@ namespace CaixaFacil
 
             if ((cbxSaldoNegativo.Checked && cbxSaldoPositivo.Checked) || (!cbxSaldoPositivo.Checked && !cbxSaldoNegativo.Checked))
             {
-                _sql = "Select FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%' and CONVERT(Date, FluxoCaixa.DataEntrada, 103) BETWEEN CONVERT(Date, @DataInicial, 103) AND CONVERT(Date, @DataFinal, 103)";
+                _sql = "Select " + FilterRows() + " FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%' and CONVERT(Date, FluxoCaixa.DataEntrada, 103) BETWEEN CONVERT(Date, @DataInicial, 103) AND CONVERT(Date, @DataFinal, 103)";
             }
             else if (cbxSaldoPositivo.Checked)
             {
-                _sql = "Select FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%' and CONVERT(Date, FluxoCaixa.DataEntrada, 103) BETWEEN CONVERT(Date, @DataInicial, 103) AND CONVERT(Date, @DataFinal, 103) and FluxoCaixa.SaldoCaixa >= 0";
+                _sql = "Select " + FilterRows() + " FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%' and CONVERT(Date, FluxoCaixa.DataEntrada, 103) BETWEEN CONVERT(Date, @DataInicial, 103) AND CONVERT(Date, @DataFinal, 103) and FluxoCaixa.SaldoCaixa >= 0";
             }
             else if (cbxSaldoNegativo.Checked)
             {
-                _sql = "Select FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%' and CONVERT(Date, FluxoCaixa.DataEntrada, 103) BETWEEN CONVERT(Date, @DataInicial, 103) AND CONVERT(Date, @DataFinal, 103) and FluxoCaixa.SaldoCaixa < 0";
+                _sql = "Select " + FilterRows() + " FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%' and CONVERT(Date, FluxoCaixa.DataEntrada, 103) BETWEEN CONVERT(Date, @DataInicial, 103) AND CONVERT(Date, @DataFinal, 103) and FluxoCaixa.SaldoCaixa < 0";
             }
 
             SqlConnection conexao = new SqlConnection(stringConn);
@@ -244,15 +243,15 @@ namespace CaixaFacil
             {
                 if ((cbxSaldoPositivo.Checked && cbxSaldoNegativo.Checked) || (!cbxSaldoPositivo.Checked && !cbxSaldoNegativo.Checked))
                 {
-                    _sql = "Select FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%'";
+                    _sql = "Select " + FilterRows() + " FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%'";
                 }
                 else if (cbxSaldoPositivo.Checked)
                 {
-                    _sql = "Select FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%' and FluxoCaixa.SaldoCaixa >= 0";
+                    _sql = "Select " + FilterRows() + " FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%' and FluxoCaixa.SaldoCaixa >= 0";
                 }
                 else if (cbxSaldoNegativo.Checked)
                 {
-                    _sql = "Select FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%'  and FluxoCaixa.SaldoCaixa < 0";
+                    _sql = "Select " + FilterRows() + " FluxoCaixa.DataEntrada, FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada AS ValorCaixa, FluxoCaixa.ValorCaixa as ValorRecebido, FluxoCaixa.SaldoCaixa, Usuario.Nome from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%'  and FluxoCaixa.SaldoCaixa < 0";
                 }
 
                 SqlConnection conexao = new SqlConnection(stringConn);
@@ -411,6 +410,38 @@ namespace CaixaFacil
         }
 
         decimal valorTotalCaixa, ValorTotalRecebido, ValorTotalSaldoCaixa;
+
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txt_Descricao.Text))
+            {
+                CarregarGrid();
+            }
+            else
+                txt_Descricao_TextChanged(sender, e);
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                cbMaxRows_SelectedIndexChanged(sender, e);
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void dgvDadosSaldoFinal_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            DataGridView dgv;
+            dgv = (DataGridView)sender;
+            dgv.ClearSelection();
+        }
+
         private void SomarValoresCaixa()
         {
             SqlConnection conexao = new SqlConnection(stringConn);

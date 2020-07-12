@@ -36,12 +36,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btn_Fechar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.cbMaxRows = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.dgv_Busca = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_Nome = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.cbMaxRows = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -121,7 +121,7 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.cbMaxRows);
             this.panel3.Controls.Add(this.label4);
@@ -134,51 +134,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1059, 405);
             this.panel3.TabIndex = 2;
-            // 
-            // dgv_Busca
-            // 
-            this.dgv_Busca.AllowUserToAddRows = false;
-            this.dgv_Busca.AllowUserToDeleteRows = false;
-            this.dgv_Busca.AllowUserToOrderColumns = true;
-            this.dgv_Busca.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgv_Busca.BackgroundColor = System.Drawing.Color.White;
-            this.dgv_Busca.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Busca.Location = new System.Drawing.Point(10, 66);
-            this.dgv_Busca.Margin = new System.Windows.Forms.Padding(2);
-            this.dgv_Busca.Name = "dgv_Busca";
-            this.dgv_Busca.ReadOnly = true;
-            this.dgv_Busca.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Busca.Size = new System.Drawing.Size(1039, 259);
-            this.dgv_Busca.TabIndex = 7;
-            this.dgv_Busca.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Busca_CellClick);
-            this.dgv_Busca.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_Busca_DataBindingComplete);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(294, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 19);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Nome:";
-            // 
-            // txt_Nome
-            // 
-            this.txt_Nome.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txt_Nome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_Nome.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Nome.Location = new System.Drawing.Point(353, 6);
-            this.txt_Nome.Margin = new System.Windows.Forms.Padding(2);
-            this.txt_Nome.Name = "txt_Nome";
-            this.txt_Nome.Size = new System.Drawing.Size(418, 26);
-            this.txt_Nome.TabIndex = 2;
-            this.txt_Nome.TextChanged += new System.EventHandler(this.txt_Nome_TextChanged);
-            this.txt_Nome.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Nome_KeyDown);
             // 
             // cbMaxRows
             // 
@@ -226,6 +181,51 @@
             this.label4.Size = new System.Drawing.Size(133, 19);
             this.label4.TabIndex = 33;
             this.label4.Text = "Máximo de linhas:";
+            // 
+            // dgv_Busca
+            // 
+            this.dgv_Busca.AllowUserToAddRows = false;
+            this.dgv_Busca.AllowUserToDeleteRows = false;
+            this.dgv_Busca.AllowUserToOrderColumns = true;
+            this.dgv_Busca.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgv_Busca.BackgroundColor = System.Drawing.Color.White;
+            this.dgv_Busca.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Busca.Location = new System.Drawing.Point(10, 66);
+            this.dgv_Busca.Margin = new System.Windows.Forms.Padding(2);
+            this.dgv_Busca.Name = "dgv_Busca";
+            this.dgv_Busca.ReadOnly = true;
+            this.dgv_Busca.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Busca.Size = new System.Drawing.Size(1039, 259);
+            this.dgv_Busca.TabIndex = 7;
+            this.dgv_Busca.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Busca_CellClick);
+            this.dgv_Busca.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_Busca_DataBindingComplete);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(294, 20);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 19);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Nome:";
+            // 
+            // txt_Nome
+            // 
+            this.txt_Nome.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txt_Nome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_Nome.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Nome.Location = new System.Drawing.Point(353, 17);
+            this.txt_Nome.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_Nome.Name = "txt_Nome";
+            this.txt_Nome.Size = new System.Drawing.Size(418, 26);
+            this.txt_Nome.TabIndex = 2;
+            this.txt_Nome.TextChanged += new System.EventHandler(this.txt_Nome_TextChanged);
+            this.txt_Nome.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Nome_KeyDown);
             // 
             // FrmPesquisarUsuario
             // 

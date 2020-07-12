@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -16,6 +11,7 @@ namespace CaixaFacil
         public FrmRelatorioSaidaCaixa()
         {
             InitializeComponent();
+            cbMaxRows.SelectedIndex = 1;
         }
 
         private void FrmRelatorioSaidaCaixa_Load(object sender, EventArgs e)
@@ -25,10 +21,20 @@ namespace CaixaFacil
         }
 
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _Sql;
+
+        private string FilterRows()
+        {
+            string filter = "";
+            if (cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
+                filter = "Top " + cbMaxRows.Text;
+
+            return filter;
+        }
+
         private void CarregarValoresSaidaCaixa()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _Sql = "Select FluxoCaixa.Id_Fluxo, FluxoCaixa.DataEntrada, Usuario.Nome, SaidaCaixa.ValorSaida, SaidaCaixa.MotivoRetirada from SaidaCaixa inner join FluxoCaixa on FluxoCaixa.Id_Fluxo = SaidaCaixa.Id_Fluxo inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario";
+            _Sql = "Select " + FilterRows() + " FluxoCaixa.Id_Fluxo, FluxoCaixa.DataEntrada, Usuario.Nome, SaidaCaixa.ValorSaida, SaidaCaixa.MotivoRetirada from SaidaCaixa inner join FluxoCaixa on FluxoCaixa.Id_Fluxo = SaidaCaixa.Id_Fluxo inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario";
             SqlDataAdapter comando = new SqlDataAdapter(_Sql, conexao);
             comando.SelectCommand.CommandText = _Sql;
             DataTable Tabela = new DataTable();
@@ -81,6 +87,26 @@ namespace CaixaFacil
         }
 
         int X = 0, Y = 0;
+
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CarregarValoresSaidaCaixa();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                CarregarValoresSaidaCaixa();
+        }
+
         private void PanelCabecalho_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;

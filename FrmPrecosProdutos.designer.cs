@@ -29,8 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbMaxRows = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.dgv_Busca = new System.Windows.Forms.DataGridView();
             this.idProdutoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,8 +49,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tablePrecosProdutoTableAdapter = new CaixaFacil.DbControleVendaDataSetTableAdapters.TablePrecosProdutoTableAdapter();
-            this.cbMaxRows = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Busca)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePrecosProdutoBindingSource)).BeginInit();
@@ -58,6 +58,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.cbMaxRows);
             this.panel1.Controls.Add(this.label4);
@@ -71,6 +72,53 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 485);
             this.panel1.TabIndex = 1;
+            // 
+            // cbMaxRows
+            // 
+            this.cbMaxRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.cbMaxRows.BackColor = System.Drawing.Color.White;
+            this.cbMaxRows.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.cbMaxRows.FormattingEnabled = true;
+            this.cbMaxRows.Items.AddRange(new object[] {
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60",
+            "70",
+            "80",
+            "90",
+            "100",
+            "200",
+            "300",
+            "400",
+            "500",
+            "600",
+            "700",
+            "800",
+            "900",
+            "1000",
+            "Todos"});
+            this.cbMaxRows.Location = new System.Drawing.Point(358, 441);
+            this.cbMaxRows.Name = "cbMaxRows";
+            this.cbMaxRows.Size = new System.Drawing.Size(132, 27);
+            this.cbMaxRows.TabIndex = 36;
+            this.cbMaxRows.SelectedIndexChanged += new System.EventHandler(this.cbMaxRows_SelectedIndexChanged);
+            this.cbMaxRows.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbMaxRows_KeyDown);
+            this.cbMaxRows.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbMaxRows_KeyPress);
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.label4.Location = new System.Drawing.Point(220, 444);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(133, 19);
+            this.label4.TabIndex = 35;
+            this.label4.Text = "Máximo de linhas:";
             // 
             // dgv_Busca
             // 
@@ -117,9 +165,9 @@
             // 
             this.valorVendaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.valorVendaDataGridViewTextBoxColumn.DataPropertyName = "ValorVenda";
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.valorVendaDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.valorVendaDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.valorVendaDataGridViewTextBoxColumn.HeaderText = "Preço";
             this.valorVendaDataGridViewTextBoxColumn.Name = "valorVendaDataGridViewTextBoxColumn";
             this.valorVendaDataGridViewTextBoxColumn.ReadOnly = true;
@@ -253,53 +301,6 @@
             // tablePrecosProdutoTableAdapter
             // 
             this.tablePrecosProdutoTableAdapter.ClearBeforeFill = true;
-            // 
-            // cbMaxRows
-            // 
-            this.cbMaxRows.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.cbMaxRows.BackColor = System.Drawing.Color.White;
-            this.cbMaxRows.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.cbMaxRows.FormattingEnabled = true;
-            this.cbMaxRows.Items.AddRange(new object[] {
-            "10",
-            "20",
-            "30",
-            "40",
-            "50",
-            "60",
-            "70",
-            "80",
-            "90",
-            "100",
-            "200",
-            "300",
-            "400",
-            "500",
-            "600",
-            "700",
-            "800",
-            "900",
-            "1000",
-            "Todos"});
-            this.cbMaxRows.Location = new System.Drawing.Point(358, 441);
-            this.cbMaxRows.Name = "cbMaxRows";
-            this.cbMaxRows.Size = new System.Drawing.Size(132, 27);
-            this.cbMaxRows.TabIndex = 36;
-            this.cbMaxRows.SelectedIndexChanged += new System.EventHandler(this.cbMaxRows_SelectedIndexChanged);
-            this.cbMaxRows.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbMaxRows_KeyDown);
-            this.cbMaxRows.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbMaxRows_KeyPress);
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(220, 444);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(133, 19);
-            this.label4.TabIndex = 35;
-            this.label4.Text = "Máximo de linhas:";
             // 
             // FrmPrecosProdutos
             // 
