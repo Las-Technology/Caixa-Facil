@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -18,7 +12,7 @@ namespace CaixaFacil
             lbl_PerguntaSeguranca.Text = PerguntaSeguranca;
         }
 
-        public string RespostaSeguranca { get; set; }    
+        public string RespostaSeguranca { get; set; }
         public string AcaoFechar { get; set; }
         private void btn_Confirmar_Click(object sender, EventArgs e)
         {

@@ -97,7 +97,6 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x64\Release\CaixaFacil.FrmPagame
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x64\Release\CaixaFacil.FrmPesquisarAgendamento.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x64\Release\CaixaFacil.FrmPesquisarBoletos.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x64\Release\CaixaFacil.FrmPesquisarCliente.resources
-C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x64\Release\CaixaFacil.FrmPesquisarEmpresa.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x64\Release\CaixaFacil.FrmPesquisarFornecedor.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x64\Release\CaixaFacil.FrmPesquisarProdutos.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x64\Release\CaixaFacil.FrmPesquisarServico.resources

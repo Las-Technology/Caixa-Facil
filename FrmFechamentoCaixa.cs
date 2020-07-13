@@ -83,7 +83,7 @@ namespace CaixaFacil
 
         private void RegistroSaidaCaixa()
         {
-             SqlConnection conexao = new SqlConnection(stringConn);
+            SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "select * from FluxoCaixa inner join SaidaCaixa on SaidaCaixa.Id_Fluxo = FluxoCaixa.Id_Fluxo where SaidaCaixa.Id_Fluxo = @Id_Fluxo";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.Parameters.AddWithValue("@Id_Fluxo", Id_Caixa);
@@ -151,7 +151,7 @@ namespace CaixaFacil
         private decimal SumValorReceberPagamentoParceladoAndPrazo()
         {
             decimal valorParceladoAndPrazo = 0.00m;
-            
+
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "select sum(ParcelaVenda.ValorParcelado) as Valor from Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join FormaPagamento on FormaPagamento.id_Venda = Venda.id_Venda where Venda.DataVenda = convert(date, @DataVenda, 103) and ParcelaVenda.DataPagamento = '' and (FormaPagamento.Descricao = 'PARCELADO' or FormaPagamento.Descricao = 'PRAZO') and Venda.HoraVenda >= convert(datetime, @HoraVenda, 103)";
             SqlCommand comando = new SqlCommand(_sql, conexao);
@@ -295,7 +295,7 @@ namespace CaixaFacil
         ClassFluxoCaixa FluxoCaixa = new ClassFluxoCaixa();
         private void btn_FecharCaixa_Click(object sender, EventArgs e)
         {
-           if (txt_ValorTotalCaixa.Text != "")
+            if (txt_ValorTotalCaixa.Text != "")
             {
                 try
                 {
@@ -410,7 +410,7 @@ namespace CaixaFacil
                         else
                         {
                             Saldo = ValorTotalCaixa - ((ValoresRecebidos + ValorEntrada) - ValorSaida);
-                        }                       
+                        }
                         txt_SaldoCaixa.Text = "R$ " + Saldo;
                         if (Saldo < 0)
                         {
@@ -451,7 +451,7 @@ namespace CaixaFacil
         int Id_Usuario;
         public void ValoresCaixa()
         {
-             SqlConnection conexao = new SqlConnection(stringConn);
+            SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Select * from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.Id_Fluxo = @ID";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.Parameters.AddWithValue("@ID", txt_CodigoCaixa.Text);
@@ -501,7 +501,7 @@ namespace CaixaFacil
                 else
                 {
                     ValorSaida = decimal.Parse(comando.ExecuteScalar().ToString());
-                   txt_ValorRetiradas.Text = "R$ " + ValorSaida;
+                    txt_ValorRetiradas.Text = "R$ " + ValorSaida;
                 }
             }
             catch (Exception ex)

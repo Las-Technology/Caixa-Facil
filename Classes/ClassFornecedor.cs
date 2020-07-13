@@ -22,7 +22,7 @@ namespace CaixaFacil
         private string Telefone;
         private string Celular;
         private string Email;
-        
+
         public int id
         {
             get { return Id; }
@@ -33,7 +33,7 @@ namespace CaixaFacil
             get { return Nome; }
             set { Nome = value; }
         }
-      
+
         public string Cnpj
         {
             get { return CNPJ; }
@@ -98,7 +98,7 @@ namespace CaixaFacil
                 "@Endereco, @Numero,@Cidade,@Estado,@Telefone,@Celular,@Email)";
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@ID", id);
-            comando.Parameters.AddWithValue("@Nome", nome);          
+            comando.Parameters.AddWithValue("@Nome", nome);
             comando.Parameters.AddWithValue("@CNPJ", Cnpj);
             comando.Parameters.AddWithValue("@Inscricao", Inscricao);
             comando.Parameters.AddWithValue("@Cep", CEP);
@@ -164,7 +164,7 @@ namespace CaixaFacil
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Delete from Fornecedor where Id_fornecedor = @ID";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-            comando.Parameters.AddWithValue("@ID", id);            
+            comando.Parameters.AddWithValue("@ID", id);
             comando.CommandText = _sql;
             try
             {
@@ -231,7 +231,7 @@ namespace CaixaFacil
                 conexao.Close();
             }
         }
-        
+
         public bool VerificarCNPJexistsUpdate()
         {
             SqlConnection conexao = new SqlConnection(stringConn);

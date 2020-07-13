@@ -1,9 +1,9 @@
-﻿using System;
+﻿using CaixaFacil.Properties;
+using System;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using CaixaFacil.Properties;
 
 namespace CaixaFacil
 {
@@ -107,7 +107,7 @@ namespace CaixaFacil
         {
             this.Close();
         }
-      
+
         bool ValidarCNPJ()
         {
             try
@@ -173,8 +173,8 @@ namespace CaixaFacil
                 return false;
             }
         }
-       
-        
+
+
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
         int Id_Empresa;
         public void CodigoEmpresa()
@@ -293,9 +293,9 @@ namespace CaixaFacil
                 errorProvider.SetError(txt_Email, "E-mail inválido!");
                 txt_Email.Focus();
                 return;
-            }            
+            }
             else
-            {               
+            {
                 try
                 {
                     if (ValidarCNPJ() == true)
@@ -344,7 +344,7 @@ namespace CaixaFacil
                         }
                         empresa.logoEmpresa = Diretorio;
                         if (empresa.cadastrar() == false)
-                        {                           
+                        {
                             MessageBox.Show("Dados da empresa cadastrada com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             LimparCampos();
                             Diretorio = "";
@@ -376,7 +376,7 @@ namespace CaixaFacil
             {
                 try
                 {
-                   using(var ws = new WsCorreios.AtendeClienteClient())
+                    using (var ws = new WsCorreios.AtendeClienteClient())
                     {
                         var consultaCEP = ws.consultaCEP(mask_Cep.Text);
                         txt_Logradouro.Text = consultaCEP.end;
@@ -683,7 +683,7 @@ namespace CaixaFacil
             errorProvider.Clear();
         }
 
-        
+
         public string Diretorio { get; set; }
 
         private void btn_LimparImagem_Click(object sender, EventArgs e)
@@ -778,9 +778,9 @@ namespace CaixaFacil
             {
                 Diretorio = AbrirArquivo.FileName;
                 pb_ImagemEmpresa.ImageLocation = Diretorio;
-                pb_ImagemEmpresa.Load();                
+                pb_ImagemEmpresa.Load();
             }
-            btn_LimparImagem.Enabled = true; 
+            btn_LimparImagem.Enabled = true;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace CaixaFacil
                     else if (txt_ValorPago.Text.IndexOf(',') > 0)
                         e.Handled = true;
             }
-        }      
+        }
 
         private void lbl_Fechar_Click(object sender, EventArgs e)
         {
@@ -120,7 +120,7 @@ namespace CaixaFacil
         }
 
         private void btn_Baixa_Click(object sender, EventArgs e)
-        {            
+        {
             if (txt_ValorPago.Text != "")
             {
                 txt_ValorPago_Leave(sender, e);
@@ -130,7 +130,7 @@ namespace CaixaFacil
                     GerenciarCaixa();
                     InserirTipoPagamento();
                     BaixarParcela();
-                    
+
                     MessageBox.Show("Pagamento realizado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Backup.GerarBackup();
                     this.Close();

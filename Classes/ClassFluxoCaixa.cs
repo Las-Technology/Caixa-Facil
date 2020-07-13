@@ -165,7 +165,7 @@ namespace CaixaFacil
             comando.Parameters.AddWithValue("@ValorCaixa", valorCaixa);
             comando.Parameters.AddWithValue("@DataSaida", dataSaida);
             comando.Parameters.AddWithValue("@HoraSaida", horaSaida);
-            comando.Parameters.AddWithValue("@Id_Usuario", id_Usuario);           
+            comando.Parameters.AddWithValue("@Id_Usuario", id_Usuario);
             comando.Parameters.AddWithValue("@ValorReceber", valorReceber);
             comando.Parameters.AddWithValue("@EntradaParcela", entradaParcela);
             comando.Parameters.AddWithValue("@ValorTotalCaixa", ValorTotalCaixa);
@@ -271,7 +271,7 @@ namespace CaixaFacil
             if (Tabela.Rows.Count > 0)
             {
                 id_Usuario = int.Parse(Tabela.Rows[0]["Id_Usuario"].ToString());
-                nomeUsuario = Tabela.Rows[0]["Nome"].ToString();   
+                nomeUsuario = Tabela.Rows[0]["Nome"].ToString();
                 DataEntrada = Tabela.Rows[0]["DataEntrada"].ToString();
                 return true;
             }
@@ -286,7 +286,7 @@ namespace CaixaFacil
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Insert into SaidaCaixa values (@ValorSaida, @MotivoRetirada,  @ID_Fluxo)";
             SqlCommand comando = new SqlCommand(_sql, conexao);
-           comando.Parameters.AddWithValue("@ValorSaida", valorRetiradas);
+            comando.Parameters.AddWithValue("@ValorSaida", valorRetiradas);
             comando.Parameters.AddWithValue("@MotivoRetirada", motivoRetirada);
             comando.Parameters.AddWithValue("@ID_Fluxo", id);
             comando.CommandText = _sql;
@@ -303,6 +303,6 @@ namespace CaixaFacil
             {
                 conexao.Close();
             }
-        }    
-    }    
+        }
+    }
 }

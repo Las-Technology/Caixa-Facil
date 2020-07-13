@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 
 namespace CaixaFacil
 {
@@ -35,7 +30,7 @@ namespace CaixaFacil
         {
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Insert into FormaPagamento values (@Descricao, @Id_Venda)";
-            SqlCommand comando = new SqlCommand(_sql, conexao);            
+            SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@Descricao", descricao);
             comando.Parameters.AddWithValue("@Id_Venda", id_Venda);
             comando.CommandText = _sql;

@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -94,7 +88,7 @@ namespace CaixaFacil
             if (txt_DescontoDinheiro.Text != "")
             {
                 try
-                {                    
+                {
                     ValorDescontoDinheiro = decimal.Parse(txt_DescontoDinheiro.Text);
                     if (ValorDescontoDinheiro <= ValorTotal)
                     {
@@ -128,7 +122,7 @@ namespace CaixaFacil
             {
                 try
                 {
-                   valorDescontoPorcento = decimal.Parse(txt_DescontoPorcento.Text);
+                    valorDescontoPorcento = decimal.Parse(txt_DescontoPorcento.Text);
                     if (valorDescontoPorcento <= 100)
                     {
                         ValorDescontoDinheiro = (valorDescontoPorcento * ValorTotal) / 100;
@@ -243,7 +237,7 @@ namespace CaixaFacil
             txt_DescontoDinheiro_Leave(sender, e);
             txt_DescontoPorcento_Leave(sender, e);
             EfetuarVenda();
-            EfetuarParcelas();           
+            EfetuarParcelas();
             confirmacao = "Venda realizada com sucesso!";
             Close();
         }
@@ -359,7 +353,7 @@ namespace CaixaFacil
         public void GerenciarCaixaDebito()
         {
             decimal Valor = decimal.Parse(txt_ValorDesconto.Text);
-            decimal Desconto= decimal.Parse(txt_DescontoDinheiro.Text);
+            decimal Desconto = decimal.Parse(txt_DescontoDinheiro.Text);
             SqlConnection conexao = new SqlConnection(Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"));
             string _sql = "update FluxoCaixa set ValorRecebidoDebito = ValorRecebidoDebito + @Valor, Desconto = Desconto + @Desconto Where DataSaida = ''";
             SqlCommand comando = new SqlCommand(_sql, conexao);

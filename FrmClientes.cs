@@ -348,7 +348,7 @@ namespace CaixaFacil
         private void mask_Cep_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                btn_BuscarCep_Click(sender, e); 
+                btn_BuscarCep_Click(sender, e);
         }
 
         private void txt_Codigo_KeyDown(object sender, KeyEventArgs e)
@@ -558,6 +558,7 @@ namespace CaixaFacil
                 else
                 {
                     EditarCliente();
+                    codigoCliente();
                 }
             }
             catch (Exception ex)
@@ -583,7 +584,7 @@ namespace CaixaFacil
             cliente.celular = mask_Celular.Text;
             cliente.email = txt_Email.Text.Trim();
 
-            
+
             if (mask_CPF.MaskCompleted)
             {
                 string validar = mask_CPF.Text;
@@ -637,7 +638,7 @@ namespace CaixaFacil
             {
                 try
                 {
-                   using(var ws = new WsCorreios.AtendeClienteClient())
+                    using (var ws = new WsCorreios.AtendeClienteClient())
                     {
                         var consultaCEP = ws.consultaCEP(mask_Cep.Text);
                         txt_Endereco.Text = consultaCEP.end;
@@ -657,12 +658,12 @@ namespace CaixaFacil
         {
             if (idCliente == 0)
             {
-                MessageBox.Show("É necessário preencher os campos para excluir os dados!", "Mensagem do sistema.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Informe os dados do cliente para excluir!", "Mensagem do sistema.", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             cliente.id = int.Parse(txt_Codigo.Text);
-          
+
             if (MessageBox.Show("Deseja mesmo excluir os dados do cliente?", "Caixa Fácil", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
                 try
@@ -677,7 +678,7 @@ namespace CaixaFacil
                     MessageBox.Show("Não é permitido a exclusão! Existe registros de venda(s) do cliente", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
-        }       
+        }
 
         private void dateNascimento_Leave(object sender, EventArgs e)
         {
@@ -693,7 +694,7 @@ namespace CaixaFacil
 
                 int dias = time.Days;
                 int Idade = dias / 365;
-                if(string.IsNullOrWhiteSpace(txt_Nome.Text))
+                if (string.IsNullOrWhiteSpace(txt_Nome.Text))
                     MessageBox.Show("A idade do cliente é: " + Idade.ToString(), "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
                     MessageBox.Show("A idade de " + txt_Nome.Text + " é: " + Idade.ToString(), "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -701,7 +702,7 @@ namespace CaixaFacil
 
         }
 
-        int idCliente; 
+        int idCliente;
 
         private void btn_Pesquisar_Click(object sender, EventArgs e)
         {

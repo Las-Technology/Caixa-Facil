@@ -12,19 +12,19 @@ namespace CaixaFacil
         {
             InitializeComponent();
             cbMaxRows.SelectedIndex = 1;
-        }    
-      
+        }
+
         private void CarregarGrid()
         {
             string filter = "";
 
-            if(cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
+            if (cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
             {
                 filter = " TOP " + cbMaxRows.Text;
             }
-            if(string.IsNullOrWhiteSpace(txt_Nome.Text))
+            if (string.IsNullOrWhiteSpace(txt_Nome.Text))
             {
-                _sql = "Select " + filter +  " [Id_Cliente] ,[Nome] ,[DataNascimento] ,[CPF] ,[RG] ,[CEP] ,[Bairro] ,[Endereco] ,[Numero] ,[Cidade] ,[Estado] ,[Telefone] ,[Celular] ,[Email] from Cliente where id_Cliente <> 1";
+                _sql = "Select " + filter + " [Id_Cliente] ,[Nome] ,[DataNascimento] ,[CPF] ,[RG] ,[CEP] ,[Bairro] ,[Endereco] ,[Numero] ,[Cidade] ,[Estado] ,[Telefone] ,[Celular] ,[Email] from Cliente where id_Cliente <> 1";
             }
             else
             {
@@ -32,7 +32,7 @@ namespace CaixaFacil
             }
 
             SqlConnection conexao = new SqlConnection(stringConn);
-            SqlDataAdapter adapter = new SqlDataAdapter(_sql,conexao);
+            SqlDataAdapter adapter = new SqlDataAdapter(_sql, conexao);
             adapter.SelectCommand.CommandText = _sql;
             try
             {
@@ -42,7 +42,7 @@ namespace CaixaFacil
                 dgv_Busca.DataSource = Tabela;
                 for (int i = 0; i < dgv_Busca.Rows.Count; i++)
                 {
-                    dgv_Busca.Rows[i].Cells["ColumnCPF"].Value = Security.Dry (dgv_Busca.Rows[i].Cells["ColumnCPF"].Value.ToString());
+                    dgv_Busca.Rows[i].Cells["ColumnCPF"].Value = Security.Dry(dgv_Busca.Rows[i].Cells["ColumnCPF"].Value.ToString());
                     dgv_Busca.Rows[i].Cells["ColumnRG"].Value = Security.Dry(dgv_Busca.Rows[i].Cells["ColumnRG"].Value.ToString());
                 }
             }
@@ -55,7 +55,7 @@ namespace CaixaFacil
                 conexao.Close();
             }
         }
-        string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"),  _sql;
+        string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
 
         public string Codigo { get; set; }
         public string Nome { get; set; }

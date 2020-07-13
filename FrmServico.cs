@@ -14,7 +14,7 @@ namespace CaixaFacil
 
         int X = 0;
         int Y = 0;
-       
+
         private void panelCabecalho_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
@@ -31,7 +31,6 @@ namespace CaixaFacil
 
         private void LimparCampos()
         {
-            txt_CodigoServico.Clear();
             txt_DescricaoServico.Clear();
             txt_PrecoServico.Clear();
             idServico = 0;
@@ -227,6 +226,7 @@ namespace CaixaFacil
                     prestacaoServico.Atualizar();
                     MessageBox.Show("Dados da prestação de Serviço atualizado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimparCampos();
+                    CodigoProduto();
                 }
                 catch (Exception ex)
                 {
@@ -267,8 +267,8 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    Id_Produto = Convert.ToInt32(comando.ExecuteScalar()) + 1;                    
-                   txt_CodigoServico.Text = Id_Produto.ToString();
+                    Id_Produto = Convert.ToInt32(comando.ExecuteScalar()) + 1;
+                    txt_CodigoServico.Text = Id_Produto.ToString();
                 }
             }
             catch (Exception ex)

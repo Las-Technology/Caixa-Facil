@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaixaFacil
 {
@@ -44,7 +39,7 @@ namespace CaixaFacil
             get { return Vencimento; }
             set { Vencimento = value; }
         }
-        public double valorDocumento 
+        public double valorDocumento
         {
             get { return ValorDocumento; }
             set { ValorDocumento = value; }
@@ -79,7 +74,7 @@ namespace CaixaFacil
             get { return Status; }
             set { Status = value; }
         }
-        
+
         public void Cadastrar()
         {
             SqlConnection conexao = new SqlConnection(stringConn);

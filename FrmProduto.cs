@@ -11,7 +11,7 @@ namespace CaixaFacil
 
         public FrmProduto()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private void FrmProduto_Load(object sender, EventArgs e)
@@ -169,7 +169,7 @@ namespace CaixaFacil
 
             if (txt_NomeProduto.Text == string.Empty)
             {
-                MessageBox.Show("Preencha o campo 'Nome do produto'!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
+                MessageBox.Show("Preencha o campo 'Nome do produto'!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.Clear();
                 errorProvider.SetError(txt_NomeProduto, "Campo obrigatório!");
                 txt_NomeProduto.Focus();
@@ -182,7 +182,7 @@ namespace CaixaFacil
                 errorProvider.SetError(txt_NomeFornecedor, "Campo obrigatório!");
                 txt_NomeFornecedor.Focus();
                 return;
-            }           
+            }
             else if (txt_Marca.Text == string.Empty)
             {
                 MessageBox.Show("Preencha o campo 'Marca'!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -238,7 +238,7 @@ namespace CaixaFacil
                 txt_EstoqueAtual.Focus();
                 return;
             }
-           
+
             else if (txt_Unidade.Text == string.Empty)
             {
                 MessageBox.Show("Coloque a unidade. Ex: unidade. Kg. etc...", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); errorProvider.Clear();
@@ -250,10 +250,25 @@ namespace CaixaFacil
             {
                 try
                 {
+                    if (txt_DataValidade.Text != "00/00/0000")
+                    {
+                        DateTime dateTime = DateTime.Parse(txt_DataValidade.Text);
+                    }
+                }
+                catch
+                {
+                    errorProvider.Clear();
+                    MessageBox.Show("Data de validade inválida", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    errorProvider.SetError(txt_DataValidade, "Data de validade inválida");
+                    txt_DataValidade.Focus();
+                    return;
+                }
 
+                try
+                {
                     Codigocategoria();
                     categoria.id = int.Parse(Id_Categoria);
-                    categoria.Descricao = txt_Categoria.Text.Trim();                    
+                    categoria.Descricao = txt_Categoria.Text.Trim();
                     categoria.Cadastrar();
                     produto.id = int.Parse(txt_Codigo.Text);
                     produto.descricao = txt_NomeProduto.Text.Trim();
@@ -310,7 +325,7 @@ namespace CaixaFacil
                 comando.Fill(Tabela);
                 if (Tabela.Rows.Count > 0)
                 {
-                    
+
                     txt_CodigoBarra.Text = Tabela.Rows[0]["CodigoBarra"].ToString();
                     txt_NomeProduto.Text = Tabela.Rows[0]["Descricao"].ToString();
                     txt_Marca.Text = Tabela.Rows[0]["Marca"].ToString();
@@ -320,8 +335,9 @@ namespace CaixaFacil
                     txt_PrecoVenda.Text = Tabela.Rows[0]["ValorVenda"].ToString();
                     txt_PrecoCusto.Text = Tabela.Rows[0]["ValorCusto"].ToString();
                     txt_Lucro.Text = Tabela.Rows[0]["Lucro"].ToString();
+                    txt_DataValidade.Text = Tabela.Rows[0]["DataValidade"].ToString();
                     Id_Categoria = Tabela.Rows[0]["Id_Categoria"].ToString();
-                    idFornecedor = int.Parse( Tabela.Rows[0]["Id_Fornecedor"].ToString());
+                    idFornecedor = int.Parse(Tabela.Rows[0]["Id_Fornecedor"].ToString());
                     dtDataCadastro.Text = Tabela.Rows[0]["DataCadastro"].ToString();
                     txtNumeroContaFiscal.Text = Tabela.Rows[0]["NumeroNotaFiscal"].ToString();
                 }
@@ -346,7 +362,7 @@ namespace CaixaFacil
                 if (Tabela.Rows.Count > 0)
                 {
                     txt_Categoria.Text = Tabela.Rows[0]["Descricao"].ToString();
-                   
+
                 }
             }
             catch (Exception ex)
@@ -555,7 +571,7 @@ namespace CaixaFacil
                 txt_EstoqueAtual.Text = produto.estoqueAtual.ToString();
                 txt_EstoqueMinimo.Text = produto.estoqueMinimo.ToString();
                 txt_Unidade.Text = produto.unidade;
-                txt_Categoria.Text = pesquisarProdutos.Descricao;               
+                txt_Categoria.Text = pesquisarProdutos.Descricao;
                 txt_NomeFornecedor.Text = pesquisarProdutos.Fornecedor;
                 btn_Buscar.Enabled = true;
             }
@@ -621,7 +637,7 @@ namespace CaixaFacil
             }
             if (txt_NomeProduto.Text == string.Empty)
             {
-                MessageBox.Show("Preencha o campo 'Nome do produto'!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);                
+                MessageBox.Show("Preencha o campo 'Nome do produto'!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.Clear();
                 errorProvider.SetError(txt_NomeProduto, "Campo obrigatório!");
                 txt_NomeProduto.Focus();
@@ -629,7 +645,7 @@ namespace CaixaFacil
             }
             else if (txt_NomeFornecedor.Text == string.Empty)
             {
-                MessageBox.Show("Clique no botão buscar e selecione o fornecedor do produto a ser inserido no sistema!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
+                MessageBox.Show("Clique no botão buscar e selecione o fornecedor do produto a ser inserido no sistema!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.Clear();
                 errorProvider.SetError(txt_NomeFornecedor, "Campo obrigatório!");
                 txt_NomeFornecedor.Focus();
@@ -645,7 +661,7 @@ namespace CaixaFacil
             }
             else if (txt_Categoria.Text == string.Empty)
             {
-                MessageBox.Show("Indique a categoria do produto!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
+                MessageBox.Show("Indique a categoria do produto!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.Clear();
                 errorProvider.SetError(txt_Categoria, "Campo obrigatório!");
                 txt_Categoria.Focus();
@@ -653,7 +669,7 @@ namespace CaixaFacil
             }
             else if (!txt_DataValidade.MaskCompleted)
             {
-                MessageBox.Show("Coloque a data da validade do produto. Se a validade é indeterminada preencha 00/00/0000!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
+                MessageBox.Show("Coloque a data da validade do produto. Se a validade é indeterminada preencha 00/00/0000!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.Clear();
                 errorProvider.SetError(txt_DataValidade, "Campo obrigatório!");
                 txt_DataValidade.Focus();
@@ -661,7 +677,7 @@ namespace CaixaFacil
             }
             else if (txt_PrecoCusto.Text == string.Empty)
             {
-                MessageBox.Show("Coloque o preço custo do produto", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
+                MessageBox.Show("Coloque o preço custo do produto", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.SetError(txt_PrecoCusto, "Campo obrigatório!");
                 txt_PrecoCusto.Focus();
                 return;
@@ -691,7 +707,7 @@ namespace CaixaFacil
 
             else if (txt_Unidade.Text == string.Empty)
             {
-                MessageBox.Show("Coloque a unidade. Ex: unidade. Kg. etc...", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
+                MessageBox.Show("Coloque a unidade. Ex: unidade. Kg. etc...", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.Clear();
                 errorProvider.SetError(txt_Unidade, "Campo obrigatório!");
                 txt_Unidade.Focus();
@@ -699,6 +715,22 @@ namespace CaixaFacil
             }
             else
             {
+                try
+                {
+                    if (txt_DataValidade.Text != "00/00/0000")
+                    {
+                        DateTime dateTime = DateTime.Parse(txt_DataValidade.Text);
+                    }
+                }
+                catch
+                {
+                    errorProvider.Clear();
+                    MessageBox.Show("Data de validade inválida", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    errorProvider.SetError(txt_DataValidade, "Data de validade inválida");
+                    txt_DataValidade.Focus();
+                    return;
+                }
+
                 try
                 {
                     EditarProduto();
@@ -749,7 +781,7 @@ namespace CaixaFacil
                 idFornecedor = int.Parse(fornecedor.IdFornecedor);
 
             }
-            
+
         }
 
         private void txt_EstoqueAtual_KeyPress(object sender, KeyPressEventArgs e)
@@ -829,7 +861,8 @@ namespace CaixaFacil
                         txt_Lucro.Text = Lucro.ToString();
                     }
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txt_PrecoVenda.Clear();
@@ -843,5 +876,5 @@ namespace CaixaFacil
                 btn_Buscar_Click(sender, e);
             }
         }
-    }    
+    }
 }

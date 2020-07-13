@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 
 namespace CaixaFacil
@@ -50,7 +49,7 @@ namespace CaixaFacil
 
         public void EfetuarPagamentoMisto()
         {
-                SqlConnection conexao = new SqlConnection(stringConn);
+            SqlConnection conexao = new SqlConnection(stringConn);
             try
             {
                 conexao.Open();

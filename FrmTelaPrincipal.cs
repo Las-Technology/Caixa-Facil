@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using CaixaFacil.Properties;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Diagnostics;
-using Tulpep.NotificationWindow;
+using System.Drawing;
 using System.Media;
-using System.IO;
-using CaixaFacil.Properties;
+using System.Windows.Forms;
+using Tulpep.NotificationWindow;
 
 namespace CaixaFacil
 {
@@ -21,7 +15,7 @@ namespace CaixaFacil
         public FrmTelaPrincipal(int Id_Usuario, string NomeUsuario, string Funcao)
         {
             InitializeComponent();
-            
+
             this.Funcao = Funcao;
             lbl_Data.Text = "Data: " + DateTime.Now.ToLongDateString();
             this.Id_Usuario = Id_Usuario;
@@ -135,7 +129,7 @@ namespace CaixaFacil
         }
 
         string confirmacao;
-       private void btn_Fechar_Click(object sender, EventArgs e)
+        private void btn_Fechar_Click(object sender, EventArgs e)
         {
             Close();
         }
@@ -272,7 +266,7 @@ namespace CaixaFacil
             fornecedor.ShowDialog();
         }
 
-       private void Menu_Empresa_Click(object sender, EventArgs e)
+        private void Menu_Empresa_Click(object sender, EventArgs e)
         {
             FrmEmpresa empresa = new FrmEmpresa();
             empresa.ShowDialog();
@@ -369,7 +363,7 @@ namespace CaixaFacil
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if(AreaAtuacao == "SALÃO DE BELEZA" || AreaAtuacao == "PRESTAÇÃO DE SERVIÇO" || AreaAtuacao == "SALÃO DE BELEZA E LOJA")
+            if (AreaAtuacao == "SALÃO DE BELEZA" || AreaAtuacao == "PRESTAÇÃO DE SERVIÇO" || AreaAtuacao == "SALÃO DE BELEZA E LOJA")
             {
                 NotificarAgenda();
             }
@@ -387,7 +381,7 @@ namespace CaixaFacil
             {
                 MessageBox.Show("Caixa Fechado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            
+
         }
 
         private void FrmPrincipal_KeyDown(object sender, KeyEventArgs e)
@@ -440,7 +434,7 @@ namespace CaixaFacil
         {
             if (SituacaoCaixa() == true)
             {
-                FrmRegistroCaixa registroDiario = new FrmRegistroCaixa("", "", "","");
+                FrmRegistroCaixa registroDiario = new FrmRegistroCaixa("", "", "", "");
                 registroDiario.ShowDialog();
             }
             else
@@ -487,7 +481,7 @@ namespace CaixaFacil
         }
 
         private void linkNotificacao_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {            
+        {
             VerificarValidadeProdutos();
             if (retorno == true)
             {
@@ -520,7 +514,7 @@ namespace CaixaFacil
                     popup.Popup();
                 }
             }
-        }   
+        }
 
         private void agendamentoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -597,7 +591,7 @@ namespace CaixaFacil
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
                 comando.Fill(Tabela);
-                if(Tabela.Rows.Count == 0)
+                if (Tabela.Rows.Count == 0)
                 {
                     return "false";
                 }

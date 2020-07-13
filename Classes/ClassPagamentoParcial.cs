@@ -14,7 +14,7 @@ namespace CaixaFacil
         private decimal ValorTotalAbatido;
         private int Id_PagamentoParcial = 1;
         private string HoraPagamento;
-       
+
         public int Id
         {
             get { return Id_PagamentoParcial; }
@@ -76,9 +76,9 @@ namespace CaixaFacil
             {
                 _sql = "Select Max(id_PagamentoParcial) From PagamentoParcial";
                 SqlCommand comando = new SqlCommand(_sql, conexao);
-                comando.CommandText = _sql; 
+                comando.CommandText = _sql;
                 try
-                {                  
+                {
                     conexao.Open();
                     if (comando.ExecuteScalar() != DBNull.Value)
                     {
@@ -110,7 +110,7 @@ namespace CaixaFacil
                 DataTable Tabela = new DataTable();
                 adapter.Fill(Tabela);
                 if (Tabela.Rows.Count > 0)
-                {                   
+                {
                     _sql = "update PagamentoParcial set ValorRestante = ValorRestante + @ValorRestante, DataAbatimento = @DataAbatimento from PagamentoParcial inner join Venda on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join Cliente on Cliente.Id_Cliente = venda.Id_Cliente  where Cliente.Id_Cliente = @id and PagamentoParcial.ValorRestante > 0";
                     SqlCommand comando = new SqlCommand(_sql, conexao);
                     comando.Parameters.AddWithValue("@id", id_Cliente);
@@ -128,9 +128,9 @@ namespace CaixaFacil
                     comando.Parameters.AddWithValue("@DataAbatimento", dataAbatimento);
                     comando.Parameters.AddWithValue("@ValorRestante", valorRestante);
                     comando.Parameters.AddWithValue("@Id_Venda", Id_Venda);
-                    comando.CommandText = _sql;               
+                    comando.CommandText = _sql;
                     comando.ExecuteNonQuery();
-                   return false;                    
+                    return false;
                 }
             }
             catch

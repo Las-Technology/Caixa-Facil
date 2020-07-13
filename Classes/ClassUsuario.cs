@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaixaFacil
 {
@@ -33,11 +29,11 @@ namespace CaixaFacil
             get { return Nome; }
             set { Nome = value; }
         }
-         public string funcao
+        public string funcao
         {
             get { return Funcao; }
             set { Funcao = value; }
-        }        
+        }
         public string email
         {
             get { return Email; }
@@ -53,7 +49,7 @@ namespace CaixaFacil
             get { return Senha; }
             set { Senha = value; }
         }
-       public string situacao
+        public string situacao
         {
             get { return Situacao; }
             set { Situacao = value; }
@@ -132,7 +128,7 @@ namespace CaixaFacil
             {
                 id = int.Parse(Tabela.Rows[0]["Id_Usuario"].ToString());
                 nome = Tabela.Rows[0]["Nome"].ToString();
-               funcao= Tabela.Rows[0]["Funcao"].ToString();
+                funcao = Tabela.Rows[0]["Funcao"].ToString();
                 email = Tabela.Rows[0]["Email"].ToString();
                 usuario = Tabela.Rows[0]["Usuario"].ToString();
                 senha = Tabela.Rows[0]["Senha"].ToString();

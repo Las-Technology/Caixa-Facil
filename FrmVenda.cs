@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CaixaFacil.Properties;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
-using CaixaFacil.Properties;
 
 namespace CaixaFacil
 {
@@ -277,7 +277,7 @@ namespace CaixaFacil
         decimal LucroTotal;
 
         private void btn_Adcionar_Click(object sender, EventArgs e)
-        { 
+        {
             AdicionarItens();
         }
 
@@ -287,7 +287,7 @@ namespace CaixaFacil
         {
             try
             {
-                foreach(DataGridViewRow row in DGV_ItensVenda.Rows)
+                foreach (DataGridViewRow row in DGV_ItensVenda.Rows)
                 {
                     estoque.id = int.Parse(row.Cells["ColumnCodigo"].Value.ToString());
                     estoque.quantidade = int.Parse(row.Cells["ColumnQuantidade"].Value.ToString());
@@ -446,13 +446,13 @@ namespace CaixaFacil
         {
             foreach (DataGridViewRow row in DGV_ItensVenda.Rows)
             {
-                if(row.Cells["ColumnCodigo"].Value.ToString() == codigoProduto)
+                if (row.Cells["ColumnCodigo"].Value.ToString() == codigoProduto)
                 {
                     EstoqueAtual -= int.Parse(row.Cells["ColumnQuantidade"].Value.ToString());
                 }
             }
         }
-        
+
         private void RemoverItens()
         {
             try
@@ -772,7 +772,7 @@ namespace CaixaFacil
         }
 
 
-        SoundPlayer soundPlayer = new SoundPlayer(Properties.Resources.Beep_Short);
+        SoundPlayer soundPlayer = new SoundPlayer(Properties.Resources.computerData);
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -1152,7 +1152,7 @@ namespace CaixaFacil
                 PagamentoParcial.horaPagamento = DateTime.Now.ToLongTimeString();
                 PagamentoParcial.InserirValorAbatido();
 
-                if(ValorAbatido > 0)
+                if (ValorAbatido > 0)
                 {
                     tipoPagamento.idPagamentoParcial = id;
                     tipoPagamento.descricao = vendaParcial.TipoPagamento;
@@ -1183,9 +1183,9 @@ namespace CaixaFacil
 
             if (vendaParcial.TipoPagamento == "Dinheiro" || string.IsNullOrEmpty(vendaParcial.TipoPagamento))
                 _sql = "Update FluxoCaixa set ValorRecebidoParcial = ValorRecebidoParcial + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
-            else if(vendaParcial.TipoPagamento == "Cartão de Crédito")
+            else if (vendaParcial.TipoPagamento == "Cartão de Crédito")
                 _sql = "Update FluxoCaixa set ValorRecebidoCredito = ValorRecebidoCredito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
-            else if(vendaParcial.TipoPagamento == "Cartão de Débito")
+            else if (vendaParcial.TipoPagamento == "Cartão de Débito")
                 _sql = "Update FluxoCaixa set ValorRecebidoDebito = ValorRecebidoDebito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
 
             SqlCommand comando = new SqlCommand(_sql, conexao);
@@ -1305,7 +1305,7 @@ namespace CaixaFacil
         {
             FrmPesquisarServico pesquisarServico = new FrmPesquisarServico();
             pesquisarServico.ShowDialog();
-           
+
             if (pesquisarServico.Codigo != null)
             {
                 produto.id = int.Parse(pesquisarServico.Codigo);

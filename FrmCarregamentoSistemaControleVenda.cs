@@ -8,7 +8,7 @@ namespace CaixaFacil
     public partial class FrmCarregamentoSistemaControleVenda : Form
     {
         string sqlConnM = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdHJjGrOXTsH7b9NW1qcCpVJxD4wsfhTDR6OXOUSfCqDynZ+0PYEaREWQ=="),
-           
+
             sqlConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3");
         public FrmCarregamentoSistemaControleVenda()
         {
@@ -128,7 +128,7 @@ namespace CaixaFacil
                 conexao.Open();
                 comando.ExecuteNonQuery();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -224,7 +224,7 @@ namespace CaixaFacil
                 "[Celular] VARCHAR(16)  NULL," +
                 "[Email] VARCHAR(100) NULL," +
                 "PRIMARY KEY CLUSTERED([Id_Fornecedor] ASC));" +
-                
+
                 "CREATE TABLE[dbo].[Produto](" +
                 "[Id_Produto] INT             NOT NULL," +
                 "[CodigoBarra] VARCHAR(13)    NULL," +
@@ -244,7 +244,7 @@ namespace CaixaFacil
                 "PRIMARY KEY CLUSTERED([Id_Produto] ASC)," +
                 "FOREIGN KEY([Id_Fornecedor]) REFERENCES[dbo].[Fornecedor] ([Id_Fornecedor])," +
                 "FOREIGN KEY([Id_Categoria]) REFERENCES[dbo].[Categoria] ([Id_Categoria]));" +
-                
+
                 "CREATE TABLE[dbo].[Usuario](" +
                 "[Id_Usuario] INT           IDENTITY(1, 1) NOT NULL," +
                 "[Nome]       VARCHAR(100) NOT NULL," +
@@ -257,7 +257,7 @@ namespace CaixaFacil
                 "[PerguntaSeguranca] VARCHAR(MAX) NULL," +
                 "[RespostaSeguranca] VARCHAR(MAX) NULL," +
                 "PRIMARY KEY CLUSTERED([Id_Usuario] ASC));" +
-                
+
                 "CREATE TABLE[dbo].[Venda](" +
                 "[Id_Venda] INT             NOT NULL," +
                 "[parcelas] INT NOT NULL," +
@@ -271,7 +271,7 @@ namespace CaixaFacil
                 "PRIMARY KEY CLUSTERED([Id_Venda] ASC)," +
                 "FOREIGN KEY([Id_Usuario]) REFERENCES[dbo].[Usuario] ([Id_Usuario])," +
                 "FOREIGN KEY([Id_Cliente]) REFERENCES[dbo].[Cliente] ([Id_Cliente]));" +
-                
+
                 "CREATE TABLE[dbo].[FluxoCaixa](" +
                 "[Id_Fluxo] INT             IDENTITY(1, 1) NOT NULL," +
                 "[ValorEntrada]         DECIMAL(18, 2) NOT NULL," +
@@ -295,7 +295,7 @@ namespace CaixaFacil
                 "[Id_Usuario] INT NOT NULL,    " +
                 "PRIMARY KEY CLUSTERED([Id_Fluxo] ASC)," +
                 "FOREIGN KEY([Id_Usuario]) REFERENCES[dbo].[Usuario] ([Id_Usuario]));" +
-                
+
                 "CREATE TABLE[dbo].[FormaPagamento](" +
                 "[Id_FormaPagamento] INT          IDENTITY(1, 1) NOT NULL," +
                 "[Descricao]         VARCHAR(20) NOT NULL," +
@@ -309,7 +309,7 @@ namespace CaixaFacil
                 "[ValorCredDeb] DECIMAL(18, 2) NULL, " +
                 "[id_Venda] INT NULL," +
                 "FOREIGN KEY([id_Venda]) REFERENCES[dbo].[Venda] ([id_Venda]) ON DELETE CASCADE)" +
-                
+
                 "CREATE TABLE[dbo].[ItensVenda](" +
                 "[Id_ItensVenda] INT             IDENTITY(1, 1) NOT NULL," +
                 "[Valor]         DECIMAL(18, 2) NOT NULL," +
@@ -320,7 +320,7 @@ namespace CaixaFacil
                 "PRIMARY KEY CLUSTERED([Id_ItensVenda] ASC)," +
                 "FOREIGN KEY([Id_Produto]) REFERENCES[dbo].[Produto] ([Id_Produto])," +
                 "FOREIGN KEY([Id_Venda]) REFERENCES[dbo].[Venda] ([Id_Venda]) ON DELETE CASCADE);" +
-                
+
                 "CREATE TABLE[dbo].[PagamentoParcial](" +
                 "[Id_PagamentoParcial] INT," +
                 "[DataAbatimento]      VARCHAR(30)    NOT NULL," +
@@ -328,14 +328,14 @@ namespace CaixaFacil
                 "[Id_Venda]            INT NOT NULL," +
                 "PRIMARY KEY CLUSTERED([Id_PagamentoParcial] ASC)," +
                 "FOREIGN KEY([Id_Venda]) REFERENCES[dbo].[Venda] ([Id_Venda]) ON DELETE CASCADE);" +
-                
+
                 "CREATE TABLE[dbo].[ParcelaVenda]([Id_Parcela] INT             IDENTITY(1, 1) NOT NULL,[Parcela]        INT NOT NULL," +
                 "[DataVencimento] VARCHAR(10)    NOT NULL," +
                 "[ValorParcelado] DECIMAL(18, 2) NOT NULL," +
                 "[DataPagamento]  VARCHAR(10)    NULL,[HoraPagamento] VARCHAR(10)    NULL,[Id_Venda] INT NOT NULL," +
                 "PRIMARY KEY CLUSTERED([Id_Parcela] ASC)," +
                 "FOREIGN KEY([Id_Venda]) REFERENCES[dbo].[Venda] ([Id_Venda]) ON DELETE CASCADE);" +
-                
+
                 "CREATE TABLE[dbo].[SaidaCaixa](" +
                 "[Id_SaidaCaixa] INT             IDENTITY(1, 1) NOT NULL," +
                 "[ValorSaida]     DECIMAL(18, 2) NOT NULL," +
@@ -343,14 +343,14 @@ namespace CaixaFacil
                 "[Id_Fluxo]       INT NOT NULL," +
                 "PRIMARY KEY CLUSTERED([Id_SaidaCaixa] ASC)," +
                 "FOREIGN KEY([Id_Fluxo]) REFERENCES[dbo].[FluxoCaixa] ([Id_Fluxo]));" +
-                
+
                 "CREATE TABLE[dbo].[TipoPagamento](" +
                 "[Id_TipoPagamento] INT           IDENTITY(1, 1) NOT NULL," +
                 "[Descricao]        VARCHAR(30)  NULL," +
                 "[Id_Venda] INT NOT NULL," +
                 "PRIMARY KEY CLUSTERED([Id_TipoPagamento] ASC)," +
                 "FOREIGN KEY([Id_Venda]) REFERENCES[dbo].[Venda] ([Id_Venda]) ON DELETE CASCADE);" +
-                
+
                 "CREATE TABLE[dbo].[ValorAbatido](" +
                 "[Id_ValorAbatido] INT             IDENTITY(1, 1) NOT NULL," +
                 "[ValorTotalAbatimento] DECIMAL(18, 2) NOT NULL," +
@@ -372,9 +372,9 @@ namespace CaixaFacil
                 +
 
                 "insert into cliente values(1,'CLIENTE AVULSO','00/00/000','V5Asc8VWwU2M740N7tXICQ==','ZG3pKrNg0qNZyduxtLfdvA==','000000','null','null',9,'null','null','','','')" +
-                
+
                 "use master;" +
-                
+
                 "create table autentico(" +
                 "situacao varchar(25) null)";
 
@@ -468,7 +468,7 @@ namespace CaixaFacil
             }
         }
 
-        string  _sql;
+        string _sql;
         bool Retorno;
         private void VerificarDataBase()
         {
@@ -508,7 +508,7 @@ namespace CaixaFacil
             {
                 conexao.Open();
                 SqlDataReader reader = comando.ExecuteReader();
-                 if (reader.Read())
+                if (reader.Read())
                 {
                     Situacao = true;
                 }
@@ -568,13 +568,13 @@ namespace CaixaFacil
             {
                 conexao.Close();
                 return true;
-                }
+            }
             else
             {
                 conexao.Close();
                 return false;
             }
-            
+
         }
     }
 }

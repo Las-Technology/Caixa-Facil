@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaixaFacil
 {
@@ -51,7 +46,7 @@ namespace CaixaFacil
             conexao.Open();
             SqlDataAdapter comando = new SqlDataAdapter(_Sql, conexao);
             comando.SelectCommand.Parameters.AddWithValue("@Usuario", usuario);
-            comando.SelectCommand.Parameters.AddWithValue("@Senha", senha);            
+            comando.SelectCommand.Parameters.AddWithValue("@Senha", senha);
             comando.SelectCommand.CommandText = _Sql;
             DataTable Tabela = new DataTable();
             comando.Fill(Tabela);
@@ -68,7 +63,7 @@ namespace CaixaFacil
                 conexao.Close();
                 return false;
             }
-           
+
         }
     }
 }

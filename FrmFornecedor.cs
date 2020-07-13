@@ -194,7 +194,7 @@ namespace CaixaFacil
                         }
                     }
                     else
-                        Fornecedor.Cnpj = "";                    
+                        Fornecedor.Cnpj = "";
 
                     Fornecedor.Cadastrar();
                     MessageBox.Show("Fornecedor cadastrado com sucesso!", "Aviso do sistema!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -253,7 +253,7 @@ namespace CaixaFacil
             }
             else if (string.IsNullOrEmpty(IdFornecedor))
             {
-                MessageBox.Show("Informe os dados do fornecedor para alteração!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); 
+                MessageBox.Show("Informe os dados do fornecedor para alteração!", "Campo Obrigatório!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.Clear();
                 return;
             }
@@ -311,6 +311,7 @@ namespace CaixaFacil
                     Fornecedor.Atualizar();
                     MessageBox.Show("Dados do Fornecedor atualizado com sucesso!", "Aviso do sistema!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimparCampos();
+                    CodigoFornecedor();
                 }
                 catch (Exception ex)
                 {
@@ -357,11 +358,11 @@ namespace CaixaFacil
         {
             CodigoFornecedor();
         }
-     
+
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
-     
+
         //MÉTODO PARA MOSTRAR AO USUÁRIO DO SISTEMA O CÓDIGO DO CLIENTE QUE SERÁ GERADO AO CADASTRAR O CLIENTE NO SISTEMA
-      
+
         private void CodigoFornecedor()
         {
             SqlConnection conexao = new SqlConnection(stringConn);

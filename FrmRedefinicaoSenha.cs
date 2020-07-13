@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -20,7 +14,7 @@ namespace CaixaFacil
 
         private void btn_Cancelar_Click(object sender, EventArgs e)
         {
-           this.Close();
+            this.Close();
         }
 
         private void btn_Confirmar_Click(object sender, EventArgs e)

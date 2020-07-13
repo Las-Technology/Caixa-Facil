@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaixaFacil
 {
@@ -144,7 +139,7 @@ namespace CaixaFacil
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Select * from Produto where Id_Produto = @Id";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
-            comando.SelectCommand.Parameters.AddWithValue("@Id", id);            
+            comando.SelectCommand.Parameters.AddWithValue("@Id", id);
             comando.SelectCommand.CommandText = _sql;
             try
             {
@@ -153,7 +148,7 @@ namespace CaixaFacil
                 comando.Fill(Tabela);
                 if (Tabela.Rows.Count > 0)
                 {
-                    
+
                     descricao = Tabela.Rows[0]["Descricao"].ToString();
                     PrecoServico = decimal.Parse(Tabela.Rows[0]["PrecoVenda"].ToString());
                     return true;

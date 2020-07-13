@@ -11,6 +11,22 @@ namespace CaixaFacil
         public FrmContasReceber()
         {
             InitializeComponent();
+            cbMaxRows.SelectedIndex = 1;
+            LoadData();
+        }
+
+        private string FilterRows()
+        {
+            string filter = "";
+
+            if (cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
+                filter = "TOP " + cbMaxRows.Text;
+
+            return filter;
+        }
+
+        private void LoadData()
+        {
             ContasReceberPrazo();
             ContasReceberParcela();
             ContasReceberParcial();
@@ -22,7 +38,7 @@ namespace CaixaFacil
             ValorTotalReceber = ValorReceberParcela + ValorReceberParcial + ValorReceberPrazo + ValorReceberMisto;
             lbl_ValorTotal.Text = "R$ " + ValorTotalReceber;
             areaAtuacao();
-            if(AreaAtuacao == "SALÃO DE BELEZA" || AreaAtuacao == "PRESTAÇÃO DE SERVIÇO")
+            if (AreaAtuacao == "SALÃO DE BELEZA" || AreaAtuacao == "PRESTAÇÃO DE SERVIÇO")
             {
                 dgv_Parcela.Columns["Column13"].HeaderText = "Cód. Serviço";
                 dgv_Parcial.Columns["Column16"].HeaderText = "Cód. Serviço";
@@ -96,7 +112,7 @@ namespace CaixaFacil
         {
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Select AreaAtuacao From Empresa";
-            SqlCommand comando = new SqlCommand(_sql,conexao);
+            SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.CommandText = _sql;
             try
             {
@@ -183,7 +199,7 @@ namespace CaixaFacil
         private void ContasReceberPrazo()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "SELECT Produto.Descricao, produto.ValorVenda, Cliente.Id_Cliente, Cliente.Nome, ItensVenda.Valor, ItensVenda.Quantidade,  ParcelaVenda.DataVencimento, Venda.DataVenda, Venda.HoraVenda FROM Cliente INNER JOIN Venda ON Cliente.Id_Cliente = Venda.Id_Cliente INNER JOIN ItensVenda ON Venda.Id_Venda = ItensVenda.Id_Venda INNER JOIN ParcelaVenda ON Venda.Id_Venda = ParcelaVenda.Id_Venda INNER JOIN FormaPagamento ON FormaPagamento.Id_Venda = Venda.Id_Venda INNER JOIN Produto ON ItensVenda.Id_Produto = Produto.Id_Produto where FormaPagamento.Descricao = 'prazo' and ParcelaVenda.DataPagamento = ''";
+            _sql = "SELECT " + FilterRows() + " Produto.Descricao, produto.ValorVenda, Cliente.Id_Cliente, Cliente.Nome, ItensVenda.Valor, ItensVenda.Quantidade,  ParcelaVenda.DataVencimento, Venda.DataVenda, Venda.HoraVenda FROM Cliente INNER JOIN Venda ON Cliente.Id_Cliente = Venda.Id_Cliente INNER JOIN ItensVenda ON Venda.Id_Venda = ItensVenda.Id_Venda INNER JOIN ParcelaVenda ON Venda.Id_Venda = ParcelaVenda.Id_Venda INNER JOIN FormaPagamento ON FormaPagamento.Id_Venda = Venda.Id_Venda INNER JOIN Produto ON ItensVenda.Id_Produto = Produto.Id_Produto where FormaPagamento.Descricao = 'prazo' and ParcelaVenda.DataPagamento = ''";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.CommandText = _sql;
             DataTable Tabela = new DataTable();
@@ -194,7 +210,7 @@ namespace CaixaFacil
         private void ContasReceberParcela()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "SELECT Cliente.Id_Cliente, Cliente.Nome, Venda.Id_Venda, ParcelaVenda.Parcela, ParcelaVenda.DataVencimento, ParcelaVenda.ValorParcelado FROM Cliente INNER JOIN Venda ON Cliente.Id_Cliente = Venda.Id_Cliente INNER JOIN ParcelaVenda ON Venda.Id_Venda = ParcelaVenda.Id_Venda INNER JOIN  FormaPagamento ON FormaPagamento.Id_Venda = Venda.Id_Venda WHERE(ParcelaVenda.DataPagamento = '') AND(FormaPagamento.Descricao = 'parcelado')";
+            _sql = "SELECT " + FilterRows() + " Cliente.Id_Cliente, Cliente.Nome, Venda.Id_Venda, ParcelaVenda.Parcela, ParcelaVenda.DataVencimento, ParcelaVenda.ValorParcelado FROM Cliente INNER JOIN Venda ON Cliente.Id_Cliente = Venda.Id_Cliente INNER JOIN ParcelaVenda ON Venda.Id_Venda = ParcelaVenda.Id_Venda INNER JOIN  FormaPagamento ON FormaPagamento.Id_Venda = Venda.Id_Venda WHERE(ParcelaVenda.DataPagamento = '') AND(FormaPagamento.Descricao = 'parcelado')";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.CommandText = _sql;
             DataTable Tabela = new DataTable();
@@ -205,7 +221,7 @@ namespace CaixaFacil
         private void ContasReceberParcial()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "SELECT Cliente.Id_Cliente, Cliente.Nome, PagamentoParcial.ID_Venda, PagamentoParcial.ValorRestante FROM PagamentoParcial INNER JOIN Venda ON  PagamentoParcial.Id_Venda = Venda.Id_Venda INNER JOIN Cliente ON Cliente.Id_Cliente = Venda.Id_Cliente WHERE PagamentoParcial.ValorRestante > 0";
+            _sql = "SELECT " + FilterRows() + " Cliente.Id_Cliente, Cliente.Nome, PagamentoParcial.ID_Venda, PagamentoParcial.ValorRestante FROM PagamentoParcial INNER JOIN Venda ON  PagamentoParcial.Id_Venda = Venda.Id_Venda INNER JOIN Cliente ON Cliente.Id_Cliente = Venda.Id_Cliente WHERE PagamentoParcial.ValorRestante > 0";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.CommandText = _sql;
             DataTable Tabela = new DataTable();
@@ -216,7 +232,7 @@ namespace CaixaFacil
         private void ContasReceberMisto()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "SELECT Cliente.Id_Cliente, Cliente.Nome, PagamentoMisto.ID_Venda, PagamentoMisto.ValorRestante FROM PagamentoMisto INNER JOIN Venda ON  PagamentoMisto.Id_Venda = Venda.Id_Venda INNER JOIN Cliente ON Cliente.Id_Cliente = Venda.Id_Cliente WHERE PagamentoMisto.ValorRestante > 0";
+            _sql = "SELECT " + FilterRows() + " Cliente.Id_Cliente, Cliente.Nome, PagamentoMisto.ID_Venda, PagamentoMisto.ValorRestante FROM PagamentoMisto INNER JOIN Venda ON  PagamentoMisto.Id_Venda = Venda.Id_Venda INNER JOIN Cliente ON Cliente.Id_Cliente = Venda.Id_Cliente WHERE PagamentoMisto.ValorRestante > 0";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.CommandText = _sql;
             DataTable Tabela = new DataTable();
@@ -267,6 +283,25 @@ namespace CaixaFacil
         private void btn_Fechar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                LoadData();
         }
 
         int X = 0, Y = 0;

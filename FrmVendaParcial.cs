@@ -13,8 +13,8 @@ namespace CaixaFacil
         public decimal valorAbatido { get; set; }
         public decimal valorTotal { get; private set; }
         public decimal valorRestante { get; set; }
-        public decimal valorDesconto { get;  set; }
-        public decimal valorTotalComDesconto { get;  set; }
+        public decimal valorDesconto { get; set; }
+        public decimal valorTotalComDesconto { get; set; }
         public decimal descontoDinheiro;
         public string TipoPagamento { get; set; }
         bool goDescontar = false;
@@ -89,7 +89,7 @@ namespace CaixaFacil
                     if (valorAbatido > 0)
                     {
                         if (cbFormaPagamento.SelectedIndex == -1)
-                        {                            
+                        {
                             MessageBox.Show("Informe qual o tipo de pagamento em espécie!", "Biblioteca Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             errorProvider.SetError(cbFormaPagamento, "Selecione O tipo em espécie!");
                             cbFormaPagamento.Focus();
@@ -190,7 +190,7 @@ namespace CaixaFacil
                 btn_FinalizarParcial_Click(sender, e);
         }
 
-        
+
         private void btn_Descontar_Click(object sender, EventArgs e)
         {
             goDescontar = !goDescontar;
@@ -204,18 +204,18 @@ namespace CaixaFacil
                     txt_DescontoPorcento.Visible = true;
                     txt_ValorTotalDesconto.Visible = true;
                     groupBox13.Location = new Point(6, 176);
-                    groupBox11.Size = new Size(494, 156);                   
+                    groupBox11.Size = new Size(494, 156);
                     txt_DescontoDinheiro.Focus();
-                    break; 
+                    break;
                 case false:
                     lbl_DescontoDinheiro.Visible = false;
                     txt_DescontoDinheiro.Visible = false;
                     lbl_ValorDesconto.Visible = false;
                     txt_ValorTotalDesconto.Visible = false;
                     lbl_DescontoPorcento.Visible = false;
-                    txt_DescontoPorcento.Visible = false;     
+                    txt_DescontoPorcento.Visible = false;
                     groupBox13.Location = new Point(7, 122);
-                    groupBox11.Size = new Size(494, 102);                                  
+                    groupBox11.Size = new Size(494, 102);
                     break;
 
             }

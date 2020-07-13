@@ -1,12 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -24,7 +18,7 @@ namespace CaixaFacil
             rp.Add(new ReportParameter("cidade", Cidade));
             rp.Add(new ReportParameter("estado", Estado));
             rp.Add(new ReportParameter("CNPJ", CNPJ));
-            rp.Add(new ReportParameter("ValorPago", ValorPago.ToString()));            
+            rp.Add(new ReportParameter("ValorPago", ValorPago.ToString()));
             rp.Add(new ReportParameter("troco", troco.ToString()));
             rvCupom.LocalReport.SetParameters(rp);
             rvCupom.RefreshReport();
@@ -57,7 +51,7 @@ namespace CaixaFacil
 
         private void FrmCupom_Load(object sender, EventArgs e)
         {
-           this.TableCupomTableAdapter.Fill(this.DbControleVendaDataSet.TableCupom, CodVenda);
+            this.TableCupomTableAdapter.Fill(this.DbControleVendaDataSet.TableCupom, CodVenda);
 
             this.rvCupom.RefreshReport();
             this.rvCupom.RefreshReport();

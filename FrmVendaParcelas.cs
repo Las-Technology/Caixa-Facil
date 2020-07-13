@@ -216,7 +216,7 @@ namespace CaixaFacil
             Parcelas.Columns.Add("vencimento", typeof(string));
             Parcelas.Columns.Add("valorParcela", typeof(decimal));
 
-            foreach(DataGridViewRow dgwRow in dgv_Parcelas.Rows)
+            foreach (DataGridViewRow dgwRow in dgv_Parcelas.Rows)
             {
                 Parcelas.Rows.Add(int.Parse(dgwRow.Cells["ColumnNParcelas"].Value.ToString()), dgwRow.Cells["ColumnVencimento"].Value.ToString(), decimal.Parse(dgwRow.Cells["ColumnValorParcela"].Value.ToString()));
             }

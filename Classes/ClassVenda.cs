@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaixaFacil
 {
@@ -22,7 +17,7 @@ namespace CaixaFacil
         private string HoraVenda;
         private int Id_Usuario;
         private int Id_Cliente;
-        
+
         public int Id
         {
             get { return Id_Venda; }
@@ -67,7 +62,7 @@ namespace CaixaFacil
         {
             get { return Id_Cliente; }
             set { Id_Cliente = value; }
-        }       
+        }
 
         public void EfetuarVenda()
         {
@@ -83,7 +78,7 @@ namespace CaixaFacil
             comando.Parameters.AddWithValue("@HoraVenda", horaVenda);
             comando.Parameters.AddWithValue("@Id_Usuario", id_usuario);
             comando.Parameters.AddWithValue("@Id_Cliente", id_cliente);
-         
+
             comando.CommandText = _sql;
             try
             {
@@ -97,19 +92,19 @@ namespace CaixaFacil
             finally
             {
                 conexao.Close();
-            }           
-        }      
+            }
+        }
         public void Consultar()
         {
-          
-                SqlConnection conexao = new SqlConnection(stringConn);
+
+            SqlConnection conexao = new SqlConnection(stringConn);
             try
             {
                 conexao.Open();
                 _sql = "Select * from Venda where id_venda = @id";
-            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
-            comando.SelectCommand.Parameters.AddWithValue("id", Id);
-            comando.SelectCommand.CommandText = _sql;
+                SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
+                comando.SelectCommand.Parameters.AddWithValue("id", Id);
+                comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
                 comando.Fill(Tabela);
                 if (Tabela.Rows.Count > 0)
@@ -123,11 +118,11 @@ namespace CaixaFacil
                     HoraVenda = Tabela.Rows[0]["HoraVenda"].ToString();
                     id_usuario = int.Parse(Tabela.Rows[0]["Id_Usuario"].ToString());
                     Id_Cliente = int.Parse(Tabela.Rows[0]["Id_Cliente"].ToString());
-                }                
+                }
             }
             catch
             {
-                throw; 
+                throw;
             }
             finally
             {

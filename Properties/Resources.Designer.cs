@@ -221,15 +221,6 @@ namespace CaixaFacil.Properties {
         }
         
         /// <summary>
-        ///   Consulta um recurso localizado do tipo System.IO.UnmanagedMemoryStream semelhante a System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream Beep_Short {
-            get {
-                return ResourceManager.GetStream("Beep_Short", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Botão_Maximizar11 {
@@ -546,6 +537,15 @@ namespace CaixaFacil.Properties {
             get {
                 object obj = ResourceManager.GetObject("Company-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.IO.UnmanagedMemoryStream semelhante a System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream computerData {
+            get {
+                return ResourceManager.GetStream("computerData", resourceCulture);
             }
         }
         
@@ -902,6 +902,16 @@ namespace CaixaFacil.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ocultar {
+            get {
+                object obj = ResourceManager.GetObject("ocultar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ok_2_icon {
             get {
                 object obj = ResourceManager.GetObject("ok-2-icon", resourceCulture);
@@ -1234,6 +1244,16 @@ namespace CaixaFacil.Properties {
         internal static System.Drawing.Bitmap User_Group_icon__1_1 {
             get {
                 object obj = ResourceManager.GetObject("User-Group-icon (1)1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ver {
+            get {
+                object obj = ResourceManager.GetObject("ver", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

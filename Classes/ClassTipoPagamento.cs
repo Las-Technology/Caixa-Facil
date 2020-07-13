@@ -5,7 +5,7 @@ namespace CaixaFacil
     class TipoPagamento
     {
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _sql;
-        
+
         private string Descricao;
         private int IdPagamentoParcial;
         private int IdPagamentoMisto;

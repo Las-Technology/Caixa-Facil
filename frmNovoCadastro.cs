@@ -11,10 +11,10 @@ namespace CaixaFacil
         }
 
         private void btn_CadastroCliente_Click(object sender, EventArgs e)
-        {           
+        {
             FrmClientes clientes = new FrmClientes();
             clientes.ShowDialog();
-            
+
         }
 
         private void btnCadastroProduto_Click(object sender, EventArgs e)

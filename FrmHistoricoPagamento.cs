@@ -11,30 +11,14 @@ namespace CaixaFacil
         public FrmHistoricoPagamento()
         {
             InitializeComponent();
+            cbMaxRows.SelectedIndex = 1;
         }
 
-        string NVenda, Cliente, dateTime, codCliente;
+        string NVenda, Cliente, dateTime;
         decimal ValorVenda;
 
-        private void MostrarHistoricoPagamento()
-        {
-            try
-            {
-                SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0";
-                SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
-                comando.SelectCommand.CommandText = _sql;
-                DataTable Tabela = new DataTable();
-                comando.Fill(Tabela);
-                dgvHistoricoPagamento.DataSource = Tabela;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         int idPagamento; decimal ValorRestante, ValorAbatido;
+
         private void informarValorVendaParcialOrMisto()
         {
             InformarValorPagamentoParcialOrMisto();
@@ -131,7 +115,7 @@ namespace CaixaFacil
                 if (Tabela.Rows.Count > 0)
                 {
                     ValorVenda = decimal.Parse(Tabela.Rows[0]["ValorTotal"].ToString());
-                   
+
                 }
             }
             catch (Exception ex)
@@ -184,39 +168,49 @@ namespace CaixaFacil
 
         private void cbFormaPagamento_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LoadDataOptionSelected();
+        }
+
+        private string FilterRows()
+        {
+            string filter = "";
+
+            if (cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
+                filter = "TOP " + cbMaxRows.Text;
+
+            return filter;
+        }
+
+        private void LoadDataOptionSelected()
+        {
             try
             {
                 if (string.IsNullOrEmpty(txtCliente.Text.Trim()))
                 {
                     if (cbFormaPagamento.Text == "Parcela")
                     {
-                        _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PARCELADO' and ParcelaVenda.DataPagamento <> ''";
+                        _sql = "select distinct " + FilterRows() + " Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PARCELADO' and ParcelaVenda.DataPagamento <> ''";
                     }
                     else if (cbFormaPagamento.Text == "Prazo")
                     {
-                        _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PRAZO' and ParcelaVenda.DataPagamento <> ''";
+                        _sql = "select distinct " + FilterRows() + " Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PRAZO' and ParcelaVenda.DataPagamento <> ''";
                     }
                     else if (cbFormaPagamento.Text == "Parcial")
                     {
-                        _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0";
+                        _sql = "select distinct " + FilterRows() + " Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0";
                     }
                     else if (cbFormaPagamento.Text == "Misto")
                     {
-                        _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'MISTO' and PagamentoMisto.ValorRestante >= 0";
+                        _sql = "select distinct " + FilterRows() + " Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'MISTO' and PagamentoMisto.ValorRestante >= 0";
                     }
 
                     BuscarHistoricoPagamentoPorFormasPagamento();
-                }
-                else
-                {
-                   txtCliente_TextChanged(sender, e);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void FrmHistoricoPagamento_KeyDown(object sender, KeyEventArgs e)
@@ -247,6 +241,41 @@ namespace CaixaFacil
             }
         }
 
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dgvHistoricoPagamento.Rows.Count > 0)
+                LoadData();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                LoadData();
+        }
+
+        private void LoadData()
+        {
+            LoadDataGrid();
+        }
+
+        private void LoadDataGrid()
+        {
+            if (string.IsNullOrWhiteSpace(txtCliente.Text))
+            {
+                LoadDataOptionSelected();
+            }
+            else
+                LoadDataOption();
+        }
+
         private void dgvHistoricoPagamento_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             DataGridView dgv;
@@ -256,21 +285,26 @@ namespace CaixaFacil
 
         private void txtCliente_TextChanged(object sender, EventArgs e)
         {
+            LoadDataOption();
+        }
+
+        private void LoadDataOption()
+        {
             if (cbFormaPagamento.Text == "Parcela")
             {
-                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PARCELADO' and ParcelaVenda.DataPagamento <> '' and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
+                _sql = "select distinct " + FilterRows() + " Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PARCELADO' and ParcelaVenda.DataPagamento <> '' and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
             }
             else if (cbFormaPagamento.Text == "Prazo")
             {
-                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PRAZO' and ParcelaVenda.DataPagamento <> '' and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
+                _sql = "select distinct " + FilterRows() + " Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PRAZO' and ParcelaVenda.DataPagamento <> '' and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
             }
             else if (cbFormaPagamento.Text == "Parcial")
             {
-                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0 and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
+                _sql = "select distinct " + FilterRows() + " Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0 and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
             }
             else if (cbFormaPagamento.Text == "Misto")
             {
-                _sql = "select distinct Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'MISTO' and PagamentoMisto.ValorRestante >= 0 and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
+                _sql = "select distinct " + FilterRows() + " Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as nomeUsuario from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where FormaPagamento.Descricao = 'MISTO' and PagamentoMisto.ValorRestante >= 0 and Cliente.Nome like '%" + txtCliente.Text.Trim() + "%'";
             }
             BuscarHistoricoPagamentoPorFormasPagamento();
         }
@@ -313,8 +347,7 @@ namespace CaixaFacil
             {
                 DataGridViewRow row = dgvHistoricoPagamento.Rows[e.RowIndex];
                 NVenda = row.Cells["ColVenda"].Value.ToString();
-                codCliente = row.Cells["ColCodCliente"].Value.ToString();
-                Cliente = row.Cells["ColCliente"].Value.ToString();              
+                Cliente = row.Cells["ColCliente"].Value.ToString();
                 dateTime = row.Cells["ColDataVenda"].Value.ToString() + ", " + row.Cells["ColHoraVenda"].Value.ToString();
             }
         }

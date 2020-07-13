@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaixaFacil
 {
@@ -16,7 +11,7 @@ namespace CaixaFacil
         private int Id;
         private string descricao;
 
-         public int id
+        public int id
         {
             get { return Id; }
             set { Id = value; }
@@ -26,7 +21,7 @@ namespace CaixaFacil
             get { return descricao; }
             set { descricao = value; }
         }
-      public void Cadastrar()
+        public void Cadastrar()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Insert into categoria values (@Id, @Descricao)";
@@ -77,7 +72,7 @@ namespace CaixaFacil
             _sql = "delete from categoria where Id_Categoria = @Id";
             SqlCommand comando = new SqlCommand(_sql, conexao);
 
-            comando.Parameters.AddWithValue("@Id", id); 
+            comando.Parameters.AddWithValue("@Id", id);
             comando.CommandText = _sql;
             try
             {
@@ -105,9 +100,9 @@ namespace CaixaFacil
                 conexao.Open();
                 DataTable Tabela = new DataTable();
                 comando.Fill(Tabela);
-                if(Tabela.Rows.Count>0)
+                if (Tabela.Rows.Count > 0)
                 {
-                    Descricao = Tabela.Rows[0]["Descricao"].ToString();                    
+                    Descricao = Tabela.Rows[0]["Descricao"].ToString();
                 }
             }
             catch

@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmUsuario));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lbl_Contador = new System.Windows.Forms.Label();
+            this.lblTogglePass = new System.Windows.Forms.Label();
             this.btn_Excluir = new System.Windows.Forms.Button();
             this.btn_Editar = new System.Windows.Forms.Button();
             this.btn_Pesquisar = new System.Windows.Forms.Button();
@@ -70,7 +70,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.lbl_Contador);
+            this.panel1.Controls.Add(this.lblTogglePass);
             this.panel1.Controls.Add(this.btn_Excluir);
             this.panel1.Controls.Add(this.btn_Editar);
             this.panel1.Controls.Add(this.btn_Pesquisar);
@@ -98,25 +98,25 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(704, 405);
+            this.panel1.Size = new System.Drawing.Size(704, 368);
             this.panel1.TabIndex = 0;
             // 
-            // lbl_Contador
+            // lblTogglePass
             // 
-            this.lbl_Contador.AutoSize = true;
-            this.lbl_Contador.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Contador.ForeColor = System.Drawing.Color.Black;
-            this.lbl_Contador.Location = new System.Drawing.Point(527, 167);
-            this.lbl_Contador.Name = "lbl_Contador";
-            this.lbl_Contador.Size = new System.Drawing.Size(0, 19);
-            this.lbl_Contador.TabIndex = 173;
+            this.lblTogglePass.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTogglePass.ForeColor = System.Drawing.Color.White;
+            this.lblTogglePass.Location = new System.Drawing.Point(621, 163);
+            this.lblTogglePass.Name = "lblTogglePass";
+            this.lblTogglePass.Size = new System.Drawing.Size(55, 26);
+            this.lblTogglePass.TabIndex = 173;
+            this.lblTogglePass.Click += new System.EventHandler(this.lblTogglePass_Click);
             // 
             // btn_Excluir
             // 
             this.btn_Excluir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Excluir.Image = global::CaixaFacil.Properties.Resources.Button_Delete_icon;
             this.btn_Excluir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Excluir.Location = new System.Drawing.Point(514, 347);
+            this.btn_Excluir.Location = new System.Drawing.Point(514, 307);
             this.btn_Excluir.Name = "btn_Excluir";
             this.btn_Excluir.Size = new System.Drawing.Size(162, 45);
             this.btn_Excluir.TabIndex = 172;
@@ -130,7 +130,7 @@
             this.btn_Editar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Editar.Image = global::CaixaFacil.Properties.Resources.Text_Edit_icon__1_;
             this.btn_Editar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Editar.Location = new System.Drawing.Point(355, 347);
+            this.btn_Editar.Location = new System.Drawing.Point(355, 307);
             this.btn_Editar.Name = "btn_Editar";
             this.btn_Editar.Size = new System.Drawing.Size(153, 45);
             this.btn_Editar.TabIndex = 171;
@@ -144,7 +144,7 @@
             this.btn_Pesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Pesquisar.Image = global::CaixaFacil.Properties.Resources.magnifying_glass_icon;
             this.btn_Pesquisar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Pesquisar.Location = new System.Drawing.Point(189, 347);
+            this.btn_Pesquisar.Location = new System.Drawing.Point(189, 307);
             this.btn_Pesquisar.Name = "btn_Pesquisar";
             this.btn_Pesquisar.Size = new System.Drawing.Size(160, 45);
             this.btn_Pesquisar.TabIndex = 170;
@@ -158,7 +158,7 @@
             this.btn_Salvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Salvar.Image = global::CaixaFacil.Properties.Resources.Save_icon__1_1;
             this.btn_Salvar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Salvar.Location = new System.Drawing.Point(26, 347);
+            this.btn_Salvar.Location = new System.Drawing.Point(26, 307);
             this.btn_Salvar.Name = "btn_Salvar";
             this.btn_Salvar.Size = new System.Drawing.Size(154, 45);
             this.btn_Salvar.TabIndex = 169;
@@ -172,10 +172,10 @@
             this.txt_RespostaSeguranca.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txt_RespostaSeguranca.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txt_RespostaSeguranca.ForeColor = System.Drawing.Color.Black;
-            this.txt_RespostaSeguranca.Location = new System.Drawing.Point(91, 262);
+            this.txt_RespostaSeguranca.Location = new System.Drawing.Point(91, 265);
             this.txt_RespostaSeguranca.MaxLength = 30;
             this.txt_RespostaSeguranca.Name = "txt_RespostaSeguranca";
-            this.txt_RespostaSeguranca.Size = new System.Drawing.Size(176, 26);
+            this.txt_RespostaSeguranca.Size = new System.Drawing.Size(307, 26);
             this.txt_RespostaSeguranca.TabIndex = 7;
             this.txt_RespostaSeguranca.TextChanged += new System.EventHandler(this.txt_RespostaSeguranca_TextChanged);
             // 
@@ -184,7 +184,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(8, 264);
+            this.label11.Location = new System.Drawing.Point(8, 267);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(77, 19);
             this.label11.TabIndex = 168;
@@ -200,7 +200,7 @@
             "Qual é a sua comida Predileta?"});
             this.cb_PerguntaSeguranca.Location = new System.Drawing.Point(334, 229);
             this.cb_PerguntaSeguranca.Name = "cb_PerguntaSeguranca";
-            this.cb_PerguntaSeguranca.Size = new System.Drawing.Size(357, 27);
+            this.cb_PerguntaSeguranca.Size = new System.Drawing.Size(342, 27);
             this.cb_PerguntaSeguranca.TabIndex = 6;
             this.cb_PerguntaSeguranca.SelectedIndexChanged += new System.EventHandler(this.cb_PerguntaSeguranca_SelectedIndexChanged);
             // 
@@ -223,7 +223,7 @@
             this.txt_DicaSenha.Location = new System.Drawing.Point(206, 197);
             this.txt_DicaSenha.MaxLength = 30;
             this.txt_DicaSenha.Name = "txt_DicaSenha";
-            this.txt_DicaSenha.Size = new System.Drawing.Size(176, 26);
+            this.txt_DicaSenha.Size = new System.Drawing.Size(470, 26);
             this.txt_DicaSenha.TabIndex = 5;
             this.txt_DicaSenha.TextChanged += new System.EventHandler(this.txt_DicaSenha_TextChanged);
             // 
@@ -244,7 +244,7 @@
             this.cb_Funcao.Items.AddRange(new object[] {
             "ADMINISTRADOR",
             "FUNCIONÁRIO"});
-            this.cb_Funcao.Location = new System.Drawing.Point(91, 299);
+            this.cb_Funcao.Location = new System.Drawing.Point(476, 264);
             this.cb_Funcao.Name = "cb_Funcao";
             this.cb_Funcao.Size = new System.Drawing.Size(200, 27);
             this.cb_Funcao.TabIndex = 8;
@@ -255,7 +255,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(19, 302);
+            this.label5.Location = new System.Drawing.Point(404, 267);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(62, 19);
             this.label5.TabIndex = 165;
@@ -268,7 +268,7 @@
             this.txt_senha.Location = new System.Drawing.Point(338, 163);
             this.txt_senha.MaxLength = 15;
             this.txt_senha.Name = "txt_senha";
-            this.txt_senha.Size = new System.Drawing.Size(176, 26);
+            this.txt_senha.Size = new System.Drawing.Size(277, 26);
             this.txt_senha.TabIndex = 4;
             this.txt_senha.UseSystemPasswordChar = true;
             this.txt_senha.TextChanged += new System.EventHandler(this.txt_senha_TextChanged);
@@ -316,7 +316,7 @@
             this.txt_Email.Location = new System.Drawing.Point(91, 131);
             this.txt_Email.MaxLength = 100;
             this.txt_Email.Name = "txt_Email";
-            this.txt_Email.Size = new System.Drawing.Size(390, 26);
+            this.txt_Email.Size = new System.Drawing.Size(585, 26);
             this.txt_Email.TabIndex = 2;
             this.txt_Email.TextChanged += new System.EventHandler(this.txt_Email_TextChanged);
             // 
@@ -328,7 +328,7 @@
             this.txt_Nome.Location = new System.Drawing.Point(243, 99);
             this.txt_Nome.MaxLength = 100;
             this.txt_Nome.Name = "txt_Nome";
-            this.txt_Nome.Size = new System.Drawing.Size(339, 26);
+            this.txt_Nome.Size = new System.Drawing.Size(433, 26);
             this.txt_Nome.TabIndex = 1;
             this.txt_Nome.TextChanged += new System.EventHandler(this.txt_Nome_TextChanged);
             this.txt_Nome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_Nome_KeyPress);
@@ -457,7 +457,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 405);
+            this.ClientSize = new System.Drawing.Size(704, 368);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -510,6 +510,6 @@
         private System.Windows.Forms.Button btn_Editar;
         private System.Windows.Forms.Button btn_Pesquisar;
         private System.Windows.Forms.Button btn_Salvar;
-        private System.Windows.Forms.Label lbl_Contador;
+        private System.Windows.Forms.Label lblTogglePass;
     }
 }

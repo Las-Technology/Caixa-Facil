@@ -1,7 +1,4 @@
-﻿using CaixaFacil.Properties;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -30,7 +27,7 @@ namespace CaixaFacil
             InitializeComponent();
             this.ValorTotal = ValorTotal;
             lbl_ValorTotal.Text = "R$ " + ValorTotal;
-        }        
+        }
 
         private void lbl_Fechar_Click(object sender, EventArgs e)
         {
@@ -150,7 +147,7 @@ namespace CaixaFacil
         }
 
         private void btn_Finalizar_Click(object sender, EventArgs e)
-        {        
+        {
             Finalizar();
             if (vendaConfirmada)
                 this.Close();
@@ -174,7 +171,7 @@ namespace CaixaFacil
                 return;
             }
 
-            vendaConfirmada = true;           
+            vendaConfirmada = true;
         }
 
         private void txt_Troco_KeyPress(object sender, KeyPressEventArgs e)
@@ -265,7 +262,7 @@ namespace CaixaFacil
         private void btn_Recibo_Click(object sender, EventArgs e)
         {
             Finalizar();
-         
+
             if (!vendaConfirmada)
                 return;
 

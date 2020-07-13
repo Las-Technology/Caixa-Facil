@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -121,12 +116,12 @@ namespace CaixaFacil
         private void btn_Gravar_Click(object sender, EventArgs e)
         {
             if (txt_Beneficiario.Text == string.Empty)
-            {                
+            {
                 errorProvider.Clear();
                 errorProvider.SetError(txt_Beneficiario, "Campo obrigatório!");
                 txt_Beneficiario.Focus();
                 return;
-            }           
+            }
             else if (txt_Referente.Text == string.Empty)
             {
                 errorProvider.Clear();
@@ -486,7 +481,8 @@ namespace CaixaFacil
         {
             errorProvider.Clear();
             if ((txt_Multa.Text != "") && (txt_ValorPago.Text != "") && (txt_ValorDocumentoQuitar.Text != ""))
-            { double VD = double.Parse(txt_ValorDocumentoQuitar.Text), Multa = double.Parse(txt_Multa.Text);
+            {
+                double VD = double.Parse(txt_ValorDocumentoQuitar.Text), Multa = double.Parse(txt_Multa.Text);
                 txt_ValorPago.Text = (VD + Multa).ToString();
             }
         }
@@ -551,7 +547,7 @@ namespace CaixaFacil
                 MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txt_Desconto.Clear();
             }
-}
+        }
 
         private void txt_Multa_Leave(object sender, EventArgs e)
         {

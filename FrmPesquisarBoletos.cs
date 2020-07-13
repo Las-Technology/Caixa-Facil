@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -77,7 +72,7 @@ namespace CaixaFacil
         {
             string filter = "";
 
-            if(cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
+            if (cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
             {
                 filter = " TOP " + cbMaxRows.Text;
             }
@@ -90,7 +85,7 @@ namespace CaixaFacil
             {
                 _sql = "SELECT" + filter + " Id, Beneficiario, NumeroDocumento, Vencimento, ValorDocumento, Referencia, DataPagamento, Multa, Desconto, ValorPago, Status from ContasPagar where Beneficiario like '" + txt_Beneficiario.Text.Trim() + "%'";
             }
-            
+
             SqlConnection conexao = new SqlConnection(stringConn);
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.CommandText = _sql;
@@ -114,7 +109,7 @@ namespace CaixaFacil
         private void dataGridView_Busca_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int Cont = e.RowIndex;
-            if(Cont >= 0)
+            if (Cont >= 0)
             {
                 DataGridViewRow linhas = dgv_Busca.Rows[e.RowIndex];
                 Codigo = linhas.Cells[0].Value.ToString();

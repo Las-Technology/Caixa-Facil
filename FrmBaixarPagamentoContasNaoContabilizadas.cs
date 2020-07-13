@@ -68,7 +68,7 @@ namespace CaixaFacil
 
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3");
         string _sql;
-          
+
 
         private void txt_ValorPago_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -143,7 +143,7 @@ namespace CaixaFacil
             }
 
             ValorCaixa += ValorNCaixa;
-            SqlConnection conexao = new SqlConnection(stringConn);           
+            SqlConnection conexao = new SqlConnection(stringConn);
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@ValorCaixa", ValorCaixa);
             comando.Parameters.AddWithValue("@ValorRecebido", ValorRecebido);
@@ -162,7 +162,7 @@ namespace CaixaFacil
                 conexao.Close();
             }
         }
-            
+
         PagamentoParcial PagamentoParcial = new PagamentoParcial();
         private void txt_ValorPago_Leave(object sender, EventArgs e)
         {

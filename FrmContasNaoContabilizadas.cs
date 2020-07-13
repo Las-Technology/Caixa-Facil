@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -217,7 +212,7 @@ namespace CaixaFacil
             try
             {
                 ValidarCampos();
-               if(Validado == true)
+                if (Validado == true)
                 {
                     contasNaoContabilizada.nome = txt_Nome.Text.Trim();
                     contasNaoContabilizada.bairro = txt_Bairro.Text.Trim();
@@ -225,7 +220,7 @@ namespace CaixaFacil
                     contasNaoContabilizada.numero = txt_Numero.Text.Trim();
                     contasNaoContabilizada.valorConta = decimal.Parse(txt_Valor.Text.Trim());
                     contasNaoContabilizada.dataConta = dt_DataVenda.Text;
-                    
+
                     if (contasNaoContabilizada.valorConta > 0)
                     {
                         contasNaoContabilizada.ConfimarVendaNaoContabilizada();
@@ -422,7 +417,7 @@ namespace CaixaFacil
 
         private void btnBaixarConta_Click(object sender, EventArgs e)
         {
-            if(codigo > 0)
+            if (codigo > 0)
             {
                 FrmBaixarPagamentoContasNaoContabilizadas baixarPagamentoContasNaoContabilizadas = new FrmBaixarPagamentoContasNaoContabilizadas(ValorConta, codigo.ToString(), txt_Nome.Text.Trim());
                 baixarPagamentoContasNaoContabilizadas.ShowDialog();
@@ -446,6 +441,6 @@ namespace CaixaFacil
             {
                 btnConfirmar_Click(sender, e);
             }
-        }       
+        }
     }
 }

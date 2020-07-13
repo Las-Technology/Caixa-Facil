@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAutenticacao));
             this.panelTela = new System.Windows.Forms.Panel();
+            this.lblTogglePass = new System.Windows.Forms.Label();
+            this.linkRedefinicao = new System.Windows.Forms.LinkLabel();
             this.lbl_DicaSenha = new System.Windows.Forms.Label();
             this.lbl_Fechar = new System.Windows.Forms.Label();
             this.btn_Entrar = new System.Windows.Forms.Button();
@@ -40,13 +42,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cb_Usuario = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.linkRedefinicao = new System.Windows.Forms.LinkLabel();
             this.panelTela.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTela
             // 
             this.panelTela.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panelTela.Controls.Add(this.lblTogglePass);
             this.panelTela.Controls.Add(this.linkRedefinicao);
             this.panelTela.Controls.Add(this.lbl_DicaSenha);
             this.panelTela.Controls.Add(this.lbl_Fechar);
@@ -64,11 +66,34 @@
             this.panelTela.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTela_MouseDown);
             this.panelTela.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTela_MouseMove);
             // 
+            // lblTogglePass
+            // 
+            this.lblTogglePass.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTogglePass.ForeColor = System.Drawing.Color.White;
+            this.lblTogglePass.Location = new System.Drawing.Point(317, 71);
+            this.lblTogglePass.Name = "lblTogglePass";
+            this.lblTogglePass.Size = new System.Drawing.Size(55, 26);
+            this.lblTogglePass.TabIndex = 10;
+            this.lblTogglePass.Click += new System.EventHandler(this.lblTogglePass_Click);
+            // 
+            // linkRedefinicao
+            // 
+            this.linkRedefinicao.AutoSize = true;
+            this.linkRedefinicao.LinkColor = System.Drawing.Color.White;
+            this.linkRedefinicao.Location = new System.Drawing.Point(158, 186);
+            this.linkRedefinicao.Name = "linkRedefinicao";
+            this.linkRedefinicao.Size = new System.Drawing.Size(135, 19);
+            this.linkRedefinicao.TabIndex = 9;
+            this.linkRedefinicao.TabStop = true;
+            this.linkRedefinicao.Text = "Redefina a sua senha";
+            this.linkRedefinicao.Visible = false;
+            this.linkRedefinicao.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkRedefinicao_LinkClicked);
+            // 
             // lbl_DicaSenha
             // 
             this.lbl_DicaSenha.AutoSize = true;
             this.lbl_DicaSenha.ForeColor = System.Drawing.Color.White;
-            this.lbl_DicaSenha.Location = new System.Drawing.Point(141, 160);
+            this.lbl_DicaSenha.Location = new System.Drawing.Point(141, 167);
             this.lbl_DicaSenha.Name = "lbl_DicaSenha";
             this.lbl_DicaSenha.Size = new System.Drawing.Size(0, 19);
             this.lbl_DicaSenha.TabIndex = 8;
@@ -89,8 +114,10 @@
             // 
             // btn_Entrar
             // 
+            this.btn_Entrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Entrar.ForeColor = System.Drawing.Color.White;
             this.btn_Entrar.Image = global::CaixaFacil.Properties.Resources.logar;
-            this.btn_Entrar.Location = new System.Drawing.Point(227, 103);
+            this.btn_Entrar.Location = new System.Drawing.Point(232, 106);
             this.btn_Entrar.Name = "btn_Entrar";
             this.btn_Entrar.Size = new System.Drawing.Size(130, 54);
             this.btn_Entrar.TabIndex = 6;
@@ -100,8 +127,10 @@
             // 
             // btn_Cancelar
             // 
+            this.btn_Cancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Cancelar.ForeColor = System.Drawing.Color.White;
             this.btn_Cancelar.Image = global::CaixaFacil.Properties.Resources.Button_Cancel_icon__1_;
-            this.btn_Cancelar.Location = new System.Drawing.Point(102, 103);
+            this.btn_Cancelar.Location = new System.Drawing.Point(107, 106);
             this.btn_Cancelar.Name = "btn_Cancelar";
             this.btn_Cancelar.Size = new System.Drawing.Size(119, 54);
             this.btn_Cancelar.TabIndex = 5;
@@ -124,10 +153,9 @@
             // 
             this.txt_Senha.Location = new System.Drawing.Point(100, 71);
             this.txt_Senha.Name = "txt_Senha";
-            this.txt_Senha.Size = new System.Drawing.Size(257, 26);
+            this.txt_Senha.Size = new System.Drawing.Size(218, 26);
             this.txt_Senha.TabIndex = 0;
             this.txt_Senha.UseSystemPasswordChar = true;
-            this.txt_Senha.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Senha_KeyDown);
             // 
             // label1
             // 
@@ -148,22 +176,9 @@
             this.cb_Usuario.Location = new System.Drawing.Point(100, 36);
             this.cb_Usuario.Margin = new System.Windows.Forms.Padding(4);
             this.cb_Usuario.Name = "cb_Usuario";
-            this.cb_Usuario.Size = new System.Drawing.Size(257, 27);
+            this.cb_Usuario.Size = new System.Drawing.Size(272, 27);
             this.cb_Usuario.TabIndex = 1;
             this.cb_Usuario.SelectedIndexChanged += new System.EventHandler(this.cb_Usuario_SelectedIndexChanged);
-            // 
-            // linkRedefinicao
-            // 
-            this.linkRedefinicao.AutoSize = true;
-            this.linkRedefinicao.LinkColor = System.Drawing.Color.White;
-            this.linkRedefinicao.Location = new System.Drawing.Point(158, 179);
-            this.linkRedefinicao.Name = "linkRedefinicao";
-            this.linkRedefinicao.Size = new System.Drawing.Size(135, 19);
-            this.linkRedefinicao.TabIndex = 9;
-            this.linkRedefinicao.TabStop = true;
-            this.linkRedefinicao.Text = "Redefina a sua senha";
-            this.linkRedefinicao.Visible = false;
-            this.linkRedefinicao.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkRedefinicao_LinkClicked);
             // 
             // FrmAutenticacao
             // 
@@ -174,11 +189,13 @@
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmAutenticacao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Autenticacao do sistema";
             this.Load += new System.EventHandler(this.FrmAutenticacao_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmAutenticacao_KeyDown);
             this.panelTela.ResumeLayout(false);
             this.panelTela.PerformLayout();
             this.ResumeLayout(false);
@@ -198,5 +215,6 @@
         private System.Windows.Forms.Label lbl_Fechar;
         private System.Windows.Forms.Label lbl_DicaSenha;
         private System.Windows.Forms.LinkLabel linkRedefinicao;
+        private System.Windows.Forms.Label lblTogglePass;
     }
 }

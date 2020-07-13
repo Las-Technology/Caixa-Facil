@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using CaixaFacil.Properties;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CaixaFacil.Properties;
 
 namespace CaixaFacil
 {
@@ -18,10 +13,13 @@ namespace CaixaFacil
         {
             InitializeComponent();
         }
+
         int Id_Usuario;
         string NomeUsuario;
         private void FrmAutenticacao_Load(object sender, EventArgs e)
         {
+            lblTogglePass.Image = Resources.ver;
+            toolTip.SetToolTip(lblTogglePass, "Mostrar");
             txt_Senha.Focus();
             UsuarioSistema();
             CodigoCaixa();
@@ -297,10 +295,7 @@ namespace CaixaFacil
         }
         private void txt_Senha_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_Entrar_Click(sender, e);
-            }
+
         }
 
         private void lbl_Fechar_Click(object sender, EventArgs e)
@@ -378,6 +373,44 @@ namespace CaixaFacil
             {
 
                 this.Visible = true;
+            }
+        }
+
+        bool estaOculto = true;
+        ToolTip toolTip = new ToolTip();
+
+        private void lblTogglePass_Click(object sender, EventArgs e)
+        {
+            switch (estaOculto)
+            {
+                case true:
+                    lblTogglePass.Image = Resources.ocultar;
+                    txt_Senha.UseSystemPasswordChar = false;
+                    toolTip.SetToolTip(lblTogglePass, "Ocultar");
+                    estaOculto = false;
+                    break;
+                case false:
+                    lblTogglePass.Image = Resources.ver;
+                    txt_Senha.UseSystemPasswordChar = true;
+                    toolTip.SetToolTip(lblTogglePass, "Mostrar");
+                    estaOculto = true;
+                    break;
+            }
+        }
+
+        private void FrmAutenticacao_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn_Entrar_Click(sender, e);
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                btn_Cancelar_Click(sender, e);
+            }
+            else if (e.KeyCode == Keys.F1)
+            {
+                lblTogglePass_Click(sender, e);
             }
         }
 

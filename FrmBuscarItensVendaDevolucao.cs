@@ -34,7 +34,7 @@ namespace CaixaFacil
 
                 if (string.IsNullOrWhiteSpace(txtNomeCliente.Text))
                     _sql = "select distinct " + filter + " Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.Desconto, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Produto.Unidade <> 'serviço'";
-                else 
+                else
                     _sql = "select distinct " + filter + " Venda.Id_Venda, Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.ValorTotal, Venda.Desconto, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, FormaPagamento.Descricao from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda where Cliente.Nome like '%" + txtNomeCliente.Text + "%' and Produto.Unidade <> 'serviço'";
 
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
@@ -118,7 +118,7 @@ namespace CaixaFacil
             }
         }
 
-       string CodVenda = "", Cliente, horaVenda, dataVenda, atendente, ValorVenda, codCliente, desconto;
+        string CodVenda = "", Cliente, horaVenda, dataVenda, atendente, ValorVenda, codCliente, desconto;
 
         private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
         {

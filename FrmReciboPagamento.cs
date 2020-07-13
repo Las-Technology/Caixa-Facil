@@ -1,12 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -43,7 +37,7 @@ namespace CaixaFacil
         int CodigoVenda;
         private void ReciboPagamento_Load(object sender, EventArgs e)
         {
-           
+
             this.VendaTableAdapter.Fill(this.DataSetRelatorio.Venda, CodigoVenda);
 
             this.rv_Recibo.RefreshReport();

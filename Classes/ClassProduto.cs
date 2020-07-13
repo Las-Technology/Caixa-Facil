@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaixaFacil
 {
@@ -127,7 +122,7 @@ namespace CaixaFacil
             comando.Parameters.AddWithValue("@DataCadastro", dataCadastro);
             comando.CommandText = _sql;
             try
-                
+
             {
                 conexao.Open();
                 comando.ExecuteNonQuery();
@@ -247,7 +242,7 @@ namespace CaixaFacil
 
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Select * from Produto where CodigoBarra = @CodigoBarra";
-            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);            
+            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.Parameters.AddWithValue("@CodigoBarra", codigoBarra);
             comando.SelectCommand.CommandText = _sql;
             try

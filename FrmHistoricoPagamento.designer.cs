@@ -54,6 +54,8 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.cbMaxRows = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHistoricoPagamento)).BeginInit();
@@ -64,6 +66,8 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.cbMaxRows);
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnVerHistoricoPagamento);
             this.panel1.Controls.Add(this.cbFormaPagamento);
             this.panel1.Controls.Add(this.label4);
@@ -331,6 +335,53 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(150, 106);
             // 
+            // cbMaxRows
+            // 
+            this.cbMaxRows.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbMaxRows.BackColor = System.Drawing.Color.White;
+            this.cbMaxRows.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.cbMaxRows.FormattingEnabled = true;
+            this.cbMaxRows.Items.AddRange(new object[] {
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60",
+            "70",
+            "80",
+            "90",
+            "100",
+            "200",
+            "300",
+            "400",
+            "500",
+            "600",
+            "700",
+            "800",
+            "900",
+            "1000",
+            "Todos"});
+            this.cbMaxRows.Location = new System.Drawing.Point(334, 548);
+            this.cbMaxRows.Name = "cbMaxRows";
+            this.cbMaxRows.Size = new System.Drawing.Size(132, 27);
+            this.cbMaxRows.TabIndex = 35;
+            this.cbMaxRows.SelectedIndexChanged += new System.EventHandler(this.cbMaxRows_SelectedIndexChanged);
+            this.cbMaxRows.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbMaxRows_KeyDown);
+            this.cbMaxRows.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbMaxRows_KeyPress);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(216, 551);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(113, 19);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "Máx. de linhas:";
+            // 
             // FrmHistoricoPagamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -379,5 +430,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColDataVenda;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColHoraVenda;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColOperador;
+        private System.Windows.Forms.ComboBox cbMaxRows;
+        private System.Windows.Forms.Label label1;
     }
 }

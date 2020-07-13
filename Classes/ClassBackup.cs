@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CaixaFacil.Properties;
+using System;
 using System.Data.SqlClient;
 using System.IO;
-using CaixaFacil.Properties;
 
 namespace CaixaFacil
 {
@@ -9,7 +9,7 @@ namespace CaixaFacil
     {
         static string directory = Settings.Default["Disco"].ToString() + @"Caixa Fácil/Arquivo-Backup/";
         static string DataTempo;
-        
+
         private static void createDirectory()
         {
             if (!Directory.Exists(directory))

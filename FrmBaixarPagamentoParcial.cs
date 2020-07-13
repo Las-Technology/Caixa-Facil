@@ -86,7 +86,7 @@ namespace CaixaFacil
             {
                 conexao.Close();
             }
-        }        
+        }
 
         private void txt_ValorPago_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -188,13 +188,13 @@ namespace CaixaFacil
                 conexao.Close();
             }
         }
-            
+
         PagamentoParcial PagamentoParcial = new PagamentoParcial();
         int Id_PagamentoParcial;
 
         private void InformarValorabatido()
         {
-             SqlConnection conexao = new SqlConnection(stringConn);
+            SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "select * from PagamentoParcial inner join Venda on Venda.Id_Venda= PagamentoParcial.Id_Venda inner join Cliente on Cliente.Id_Cliente=venda.Id_Cliente where Cliente.Id_Cliente = @ID_Cliente and PagamentoParcial.ValorRestante > 0";
             try
             {

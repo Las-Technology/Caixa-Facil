@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -19,7 +14,7 @@ namespace CaixaFacil
             this.DataInicial = DataInicial;
             this.DataFinal = DataFinal;
             this.Operador = Operador;
-            if (DataInicial != "" && DataFinal != "" && Operador != "" )
+            if (DataInicial != "" && DataFinal != "" && Operador != "")
             {
                 RegistrosPeriodicos();
             }
@@ -526,7 +521,7 @@ namespace CaixaFacil
         {
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "select AreaAtuacao From Empresa";
-            SqlDataAdapter adapter = new SqlDataAdapter(_sql,conexao); ;
+            SqlDataAdapter adapter = new SqlDataAdapter(_sql, conexao); ;
             DataTable Tabela = new DataTable();
             adapter.Fill(Tabela);
             if (Tabela.Rows.Count > 0)
@@ -1010,7 +1005,7 @@ namespace CaixaFacil
                 comando.ExecuteNonQuery();
                 if (comando.ExecuteScalar() == DBNull.Value)
                 {
-                   SaldoFinal = 0.00m;
+                    SaldoFinal = 0.00m;
                     lbl_SaldoFinal.Text = "R$ 0,00";
                 }
                 else

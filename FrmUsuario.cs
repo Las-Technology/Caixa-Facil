@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CaixaFacil.Properties;
+using System;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
@@ -43,8 +44,13 @@ namespace CaixaFacil
                 conexao.Close();
             }
         }
+
+        ToolTip toolTip = new ToolTip();
+
         private void FrmUsuario_Load(object sender, EventArgs e)
         {
+            lblTogglePass.Image = Resources.ver;
+            toolTip.SetToolTip(lblTogglePass, "Mostrar");
             CodigoUsuario();
         }
 
@@ -113,12 +119,6 @@ namespace CaixaFacil
         private void txt_senha_TextChanged(object sender, EventArgs e)
         {
             errorProvider.Clear();
-            int totalValue = 0 + txt_senha.TextLength;
-            lbl_Contador.Text = totalValue.ToString() + " Caracter(es).";
-            if (txt_senha.Text == string.Empty)
-            {
-                lbl_Contador.Text = string.Empty;
-            }
         }
 
         private void txt_Nome_KeyPress(object sender, KeyPressEventArgs e)
@@ -262,13 +262,12 @@ namespace CaixaFacil
             txt_Usuario.Clear();
             txt_senha.Clear();
             cb_Funcao.Text = "";
-            lbl_Contador.Text = string.Empty;
             idUsuario = 0;
         }
 
         private void btn_Editar_Click(object sender, EventArgs e)
         {
-            if(idUsuario == 0)
+            if (idUsuario == 0)
             {
                 MessageBox.Show("Informe os dados para alteração!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -381,10 +380,10 @@ namespace CaixaFacil
             {
                 if (idUsuario == 0)
                 {
-                    MessageBox.Show("Informe os dados para Excluir os dados!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Informe os dados para excluir!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-             
+
                 if (MessageBox.Show("Deseja mesmo excluir os dados do usuário?", "Caixa Fácil.", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     Usuario.id = int.Parse(txt_Codigo.Text);
@@ -423,6 +422,7 @@ namespace CaixaFacil
         }
 
         int idUsuario;
+        bool estaOculto = true;
 
         private void btn_Pesquisar_Click(object sender, EventArgs e)
         {
@@ -463,6 +463,25 @@ namespace CaixaFacil
                 btn_Editar_Click(sender, e);
             else if (e.KeyCode == Keys.F5)
                 btn_Excluir_Click(sender, e);
+        }
+
+        private void lblTogglePass_Click(object sender, EventArgs e)
+        {
+            switch (estaOculto)
+            {
+                case true:
+                    lblTogglePass.Image = Resources.ocultar;
+                    txt_senha.UseSystemPasswordChar = false;
+                    toolTip.SetToolTip(lblTogglePass, "Ocultar");
+                    estaOculto = false;
+                    break;
+                case false:
+                    lblTogglePass.Image = Resources.ver;
+                    txt_senha.UseSystemPasswordChar = true;
+                    toolTip.SetToolTip(lblTogglePass, "Mostrar");
+                    estaOculto = true;
+                    break;
+            }
         }
     }
 }

@@ -16,19 +16,36 @@ namespace CaixaFacil
             InitializeComponent();
             this.IdPagamento = IdPagamento;
             this.FormaPagamento = FormaPagamento;
+            cbMaxRows.SelectedIndex = 1;
         }
+
+        private string FilterRows()
+        {
+            string filter = "";
+
+            if (cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
+                filter = "TOP " + cbMaxRows.Text;
+
+            return filter;
+        }
+
 
         private void FrmListavenda_Load(object sender, EventArgs e)
         {
-            dgvListaItensDevolvidos.DataSource = ListaItensDevolvidos();
+            LoadData();
             txtValorItensDevolvidos.Text = "R$ " + getValorItensDevolvidos();
+        }
+
+        private void LoadData()
+        {
+            dgvListaItensDevolvidos.DataSource = ListaItensDevolvidos();
         }
 
         private decimal getValorItensDevolvidos()
         {
             decimal valorItensDevolvidos = 0;
 
-            foreach(DataGridViewRow row in dgvListaItensDevolvidos.Rows)
+            foreach (DataGridViewRow row in dgvListaItensDevolvidos.Rows)
             {
                 valorItensDevolvidos += decimal.Parse(row.Cells["ColValor"].Value.ToString());
             }
@@ -40,9 +57,9 @@ namespace CaixaFacil
             SqlConnection conexao = new SqlConnection(stringConn);
 
             if (FormaPagamento.ToUpper() == "PARCIAL")
-                _sql = "Select Produto.Id_Produto, Produto.Descricao, HistoricoDevolucao.ValorProduto, HistoricoDevolucao.qtdItens, HistoricoDevolucao.DataDevolucao from HistoricoDevolucao inner join Produto on Produto.Id_Produto = HistoricoDevolucao.Id_Produto where HistoricoDevolucao.Id_PagamentoParcial = @IdPagamento";
+                _sql = "Select " + FilterRows() + " Produto.Id_Produto, Produto.Descricao, HistoricoDevolucao.ValorProduto, HistoricoDevolucao.qtdItens, HistoricoDevolucao.DataDevolucao from HistoricoDevolucao inner join Produto on Produto.Id_Produto = HistoricoDevolucao.Id_Produto where HistoricoDevolucao.Id_PagamentoParcial = @IdPagamento";
             else if (FormaPagamento.ToUpper() == "MISTO")
-                _sql = "Select Produto.Id_Produto, Produto.Descricao, HistoricoDevolucao.ValorProduto, HistoricoDevolucao.qtdItens, HistoricoDevolucao.DataDevolucao from HistoricoDevolucao inner join Produto on Produto.Id_Produto = HistoricoDevolucao.Id_Produto where HistoricoDevolucao.Id_PagamentoMisto = @IdPagamento";
+                _sql = "Select " + FilterRows() + " Produto.Id_Produto, Produto.Descricao, HistoricoDevolucao.ValorProduto, HistoricoDevolucao.qtdItens, HistoricoDevolucao.DataDevolucao from HistoricoDevolucao inner join Produto on Produto.Id_Produto = HistoricoDevolucao.Id_Produto where HistoricoDevolucao.Id_PagamentoMisto = @IdPagamento";
 
             SqlDataAdapter adapter = new SqlDataAdapter(_sql, conexao);
             adapter.SelectCommand.Parameters.AddWithValue("@IdPagamento", IdPagamento);
@@ -67,6 +84,25 @@ namespace CaixaFacil
         }
 
         int X = 0, Y = 0;
+
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                LoadData();
+        }
 
         private void btnFechar_Click(object sender, EventArgs e)
         {

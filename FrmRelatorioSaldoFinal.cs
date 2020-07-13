@@ -98,7 +98,7 @@ namespace CaixaFacil
                 conexao.Close();
             }
 
-            if((cbxSaldoPositivo.Checked && cbxSaldoNegativo.Checked) || (!cbxSaldoPositivo.Checked && !cbxSaldoNegativo.Checked))
+            if ((cbxSaldoPositivo.Checked && cbxSaldoNegativo.Checked) || (!cbxSaldoPositivo.Checked && !cbxSaldoNegativo.Checked))
             {
                 _sql = "Select sum(FluxoCaixa.ValorTotalCaixa - FluxoCaixa.ValorEntrada) AS ValorCaixa from FluxoCaixa where DataSaida <> ''";
                 SomarValoresCaixa();
@@ -277,7 +277,7 @@ namespace CaixaFacil
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);            
+                    MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -313,7 +313,7 @@ namespace CaixaFacil
                         _sql = "Select sum(FluxoCaixa.SaldoCaixa) AS ValorCaixa from FluxoCaixa inner join Usuario on Usuario.Id_Usuario = FluxoCaixa.Id_Usuario where FluxoCaixa.DataSaida <> '' and " + Opcao + " like '" + txt_Descricao.Text.Trim() + "%' and FluxoCaixa.SaldoCaixa < 0";
                         SomarValoresSaldoCaixa();
                     }
-                }              
+                }
             }
             else
             {
@@ -348,7 +348,7 @@ namespace CaixaFacil
                     CarregarGrid();
                 }
             }
-            else if ((cbxSaldoPositivo.Checked && cbxSaldoNegativo.Checked) || (!cbxSaldoPositivo.Checked && !cbxSaldoNegativo.Checked) )
+            else if ((cbxSaldoPositivo.Checked && cbxSaldoNegativo.Checked) || (!cbxSaldoPositivo.Checked && !cbxSaldoNegativo.Checked))
             {
                 if (txt_Descricao.Text == "")
                 {

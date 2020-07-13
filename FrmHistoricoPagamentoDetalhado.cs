@@ -33,7 +33,7 @@ namespace CaixaFacil
             {
                 lblInfo.Visible = true;
                 btnVisualizarLista.Visible = true;
-                if(valorRestante == 0)
+                if (valorRestante == 0)
                 {
                     txtValorPago.Text = txtValorVenda.Text;
                 }
@@ -117,7 +117,7 @@ namespace CaixaFacil
             {
                 btnFechar_Click(sender, e);
             }
-            if(e.KeyCode == Keys.F2)
+            if (e.KeyCode == Keys.F2)
             {
                 btnVisualizarLista_Click(sender, e);
             }

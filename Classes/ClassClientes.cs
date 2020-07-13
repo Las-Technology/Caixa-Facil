@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
 
 namespace CaixaFacil
 {
@@ -221,7 +217,7 @@ namespace CaixaFacil
         public void Atualizar()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-             _sql = "UPDATE Cliente SET Nome = @Nome, DataNascimento = @DataNascimento, CPF= @CPF, RG = @RG, CEP = @CEP, Bairro = @Bairro, Endereco = @Endereco, Numero = @Numero, Cidade = @Cidade, Estado = @Estado, Telefone = @Telefone, Celular = @Celular, Email = @Email WHERE Id_Cliente = @ID";
+            _sql = "UPDATE Cliente SET Nome = @Nome, DataNascimento = @DataNascimento, CPF= @CPF, RG = @RG, CEP = @CEP, Bairro = @Bairro, Endereco = @Endereco, Numero = @Numero, Cidade = @Cidade, Estado = @Estado, Telefone = @Telefone, Celular = @Celular, Email = @Email WHERE Id_Cliente = @ID";
             SqlCommand comando = new SqlCommand(_sql, conexao);
 
             comando.Parameters.AddWithValue("@ID", id);

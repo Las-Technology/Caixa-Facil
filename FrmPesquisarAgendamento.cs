@@ -52,11 +52,11 @@ namespace CaixaFacil
             dgv_Busca.DataSource = tabela;
         }
 
-       private void CarregarDataGrid()
+        private void CarregarDataGrid()
         {
             string filter = "";
 
-            if(cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
+            if (cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
             {
                 filter = " TOP " + cbMaxRows.Text;
             }
@@ -160,6 +160,6 @@ namespace CaixaFacil
             if (e.Button != MouseButtons.Left) return;
             this.Left = X + MousePosition.X;
             this.Top = Y + MousePosition.Y;
-        }     
+        }
     }
 }

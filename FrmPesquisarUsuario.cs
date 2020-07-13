@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -48,7 +43,7 @@ namespace CaixaFacil
         {
             btn_Fechar.BackColor = Color.DarkOrange;
         }
-              
+
         private void FrmPesquisarUsuario_Load(object sender, EventArgs e)
         {
             cbMaxRows.SelectedIndex = 1;
@@ -88,7 +83,7 @@ namespace CaixaFacil
                     MessageBox.Show("Dados não encontrado no banco de dados!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

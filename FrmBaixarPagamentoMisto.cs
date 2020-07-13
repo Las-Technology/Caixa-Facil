@@ -85,7 +85,7 @@ namespace CaixaFacil
             {
                 conexao.Close();
             }
-        }        
+        }
 
         private void txt_ValorPago_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -188,12 +188,12 @@ namespace CaixaFacil
                 conexao.Close();
             }
         }
-            
+
         ValorMistoAbatido valorMistoAbatido = new ValorMistoAbatido();
 
         private void InformarValorabatido()
         {
-             SqlConnection conexao = new SqlConnection(stringConn);
+            SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "select * from PagamentoMisto inner join Venda on Venda.Id_Venda= PagamentoMisto.Id_Venda inner join Cliente on Cliente.Id_Cliente = venda.Id_Cliente where Cliente.Id_Cliente = @ID_Cliente and PagamentoMisto.ValorRestante > 0";
             try
             {

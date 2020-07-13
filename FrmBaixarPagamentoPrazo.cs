@@ -20,7 +20,7 @@ namespace CaixaFacil
         }
         int CodigoCliente;
         decimal ValorPago, ValorConta, Troco;
-        
+
 
         private void FrmBaixarPagamentoPrazo_KeyDown(object sender, KeyEventArgs e)
         {
@@ -84,7 +84,7 @@ namespace CaixaFacil
         }
 
         private void btn_Cancelar_Click(object sender, EventArgs e)
-        {           
+        {
             this.Close();
         }
 
@@ -151,7 +151,7 @@ namespace CaixaFacil
             {
                 txt_ValorPago_Leave(sender, e);
                 if (ValorPago >= ValorConta)
-                {                    
+                {
                     CaixaDia();
                     GerenciarCaixa();
                     InserirTipoPagamento();
@@ -232,7 +232,7 @@ namespace CaixaFacil
             }
 
             ValorCaixa += ValorConta;
-            SqlConnection conexao = new SqlConnection(stringConn);            
+            SqlConnection conexao = new SqlConnection(stringConn);
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@ValorCaixa", ValorCaixa);
             comando.Parameters.AddWithValue("@ValorRecebido", ValorConta);

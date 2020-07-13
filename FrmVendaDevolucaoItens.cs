@@ -43,7 +43,7 @@ namespace CaixaFacil
             {
                 getValorReceberPagamentoParcial();
             }
-            else if(formaPagamento == "MISTO")
+            else if (formaPagamento == "MISTO")
             {
                 getValorReceberPagamentoMisto();
             }
@@ -54,7 +54,7 @@ namespace CaixaFacil
                 valorEntrada = this.valorVenda - sumValorParcelado;
                 valorPago += valorEntrada;
             }
-            else if((formaPagamento == "PRAZO"))
+            else if ((formaPagamento == "PRAZO"))
             {
                 InformarValoresPagos();
             }
@@ -68,7 +68,7 @@ namespace CaixaFacil
 
         private decimal ReceberValorAbatidoMisto()
         {
-            if(valorRestante == 0.00m)
+            if (valorRestante == 0.00m)
             {
                 valorAbatido = valorVenda - desconto;
                 return valorAbatido;
@@ -132,7 +132,7 @@ namespace CaixaFacil
             receberValor_e_IdPagamentoParcial();
             ValorTotalPagamentoParcial = valorRestante + ReceberValorAbatido();
         }
-        
+
         private void VerificarParcelas_E_ValorEntrada()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
@@ -193,7 +193,7 @@ namespace CaixaFacil
         }
 
         private void receberValor_e_IdPagamentoParcial()
-        {            
+        {
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "select PagamentoParcial.ValorRestante, PagamentoParcial.Id_PagamentoParcial from PagamentoParcial inner join Venda on Venda.Id_Venda = PagamentoParcial.Id_Venda where Venda.Id_Cliente = @IdCliente and PagamentoParcial.ValorRestante > 0";
 
@@ -227,7 +227,7 @@ namespace CaixaFacil
 
         private decimal ReceberValorAbatido()
         {
-            if(valorRestante == 0.00m)
+            if (valorRestante == 0.00m)
             {
                 valorAbatido = valorVenda - desconto;
                 return valorAbatido;
@@ -361,7 +361,7 @@ namespace CaixaFacil
             try
             {
                 conexao.Open();
-               if(comando.ExecuteScalar() != DBNull.Value)                
+                if (comando.ExecuteScalar() != DBNull.Value)
                 {
                     idFluxoCaixa = comando.ExecuteScalar().ToString();
                 }
@@ -440,7 +440,7 @@ namespace CaixaFacil
                         RemoverTipoPagamento();
                     }
                 }
-                else if(formaPagamento == "PRAZO" || formaPagamento == "PARCELADO")
+                else if (formaPagamento == "PRAZO" || formaPagamento == "PARCELADO")
                 {
                     RemoverTipoPagamento();
                 }
@@ -475,13 +475,13 @@ namespace CaixaFacil
 
             else if (formaPagamento == "PARCELADO" || formaPagamento == "PRAZO")
             {
-                foreach(DataRow dr in getIdsParcela().Rows)
+                foreach (DataRow dr in getIdsParcela().Rows)
                 {
                     _sql = "delete from TipoPagamento where Id_Parcela = @Id";
                     id = int.Parse(dr["Id_Parcela"].ToString());
                     RemoverRowsTipoPagamento(id, _sql);
                 }
-            }            
+            }
         }
 
         private DataTable getIdsParcela()
@@ -615,7 +615,7 @@ namespace CaixaFacil
         private void GravarTudoHistoricoDevolucao()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            
+
             foreach (DataGridViewRow row in dgv_ListaVenda.Rows)
             {
                 if (formaPagamento == "PAGAMENTO PARCIAL")
@@ -704,7 +704,7 @@ namespace CaixaFacil
         decimal subValorVendaValorAbatido, subValorReceber, valorContaTotal, valorContaFinal;
 
         private void AlterarValoresPagamentoParcialOrMisto_Parcelado()
-        {           
+        {
             // primeiro Verifica se o idVenda informado é igual ao idVenda da tabela Pagamento Parcial
 
             if (formaPagamento == "PAGAMENTO PARCIAL" || formaPagamento == "MISTO")
@@ -728,7 +728,7 @@ namespace CaixaFacil
                         if (GetQtdRegistroVenda() == 1)
                         {
                             valorDevolver = valorAbatido;
-                            MessageBox.Show("O(A) cliente  " + cliente + " abateu R$ "+ valorAbatido + " em uma conta que está no valor de " + lblValorTotalComDesconto.Text + ". Com a devolução o valor a ser devolvido ao cliente é de R$ " + valorDevolver + " reais.", "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("O(A) cliente  " + cliente + " abateu R$ " + valorAbatido + " em uma conta que está no valor de " + lblValorTotalComDesconto.Text + ". Com a devolução o valor a ser devolvido ao cliente é de R$ " + valorDevolver + " reais.", "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                             MessageBox.Show("Contabilizando a conta do(a) cliente  " + cliente + ", o valor total da conta é R$ " + (valorContaTotal - desconto) + ". O(A) cliente abateu R$ " + valorAbatido + " e com a devolução do(s) item(ns) selecionado(s) que está no valor de " + lblValorTotalComDesconto.Text + " o(a) cliente passa a não ter dívidas e receberá o valor de R$ " + valorDevolver + ".", "Aviso do sistema Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -844,16 +844,16 @@ namespace CaixaFacil
         }
 
         int getIdVenda;
-        
+
         private void GetIdPagamentoParcialOrMistoAndIdVenda()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            
+
             if (formaPagamento == "PAGAMENTO PARCIAL")
                 _sql = "select min(PagamentoParcial.Id_PagamentoParcial) as Id_PagamentoParcial, Venda.Id_Venda from PagamentoParcial inner join Venda on Venda.id_Venda = PagamentoParcial.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and PagamentoParcial.Id_Venda > @IdVenda group by Venda.Id_Venda";
             else
                 _sql = "select min(PagamentoMisto.Id_PagamentoMisto) as Id_PagamentoMisto, Venda.Id_Venda from PagamentoMisto inner join Venda on Venda.id_Venda = PagamentoMisto.Id_Venda inner join Cliente on Cliente.Id_Cliente = Venda.Id_Cliente where Venda.Id_Cliente = @IdCliente and PagamentoMisto.Id_Venda > @IdVenda group by Venda.Id_Venda";
-            
+
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@IdVenda", codVenda);
             comando.Parameters.AddWithValue("@IdCliente", codCliente);
@@ -910,7 +910,7 @@ namespace CaixaFacil
                 conexao.Close();
             }
         }
-        
+
         private bool VerificarOutrasContas()
         {
             bool existsConta = false;
@@ -933,7 +933,7 @@ namespace CaixaFacil
             {
                 conexao.Open();
                 SqlDataReader dr = comando.ExecuteReader();
-                if(dr.Read())
+                if (dr.Read())
                 {
                     valorRestante = 0.00m;
                     existsConta = true;
@@ -1000,7 +1000,7 @@ namespace CaixaFacil
             comando.Parameters.AddWithValue("@IdCliente", codCliente);
             try
             {
-                conexao.Open();                
+                conexao.Open();
                 if (comando.ExecuteScalar() != DBNull.Value)
                 {
                     IdVendaComValorRestante = int.Parse(comando.ExecuteScalar().ToString());
@@ -1042,7 +1042,7 @@ namespace CaixaFacil
         }
 
         private void verificarDataPagamento_E_AtualizarValoresFluxoCaixa()
-        {            
+        {
             if (formaPagamento == "Cartão de Débito")
             {
                 ValorRecebidoDebito = valorVenda;
@@ -1116,8 +1116,8 @@ namespace CaixaFacil
             SqlCommand comando = new SqlCommand(_sql, conexao);
             if (valorCaixa >= valorPago)
             {
-                if(devolucaoItensTudo)
-                comando.Parameters.AddWithValue("@Valor", valorPago);
+                if (devolucaoItensTudo)
+                    comando.Parameters.AddWithValue("@Valor", valorPago);
                 else
                     comando.Parameters.AddWithValue("@Valor", (valorSubTotal / qtdItens) * qtdItensDevolvido);
             }
@@ -1301,7 +1301,7 @@ namespace CaixaFacil
             deleteUpdateItensVenda();
 
             subValorReceber = valorSubTotal;
-           if (formaPagamento == "Cartão de Débito")
+            if (formaPagamento == "Cartão de Débito")
             {
                 ValorRecebidoDebito = ((valorSubTotal / qtdItens) * qtdItensDevolvido);
                 AtualizarValorRecebidoDebito();
@@ -1326,7 +1326,7 @@ namespace CaixaFacil
 
         private void AtualizarEstoque()
         {
-            if(qtdItensDevolvido > 0 && qtdItensDevolvido < qtdItens)
+            if (qtdItensDevolvido > 0 && qtdItensDevolvido < qtdItens)
             {
                 qtdItens = qtdItensDevolvido;
             }
@@ -1356,7 +1356,7 @@ namespace CaixaFacil
 
         decimal subValoresTotalUnitario, valorParcela;
         int qtdParcela;
-       
+
         private void verificarFormaPagamentos()
         {
 
@@ -1391,7 +1391,7 @@ namespace CaixaFacil
             }
             else if (formaPagamento == "PRAZO")
             {
-                valorParcela = subValoresTotalUnitario;               
+                valorParcela = subValoresTotalUnitario;
             }
             else if (formaPagamento == "VISTA")
             {
@@ -1411,7 +1411,7 @@ namespace CaixaFacil
                     if ((valorVenda - desconto) < valorAbatido && valorRestante > 0)
                     {
                         subValorVendaValorAbatido = (valorVenda - desconto) - valorAbatido;
-                        if(subValorVendaValorAbatido < 0 && valorAbatido > 0)
+                        if (subValorVendaValorAbatido < 0 && valorAbatido > 0)
                         {
                             valorContaTotal = valorAbatido + valorRestante + desconto;
 
@@ -1465,7 +1465,7 @@ namespace CaixaFacil
                 conexao.Open();
                 comando.ExecuteNonQuery();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -1503,7 +1503,7 @@ namespace CaixaFacil
                     IdPagamento = int.Parse(dr[column].ToString());
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Caixa Fàcil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -1513,7 +1513,7 @@ namespace CaixaFacil
             }
 
             return IdPagamento;
-        }       
+        }
 
         private void AlterarValorDesconto()
         {

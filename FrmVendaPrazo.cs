@@ -49,13 +49,13 @@ namespace CaixaFacil
                     id_Cliente = lbl_CodigoCliente.Text;
                     Vencimento = mask_Data.Text;
                     this.Close();
-                 //else
-                 //{
-                 //    MessageBox.Show("Venda não permitida. O cliente tem conta(s) vencida(s) com a empresa!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                 //}
+                    //else
+                    //{
+                    //    MessageBox.Show("Venda não permitida. O cliente tem conta(s) vencida(s) com a empresa!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    //}
                 }
-                    else
-                        MessageBox.Show("Informe o cliente!", "Biblioteca Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                else
+                    MessageBox.Show("Informe o cliente!", "Biblioteca Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             catch (Exception ex)
             {
@@ -137,7 +137,7 @@ namespace CaixaFacil
             this.lbl_Fechar.BackColor = Color.Red;
         }
 
-       private void btn_Cancelar_Click(object sender, EventArgs e)
+        private void btn_Cancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }

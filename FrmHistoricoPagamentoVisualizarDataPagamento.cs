@@ -13,16 +13,32 @@ namespace CaixaFacil
         public FrmHistoricoPagamentoVisualizarDataPagamento(string NVenda, string FormaPagamento, int idPagamento)
         {
             InitializeComponent();
+            cbMaxRows.SelectedIndex = 1;
             codVenda = NVenda;
             this.FormaPagamento = FormaPagamento;
             this.IdPagamento = idPagamento;
         }
 
+        private string FilterRows()
+        {
+            string filter = "";
+
+            if (cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
+                filter = "TOP " + cbMaxRows.Text;
+
+            return filter;
+        }
+
         private void FrmListavenda_Load(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void LoadData()
         {
             if (FormaPagamento == "Parcela")
             {
-                InformarDataEValorPagamentoParcelaPago();               
+                InformarDataEValorPagamentoParcelaPago();
             }
             else if (FormaPagamento == "Prazo")
             {
@@ -42,7 +58,7 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select ParcelaVenda.Id_Venda as venda, TipoPagamento.Descricao as especie, ParcelaVenda.ValorParcelado as ValorAbatido, ParcelaVenda.DataPagamento as DataAbatimento, ParcelaVenda.HoraPagamento as HoraAbatimento from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join TipoPagamento on TipoPagamento.id_Parcela = ParcelaVenda.id_Parcela where FormaPagamento.Descricao = 'PARCELADO' and ParcelaVenda.DataPagamento <> ''  and ParcelaVenda.Id_Venda = " + codVenda;
+                _sql = "select " + FilterRows() + " ParcelaVenda.Id_Venda as venda, TipoPagamento.Descricao as especie, ParcelaVenda.ValorParcelado as ValorAbatido, ParcelaVenda.DataPagamento as DataAbatimento, ParcelaVenda.HoraPagamento as HoraAbatimento from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join TipoPagamento on TipoPagamento.id_Parcela = ParcelaVenda.id_Parcela where FormaPagamento.Descricao = 'PARCELADO' and ParcelaVenda.DataPagamento <> ''  and ParcelaVenda.Id_Venda = " + codVenda;
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
@@ -60,7 +76,7 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _sql = "select ParcelaVenda.Id_Venda as venda, TipoPagamento.Descricao as especie, ParcelaVenda.ValorParcelado as ValorAbatido, ParcelaVenda.DataPagamento as DataAbatimento, ParcelaVenda.HoraPagamento as HoraAbatimento from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join TipoPagamento on TipoPagamento.id_Parcela = ParcelaVenda.id_Parcela where FormaPagamento.Descricao = 'PRAZO' and ParcelaVenda.DataPagamento <> ''  and ParcelaVenda.Id_Venda = " + codVenda;
+                _sql = "select " + FilterRows() + " ParcelaVenda.Id_Venda as venda, TipoPagamento.Descricao as especie, ParcelaVenda.ValorParcelado as ValorAbatido, ParcelaVenda.DataPagamento as DataAbatimento, ParcelaVenda.HoraPagamento as HoraAbatimento from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join TipoPagamento on TipoPagamento.id_Parcela = ParcelaVenda.id_Parcela where FormaPagamento.Descricao = 'PRAZO' and ParcelaVenda.DataPagamento <> ''  and ParcelaVenda.Id_Venda = " + codVenda;
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
@@ -80,10 +96,10 @@ namespace CaixaFacil
                 SqlConnection conexao = new SqlConnection(stringConn);
 
                 if (FormaPagamento.ToUpper() == "PARCIAL")
-                    _sql = "select venda.id_Venda as venda, TipoPagamento.Descricao as especie, ValorAbatido.ValorTotalAbatimento as ValorAbatido,  ValorAbatido.DataPagamento as DataAbatimento,  ValorAbatido.HoraPagamento as HoraAbatimento from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join ValorAbatido on ValorAbatido.Id_PagamentoParcial = PagamentoParcial.Id_PagamentoParcial inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join TipoPagamento on TipoPagamento.id_PagamentoParcial = PagamentoParcial.id_PagamentoParcial where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0 and ValorAbatido.ValorTotalAbatimento > 0  and PagamentoParcial.Id_PagamentoParcial = " + IdPagamento;
+                    _sql = "select " + FilterRows() + " venda.id_Venda as venda, TipoPagamento.Descricao as especie, ValorAbatido.ValorTotalAbatimento as ValorAbatido,  ValorAbatido.DataPagamento as DataAbatimento,  ValorAbatido.HoraPagamento as HoraAbatimento from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda inner join ValorAbatido on ValorAbatido.Id_PagamentoParcial = PagamentoParcial.Id_PagamentoParcial inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join TipoPagamento on TipoPagamento.id_PagamentoParcial = PagamentoParcial.id_PagamentoParcial where FormaPagamento.Descricao = 'PAGAMENTO PARCIAL' and PagamentoParcial.ValorRestante >= 0 and ValorAbatido.ValorTotalAbatimento > 0  and PagamentoParcial.Id_PagamentoParcial = " + IdPagamento;
                 else if (FormaPagamento.ToUpper() == "MISTO")
-                    _sql = "select venda.id_Venda as venda, TipoPagamento.Descricao as especie, ValorMistoAbatido.ValorTotalAbatimento as ValorAbatido,  ValorMistoAbatido.DataPagamento as DataAbatimento,  ValorMistoAbatido.HoraPagamento as HoraAbatimento from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join ValorMistoAbatido on ValorMistoAbatido.Id_PagamentoMisto = PagamentoMisto.Id_PagamentoMisto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join TipoPagamento on TipoPagamento.id_PagamentoMisto = PagamentoMisto.id_PagamentoMisto where FormaPagamento.Descricao = 'MISTO' and PagamentoMisto.ValorRestante >= 0 and ValorMistoAbatido.ValorTotalAbatimento > 0  and PagamentoMisto.Id_PagamentoMisto = " + IdPagamento;
-                
+                    _sql = "select " + FilterRows() + " venda.id_Venda as venda, TipoPagamento.Descricao as especie, ValorMistoAbatido.ValorTotalAbatimento as ValorAbatido,  ValorMistoAbatido.DataPagamento as DataAbatimento,  ValorMistoAbatido.HoraPagamento as HoraAbatimento from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join PagamentoMisto on PagamentoMisto.Id_Venda = Venda.Id_Venda inner join ValorMistoAbatido on ValorMistoAbatido.Id_PagamentoMisto = PagamentoMisto.Id_PagamentoMisto inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario inner join TipoPagamento on TipoPagamento.id_PagamentoMisto = PagamentoMisto.id_PagamentoMisto where FormaPagamento.Descricao = 'MISTO' and PagamentoMisto.ValorRestante >= 0 and ValorMistoAbatido.ValorTotalAbatimento > 0  and PagamentoMisto.Id_PagamentoMisto = " + IdPagamento;
+
                 SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
                 comando.SelectCommand.CommandText = _sql;
                 DataTable Tabela = new DataTable();
@@ -123,6 +139,26 @@ namespace CaixaFacil
             DataGridView dgv;
             dgv = (DataGridView)sender;
             dgv.ClearSelection();
+        }
+
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dgvHistoricoPagamento.Rows.Count > 0)
+                LoadData();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                LoadData();
         }
 
         private void FrmHistoricoPagamentoDetalhado_KeyDown(object sender, KeyEventArgs e)

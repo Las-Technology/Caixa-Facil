@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -15,16 +10,22 @@ namespace CaixaFacil
     {
         public FrmAnaliseProdutoVendidos(string DataInicial, string DataFinal, string Opcao, string Analise)
         {
-            InitializeComponent();          
+            InitializeComponent();
 
             this.DataInicial = DataInicial;
             this.DataFinal = DataFinal;
             this.Opcao = Opcao;
             this.Analise = Analise;
 
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+
             if (Analise == "Venda")
             {
-               if (Opcao == "CATEGORIA")
+                if (Opcao == "CATEGORIA")
                 {
                     lbl_Titulo.Text = "Categoria do produto mais vendido";
                     Menu_Arquivo.Visible = false;
@@ -40,9 +41,9 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    if (this.Opcao == "NOME DO PRODUTO")
+                    if (Opcao == "NOME DO PRODUTO")
                     {
-                        this.Opcao = "Produto";
+                        Opcao = "Produto";
                     }
 
                     AnalisarProdutoMaisVendido_Produto_OU_Categoria();
@@ -65,6 +66,16 @@ namespace CaixaFacil
             }
         }
 
+        private string FilterRows()
+        {
+            string filter = "";
+
+            if (cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
+                filter = "TOP " + cbMaxRows.Text;
+
+            return filter;
+        }
+
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3"), _Sql, DataInicial, DataFinal, Opcao, Analise;
 
         private void AnalisarProdutoMaisVendido_Produto_OU_Categoria()
@@ -72,7 +83,7 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _Sql = "Select Sum(ItensVenda.Quantidade) as Quantidade,  Count(Venda.Id_Venda) as NumeroVendas, Sum(ItensVenda.Valor) as Valor, Sum(ItensVenda.LucroItens) as Lucro, " + Opcao + ".Descricao From ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Categoria on Categoria.Id_Categoria = Produto.Id_Categoria where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and Produto.Unidade <> 'Serviço' group by " + Opcao + ".Descricao order by Quantidade desc";
+                _Sql = "Select " + FilterRows() + " Sum(ItensVenda.Quantidade) as Quantidade,  Count(Venda.Id_Venda) as NumeroVendas, Sum(ItensVenda.Valor) as Valor, Sum(ItensVenda.LucroItens) as Lucro, " + Opcao + ".Descricao From ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Categoria on Categoria.Id_Categoria = Produto.Id_Categoria where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and Produto.Unidade <> 'Serviço' group by " + Opcao + ".Descricao order by Quantidade desc";
                 SqlDataAdapter comando = new SqlDataAdapter(_Sql, conexao);
                 comando.SelectCommand.Parameters.AddWithValue("@DataInicial", DataInicial);
                 comando.SelectCommand.Parameters.AddWithValue("@DataFinal", DataFinal);
@@ -92,12 +103,12 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-            _Sql = "Select Sum(ItensVenda.Quantidade) as Quantidade, Count(Venda.Id_Venda) as NumeroVendas, Sum(ItensVenda.Valor) as Valor, Sum(ItensVenda.LucroItens) as Lucro, Produto.Descricao From ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Categoria on Categoria.Id_Categoria = Produto.Id_Categoria where Produto.Unidade <> 'Serviço' group by Produto.Descricao order by Quantidade desc";
-            SqlDataAdapter comando = new SqlDataAdapter(_Sql, conexao);
-            comando.SelectCommand.CommandText = _Sql;
-            DataTable Tabela = new DataTable();
-            comando.Fill(Tabela);
-            dgv_AnaliseProdutoVendido.DataSource = Tabela;
+                _Sql = "Select " + FilterRows() + " Sum(ItensVenda.Quantidade) as Quantidade, Count(Venda.Id_Venda) as NumeroVendas, Sum(ItensVenda.Valor) as Valor, Sum(ItensVenda.LucroItens) as Lucro, Produto.Descricao From ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Categoria on Categoria.Id_Categoria = Produto.Id_Categoria where Produto.Unidade <> 'Serviço' group by Produto.Descricao order by Quantidade desc";
+                SqlDataAdapter comando = new SqlDataAdapter(_Sql, conexao);
+                comando.SelectCommand.CommandText = _Sql;
+                DataTable Tabela = new DataTable();
+                comando.Fill(Tabela);
+                dgv_AnaliseProdutoVendido.DataSource = Tabela;
             }
             catch (Exception ex)
             {
@@ -108,13 +119,15 @@ namespace CaixaFacil
         //Analise de serviços prestados
         private void AnalisarServicosPrestados()
         {
-        try{    SqlConnection conexao = new SqlConnection(stringConn);
-            _Sql = "Select Sum(ItensVenda.Quantidade) as Quantidade, Count(Venda.Id_Venda) as NumeroVendas, Sum(ItensVenda.Valor) as Valor, Sum(ItensVenda.LucroItens) as Lucro, Produto.Descricao From ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Categoria on Categoria.Id_Categoria = Produto.Id_Categoria where Produto.Unidade = 'Serviço' group by Produto.Descricao order by Quantidade desc";
-            SqlDataAdapter comando = new SqlDataAdapter(_Sql, conexao);
-            comando.SelectCommand.CommandText = _Sql;
-            DataTable Tabela = new DataTable();
-            comando.Fill(Tabela);
-            dgv_AnaliseProdutoVendido.DataSource = Tabela;
+            try
+            {
+                SqlConnection conexao = new SqlConnection(stringConn);
+                _Sql = "Select " + FilterRows() + " Sum(ItensVenda.Quantidade) as Quantidade, Count(Venda.Id_Venda) as NumeroVendas, Sum(ItensVenda.Valor) as Valor, Sum(ItensVenda.LucroItens) as Lucro, Produto.Descricao From ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Categoria on Categoria.Id_Categoria = Produto.Id_Categoria where Produto.Unidade = 'Serviço' group by Produto.Descricao order by Quantidade desc";
+                SqlDataAdapter comando = new SqlDataAdapter(_Sql, conexao);
+                comando.SelectCommand.CommandText = _Sql;
+                DataTable Tabela = new DataTable();
+                comando.Fill(Tabela);
+                dgv_AnaliseProdutoVendido.DataSource = Tabela;
             }
             catch (Exception ex)
             {
@@ -127,7 +140,7 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                _Sql = "Select Sum(ItensVenda.Quantidade) as Quantidade, Count(Venda.Id_Venda) as NumeroVendas, Sum(ItensVenda.Valor) as Valor, Sum(ItensVenda.LucroItens) as Lucro, Produto.Descricao From ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Categoria on Categoria.Id_Categoria = Produto.Id_Categoria where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and Produto.Unidade = 'Serviço' group by Produto.Descricao order by Quantidade desc";
+                _Sql = "Select " + FilterRows() + " Sum(ItensVenda.Quantidade) as Quantidade, Count(Venda.Id_Venda) as NumeroVendas, Sum(ItensVenda.Valor) as Valor, Sum(ItensVenda.LucroItens) as Lucro, Produto.Descricao From ItensVenda inner join Venda on Venda.Id_Venda = ItensVenda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join Categoria on Categoria.Id_Categoria = Produto.Id_Categoria where Convert(Date, Venda.DataVenda, 103) between Convert(Date, @DataInicial, 103) and Convert(Date, @DataFinal, 103) and Produto.Unidade = 'Serviço' group by Produto.Descricao order by Quantidade desc";
                 SqlDataAdapter comando = new SqlDataAdapter(_Sql, conexao);
                 comando.SelectCommand.Parameters.AddWithValue("@DataInicial", DataInicial);
                 comando.SelectCommand.Parameters.AddWithValue("@DataFinal", DataFinal);
@@ -154,6 +167,7 @@ namespace CaixaFacil
 
         private void FrmAnaliseProdutoVendidos_Load(object sender, EventArgs e)
         {
+            cbMaxRows.SelectedIndex = 1;
             dgv_AnaliseProdutoVendido.ClearSelection();
         }
 
@@ -167,10 +181,29 @@ namespace CaixaFacil
             Menu_GerarRelatorio.ForeColor = Color.White;
         }
 
+        private void cbMaxRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void cbMaxRows_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)8))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void cbMaxRows_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                LoadData();
+        }
+
         private void Menu_GerarRelatorio_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            FrmRelatorioAnaliseVenda relatorioAnaliseVenda = new FrmRelatorioAnaliseVenda(DataInicial, DataFinal, Analise);            
+            FrmRelatorioAnaliseVenda relatorioAnaliseVenda = new FrmRelatorioAnaliseVenda(DataInicial, DataFinal, Analise);
             relatorioAnaliseVenda.ShowDialog();
             Cursor = Cursors.Default;
         }
@@ -193,6 +226,6 @@ namespace CaixaFacil
             if (e.Button != MouseButtons.Left) return;
             this.Left = X + MousePosition.X;
             this.Top = Y + MousePosition.Y;
-        }      
+        }
     }
 }

@@ -84,7 +84,7 @@ namespace CaixaFacil
 
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbFilter.SelectedIndex == 0)
+            if (cbFilter.SelectedIndex == 0)
             {
                 lbl_CliProd.Text = "Cliente";
                 colunaTabela = "Cliente.Nome";
@@ -261,8 +261,8 @@ namespace CaixaFacil
             try
             {
                 SqlConnection conexao = new SqlConnection(stringConn);
-                
-                if(string.IsNullOrWhiteSpace(txtCliProd.Text))
+
+                if (string.IsNullOrWhiteSpace(txtCliProd.Text))
                     _sql = "select " + FilterRows() + " Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario";
                 else
                     _sql = "select " + FilterRows() + " Cliente.Id_Cliente, Cliente.Nome as NomeCliente, Venda.Id_Venda, ItensVenda.Quantidade, Produto.ValorVenda, ItensVenda.lucroItens, ItensVenda.Valor, FormaPagamento.Descricao, Venda.DataVenda, Venda.HoraVenda, Usuario.Nome as NomeUsuario, Produto.Descricao as DescricaoProduto from Cliente inner join venda on Venda.Id_Cliente = Cliente.Id_Cliente inner join ItensVenda on ItensVenda.Id_Venda = Venda.Id_Venda inner join Produto on Produto.Id_Produto = ItensVenda.Id_Produto inner join FormaPagamento on FormaPagamento.Id_Venda = Venda.Id_Venda inner join Usuario on Usuario.Id_Usuario = Venda.Id_Usuario where " + colunaTabela + " like '%" + txtCliProd.Text.Trim() + "%'";

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
 namespace CaixaFacil
 {
@@ -26,7 +24,7 @@ namespace CaixaFacil
             get { return ValorVenda; }
             set { ValorVenda = value; }
         }
-       public int quantidade
+        public int quantidade
         {
             get { return Quantidade; }
             set { Quantidade = value; }

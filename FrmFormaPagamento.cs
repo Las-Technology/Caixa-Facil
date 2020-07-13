@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -37,7 +31,7 @@ namespace CaixaFacil
                 pedidoNotaPromissoria = PagamentoCartao.pedidoNotaPromissoria;
                 Desconto = PagamentoCartao.Desconto;
                 this.Close();
-               
+
             }
             else
                 MessageBox.Show("Selecione a forma de pagamento!", "Mensagem do sistema 'Gerenciamneto Caixa Fácil'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

@@ -17,7 +17,7 @@ namespace CaixaFacil
         public decimal valorCredDeb { get; set; }
         public decimal valorRestante { get; set; }
         public string tipoPagamento { get; set; }
-        public int idCliente = 1; 
+        public int idCliente = 1;
         public bool isFinally = false;
         bool vincularCliente = false;
         public decimal descontoDinheiro;
@@ -52,7 +52,7 @@ namespace CaixaFacil
                     MessageBox.Show("Vincule um cliente para efetuar a venda!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-             
+
                 if (cbEditarValorCredDeb.Checked && vincularCliente && valorRestante == 0.00m)
                 {
                     MessageBox.Show("O Valor do pagamento pelo crédito|débito não foi alterado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -262,7 +262,7 @@ namespace CaixaFacil
                     if (!string.IsNullOrWhiteSpace(txtValorCreditoAndDebito.Text))
                     {
                         valorRestante = (valorTotal - descontoDinheiro) - valorDinheiro - decimal.Parse(txtValorCreditoAndDebito.Text);
-                        
+
                         if (valorRestante < 0)
                         {
                             MessageBox.Show("Informe um valor menor. O valor informado ultrapassa o valor total da venda!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -385,8 +385,8 @@ namespace CaixaFacil
 
                     if (cbEditarValorCredDeb.Checked)
                     {
-                        if(!string.IsNullOrEmpty(txtValorDinheiro.Text))
-                        valorRestante = (valorTotal - descontoDinheiro) - valorDinheiro - decimal.Parse(txtValorCreditoAndDebito.Text);
+                        if (!string.IsNullOrEmpty(txtValorDinheiro.Text))
+                            valorRestante = (valorTotal - descontoDinheiro) - valorDinheiro - decimal.Parse(txtValorCreditoAndDebito.Text);
                         txtValorRestante.Text = valorRestante.ToString("0.00");
                     }
 

@@ -14,7 +14,7 @@ namespace CaixaFacil
         }
 
         private void FrmPesquisarProdutos_Load(object sender, EventArgs e)
-        {           
+        {
             cbMaxRows.SelectedIndex = 1;
             CarregaGrid();
         }
@@ -24,7 +24,7 @@ namespace CaixaFacil
             try
             {
                 string filter = "";
-                if(cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
+                if (cbMaxRows.Text != "Todos" && !string.IsNullOrWhiteSpace(cbMaxRows.Text))
                 {
                     filter = " TOP " + cbMaxRows.Text;
                 }
@@ -45,7 +45,7 @@ namespace CaixaFacil
                 comando.Fill(Tabela);
                 dgv_Busca.DataSource = Tabela;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -53,7 +53,7 @@ namespace CaixaFacil
 
         string stringConn = Security.Dry("9UUEoK5YaRarR0A3RhJbiLUNDsVR7AWUv3GLXCm6nqT787RW+Zpgc9frlclEXhdH70DIx06R57s6u2h3wX/keyP3k/xHE/swBoHi4WgOI3vX3aocmtwEi2KpDD1I0/s3");
         string _sql;
-        
+
         public string ID_PRODUTO { get; set; }
         public string CodBarra { get; set; }
         public string Fornecedor { get; set; }
@@ -107,7 +107,7 @@ namespace CaixaFacil
         {
             try
             {
-               
+
             }
             catch (Exception ex)
             {

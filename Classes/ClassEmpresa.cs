@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CaixaFacil
 {
@@ -31,7 +27,7 @@ namespace CaixaFacil
         {
             get { return ID; }
             set { ID = value; }
-        }          
+        }
         public string razaoSocial
         {
             get { return RazaoSocial; }
@@ -125,7 +121,7 @@ namespace CaixaFacil
             }
             else
             {
-        
+
                 _sql = "Insert into empresa values (@ID_Empresa, @Razao, @Nome, @AreaAtuacao, @CNPJ, @Inscricao, @Endereco, @CEP, @Numero, @Bairro, @Cidade, @Estado, @Telefone, @Celular, @Email, @LogoEmpresa)";
                 SqlCommand comando = new SqlCommand(_sql, conexao);
                 comando.Parameters.AddWithValue("@Id_Empresa", id);
@@ -163,7 +159,7 @@ namespace CaixaFacil
         }
         public void Atualizar()
         {
-           
+
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Update  empresa set RazaoSocial = @Razao, NomeFantasia = @Nome, AreaAtuacao = @AreaAtuacao, CNPJ =  @CNPJ, InscricaoEstadual = @Inscricao, Endereco = @Endereco, CEP = @CEP, Numero = @Numero, Bairro = @Bairro, Cidade = @Cidade, Estado = @Estado, Telefone = @Telefone, Celular = @Celular, Email = @Email, LogoEmpresa = @LogoEmpresa where Id_Empresa = @ID";
             SqlCommand comando = new SqlCommand(_sql, conexao);
@@ -201,7 +197,7 @@ namespace CaixaFacil
         {
             SqlConnection conexao = new SqlConnection(stringConn);
             _sql = "Select * from Empresa";
-            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);            
+            SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.CommandText = _sql;
             try
             {

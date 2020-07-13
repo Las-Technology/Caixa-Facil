@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CaixaFacil
@@ -53,7 +47,7 @@ namespace CaixaFacil
         ClassAgendamento agendamento = new ClassAgendamento();
         private void btn_ConfirmarAgendamento_Click(object sender, EventArgs e)
         {
-           
+
             if (txt_Cliente.Text == "")
             {
                 MessageBox.Show("Informe o nome do cliente! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -109,7 +103,7 @@ namespace CaixaFacil
             txt_Cliente.Clear();
             txt_Servico.Text = "";
             dtp_Data.Text = DateTime.Now.ToLongDateString();
-            mask_Horario.Text= DateTime.Now.ToLongTimeString();
+            mask_Horario.Text = DateTime.Now.ToLongTimeString();
             mask_Telefone.Clear();
             txt_Email.Clear();
         }
@@ -136,7 +130,7 @@ namespace CaixaFacil
         ErrorProvider errorProvider = new ErrorProvider();
         private void btn_Atualizar_Click(object sender, EventArgs e)
         {
-          
+
             if (txt_Cliente.Text == "")
             {
                 MessageBox.Show("Informe o nome do cliente! Campo obrigatório!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
