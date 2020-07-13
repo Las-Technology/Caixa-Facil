@@ -36,21 +36,6 @@
             this.cbMaxRows = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dgv_Busca = new System.Windows.Forms.DataGridView();
-            this.idProduto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codigoBarra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeProduto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnNumeroNotaFiscal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnDataCadastro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.marcaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataValidadeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valorCustoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valorVenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lucro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estoqueAtualDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estoqueMinimoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unidadeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NomeCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeFornecedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabelaProdutoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dbControleVendaDataSet = new CaixaFacil.DbControleVendaDataSet();
             this.label1 = new System.Windows.Forms.Label();
@@ -64,6 +49,21 @@
             this.valorVenda1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lucroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabelaProdutoTableAdapter = new CaixaFacil.DbControleVendaDataSetTableAdapters.TabelaProdutoTableAdapter();
+            this.idProduto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigoBarra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomeProduto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marcaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valorVenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estoqueAtualDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNumeroNotaFiscal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDataCadastro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataValidadeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valorCustoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lucro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estoqueMinimoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unidadeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NomeCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomeFornecedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Busca)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabelaProdutoBindingSource)).BeginInit();
@@ -138,7 +138,6 @@
             // 
             this.dgv_Busca.AllowUserToAddRows = false;
             this.dgv_Busca.AllowUserToDeleteRows = false;
-            this.dgv_Busca.AllowUserToOrderColumns = true;
             this.dgv_Busca.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -150,14 +149,14 @@
             this.idProduto,
             this.codigoBarra,
             this.nomeProduto,
+            this.marcaDataGridViewTextBoxColumn,
+            this.valorVenda,
+            this.estoqueAtualDataGridViewTextBoxColumn,
             this.ColumnNumeroNotaFiscal,
             this.ColumnDataCadastro,
-            this.marcaDataGridViewTextBoxColumn,
             this.dataValidadeDataGridViewTextBoxColumn,
             this.valorCustoDataGridViewTextBoxColumn,
-            this.valorVenda,
             this.lucro,
-            this.estoqueAtualDataGridViewTextBoxColumn,
             this.estoqueMinimoDataGridViewTextBoxColumn,
             this.unidadeDataGridViewTextBoxColumn,
             this.NomeCategoria,
@@ -172,150 +171,6 @@
             this.dgv_Busca.TabIndex = 12;
             this.dgv_Busca.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Busca_CellClick);
             this.dgv_Busca.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgv_Busca_DataBindingComplete);
-            // 
-            // idProduto
-            // 
-            this.idProduto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.idProduto.DataPropertyName = "Id_Produto";
-            this.idProduto.HeaderText = "Código";
-            this.idProduto.Name = "idProduto";
-            this.idProduto.ReadOnly = true;
-            this.idProduto.Width = 79;
-            // 
-            // codigoBarra
-            // 
-            this.codigoBarra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.codigoBarra.DataPropertyName = "CodigoBarra";
-            this.codigoBarra.HeaderText = "Codigo de Barra";
-            this.codigoBarra.Name = "codigoBarra";
-            this.codigoBarra.ReadOnly = true;
-            this.codigoBarra.Width = 136;
-            // 
-            // nomeProduto
-            // 
-            this.nomeProduto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nomeProduto.DataPropertyName = "DescricaoNome";
-            this.nomeProduto.HeaderText = "Descrição";
-            this.nomeProduto.Name = "nomeProduto";
-            this.nomeProduto.ReadOnly = true;
-            this.nomeProduto.Width = 95;
-            // 
-            // ColumnNumeroNotaFiscal
-            // 
-            this.ColumnNumeroNotaFiscal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColumnNumeroNotaFiscal.DataPropertyName = "NumeroNotaFiscal";
-            this.ColumnNumeroNotaFiscal.HeaderText = "Número Nota Fiscal";
-            this.ColumnNumeroNotaFiscal.Name = "ColumnNumeroNotaFiscal";
-            this.ColumnNumeroNotaFiscal.ReadOnly = true;
-            this.ColumnNumeroNotaFiscal.Width = 158;
-            // 
-            // ColumnDataCadastro
-            // 
-            this.ColumnDataCadastro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColumnDataCadastro.DataPropertyName = "DataCadastro";
-            this.ColumnDataCadastro.HeaderText = "Data Cadastro";
-            this.ColumnDataCadastro.Name = "ColumnDataCadastro";
-            this.ColumnDataCadastro.ReadOnly = true;
-            this.ColumnDataCadastro.Width = 123;
-            // 
-            // marcaDataGridViewTextBoxColumn
-            // 
-            this.marcaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.marcaDataGridViewTextBoxColumn.DataPropertyName = "Marca";
-            this.marcaDataGridViewTextBoxColumn.HeaderText = "Marca";
-            this.marcaDataGridViewTextBoxColumn.Name = "marcaDataGridViewTextBoxColumn";
-            this.marcaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.marcaDataGridViewTextBoxColumn.Width = 74;
-            // 
-            // dataValidadeDataGridViewTextBoxColumn
-            // 
-            this.dataValidadeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataValidadeDataGridViewTextBoxColumn.DataPropertyName = "DataValidade";
-            this.dataValidadeDataGridViewTextBoxColumn.HeaderText = "Data da Validade";
-            this.dataValidadeDataGridViewTextBoxColumn.Name = "dataValidadeDataGridViewTextBoxColumn";
-            this.dataValidadeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.dataValidadeDataGridViewTextBoxColumn.Width = 138;
-            // 
-            // valorCustoDataGridViewTextBoxColumn
-            // 
-            this.valorCustoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.valorCustoDataGridViewTextBoxColumn.DataPropertyName = "ValorCusto";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.valorCustoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.valorCustoDataGridViewTextBoxColumn.HeaderText = "Valor de Custo";
-            this.valorCustoDataGridViewTextBoxColumn.Name = "valorCustoDataGridViewTextBoxColumn";
-            this.valorCustoDataGridViewTextBoxColumn.ReadOnly = true;
-            this.valorCustoDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // valorVenda
-            // 
-            this.valorVenda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.valorVenda.DataPropertyName = "ValorVenda";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.valorVenda.DefaultCellStyle = dataGridViewCellStyle2;
-            this.valorVenda.HeaderText = "Valor de Venda";
-            this.valorVenda.Name = "valorVenda";
-            this.valorVenda.ReadOnly = true;
-            this.valorVenda.Width = 127;
-            // 
-            // lucro
-            // 
-            this.lucro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.lucro.DataPropertyName = "Lucro";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.lucro.DefaultCellStyle = dataGridViewCellStyle3;
-            this.lucro.HeaderText = "Lucro";
-            this.lucro.Name = "lucro";
-            this.lucro.ReadOnly = true;
-            this.lucro.Width = 70;
-            // 
-            // estoqueAtualDataGridViewTextBoxColumn
-            // 
-            this.estoqueAtualDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.estoqueAtualDataGridViewTextBoxColumn.DataPropertyName = "EstoqueAtual";
-            this.estoqueAtualDataGridViewTextBoxColumn.HeaderText = "Estoque Atual";
-            this.estoqueAtualDataGridViewTextBoxColumn.Name = "estoqueAtualDataGridViewTextBoxColumn";
-            this.estoqueAtualDataGridViewTextBoxColumn.ReadOnly = true;
-            this.estoqueAtualDataGridViewTextBoxColumn.Width = 118;
-            // 
-            // estoqueMinimoDataGridViewTextBoxColumn
-            // 
-            this.estoqueMinimoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.estoqueMinimoDataGridViewTextBoxColumn.DataPropertyName = "EstoqueMinimo";
-            this.estoqueMinimoDataGridViewTextBoxColumn.HeaderText = "Estoque Mínimo";
-            this.estoqueMinimoDataGridViewTextBoxColumn.Name = "estoqueMinimoDataGridViewTextBoxColumn";
-            this.estoqueMinimoDataGridViewTextBoxColumn.ReadOnly = true;
-            this.estoqueMinimoDataGridViewTextBoxColumn.Width = 133;
-            // 
-            // unidadeDataGridViewTextBoxColumn
-            // 
-            this.unidadeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.unidadeDataGridViewTextBoxColumn.DataPropertyName = "Unidade";
-            this.unidadeDataGridViewTextBoxColumn.HeaderText = "Unidade";
-            this.unidadeDataGridViewTextBoxColumn.Name = "unidadeDataGridViewTextBoxColumn";
-            this.unidadeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.unidadeDataGridViewTextBoxColumn.Width = 85;
-            // 
-            // NomeCategoria
-            // 
-            this.NomeCategoria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.NomeCategoria.DataPropertyName = "Descricao";
-            this.NomeCategoria.HeaderText = "Categoria";
-            this.NomeCategoria.Name = "NomeCategoria";
-            this.NomeCategoria.ReadOnly = true;
-            this.NomeCategoria.Width = 93;
-            // 
-            // nomeFornecedor
-            // 
-            this.nomeFornecedor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nomeFornecedor.DataPropertyName = "Nome";
-            this.nomeFornecedor.HeaderText = "Fornecedor";
-            this.nomeFornecedor.Name = "nomeFornecedor";
-            this.nomeFornecedor.ReadOnly = true;
-            this.nomeFornecedor.Width = 105;
             // 
             // tabelaProdutoBindingSource
             // 
@@ -430,6 +285,150 @@
             // 
             this.tabelaProdutoTableAdapter.ClearBeforeFill = true;
             // 
+            // idProduto
+            // 
+            this.idProduto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.idProduto.DataPropertyName = "Id_Produto";
+            this.idProduto.HeaderText = "Código";
+            this.idProduto.Name = "idProduto";
+            this.idProduto.ReadOnly = true;
+            this.idProduto.Width = 79;
+            // 
+            // codigoBarra
+            // 
+            this.codigoBarra.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.codigoBarra.DataPropertyName = "CodigoBarra";
+            this.codigoBarra.HeaderText = "Codigo de Barra";
+            this.codigoBarra.Name = "codigoBarra";
+            this.codigoBarra.ReadOnly = true;
+            this.codigoBarra.Width = 136;
+            // 
+            // nomeProduto
+            // 
+            this.nomeProduto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nomeProduto.DataPropertyName = "DescricaoNome";
+            this.nomeProduto.HeaderText = "Descrição";
+            this.nomeProduto.Name = "nomeProduto";
+            this.nomeProduto.ReadOnly = true;
+            this.nomeProduto.Width = 95;
+            // 
+            // marcaDataGridViewTextBoxColumn
+            // 
+            this.marcaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.marcaDataGridViewTextBoxColumn.DataPropertyName = "Marca";
+            this.marcaDataGridViewTextBoxColumn.HeaderText = "Marca";
+            this.marcaDataGridViewTextBoxColumn.Name = "marcaDataGridViewTextBoxColumn";
+            this.marcaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.marcaDataGridViewTextBoxColumn.Width = 74;
+            // 
+            // valorVenda
+            // 
+            this.valorVenda.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.valorVenda.DataPropertyName = "ValorVenda";
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.valorVenda.DefaultCellStyle = dataGridViewCellStyle1;
+            this.valorVenda.HeaderText = "Valor de Venda";
+            this.valorVenda.Name = "valorVenda";
+            this.valorVenda.ReadOnly = true;
+            this.valorVenda.Width = 127;
+            // 
+            // estoqueAtualDataGridViewTextBoxColumn
+            // 
+            this.estoqueAtualDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.estoqueAtualDataGridViewTextBoxColumn.DataPropertyName = "EstoqueAtual";
+            this.estoqueAtualDataGridViewTextBoxColumn.HeaderText = "Estoque Atual";
+            this.estoqueAtualDataGridViewTextBoxColumn.Name = "estoqueAtualDataGridViewTextBoxColumn";
+            this.estoqueAtualDataGridViewTextBoxColumn.ReadOnly = true;
+            this.estoqueAtualDataGridViewTextBoxColumn.Width = 118;
+            // 
+            // ColumnNumeroNotaFiscal
+            // 
+            this.ColumnNumeroNotaFiscal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColumnNumeroNotaFiscal.DataPropertyName = "NumeroNotaFiscal";
+            this.ColumnNumeroNotaFiscal.HeaderText = "Número Nota Fiscal";
+            this.ColumnNumeroNotaFiscal.Name = "ColumnNumeroNotaFiscal";
+            this.ColumnNumeroNotaFiscal.ReadOnly = true;
+            this.ColumnNumeroNotaFiscal.Width = 158;
+            // 
+            // ColumnDataCadastro
+            // 
+            this.ColumnDataCadastro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColumnDataCadastro.DataPropertyName = "DataCadastro";
+            this.ColumnDataCadastro.HeaderText = "Data Cadastro";
+            this.ColumnDataCadastro.Name = "ColumnDataCadastro";
+            this.ColumnDataCadastro.ReadOnly = true;
+            this.ColumnDataCadastro.Width = 123;
+            // 
+            // dataValidadeDataGridViewTextBoxColumn
+            // 
+            this.dataValidadeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataValidadeDataGridViewTextBoxColumn.DataPropertyName = "DataValidade";
+            this.dataValidadeDataGridViewTextBoxColumn.HeaderText = "Data da Validade";
+            this.dataValidadeDataGridViewTextBoxColumn.Name = "dataValidadeDataGridViewTextBoxColumn";
+            this.dataValidadeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dataValidadeDataGridViewTextBoxColumn.Width = 138;
+            // 
+            // valorCustoDataGridViewTextBoxColumn
+            // 
+            this.valorCustoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.valorCustoDataGridViewTextBoxColumn.DataPropertyName = "ValorCusto";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.valorCustoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.valorCustoDataGridViewTextBoxColumn.HeaderText = "Valor de Custo";
+            this.valorCustoDataGridViewTextBoxColumn.Name = "valorCustoDataGridViewTextBoxColumn";
+            this.valorCustoDataGridViewTextBoxColumn.ReadOnly = true;
+            this.valorCustoDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // lucro
+            // 
+            this.lucro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.lucro.DataPropertyName = "Lucro";
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.lucro.DefaultCellStyle = dataGridViewCellStyle3;
+            this.lucro.HeaderText = "Lucro";
+            this.lucro.Name = "lucro";
+            this.lucro.ReadOnly = true;
+            this.lucro.Width = 70;
+            // 
+            // estoqueMinimoDataGridViewTextBoxColumn
+            // 
+            this.estoqueMinimoDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.estoqueMinimoDataGridViewTextBoxColumn.DataPropertyName = "EstoqueMinimo";
+            this.estoqueMinimoDataGridViewTextBoxColumn.HeaderText = "Estoque Mínimo";
+            this.estoqueMinimoDataGridViewTextBoxColumn.Name = "estoqueMinimoDataGridViewTextBoxColumn";
+            this.estoqueMinimoDataGridViewTextBoxColumn.ReadOnly = true;
+            this.estoqueMinimoDataGridViewTextBoxColumn.Width = 133;
+            // 
+            // unidadeDataGridViewTextBoxColumn
+            // 
+            this.unidadeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.unidadeDataGridViewTextBoxColumn.DataPropertyName = "Unidade";
+            this.unidadeDataGridViewTextBoxColumn.HeaderText = "Unidade";
+            this.unidadeDataGridViewTextBoxColumn.Name = "unidadeDataGridViewTextBoxColumn";
+            this.unidadeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.unidadeDataGridViewTextBoxColumn.Width = 85;
+            // 
+            // NomeCategoria
+            // 
+            this.NomeCategoria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.NomeCategoria.DataPropertyName = "Descricao";
+            this.NomeCategoria.HeaderText = "Categoria";
+            this.NomeCategoria.Name = "NomeCategoria";
+            this.NomeCategoria.ReadOnly = true;
+            this.NomeCategoria.Width = 93;
+            // 
+            // nomeFornecedor
+            // 
+            this.nomeFornecedor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nomeFornecedor.DataPropertyName = "Nome";
+            this.nomeFornecedor.HeaderText = "Fornecedor";
+            this.nomeFornecedor.Name = "nomeFornecedor";
+            this.nomeFornecedor.ReadOnly = true;
+            this.nomeFornecedor.Width = 105;
+            // 
             // FrmPesquisarProdutos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
@@ -477,14 +476,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn idProduto;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigoBarra;
         private System.Windows.Forms.DataGridViewTextBoxColumn nomeProduto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn marcaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn valorVenda;
+        private System.Windows.Forms.DataGridViewTextBoxColumn estoqueAtualDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNumeroNotaFiscal;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDataCadastro;
-        private System.Windows.Forms.DataGridViewTextBoxColumn marcaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataValidadeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn valorCustoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn valorVenda;
         private System.Windows.Forms.DataGridViewTextBoxColumn lucro;
-        private System.Windows.Forms.DataGridViewTextBoxColumn estoqueAtualDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn estoqueMinimoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn unidadeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn NomeCategoria;

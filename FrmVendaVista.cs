@@ -27,6 +27,7 @@ namespace CaixaFacil
             InitializeComponent();
             this.ValorTotal = ValorTotal;
             lbl_ValorTotal.Text = "R$ " + ValorTotal;
+            txt_ValorDesconto.Text = ValorTotal.ToString();
         }
 
         private void lbl_Fechar_Click(object sender, EventArgs e)

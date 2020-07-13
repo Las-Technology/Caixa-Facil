@@ -60,7 +60,6 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\bin\x86\Release\pt\Microsoft.ReportV
 C:\Users\val\Desktop\my-project\Caixa-Facil\bin\x86\Release\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
 C:\Users\val\Desktop\my-project\Caixa-Facil\bin\x86\Release\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
 C:\Users\val\Desktop\my-project\Caixa-Facil\bin\x86\Release\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
-C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.csprojAssemblyReference.cache
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmAberturaCaixa.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmAdicionarQuantidade.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmAgendamento.resources
