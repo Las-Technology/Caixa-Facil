@@ -139,3 +139,4 @@ C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmListaD
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmTelaPrincipal.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmVendaDevolucaoItens.resources
 C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.FrmVendaMista.resources
+C:\Users\val\Desktop\my-project\Caixa-Facil\obj\x86\Release\CaixaFacil.csprojAssemblyReference.cache

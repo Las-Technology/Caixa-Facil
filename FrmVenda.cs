@@ -1068,6 +1068,7 @@ namespace CaixaFacil
                         DGV_ItensVenda.CurrentRow.Cells["ColumnQuantidade"].Value = QuantidadeItens;
                         return;
                     }
+
                     int QtdCurrentRow = int.Parse(DGV_ItensVenda.CurrentRow.Cells["ColumnQuantidade"].Value.ToString());
 
                     if (QtdCurrentRow > 0)
@@ -1087,16 +1088,13 @@ namespace CaixaFacil
 
                         ValorTotal = 0;
 
+                        DGV_ItensVenda.CurrentRow.Cells["ColumnSubTotal"].Value = (decimal.Parse(DGV_ItensVenda.CurrentRow.Cells["ColumnValorUnitario"].Value.ToString()) * decimal.Parse(DGV_ItensVenda.CurrentRow.Cells["ColumnQuantidade"].Value.ToString())).ToString();
+
+
                         foreach (DataGridViewRow row in DGV_ItensVenda.Rows)
                         {
-                            row.Selected = false;
-                            row.Cells["ColumnSubTotal"].Value = (decimal.Parse(row.Cells["ColumnValorUnitario"].Value.ToString()) * decimal.Parse(row.Cells["ColumnQuantidade"].Value.ToString())).ToString();
                             ValorTotal += decimal.Parse(row.Cells["ColumnSubTotal"].Value.ToString());
-                            row.Cells["ColumnSubTotal"].DataGridView.DefaultCellStyle.Format = "C2";
                         }
-
-                        txt_ValorTotal.Text = "R$ " + ValorTotal;
-                        btn_Remover.Enabled = false;
 
                         if (EstoqueAtual == 0 && produto.unidade != "Serviço")
                         {
@@ -1120,16 +1118,11 @@ namespace CaixaFacil
                 }
                 finally
                 {
+                    txt_ValorTotal.Text = "R$ " + ValorTotal;
+                    btn_Remover.Enabled = false;
+                    DGV_ItensVenda.CurrentRow.Selected = false;
                     txt_Codigo_Barra.Focus();
                 }
-            }
-        }
-
-        private void DGV_ItensVenda_SelectionChanged(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in DGV_ItensVenda.Rows)
-            {
-                row.Selected = false;
             }
         }
 

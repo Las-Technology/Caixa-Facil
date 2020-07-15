@@ -648,7 +648,6 @@
             this.DGV_ItensVenda.TabStop = false;
             this.DGV_ItensVenda.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_ItensVenda_CellClick);
             this.DGV_ItensVenda.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_ItensVenda_CellEndEdit);
-            this.DGV_ItensVenda.SelectionChanged += new System.EventHandler(this.DGV_ItensVenda_SelectionChanged);
             // 
             // lbl_Quantidade
             // 
