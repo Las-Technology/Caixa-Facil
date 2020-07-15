@@ -42,7 +42,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Nenhum resultado encontrado. Tente outra opção!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Nenhum resultado encontrado. Tente outra opção!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

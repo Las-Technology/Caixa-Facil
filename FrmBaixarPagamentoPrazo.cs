@@ -145,7 +145,7 @@ namespace CaixaFacil
         {
             if (txt_ValorPago.Text == string.Empty)
             {
-                MessageBox.Show("Informe o valor pago!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o valor pago!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
@@ -156,7 +156,7 @@ namespace CaixaFacil
                     GerenciarCaixa();
                     InserirTipoPagamento();
                     BaixarPrazo();
-                    MessageBox.Show("Pagamento realizado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Pagamento realizado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Backup.GerarBackup();
                     this.Close();
                 }

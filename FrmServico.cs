@@ -138,7 +138,7 @@ namespace CaixaFacil
             if (txt_DescricaoServico.Text == "")
             {
                 errorProvider.Clear();
-                MessageBox.Show("Informe o nome do seviço para ser cadastrado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o nome do seviço para ser cadastrado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.SetError(txt_DescricaoServico, "Campo obrigatório!");
                 txt_DescricaoServico.Focus();
                 return;
@@ -146,7 +146,7 @@ namespace CaixaFacil
             else if (txt_PrecoServico.Text == "")
             {
                 errorProvider.Clear();
-                MessageBox.Show("Informe o preço do seviço para ser cadastrado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o preço do seviço para ser cadastrado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.SetError(txt_PrecoServico, "Campo obrigatório!");
                 txt_PrecoServico.Focus();
                 return;
@@ -167,7 +167,7 @@ namespace CaixaFacil
                     prestacaoServico.unidade = "Serviço";
                     prestacaoServico.id_Categoria = Id_Categoria;
                     prestacaoServico.Cadastrar();
-                    MessageBox.Show("Serviço cadastrado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Serviço cadastrado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimparCampos();
                     CodigoProduto();
                     Codigocategoria();
@@ -203,7 +203,7 @@ namespace CaixaFacil
             if (txt_DescricaoServico.Text == "")
             {
                 errorProvider.Clear();
-                MessageBox.Show("Informe o nome do seviço para ser atualizado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o nome do seviço para ser atualizado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.SetError(txt_DescricaoServico, "Campo obrigatório!");
                 txt_DescricaoServico.Focus();
                 return;
@@ -211,7 +211,7 @@ namespace CaixaFacil
             else if (txt_PrecoServico.Text == "")
             {
                 errorProvider.Clear();
-                MessageBox.Show("Informe o preço do seviço para ser cadastrado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o preço do seviço para ser cadastrado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 errorProvider.SetError(txt_PrecoServico, "Campo obrigatório!");
                 txt_PrecoServico.Focus();
                 return;
@@ -224,7 +224,7 @@ namespace CaixaFacil
                     prestacaoServico.descricao = txt_DescricaoServico.Text.Trim();
                     prestacaoServico.precoServico = decimal.Parse(txt_PrecoServico.Text);
                     prestacaoServico.Atualizar();
-                    MessageBox.Show("Dados da prestação de Serviço atualizado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Dados da prestação de Serviço atualizado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimparCampos();
                     CodigoProduto();
                 }

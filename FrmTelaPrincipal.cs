@@ -301,7 +301,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Caixa Fechado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Caixa Fechado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -329,7 +329,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Caixa fechado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Caixa fechado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         string Cliente, Servico, Horario;
@@ -379,7 +379,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Caixa Fechado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Caixa Fechado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
         }
@@ -420,7 +420,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Caixa Fechado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Caixa Fechado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -439,7 +439,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Caixa Fechado!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Caixa Fechado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -624,7 +624,7 @@ namespace CaixaFacil
                 }
                 else
                 {
-                    MessageBox.Show("Não há lista de vendas de hoje no momento!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Não há lista de vendas de hoje no momento!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             catch (Exception ex)

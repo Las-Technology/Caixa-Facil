@@ -408,13 +408,13 @@ namespace CaixaFacil
 
             if (EstoqueAtual == 0 && descricaoCategoria != "Serviço")
             {
-                MessageBox.Show("O produto não possui estoque para esta quantidade!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("O produto não possui estoque para esta quantidade!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_Codigo_Barra.Clear();
                 txt_Codigo_Barra.Focus();
             }
             else if (EstoqueAtual < Quantidade && descricaoCategoria != "Serviço")
             {
-                MessageBox.Show("A quantidade exigida é maior que o estoque atual. Por favor Atualize o estoque ou verifique se houve erro de digitação!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("A quantidade exigida é maior que o estoque atual. Atualize o estoque ou verifique se houve erro de digitação!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_Codigo_Barra.Clear();
                 txt_Codigo_Barra.Focus();
             }
@@ -433,11 +433,11 @@ namespace CaixaFacil
                 EstoqueAtual -= Quantidade;
                 if (EstoqueAtual == 0 && descricaoCategoria != "Serviço")
                 {
-                    MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else if (EstoqueAtual <= EstoqueMinimo && descricaoCategoria != "Serviço")
                 {
-                    MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Quantidade atual: " + EstoqueAtual, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
         }
@@ -596,7 +596,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Não há itens para venda! Verifique...", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Não há itens para venda! Verifique...", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_Codigo_Barra.Focus();
             }
         }
@@ -676,7 +676,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Não há itens para venda! Verifique...", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Não há itens para venda! Verifique...", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_Codigo_Barra.Focus();
             }
         }
@@ -1036,6 +1036,102 @@ namespace CaixaFacil
         }
 
         Venda venda = new Venda();
+        int index = 0;
+
+        private bool ConsultarEstoque(long id, int estoqueAtual)
+        {
+            bool estoqueMaior = false;
+            int sumEstoque = 0;
+
+            foreach(DataGridViewRow row in DGV_ItensVenda.Rows)
+            {
+                if (id == int.Parse(row.Cells["ColumnCodigo"].Value.ToString()))
+                {
+                    sumEstoque += int.Parse(row.Cells["ColumnQuantidade"].Value.ToString());
+                }
+            }
+
+            if (sumEstoque > estoqueAtual)
+                estoqueMaior = true;
+
+            return estoqueMaior;
+        }
+
+        private void DGV_ItensVenda_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (DGV_ItensVenda.Rows.Count > 0)
+            {
+                try
+                {
+                    if (string.IsNullOrWhiteSpace(DGV_ItensVenda.CurrentRow.Cells["ColumnQuantidade"].Value.ToString()))
+                    {
+                        DGV_ItensVenda.CurrentRow.Cells["ColumnQuantidade"].Value = QuantidadeItens;
+                        return;
+                    }
+                    int QtdCurrentRow = int.Parse(DGV_ItensVenda.CurrentRow.Cells["ColumnQuantidade"].Value.ToString());
+
+                    if (QtdCurrentRow > 0)
+                    {
+                        produto.id = int.Parse(CodigoProduto);
+                        produto.ConsultarProduto();
+                        EstoqueAtual = produto.estoqueAtual;
+                        EstoqueMinimo = produto.estoqueMinimo;
+                        ConsultarItens(CodigoProduto);
+
+                        if (QtdCurrentRow > produto.estoqueAtual && produto.unidade != "Serviço" || ConsultarEstoque(produto.id, produto.estoqueAtual))
+                        {
+                            MessageBox.Show("A quantidade exigida é maior que o estoque atual. Atualize o estoque!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            DGV_ItensVenda.CurrentRow.Cells["ColumnQuantidade"].Value = QuantidadeItens;
+                            return;
+                        }
+
+                        ValorTotal = 0;
+
+                        foreach (DataGridViewRow row in DGV_ItensVenda.Rows)
+                        {
+                            row.Selected = false;
+                            row.Cells["ColumnSubTotal"].Value = (decimal.Parse(row.Cells["ColumnValorUnitario"].Value.ToString()) * decimal.Parse(row.Cells["ColumnQuantidade"].Value.ToString())).ToString();
+                            ValorTotal += decimal.Parse(row.Cells["ColumnSubTotal"].Value.ToString());
+                            row.Cells["ColumnSubTotal"].DataGridView.DefaultCellStyle.Format = "C2";
+                        }
+
+                        txt_ValorTotal.Text = "R$ " + ValorTotal;
+                        btn_Remover.Enabled = false;
+
+                        if (EstoqueAtual == 0 && produto.unidade != "Serviço")
+                        {
+                            MessageBox.Show("Quantidade do produto no estoque esgotou! Atualize o estoque no sistema!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        else if (EstoqueAtual <= EstoqueMinimo && produto.unidade != "Serviço")
+                        {
+                            MessageBox.Show("A quantidade atual do produto está chegando no ponto crítico! Atualize se necessário o estoque no sistema! Estoque Atual: " + EstoqueAtual, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Informe valor maior que zero!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        DGV_ItensVenda.CurrentRow.Cells["ColumnQuantidade"].Value = QuantidadeItens;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Informe número inteiro", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    DGV_ItensVenda.CurrentRow.Cells["ColumnQuantidade"].Value = QuantidadeItens;
+                }
+                finally
+                {
+                    txt_Codigo_Barra.Focus();
+                }
+            }
+        }
+
+        private void DGV_ItensVenda_SelectionChanged(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in DGV_ItensVenda.Rows)
+            {
+                row.Selected = false;
+            }
+        }
 
         private void btnDevolução_Click(object sender, EventArgs e)
         {
@@ -1216,14 +1312,13 @@ namespace CaixaFacil
 
         ItensVenda itensVenda = new ItensVenda();
         ClassFormaPagamento formaPagamento = new ClassFormaPagamento();
-
         ClassParcelaVenda ParcelaVenda = new ClassParcelaVenda();
-        ClassFluxoCaixa FluxoCaixa = new ClassFluxoCaixa();
+
 
         private void DGV_ItensVenda_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             btn_Remover.Enabled = true;
-
+            index = 0;
             int Contlinhas = e.RowIndex;
             if (Contlinhas == -1)
             {
@@ -1234,7 +1329,14 @@ namespace CaixaFacil
                 DataGridViewRow linha = DGV_ItensVenda.Rows[e.RowIndex];
                 CodigoProduto = linha.Cells[0].Value.ToString();
                 sub = decimal.Parse(linha.Cells["ColumnSubTotal"].Value.ToString());
-                QuantidadeItens = int.Parse(linha.Cells["ColumnQuantidade"].Value.ToString());
+                try
+                {
+                    QuantidadeItens = int.Parse(linha.Cells["ColumnQuantidade"].Value.ToString());
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 

@@ -131,7 +131,7 @@ namespace CaixaFacil
                     InserirTipoPagamento();
                     BaixarParcela();
 
-                    MessageBox.Show("Pagamento realizado com sucesso!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Pagamento realizado com sucesso!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Backup.GerarBackup();
                     this.Close();
                 }
@@ -145,7 +145,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Informe o valor pago!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o valor pago!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 txt_ValorPago.Focus();
             }
         }

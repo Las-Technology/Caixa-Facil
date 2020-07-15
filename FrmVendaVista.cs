@@ -168,7 +168,7 @@ namespace CaixaFacil
 
             if (decimal.Parse(txt_ValorPago.Text) < ValorDesconto)
             {
-                MessageBox.Show("Valor em dinheiro menor do que o valor total da venda!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Valor em dinheiro menor do que o valor total da venda!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

@@ -93,7 +93,7 @@ namespace CaixaFacil
             }
             else
             {
-                MessageBox.Show("Informe o nome do cliente!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o nome do cliente!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
     }

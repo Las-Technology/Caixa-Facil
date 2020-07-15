@@ -18,7 +18,7 @@ namespace CaixaFacil
         {
             if (txt_DicaSenha.Text == "")
             {
-                MessageBox.Show("Digite a dica de senha!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Digite a dica de senha!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {

@@ -113,19 +113,19 @@ namespace CaixaFacil
                     InformarValorabatido();
                     InserirTipoPagamento();
                     Abater();
-                    MessageBox.Show("Valor Abatido com sucesso! Valor Restante: " + txt_ValorRestante.Text, "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Valor Abatido com sucesso! Valor Restante: " + txt_ValorRestante.Text, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Backup.GerarBackup();
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Informe valor menor ou igual ao valor da conta para abatimento!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Informe valor menor ou igual ao valor da conta para abatimento!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
 
             }
             else
             {
-                MessageBox.Show("Informe o valor para abater a conta!", "Mensagem do sistema 'Caixa Fácil'...", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o valor para abater a conta!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
