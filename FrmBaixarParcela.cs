@@ -60,7 +60,7 @@ namespace CaixaFacil
 
         private void FrmBaixarParcela_Load(object sender, EventArgs e)
         {
-            cbTipoPagamento.Text = "Dinheiro";
+            cbTipoPagamento.Text = "DINHEIRO";
             CodigoCaixa();
             ValoresCaixa();
         }
@@ -230,15 +230,15 @@ namespace CaixaFacil
 
         private void GerenciarCaixa()
         {
-            if (cbTipoPagamento.Text == "Dinheiro")
+            if (cbTipoPagamento.Text == "DINHEIRO")
             {
                 _sql = "Update FluxoCaixa set ValorCaixa = @ValorCaixa, ValorRecebidoParcela = ValorRecebidoParcela + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbTipoPagamento.Text == "Cartão de Crédito")
+            else if (cbTipoPagamento.Text == "CARTÃO DE CRÉDITO")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoCredito = ValorRecebidoCredito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbTipoPagamento.Text == "Cartão de Débito")
+            else if (cbTipoPagamento.Text == "CARTÃO DE DÉBITO")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoDebito = ValorRecebidoDebito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }

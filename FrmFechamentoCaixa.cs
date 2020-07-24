@@ -153,7 +153,7 @@ namespace CaixaFacil
             decimal valorParceladoAndPrazo = 0.00m;
 
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "select sum(ParcelaVenda.ValorParcelado) as Valor from Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join FormaPagamento on FormaPagamento.id_Venda = Venda.id_Venda where Venda.DataVenda = convert(date, @DataVenda, 103) and ParcelaVenda.DataPagamento = '' and (FormaPagamento.Descricao = 'PARCELADO' or FormaPagamento.Descricao = 'PRAZO') and Venda.HoraVenda >= convert(datetime, @HoraVenda, 103)";
+            _sql = "select sum(ParcelaVenda.ValorParcelado) as Valor from Venda inner join ParcelaVenda on ParcelaVenda.Id_Venda = Venda.Id_Venda inner join FormaPagamento on FormaPagamento.id_Venda = Venda.id_Venda where convert(date, Venda.DataVenda, 103) = convert(date, @DataVenda, 103) and ParcelaVenda.DataPagamento = '' and (FormaPagamento.Descricao = 'PARCELADO' or FormaPagamento.Descricao = 'PRAZO') and convert(datetime, Venda.HoraVenda, 103) >= convert(datetime, @HoraVenda, 103)";
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@DataVenda", DataEntrada);
             comando.Parameters.AddWithValue("@HoraVenda", HoraEntrada);
@@ -182,7 +182,7 @@ namespace CaixaFacil
         {
             decimal valorParcial = 0.00m;
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "select sum(PagamentoParcial.ValorRestante) as Valor from Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda where Venda.DataVenda = convert(date, @DataVenda, 103) and PagamentoParcial.ValorRestante > 0 and Venda.HoraVenda >= convert(datetime, @HoraVenda, 103)";
+            _sql = "select sum(PagamentoParcial.ValorRestante) as Valor from Venda inner join PagamentoParcial on PagamentoParcial.Id_Venda = Venda.Id_Venda where convert(date, Venda.DataVenda, 103) = convert(date, @DataVenda, 103) and PagamentoParcial.ValorRestante > 0 and convert(datetime, Venda.HoraVenda, 103) >= convert(datetime, @HoraVenda, 103)";
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@DataVenda", DataEntrada);
             comando.Parameters.AddWithValue("@HoraVenda", HoraEntrada);

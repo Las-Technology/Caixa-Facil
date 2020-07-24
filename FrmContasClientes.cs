@@ -102,19 +102,19 @@ namespace CaixaFacil
                 {
                     tabPagamento.SelectedTab = Tab_ComprasPrazo;
                 }
-                else if ((dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count == 0) || (dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoMisto.Rows.Count >= 1 && dgv_PagamentoPrazo.Rows.Count == 0) || (dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoMisto.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0))
+                else if ((dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoMisto.Rows.Count >= 1) || (dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoParcial.Rows.Count >=1 && dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoMisto.Rows.Count == 0) || (dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoMisto.Rows.Count == 0) || (dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count >= 1) || (dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoParcelas.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count == 0))
                 {
                     tabPagamento.SelectedTab = tab_ComprasParceladas;
                 }
-                else if ((dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count == 0) || (dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count >= 1))
+                else if ((dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoParcial.Rows.Count >= 1  && dgv_PagamentoMisto.Rows.Count == 0) || (dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoParcial.Rows.Count >= 1 && dgv_PagamentoMisto.Rows.Count >= 1))
                 {
                     tabPagamento.SelectedTab = tab_PagamentoParcial;
                 }
-                else if (dgv_PagamentoMisto.Rows.Count >= 1 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0)
+                else if (dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count >= 1)
                 {
                     tabPagamento.SelectedTab = tab_PagamentoMisto;
                 }
-                else if (dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count == 0)
+                else if (dgv_PagamentoPrazo.Rows.Count == 0 && dgv_PagamentoParcelas.Rows.Count == 0 && dgv_PagamentoParcial.Rows.Count == 0 && dgv_PagamentoMisto.Rows.Count == 0)
                 {
                     MessageBox.Show("Não existe conta associada ao cliente: " + pesquisarCliente.Codigo + " - " + pesquisarCliente.Nome, "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }

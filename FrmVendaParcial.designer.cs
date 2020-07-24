@@ -399,12 +399,12 @@
             this.cbFormaPagamento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cbFormaPagamento.FormattingEnabled = true;
             this.cbFormaPagamento.Items.AddRange(new object[] {
-            "Dinheiro",
-            "Cartão de Crédito",
-            "Cartão de Débito"});
+            "DINHEIRO",
+            "CARTÃO DE CRÉDITO",
+            "CARTÃO DE DÉBITO"});
             this.cbFormaPagamento.Location = new System.Drawing.Point(317, 44);
             this.cbFormaPagamento.Name = "cbFormaPagamento";
-            this.cbFormaPagamento.Size = new System.Drawing.Size(158, 27);
+            this.cbFormaPagamento.Size = new System.Drawing.Size(185, 27);
             this.cbFormaPagamento.TabIndex = 314;
             this.cbFormaPagamento.SelectedIndexChanged += new System.EventHandler(this.cbFormaPagamento_SelectedIndexChanged);
             // 

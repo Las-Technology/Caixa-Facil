@@ -162,6 +162,7 @@ namespace CaixaFacil
                     prestacaoServico.descricao = txt_DescricaoServico.Text.Trim();
                     prestacaoServico.precoServico = decimal.Parse(txt_PrecoServico.Text);
                     prestacaoServico.lucro = decimal.Parse(txt_PrecoServico.Text);
+                    prestacaoServico.valorCusto = decimal.Parse(txt_PrecoServico.Text);
                     prestacaoServico.estoqueAtual = 0;
                     prestacaoServico.estoqueMinimo = 0;
                     prestacaoServico.unidade = "Serviço";

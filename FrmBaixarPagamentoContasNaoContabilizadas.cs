@@ -11,7 +11,7 @@ namespace CaixaFacil
         public FrmBaixarPagamentoContasNaoContabilizadas(decimal ValorConta, string Codigo, string NomeCliente)
         {
             InitializeComponent();
-            cbTipoPagamento.Text = "Dinheiro";
+            cbTipoPagamento.Text = "DINHEIRO";
             txt_ValorConta.Text = "R$ " + ValorConta.ToString();
             this.ValorConta = ValorConta;
             txt_Codigo.Text = Codigo;
@@ -129,15 +129,15 @@ namespace CaixaFacil
 
         private void GerenciarCaixa()
         {
-            if (cbTipoPagamento.Text == "Dinheiro")
+            if (cbTipoPagamento.Text == "DINHEIRO")
             {
                 _sql = "Update FluxoCaixa set ValorCaixa = @ValorCaixa, ValorRecebidoParcial = ValorRecebidoParcial + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbTipoPagamento.Text == "Cartão de Crédito")
+            else if (cbTipoPagamento.Text == "CARTÃO DE CRÉDITO")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoCredito = ValorRecebidoCredito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbTipoPagamento.Text == "Cartão de Débito")
+            else if (cbTipoPagamento.Text == "CARTÃO DE DÉBITO")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoDebito = ValorRecebidoDebito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }

@@ -352,7 +352,7 @@ namespace CaixaFacil
                     {
                         if (!produto.ConsultarCodigoProduto())
                         {
-                            MessageBox.Show("Produto não encontrado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show("Produto ou serviço não encontrado!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             txt_Codigo_Barra.Focus();
                             txt_Codigo_Barra.Clear();
                             return;
@@ -1011,7 +1011,7 @@ namespace CaixaFacil
         {
             string column = "ValorRecebidoDebito";
 
-            if (vendaMista.tipoPagamento == "Cartão de Crédito")
+            if (vendaMista.tipoPagamento == "CARTÃO DE CRÉDITO")
                 column = "ValorRecebidoCredito";
 
             SqlConnection conexao = new SqlConnection(stringConn);
@@ -1038,7 +1038,7 @@ namespace CaixaFacil
         Venda venda = new Venda();
         int index = 0;
 
-        private bool ConsultarEstoque(long id, int estoqueAtual)
+        private bool ConsultarEstoque(long id, int estoqueAtual, string unidade)
         {
             bool estoqueMaior = false;
             int sumEstoque = 0;
@@ -1051,7 +1051,7 @@ namespace CaixaFacil
                 }
             }
 
-            if (sumEstoque > estoqueAtual)
+            if (sumEstoque > estoqueAtual && unidade != "Serviço")
                 estoqueMaior = true;
 
             return estoqueMaior;
@@ -1079,7 +1079,7 @@ namespace CaixaFacil
                         EstoqueMinimo = produto.estoqueMinimo;
                         ConsultarItens(CodigoProduto);
 
-                        if (QtdCurrentRow > produto.estoqueAtual && produto.unidade != "Serviço" || ConsultarEstoque(produto.id, produto.estoqueAtual))
+                        if (QtdCurrentRow > produto.estoqueAtual && produto.unidade != "Serviço" && ConsultarEstoque(produto.id, produto.estoqueAtual, produto.unidade))
                         {
                             MessageBox.Show("A quantidade exigida é maior que o estoque atual. Atualize o estoque!", "Caixa Fácil", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             DGV_ItensVenda.CurrentRow.Cells["ColumnQuantidade"].Value = QuantidadeItens;
@@ -1249,7 +1249,7 @@ namespace CaixaFacil
                     tipoPagamento.idParcela = 0;
                     tipoPagamento.InformarFormaPagamento();
                 }
-                if (vendaParcial.TipoPagamento == "Dinheiro" || vendaParcial.TipoPagamento == "")
+                if (vendaParcial.TipoPagamento == "DINHEIRO" || vendaParcial.TipoPagamento == "")
                     valorNCaixa = ValorAbatido;
                 else
                     valorNCaixa = 0.00m;
@@ -1270,11 +1270,11 @@ namespace CaixaFacil
             decimal ValorRecebido = ValorAbatido;
             SqlConnection conexao = new SqlConnection(stringConn);
 
-            if (vendaParcial.TipoPagamento == "Dinheiro" || string.IsNullOrEmpty(vendaParcial.TipoPagamento))
+            if (vendaParcial.TipoPagamento == "DINHEIRO" || string.IsNullOrEmpty(vendaParcial.TipoPagamento))
                 _sql = "Update FluxoCaixa set ValorRecebidoParcial = ValorRecebidoParcial + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
-            else if (vendaParcial.TipoPagamento == "Cartão de Crédito")
+            else if (vendaParcial.TipoPagamento == "CARTÃO DE CRÉDITO")
                 _sql = "Update FluxoCaixa set ValorRecebidoCredito = ValorRecebidoCredito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
-            else if (vendaParcial.TipoPagamento == "Cartão de Débito")
+            else if (vendaParcial.TipoPagamento == "CARTÃO DE DÉBITO")
                 _sql = "Update FluxoCaixa set ValorRecebidoDebito = ValorRecebidoDebito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
 
             SqlCommand comando = new SqlCommand(_sql, conexao);

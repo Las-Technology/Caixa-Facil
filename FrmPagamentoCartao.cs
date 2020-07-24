@@ -12,7 +12,7 @@ namespace CaixaFacil
         public decimal Desconto { get; set; }
 
         int CodigoVenda, IdUsuario;
-        decimal ValorTotal, descontoDinheiro, DescontoPorcento, ValorDesconto, Lucro;
+        decimal ValorTotal, Lucro;
         string FormaPagamento;
         public FrmPagamentoCartao(string FormaPagamento, int CodigoVenda, decimal ValorTotal, decimal Lucro, int IdUsuario)
         {
@@ -26,7 +26,7 @@ namespace CaixaFacil
             this.FormaPagamento = FormaPagamento;
             this.IdUsuario = IdUsuario;
 
-            if (this.FormaPagamento == "Cartão de Crédito")
+            if (this.FormaPagamento == "CARTÃO DE CRÉDITO")
             {
                 gbParcelas.Visible = true;
                 btn_NotaPromissoria.Visible = false;
@@ -35,7 +35,7 @@ namespace CaixaFacil
                 btn_Cancelar.Location = new Point(245, 618);
                 btn_Finalizar.Enabled = false;
             }
-            else if (this.FormaPagamento == "Cartão de Débito")
+            else if (this.FormaPagamento == "CARTÃO DE DÉBITO")
             {
                 gbParcelas.Visible = false;
                 btn_NotaPromissoria.Visible = true;
@@ -246,13 +246,13 @@ namespace CaixaFacil
 
         private void txt_DescontoPorcento_TextChanged(object sender, EventArgs e)
         {
-            if (FormaPagamento == "Cartão de Crédito")
+            if (FormaPagamento == "CARTÃO DE CRÉDITO")
                 btn_Finalizar.Enabled = false;
         }
 
         private void txt_DescontoDinheiro_TextChanged(object sender, EventArgs e)
         {
-            if (FormaPagamento == "Cartão de Crédito")
+            if (FormaPagamento == "CARTÃO DE CRÉDITO")
                 btn_Finalizar.Enabled = false;
         }
 
@@ -286,7 +286,7 @@ namespace CaixaFacil
 
         private void EfetuarParcelas()
         {
-            if (FormaPagamento == "Cartão de Crédito")
+            if (FormaPagamento == "CARTÃO DE CRÉDITO")
             {
                 try
                 {

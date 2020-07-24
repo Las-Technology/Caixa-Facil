@@ -15,7 +15,7 @@ namespace CaixaFacil
             this.CodigoCliente = int.Parse(CodigoCliente);
             txt_Nome.Text = NomeCliente;
             txt_CodigoCliente.Text = CodigoCliente;
-            cbTipoPagamento.Text = "Dinheiro";
+            cbTipoPagamento.Text = "DINHEIRO";
 
         }
         int CodigoCliente;
@@ -218,15 +218,15 @@ namespace CaixaFacil
 
         private void GerenciarCaixa()
         {
-            if (cbTipoPagamento.Text == "Dinheiro")
+            if (cbTipoPagamento.Text == "DINHEIRO")
             {
                 _sql = "Update FluxoCaixa set ValorCaixa = @ValorCaixa, ValorRecebidoPrazo = ValorRecebidoPrazo + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbTipoPagamento.Text == "Cartão de Crédito")
+            else if (cbTipoPagamento.Text == "CARTÃO DE CRÉDITO")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoCredito = ValorRecebidoCredito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }
-            else if (cbTipoPagamento.Text == "Cartão de Débito")
+            else if (cbTipoPagamento.Text == "CARTÃO DE DÉBITO")
             {
                 _sql = "Update FluxoCaixa set ValorRecebidoDebito = ValorRecebidoDebito + @ValorRecebido where HoraSaida = '' and DataSaida = ''";
             }

@@ -103,12 +103,12 @@
             this.cbTipoPagamento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cbTipoPagamento.FormattingEnabled = true;
             this.cbTipoPagamento.Items.AddRange(new object[] {
-            "Cartão de Crédito",
-            "Cartão de Débito",
-            "Dinheiro"});
+            "CARTÃO DE CRÉDITO",
+            "CARTÃO DE DÉBITO",
+            "DINHEIRO"});
             this.cbTipoPagamento.Location = new System.Drawing.Point(334, 150);
             this.cbTipoPagamento.Name = "cbTipoPagamento";
-            this.cbTipoPagamento.Size = new System.Drawing.Size(174, 27);
+            this.cbTipoPagamento.Size = new System.Drawing.Size(185, 27);
             this.cbTipoPagamento.TabIndex = 71;
             // 
             // lbl_Fechar

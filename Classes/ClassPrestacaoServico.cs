@@ -9,6 +9,7 @@ namespace CaixaFacil
         private string Descricao;
         private decimal PrecoServico;
         private decimal Lucro;
+        private decimal ValorCusto;
         private string Unidade;
         private int Id_Categoria;
         private int EstoqueAtual;
@@ -44,6 +45,11 @@ namespace CaixaFacil
             get { return Lucro; }
             set { Lucro = value; }
         }
+        public decimal valorCusto
+        {
+            get { return valorCusto; }
+            set { ValorCusto = value; }
+        }
         public int estoqueAtual
         {
             get { return EstoqueAtual; }
@@ -61,7 +67,7 @@ namespace CaixaFacil
         public void Cadastrar()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Insert into Produto (Id_Produto, Descricao, ValorVenda, Unidade, Lucro, ID_Categoria, EstoqueAtual, EstoqueMinimo) Values (@Id, @Descricao, @PrecoServico, @Unidade, @Lucro, @ID_Categoria, @EstoqueAtual, @EstoqueMinimo)";
+            _sql = "Insert into Produto (Id_Produto, Descricao, ValorVenda, Unidade, Lucro, ID_Categoria, EstoqueAtual, EstoqueMinimo, ValorCusto) Values (@Id, @Descricao, @PrecoServico, @Unidade, @Lucro, @ID_Categoria, @EstoqueAtual, @EstoqueMinimo, @ValorCusto)";
             SqlCommand comando = new SqlCommand(_sql, conexao);
             comando.Parameters.AddWithValue("@Id", id);
             comando.Parameters.AddWithValue("@Descricao", descricao);
@@ -69,6 +75,7 @@ namespace CaixaFacil
             comando.Parameters.AddWithValue("@ID_Categoria", id_Categoria);
             comando.Parameters.AddWithValue("@Unidade", unidade);
             comando.Parameters.AddWithValue("@Lucro", lucro);
+            comando.Parameters.AddWithValue("@ValorCusto", valorCusto);
             comando.Parameters.AddWithValue("@EstoqueMinimo", estoqueMinimo);
             comando.Parameters.AddWithValue("@EstoqueAtual", estoqueAtual);
             comando.CommandText = _sql;

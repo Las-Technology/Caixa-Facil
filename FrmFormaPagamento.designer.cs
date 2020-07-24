@@ -52,8 +52,8 @@
             this.cb_FormasPagamento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cb_FormasPagamento.FormattingEnabled = true;
             this.cb_FormasPagamento.Items.AddRange(new object[] {
-            "Cartão de Crédito",
-            "Cartão de Débito"});
+            "CARTÃO DE CRÉDITO",
+            "CARTÃO DE DÉBITO"});
             this.cb_FormasPagamento.Location = new System.Drawing.Point(32, 54);
             this.cb_FormasPagamento.Margin = new System.Windows.Forms.Padding(4);
             this.cb_FormasPagamento.Name = "cb_FormasPagamento";

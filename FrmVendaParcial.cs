@@ -28,7 +28,7 @@ namespace CaixaFacil
             valorTotalComDesconto = valorTotal;
             txt_ValorVenda.Text = "R$ " + valorTotal;
             groupBox13.Location = new Point(7, 122);
-            groupBox11.Size = new Size(494, 102);
+            groupBox11.Size = new Size(509, 102);
             txtValorTotalComDesconto.Text = "R$ " + valorTotalComDesconto.ToString();
             txt_ValorRestante.Text = valorTotal.ToString();
         }
@@ -204,7 +204,7 @@ namespace CaixaFacil
                     txt_DescontoPorcento.Visible = true;
                     txt_ValorTotalDesconto.Visible = true;
                     groupBox13.Location = new Point(6, 176);
-                    groupBox11.Size = new Size(494, 156);
+                    groupBox11.Size = new Size(509, 156);
                     txt_DescontoDinheiro.Focus();
                     break;
                 case false:
@@ -215,7 +215,7 @@ namespace CaixaFacil
                     lbl_DescontoPorcento.Visible = false;
                     txt_DescontoPorcento.Visible = false;
                     groupBox13.Location = new Point(7, 122);
-                    groupBox11.Size = new Size(494, 102);
+                    groupBox11.Size = new Size(509, 156);
                     break;
 
             }

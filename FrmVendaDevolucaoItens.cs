@@ -1043,7 +1043,7 @@ namespace CaixaFacil
 
         private void verificarDataPagamento_E_AtualizarValoresFluxoCaixa()
         {
-            if (formaPagamento == "Cartão de Débito")
+            if (formaPagamento.ToUpper() == "CARTÃO DE DÉBITO")
             {
                 ValorRecebidoDebito = valorVenda;
                 AtualizarValorRecebidoDebito();
@@ -1301,7 +1301,7 @@ namespace CaixaFacil
             deleteUpdateItensVenda();
 
             subValorReceber = valorSubTotal;
-            if (formaPagamento == "Cartão de Débito")
+            if (formaPagamento.ToUpper() == "CARTÃO DE DÉBITO")
             {
                 ValorRecebidoDebito = ((valorSubTotal / qtdItens) * qtdItensDevolvido);
                 AtualizarValorRecebidoDebito();

@@ -323,8 +323,8 @@
             this.cbFormaPagamento.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cbFormaPagamento.FormattingEnabled = true;
             this.cbFormaPagamento.Items.AddRange(new object[] {
-            "Cartão de Crédito",
-            "Cartão de Débito"});
+            "CARTÃO DE CRÉDITO",
+            "CARTÃO DE DÉBITO"});
             this.cbFormaPagamento.Location = new System.Drawing.Point(191, 107);
             this.cbFormaPagamento.Name = "cbFormaPagamento";
             this.cbFormaPagamento.Size = new System.Drawing.Size(185, 27);

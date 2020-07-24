@@ -195,7 +195,7 @@ namespace CaixaFacil
         public bool ConsultarCodigoProduto()
         {
             SqlConnection conexao = new SqlConnection(stringConn);
-            _sql = "Select * from Produto where Id_Produto = @Id_Produto and Unidade <> 'Serviço'";
+            _sql = "Select * from Produto where Id_Produto = @Id_Produto";
             SqlDataAdapter comando = new SqlDataAdapter(_sql, conexao);
             comando.SelectCommand.Parameters.AddWithValue("@id_Produto", id);
             comando.SelectCommand.CommandText = _sql;
